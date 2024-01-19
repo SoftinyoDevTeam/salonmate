@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salonmate/core/const.dart';
@@ -40,4 +42,17 @@ Future<SalonConfigModel?> getSalonConfig() async {
     log('getSalonConfig: [ERROR] $e', error: e);
     return null;
   }
+}
+
+Future<bool> checkNetwork() async {
+  bool isConnected = false;
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      isConnected = true;
+    }
+  } on SocketException catch (_) {
+    isConnected = false;
+  }
+  return isConnected;
 }
