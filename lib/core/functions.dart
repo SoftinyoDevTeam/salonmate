@@ -7,29 +7,21 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 
-void post(String endpoint, Object? data) async {
-  final dio = Dio();
-  Response response;
-  response = await dio.post(apiUrl + endpoint, data: data);
-  print(response.data.toString());
-}
-
 Future<SalonConfigModel?> getSalonConfig() async {
   SalonConfigModel? config;
   try {
     Response response = await Dio().post(
-      apiUrl + "api.php",
+      apiUrl,
       options: Options(
         headers: {
           "Access-Control-Allow-Origin":
               "*", // Required for CORS support to work
-
           "Matekey": mateKey,
         },
       ),
     );
     log('getSalonConfig: [RESPONSE] ${response.data}');
-    if (response.data["status"] == "success") {
+    if (response.data["status"] == "200") {
       config = SalonConfigModel.fromJson(response.data);
       return config;
     } else {

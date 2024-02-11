@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "68f4df4544dc48a4589e4e451350e3f835d25448707d2fbe623688820d433bfe"
+build_start_time: [1707660607, 325569000]
+build_end_time: [1707660607, 763545000]
+inputs:
+  "/Users/alperenozcan/Desktop/salonmate/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1707660550, 882097541]
+  "/Users/alperenozcan/Desktop/salonmate/macos/Runner/AppDelegate.swift": !private [1686756961, 0]
+  "/Users/alperenozcan/Desktop/salonmate/macos/Runner/MainFlutterWindow.swift": !private [1686756961, 0]

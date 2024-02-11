@@ -1,12 +1,10 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:salonmate/core/models/salonconfigmodel.dart';
 
 // General const
 
-const AppName = 'SALONMATE';
+const appname = 'SALONMATE';
+const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
 String mateKey = "a690ecb2-e0c6-44c5-ac17-d8fcf947ff0c";
 
@@ -22,7 +20,7 @@ const screenDesignSize = Size(360, 690);
 
 // API AND 3rdParty const
 
-const apiUrl = 'https://salonmate.co/';
+const apiUrl = 'https://salonmate.co/inc/api.php';
 
 // Dynamic app configuration in functions.dart
 

@@ -1,7 +1,4 @@
 //Flutter dart paketleri
-import 'dart:developer';
-import 'dart:ffi';
-import 'dart:io';
 import 'package:flutter/material.dart';
 
 // Core ek paketler
@@ -12,11 +9,12 @@ import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
-
-//Ekranlar
 import 'package:salonmate/screens/HomeScreen.dart';
 import 'package:salonmate/screens/SplashScreen.dart';
 
+//Ekranlar
+
+SalonConfigModel? salonConfig;
 void main() async {
   bool? internet;
   // Flutter initialize ediliyor
@@ -24,13 +22,14 @@ void main() async {
   // Easy localization yükleniyor
   await EasyLocalization.ensureInitialized();
   // Salonmate sunucularından salon configi çekiliyor
-  SalonConfigModel? salonConfig = await getSalonConfig();
+  salonConfig = await getSalonConfig();
+  // Internet bağlantısı kontrol ediliyor
   internet = await checkNetwork();
 
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
     path: localizationDir,
-    assetLoader: CodegenLoader(),
+    assetLoader: const CodegenLoader(),
     fallbackLocale: defaultLocale,
     useOnlyLangCode: true,
     child: ScreenUtilInit(
@@ -44,42 +43,49 @@ void main() async {
             localizationsDelegates: _.localizationDelegates,
             locale: _.locale,
             debugShowCheckedModeBanner: false,
-            title: AppName,
+            title: appname,
             theme: ThemeData(
-              textTheme: TextTheme(
-                displayLarge:
-                    TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+              inputDecorationTheme: InputDecorationTheme(
+                border: OutlineInputBorder(
+                    gapPadding: 4,
+                    borderRadius: BorderRadius.circular(15.sp),
+                    borderSide: BorderSide(color: Colors.red, width: 5)),
+              ),
+              primaryTextTheme: TextTheme(
+                displayLarge: const TextStyle(
+                    fontSize: 12.0, fontWeight: FontWeight.bold),
                 bodySmall: TextStyle(
                     fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
                     fontSize: 12.sp,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
                 bodyMedium: TextStyle(
                     fontSize: 18.sp,
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    fontFamily: salonConfig?.data!.salonConfig!.fontFamily,
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
                 bodyLarge: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
                 headlineSmall: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
                 headlineMedium: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
                 headlineLarge: TextStyle(
                     fontSize: 24.sp,
                     fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color: salonConfig!.data!.salonConfig!.primaryColorLight!
-                        .toColor()),
+                    color:
+                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
               ),
+              dialogBackgroundColor: "E0E0E4".toColor(),
               useMaterial3: true,
               fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
               primaryColor:
@@ -92,8 +98,8 @@ void main() async {
                   background: salonConfig!.data!.salonConfig!.backgroundColor!
                       .toColor(),
                   brightness: Brightness.dark,
-                  primary: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor(),
+                  primary:
+                      salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
                   onPrimary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
                   secondary: salonConfig!.data!.salonConfig!.primaryColorDark!
@@ -115,13 +121,12 @@ void main() async {
             home: child,
           );
         } else {
-          return MaterialApp(
-            home: Center(
-                child: Container(child: Text("internet bağlantısı yok"))),
+          return const MaterialApp(
+            home: Center(child: Text("internet bağlantısı yok")),
           );
         }
       },
-      child: SplashScreen(),
+      child: const SplashScreen(),
     ),
   ));
 }

@@ -46,8 +46,8 @@ class Data {
     iD = json['ID'];
     salonName = json['salon_name'];
     salonAppName = json['salon_app_name'];
-    salonConfig = json['salon_config'] != null
-        ? new SalonConfig.fromJson(jsonDecode(json["salon_config"]))
+    salonConfig = json['salon_mobile_config'] != null
+        ? new SalonConfig.fromJson(jsonDecode(json["salon_mobile_config"]))
         : null;
     createdDate = json['createdDate'];
     lastActivityTime = json['lastActivityTime'];
@@ -60,7 +60,7 @@ class Data {
     data['salon_name'] = this.salonName;
     data['salon_app_name'] = this.salonAppName;
     if (this.salonConfig != null) {
-      data['salon_config'] = this.salonConfig!.toJson();
+      data['salon_mobile_config'] = this.salonConfig!.toJson();
     }
     data['createdDate'] = this.createdDate;
     data['lastActivityTime'] = this.lastActivityTime;
@@ -75,12 +75,18 @@ class SalonConfig {
   String? primaryColorDark;
   String? primaryColorLight;
   String? backgroundColor;
+  String? livechat;
+  String? textColor;
+  String? buttonColor;
   SalonConfig(
       {this.fontFamily,
       this.primaryColor,
       this.primaryColorDark,
       this.primaryColorLight,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.livechat,
+      this.textColor,
+      this.buttonColor});
 
   SalonConfig.fromJson(Map<String, dynamic> json) {
     fontFamily = json['fontFamily'];
@@ -88,6 +94,9 @@ class SalonConfig {
     primaryColorDark = json['primaryColorDark'];
     primaryColorLight = json['primaryColorLight'];
     backgroundColor = json['backgroundColor'];
+    livechat = json['livechat'];
+    textColor = json['textColor'];
+    buttonColor = json['buttonColor'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +106,9 @@ class SalonConfig {
     data['primaryColorDark'] = this.primaryColorDark;
     data['primaryColorLight'] = this.primaryColorLight;
     data['backgroundColor'] = this.backgroundColor;
+    data['livechat'] = this.livechat;
+    data['textColor'] = this.textColor;
+    data['buttonColor'] = this.buttonColor;
     return data;
   }
 }
