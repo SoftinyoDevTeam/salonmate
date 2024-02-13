@@ -200,7 +200,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                   title: "Giriş Yap",
                                   minimumSize: Size.fromHeight(50),
                                 ),
-                                Divider(),
+                                SizedBox(height: 8.h),
                                 BeyazButon(
                                     onPressed: () {
                                       showModalBottomSheet<void>(

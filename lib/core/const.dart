@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:salonmate/core/extensions.dart';
 
 // General const
 
@@ -24,6 +25,8 @@ const apiUrl = 'https://salonmate.co/inc/api.php';
 
 // Dynamic app configuration in functions.dart
 
-
-
-
+TextStyle secondary = TextStyle(
+    color: Color.fromARGB(0, 114, 5, 5),
+    fontSize: 20,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w600);

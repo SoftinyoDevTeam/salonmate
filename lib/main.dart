@@ -16,7 +16,7 @@ import 'package:salonmate/screens/SplashScreen.dart';
 
 SalonConfigModel? salonConfig;
 void main() async {
-  bool? internet;
+  bool? internet = true;
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
@@ -24,7 +24,6 @@ void main() async {
   // Salonmate sunucularından salon configi çekiliyor
   salonConfig = await getSalonConfig();
   // Internet bağlantısı kontrol ediliyor
-  internet = await checkNetwork();
 
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
@@ -46,44 +45,27 @@ void main() async {
             title: appname,
             theme: ThemeData(
               inputDecorationTheme: InputDecorationTheme(
+                contentPadding:
+                    EdgeInsets.only(left: 10.0, top: 10.0, bottom: 15.0),
+                hintStyle: TextStyle(color: "#616165".toColor()),
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(
+                    color: "#E0E0E4".toColor(),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(
+                    color: "#E0E0E4".toColor(),
+                    width: 1.0,
+                  ),
+                ),
                 border: OutlineInputBorder(
                     gapPadding: 4,
                     borderRadius: BorderRadius.circular(15.sp),
                     borderSide: BorderSide(color: Colors.red, width: 5)),
-              ),
-              primaryTextTheme: TextTheme(
-                displayLarge: const TextStyle(
-                    fontSize: 12.0, fontWeight: FontWeight.bold),
-                bodySmall: TextStyle(
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    fontSize: 12.sp,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
-                bodyMedium: TextStyle(
-                    fontSize: 18.sp,
-                    fontFamily: salonConfig?.data!.salonConfig!.fontFamily,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
-                bodyLarge: TextStyle(
-                    fontSize: 24.sp,
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
-                headlineSmall: TextStyle(
-                    fontSize: 24.sp,
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
-                headlineMedium: TextStyle(
-                    fontSize: 24.sp,
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
-                headlineLarge: TextStyle(
-                    fontSize: 24.sp,
-                    fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                    color:
-                        salonConfig!.data!.salonConfig!.textColor!.toColor()),
               ),
               dialogBackgroundColor: "E0E0E4".toColor(),
               useMaterial3: true,
@@ -97,13 +79,13 @@ void main() async {
               colorScheme: ColorScheme(
                   background: salonConfig!.data!.salonConfig!.backgroundColor!
                       .toColor(),
-                  brightness: Brightness.dark,
+                  brightness: Brightness.light,
                   primary:
                       salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
                   onPrimary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
-                  secondary: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor(),
+                  secondary:
+                      salonConfig!.data!.salonConfig!.buttonColor!.toColor(),
                   onSecondary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
                   error: salonConfig!.data!.salonConfig!.primaryColorDark!

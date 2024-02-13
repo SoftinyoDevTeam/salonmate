@@ -4,8 +4,10 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:phone_form_field/phone_form_field.dart';
+import 'package:salonmate/core/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:salonmate/core/extensions.dart';
@@ -23,10 +25,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final phoneController = TextEditingController();
-  final passController = TextEditingController();
-  String initialCountry = 'TR';
-  PhoneNumber number = PhoneNumber(isoCode: 'TR');
+  PhoneController phoneController =
+      PhoneController(PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
+  TextEditingController passController = TextEditingController();
+
   int selectedTab = 0;
   List<bool> isSelected = <bool>[true, false];
   FocusNode password = FocusNode();
@@ -128,45 +130,62 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 400.h,
                         child: Column(
                           children: [
-                            InternationalPhoneNumberInput(
-                              textStyle: TextStyle(color: Colors.black),
-                              onInputChanged: (PhoneNumber number) {
-                                print(number.phoneNumber);
-                              },
-                              onInputValidated: (bool value) {
-                                print(value);
-                              },
-                              locale: "tr",
-                              selectorConfig: SelectorConfig(
-                                selectorType: PhoneInputSelectorType.DIALOG,
-                                useBottomSheetSafeArea: true,
-                              ),
-                              ignoreBlank: false,
-                              selectorTextStyle: TextStyle(color: Colors.black),
-                              initialValue: number,
-                              textFieldController: phoneController,
-                              formatInput: true,
-                              keyboardType: TextInputType.numberWithOptions(
-                                  signed: true, decimal: true),
-                              inputBorder: OutlineInputBorder(),
-                              onSaved: (PhoneNumber number) {
-                                print('On Saved: $number');
+                            PhoneFormField(
+                              decoration:
+                                  InputDecoration(hintText: "Telefon Numarası"),
+                              inputFormatters: [
+                                new LengthLimitingTextInputFormatter(13),
+                              ],
+                              controller: phoneController,
+                              validator: (phoneNumber) {
+                                log(phoneNumber.toString());
                               },
                             ),
-                            Spacer(),
+                            SizedBox(height: 15.h),
                             TextFormField(
+                              decoration: InputDecoration(hintText: "Şifre*"),
                               controller: passController,
+                            ),
+                            SizedBox(height: 18.h),
+                            PembeButon(
+                                title: "Giriş Yap",
+                                minimumSize: Size.fromHeight(50),
+                                onPressed: () {}),
+                            SizedBox(height: 18.h),
+                            Text("Şifremi Unuttum",
+                                style: TextStyle(
+                                    color: Colors.pink,
+                                    fontWeight: FontWeight.w500))
+                          ],
+                        ),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Container(
+                        height: 400.h,
+                        child: Column(
+                          children: [
+                            PhoneFormField(
+                              decoration:
+                                  InputDecoration(hintText: "Telefon Numarası"),
+                              inputFormatters: [
+                                new LengthLimitingTextInputFormatter(13),
+                              ],
+                              controller: phoneController,
+                              validator: (phoneNumber) {
+                                log(phoneNumber.toString());
+                              },
                             ),
                             Spacer(),
                             PembeButon(
-                                title: "Giriş Yap",
+                                title: "Devam Et",
                                 minimumSize: Size.fromHeight(50),
                                 onPressed: () {}),
                           ],
                         ),
                       ),
                     )
-                  : TextFormField()
             ],
           ),
         ),
