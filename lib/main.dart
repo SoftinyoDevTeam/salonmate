@@ -104,8 +104,7 @@ void main() async {
           );
         } else {
           return const MaterialApp(
-            home: Center(child: Text("internet bağlantısı yok")),
-          );
+              home: Center(child: Text("internet bağlantısı yok")));
         }
       },
       child: const SplashScreen(),
