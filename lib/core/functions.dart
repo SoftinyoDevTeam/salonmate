@@ -11,7 +11,7 @@ Future<SalonConfigModel?> getSalonConfig() async {
   SalonConfigModel? config;
   try {
     Response response = await Dio().post(
-      apiUrl,
+      apiUrl + "?module=checkSalon",
       options: Options(
         headers: {
           "Access-Control-Allow-Origin":

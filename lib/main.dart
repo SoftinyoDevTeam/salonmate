@@ -45,27 +45,29 @@ void main() async {
             title: appname,
             theme: ThemeData(
               inputDecorationTheme: InputDecorationTheme(
+                constraints: BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
                 contentPadding:
                     EdgeInsets.only(left: 10.0, top: 10.0, bottom: 15.0),
-                hintStyle: TextStyle(color: "#616165".toColor()),
+                hintStyle: TextStyle(
+                  color: "E0E0E4".toColor(),
+                ),
                 fillColor: Colors.white,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide(
-                    color: "#E0E0E4".toColor(),
-                  ),
+                  borderSide:
+                      BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
                   borderSide: BorderSide(
                     color: "#E0E0E4".toColor(),
-                    width: 1.0,
+                    width: 0.5,
                   ),
                 ),
                 border: OutlineInputBorder(
                     gapPadding: 4,
                     borderRadius: BorderRadius.circular(15.sp),
-                    borderSide: BorderSide(color: Colors.red, width: 5)),
+                    borderSide: BorderSide(color: Colors.red, width: 0.5)),
               ),
               dialogBackgroundColor: "E0E0E4".toColor(),
               useMaterial3: true,
@@ -77,6 +79,7 @@ void main() async {
               primaryColorDark:
                   salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
               colorScheme: ColorScheme(
+                  outline: "#F5F5F9".toColor(),
                   background: salonConfig!.data!.salonConfig!.backgroundColor!
                       .toColor(),
                   brightness: Brightness.light,
@@ -84,8 +87,7 @@ void main() async {
                       salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
                   onPrimary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
-                  secondary:
-                      salonConfig!.data!.salonConfig!.buttonColor!.toColor(),
+                  secondary: "#272E54".toColor(),
                   onSecondary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
                   error: salonConfig!.data!.salonConfig!.primaryColorDark!
@@ -95,10 +97,8 @@ void main() async {
                   onBackground: salonConfig!
                       .data!.salonConfig!.primaryColorDark!
                       .toColor(),
-                  surface: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor(),
-                  onSurface: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor()),
+                  surface: Colors.white,
+                  onSurface: Colors.white),
             ),
             home: child,
           );

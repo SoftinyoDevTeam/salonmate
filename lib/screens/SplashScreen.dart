@@ -166,7 +166,10 @@ class _SplashScreenState extends State<SplashScreen> {
                             padding: const EdgeInsets.all(20),
                             child: Column(
                               children: [
-                                PembeButon(
+                                MateButon(
+                                  color: Theme.of(context).primaryColor,
+                                  textcolor:
+                                      Theme.of(context).primaryColorLight,
                                   onPressed: () {
                                     showModalBottomSheet<void>(
                                         context: context,
@@ -201,7 +204,9 @@ class _SplashScreenState extends State<SplashScreen> {
                                   minimumSize: Size.fromHeight(50),
                                 ),
                                 SizedBox(height: 8.h),
-                                BeyazButon(
+                                MateButon(
+                                    color: Theme.of(context).primaryColorLight,
+                                    textcolor: Theme.of(context).primaryColor,
                                     onPressed: () {
                                       showModalBottomSheet<void>(
                                           context: context,
