@@ -30,7 +30,8 @@ class MateButon extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(title, style: TextStyle(color: textcolor)),
+      child: Text(title,
+          style: TextStyle(color: textcolor, fontWeight: FontWeight.w600)),
     );
   }
 }

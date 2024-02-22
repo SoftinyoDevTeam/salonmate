@@ -1,9 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationListCard extends StatefulWidget {
-  dynamic element;
+  String message;
+  String createdTime;
 
-  NotificationListCard({required this.element});
+  NotificationListCard({
+    Key? key,
+    required this.message,
+    required this.createdTime,
+  }) : super(key: key);
 
   @override
   _NotificationListCardState createState() => _NotificationListCardState();
@@ -32,25 +39,34 @@ class _NotificationListCardState extends State<NotificationListCard> {
                       border: Border.all(width: 1, color: Colors.black12)),
                   child: Icon(
                     Icons.notifications_outlined,
-                    color: Colors.black,
+                    color: Theme.of(context).dialogBackgroundColor,
                   ),
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(child: new Text(widget.element["message"])),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          widget.element["crTime"],
-                          style: TextStyle(color: Colors.black, fontSize: 11),
-                        )
-                      ],
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          new Text(
+                            widget.message,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColorDark),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.createdTime,
+                            style: TextStyle(
+                                color: Theme.of(context).dialogBackgroundColor),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

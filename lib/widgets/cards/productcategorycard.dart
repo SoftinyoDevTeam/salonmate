@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class ProductCategoryListCard extends StatefulWidget {
+  final double radius;
+  final String imageUrl;
+  final String text;
+  const ProductCategoryListCard(
+      {super.key,
+      required this.radius,
+      required this.imageUrl,
+      required this.text});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<ProductCategoryListCard> createState() =>
+      _ProductCategoryListCardState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _ProductCategoryListCardState extends State<ProductCategoryListCard> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).hintColor, width: 1),
+        borderRadius: BorderRadius.circular(widget.radius),
+      ),
+      child: Column(
+        children: [
+          Container(
+            height: 70.h,
+            child: Image.network(widget.imageUrl),
+          ),
+          Text(
+            widget.text,
+            style: TextStyle(color: Theme.of(context).primaryColorDark),
+          ),
+        ],
+      ),
+    );
   }
 }

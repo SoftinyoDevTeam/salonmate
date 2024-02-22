@@ -24,12 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
             'Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.'));
     list.add(SplashModel(
         image: 'assets/images/splash/model_two.png',
-        title: 'Kazandıran \nArkadaşlık',
+        title: 'Kazandıran Arkadaşlık',
         subTitle:
-            'Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar\nhem de siz puan kazanın.'));
+            'Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.'));
     list.add(SplashModel(
         image: 'assets/images/splash/model_three.png',
-        title: 'Salla\nKazan',
+        title: 'Salla Kazan',
         subTitle:
             'Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın.'));
 
@@ -131,8 +131,8 @@ class _SplashScreenState extends State<SplashScreen> {
                                     Expanded(
                                       child: Text(
                                           splashlist[currentIndexPage].title!,
-                                          style: const TextStyle(
-                                            fontSize: 25,
+                                          style: TextStyle(
+                                            fontSize: 20.sp,
                                             color:
                                                 Color.fromARGB(255, 39, 46, 84),
                                             fontWeight: FontWeight.w800,
@@ -178,7 +178,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                           return Container(
                                               height:
                                                   ScreenUtil().screenHeight /
-                                                      1.2,
+                                                      1.1,
                                               decoration: new BoxDecoration(
                                                 color: Colors.white,
                                                 borderRadius:
@@ -215,7 +215,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                             return Container(
                                                 height:
                                                     ScreenUtil().screenHeight /
-                                                        1.2,
+                                                        1.1,
                                                 decoration: new BoxDecoration(
                                                   color: Colors.white,
                                                   borderRadius:

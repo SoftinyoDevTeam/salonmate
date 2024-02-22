@@ -34,21 +34,24 @@ class ProductCard extends StatelessWidget {
                 BoxDecoration(borderRadius: BorderRadius.circular(20.sp)),
             child: Image.network(imageUrl),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
                 Flexible(
                     child: Text.rich(TextSpan(children: <InlineSpan>[
-                  const TextSpan(
+                  TextSpan(
                     text: 'Nars',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                   TextSpan(
                     text: ' The Orginal Multi-Purpose Stick',
                     style: TextStyle(
-                      fontSize: 14,
-                    ),
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.secondary),
                   )
                 ])))
               ],
@@ -57,7 +60,10 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: Text(price.toString() + " " + currency,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.sp,
+                    color: Theme.of(context).colorScheme.secondary)),
           )
         ],
       ),

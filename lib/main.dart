@@ -9,12 +9,17 @@ import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
-import 'package:salonmate/screens/HomeScreen.dart';
-import 'package:salonmate/screens/SplashScreen.dart';
+import 'package:salonmate/screens/auth/SplashScreen.dart';
+import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
+import 'package:salonmate/screens/main/HomeScreen.dart';
+import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 //Ekranlar
-
 SalonConfigModel? salonConfig;
+SharedPreferences? prefs;
 void main() async {
   bool? internet = true;
   // Flutter initialize ediliyor
@@ -25,6 +30,7 @@ void main() async {
   salonConfig = await getSalonConfig();
   // Internet bağlantısı kontrol ediliyor
 
+  prefs = await SharedPreferences.getInstance();
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
     path: localizationDir,
@@ -32,53 +38,62 @@ void main() async {
     fallbackLocale: defaultLocale,
     useOnlyLangCode: true,
     child: ScreenUtilInit(
-      designSize: screenDesignSize,
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        if (internet == true) {
-          return MaterialApp(
-            supportedLocales: _.supportedLocales,
-            localizationsDelegates: _.localizationDelegates,
-            locale: _.locale,
-            debugShowCheckedModeBanner: false,
-            title: appname,
-            theme: ThemeData(
-              inputDecorationTheme: InputDecorationTheme(
-                constraints: BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
-                contentPadding:
-                    EdgeInsets.only(left: 10.0, top: 10.0, bottom: 15.0),
-                hintStyle: TextStyle(
-                  color: "E0E0E4".toColor(),
-                ),
-                fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide:
-                      BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide(
-                    color: "#E0E0E4".toColor(),
-                    width: 0.5,
+        designSize: screenDesignSize,
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          if (internet == true) {
+            return MaterialApp(
+              supportedLocales: _.supportedLocales,
+              localizationsDelegates: _.localizationDelegates,
+              locale: _.locale,
+              debugShowCheckedModeBanner: false,
+              title: appname,
+              theme: ThemeData(
+                radioTheme: RadioThemeData(fillColor:
+                    MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return Colors.grey;
+                  }
+                  return Colors.green;
+                })),
+                inputDecorationTheme: InputDecorationTheme(
+                  constraints: BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
+                  contentPadding: const EdgeInsets.only(
+                      left: 10.0, top: 10.0, bottom: 15.0),
+                  hintStyle: TextStyle(
+                    color: "E0E0E4".toColor(),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                    borderSide:
+                        BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide(
+                      color: "#E0E0E4".toColor(),
+                      width: 0.5,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                      gapPadding: 4,
+                      borderRadius: BorderRadius.circular(15.sp),
+                      borderSide:
+                          const BorderSide(color: Colors.red, width: 0.5)),
                 ),
-                border: OutlineInputBorder(
-                    gapPadding: 4,
-                    borderRadius: BorderRadius.circular(15.sp),
-                    borderSide: BorderSide(color: Colors.red, width: 0.5)),
-              ),
-              dialogBackgroundColor: "E0E0E4".toColor(),
-              useMaterial3: true,
-              fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-              primaryColor:
-                  salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
-              primaryColorLight:
-                  salonConfig!.data!.salonConfig!.primaryColorLight!.toColor(),
-              primaryColorDark:
-                  salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
-              colorScheme: ColorScheme(
+                dialogBackgroundColor: "E0E0E4".toColor(),
+                useMaterial3: true,
+                fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
+                primaryColor:
+                    salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
+                primaryColorLight: salonConfig!
+                    .data!.salonConfig!.primaryColorLight!
+                    .toColor(),
+                primaryColorDark:
+                    salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
+                colorScheme: ColorScheme(
                   outline: "#F5F5F9".toColor(),
                   background: salonConfig!.data!.salonConfig!.backgroundColor!
                       .toColor(),
@@ -97,17 +112,17 @@ void main() async {
                   onBackground: salonConfig!
                       .data!.salonConfig!.primaryColorDark!
                       .toColor(),
-                  surface: Colors.white,
-                  onSurface: Colors.white),
-            ),
-            home: child,
-          );
-        } else {
-          return const MaterialApp(
-              home: Center(child: Text("internet bağlantısı yok")));
-        }
-      },
-      child: const SplashScreen(),
-    ),
+                  surface: "#272E54".toColor(),
+                  onSurface: "#272E54".toColor(),
+                ),
+              ),
+              home: child,
+            );
+          } else {
+            return const MaterialApp(
+                home: Center(child: Text("internet bağlantısı yok")));
+          }
+        },
+        child: await checkLogin() ? ScreenBridge() : SplashScreen()),
   ));
 }

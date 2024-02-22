@@ -1,7 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/main.dart';
+import 'package:salonmate/screens/main/CuzdanimScreen.dart';
+import 'package:salonmate/screens/main/SallaKazan.dart';
+import 'package:salonmate/screens/products/ProductDetailScreen.dart';
+import 'package:salonmate/screens/profile/NotificationsScreen.dart';
+import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
@@ -14,15 +21,9 @@ class SalonmateHomeScreen extends StatefulWidget {
 
 class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
   PageController pageController = PageController();
+  PageController pageController2 = PageController();
   int currentIndexPage = 0;
-  final iconList = <IconData>[
-    Icons.home,
-    Icons.category_outlined,
-    Icons.brightness_6,
-    Icons.brightness_7,
-  ];
-
-  var _bottomNavIndex = 0; //default index of a first screen
+  int currentIndexPage2 = 0;
   List<Widget> Sliderlist = [
     Container(
       width: ScreenUtil().screenWidth,
@@ -137,19 +138,71 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: ScreenUtil().screenWidth / 1.5,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                gapPadding: 4,
+                                borderRadius: BorderRadius.circular(45.sp),
+                                borderSide: BorderSide(
+                                    color:
+                                        Theme.of(context).dialogBackgroundColor,
+                                    width: 1)),
+                            prefixIconColor:
+                                Theme.of(context).dialogBackgroundColor,
+                            prefixIcon: Icon(Icons.search),
+                            hintText: "Ürün arayın"),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileScreen()));
+                      },
+                      child: Icon(Icons.person,
+                          color: Theme.of(context).dialogBackgroundColor),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => NotificationScreen())));
+                      },
+                      child: Icon(Icons.notifications,
+                          color: Theme.of(context).dialogBackgroundColor),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: SizedBox(
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFF5F5F9),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.outline,
+                              surfaceTintColor: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(12), // <-- Radius
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CuzdanimScreen()));
+                            },
                             icon: Image.asset(
                               "assets/images/icons/basket.png",
                               width: 24,
@@ -168,13 +221,22 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                         child: SizedBox(
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFF5F5F9),
+                              surfaceTintColor: Colors.transparent,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.outline,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(12), // <-- Radius
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SallaKazanScreen()),
+                              );
+                            },
                             icon: Image.asset(
                               "assets/images/icons/bell.png",
                               width: 24,
@@ -260,16 +322,16 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24.h),
                   child: PageView.builder(
-                    controller: pageController,
-                    itemCount: Sliderlist.length,
+                    controller: pageController2,
+                    itemCount: Sliderlist2.length,
                     itemBuilder: (context, i) {
                       return Padding(
                         padding: const EdgeInsets.all(12),
-                        child: Sliderlist[i],
+                        child: Sliderlist2[i],
                       );
                     },
                     onPageChanged: (value) {
-                      setState(() => currentIndexPage = value);
+                      setState(() => currentIndexPage2 = value);
                     },
                   ),
                 ),
@@ -281,9 +343,9 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       height: 7,
-                      width: i == currentIndexPage ? 20 : 10,
+                      width: i == currentIndexPage2 ? 20 : 10,
                       decoration: BoxDecoration(
-                        color: i == currentIndexPage
+                        color: i == currentIndexPage2
                             ? const Color.fromARGB(255, 253, 51, 87)
                             : Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -292,23 +354,39 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 ],
               ),
               SizedBox(
-                height: 900.h,
+                height: 500.h,
                 width: ScreenUtil().screenWidth,
                 child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemCount: 6,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ProductCard(
-                          width: 120.w,
-                          height: 80.w,
-                          title: "title",
-                          imageUrl:
-                              "https://sdcdn.io/mac/tr/mac_sku_SK6R01_1x1_0.png?width=1080&height=1080",
-                          onPressed: () {},
-                          price: 128.99),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductDetailScreen()));
+                        log("test");
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ProductCard(
+                            width: 120.w,
+                            height: 80.w,
+                            title: "title",
+                            imageUrl:
+                                "https://sdcdn.io/mac/tr/mac_sku_SK6R01_1x1_0.png",
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProductDetailScreen()));
+                            },
+                            price: 128.99),
+                      ),
                     );
                   },
                 ),
@@ -316,22 +394,6 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: SizedBox(
-        height: 40.h,
-        width: 40.h,
-        child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            backgroundImage: AssetImage("assets/images/icons/online.gif")),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.outline,
-        icons: iconList,
-        activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.defaultEdge,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
       ),
     );
   }

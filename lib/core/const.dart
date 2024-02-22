@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:salonmate/core/extensions.dart';
 
 // General const
 

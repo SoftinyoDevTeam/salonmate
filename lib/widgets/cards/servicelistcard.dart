@@ -25,9 +25,15 @@ class _ServiceListCardState extends State<ServiceListCard> {
             borderRadius: BorderRadius.circular(widget.radius),
             image: DecorationImage(
                 image: NetworkImage(widget.imageUrl), fit: BoxFit.fill)),
-        child: Text(
-          widget.text,
-          style: TextStyle(color: Colors.white),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              widget.text,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ],
         ));
   }
 }
