@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationListCard extends StatefulWidget {
-  String message;
-  String createdTime;
+  String? title;
+  String? message;
+  String? createdTime;
 
   NotificationListCard({
     Key? key,
+    required this.title,
     required this.message,
     required this.createdTime,
   }) : super(key: key);
@@ -22,11 +24,11 @@ class _NotificationListCardState extends State<NotificationListCard> {
     return Container(
         decoration: BoxDecoration(
           border: Border(
-            top:
+            bottom:
                 BorderSide(width: 1, color: Color.fromARGB(255, 245, 245, 249)),
           ),
         ),
-        padding: EdgeInsets.only(top: 20, bottom: 20),
+        padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -46,25 +48,51 @@ class _NotificationListCardState extends State<NotificationListCard> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          new Text(
-                            widget.message,
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColorDark),
-                          )
-                        ],
+                      Container(
+                          width: ScreenUtil().screenWidth - 70.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              new Text(
+                                widget.title!,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColorDark),
+                              ),
+                            ],
+                          )),
+                      Container(
+                        width: ScreenUtil().screenWidth - 70.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: new Text(
+                                widget.message!,
+                                style: TextStyle(
+                                    fontSize: 10.sp,
+                                    color: Theme.of(context).primaryColorDark),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            widget.createdTime,
-                            style: TextStyle(
-                                color: Theme.of(context).dialogBackgroundColor),
-                          )
-                        ],
-                      ),
+                      Container(
+                        width: ScreenUtil().screenWidth - 70.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.createdTime!,
+                              style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).dialogBackgroundColor),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 )

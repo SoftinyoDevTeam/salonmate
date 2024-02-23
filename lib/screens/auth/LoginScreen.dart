@@ -560,7 +560,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           var response =
                                               await register(formData, context);
                                           if (response == "true") {
-                                            widget.tab = 0;
+                                            selectedTab = 0;
                                           }
                                           setState(() {});
                                         }),
@@ -807,7 +807,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           var response =
                                               await register(formData, context);
                                           if (response == "true") {
-                                            widget.tab = 0;
+                                            selectedTab = 0;
                                           }
 
                                           setState(() {});

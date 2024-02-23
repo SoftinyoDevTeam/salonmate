@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // General const
 
 const appname = 'SALONMATE';
+const affCodePrefix = 'MATE';
 const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
 String mateKey = "a690ecb2-e0c6-44c5-ac17-d8fcf947ff0c";

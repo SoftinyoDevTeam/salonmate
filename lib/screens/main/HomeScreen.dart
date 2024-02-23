@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/main.dart';
-import 'package:salonmate/screens/main/CuzdanimScreen.dart';
+import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/main/SallaKazan.dart';
 import 'package:salonmate/screens/products/ProductDetailScreen.dart';
 import 'package:salonmate/screens/profile/NotificationsScreen.dart';

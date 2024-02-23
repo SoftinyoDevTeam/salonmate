@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:html';
 
 import 'dart:io';
 
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
+import 'package:salonmate/core/models/bildirimmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/models/usermodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
@@ -168,6 +168,39 @@ Future<UserModel?> checkRegister(String phoneNumber) async {
   }
 }
 
+Future<List<Bildirim?>> notificationlist() async {
+  FormData form = FormData.fromMap({"phone": ""});
+  List<Bildirim?> notifications = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=notificationList",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+    log("notificationlist : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      for (var e in response.data["data"]) {
+        notifications.add(Bildirim.fromJson(e));
+      }
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('notificationlist: [ERROR] ${response.data["message"]}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('notificationlist: [ERROR] $e', error: e);
+    return notifications;
+  }
+}
+
 Future<String> register(FormData form, BuildContext context) async {
   try {
     Response response = await Dio().post(
@@ -204,4 +237,37 @@ Future<String> register(FormData form, BuildContext context) async {
 logout() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.clear();
+}
+
+Future<UserModel?> getProfile() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  FormData form = FormData.fromMap({"token": prefs.getString("token")});
+  UserModel? notifications;
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getProfile",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+    log("getProfile : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      notifications = UserModel.fromJson(response.data["data"]);
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('getProfile: [ERROR] ${response.data["message"]}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('getProfile: [ERROR] $e', error: e);
+    return notifications;
+  }
 }
