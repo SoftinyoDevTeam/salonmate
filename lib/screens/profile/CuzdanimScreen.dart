@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class CuzdanimScreen extends StatefulWidget {
@@ -10,6 +12,19 @@ class CuzdanimScreen extends StatefulWidget {
 }
 
 class _CuzdanimScreenState extends State<CuzdanimScreen> {
+  CuzdanimModel? cuzdanim;
+  void getCuzdanim() async {
+    cuzdanim = await checkCuzdanim();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCuzdanim();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,13 +90,21 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.primary),
                       ),
-                      Text(
-                        "3000",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.sp,
-                            color: Theme.of(context).colorScheme.secondary),
-                      )
+                      cuzdanim != null
+                          ? Text(
+                              cuzdanim!.point.toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24.sp,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            )
+                          : Text("Yükleniyor",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24.sp,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary))
                     ],
                   )),
             ),

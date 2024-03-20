@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salonmate/core/models/usermodel.dart';
+import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/buttons.dart';
 

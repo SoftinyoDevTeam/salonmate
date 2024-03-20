@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/widgets/cards/servicelistcard.dart';
+import 'package:salonmate/widgets/loader.dart';
 
 class RandevuMainScreen extends StatefulWidget {
   const RandevuMainScreen({super.key});
@@ -64,6 +69,19 @@ class _RandevuMainScreenState extends State<RandevuMainScreen> {
               ))),
     ),
   ];
+  List<HizmetKategoriModel?> hizmetler = [];
+  void getServices() async {
+    hizmetler = await checkHizmetler();
+    setState(() {});
+    log(hizmetler.length.toString());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getServices();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,25 +157,32 @@ class _RandevuMainScreenState extends State<RandevuMainScreen> {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
-                height: 300.h,
-                width: ScreenUtil().screenWidth,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ServiceListCard(
-                        text: "Hizmet Adı",
-                        imageUrl: "https://www.newwell.com.tr/Data/Blog/30.jpg",
-                        radius: 15.sp,
+              hizmetler.isEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 28.0),
+                      child: Loader(),
+                    )
+                  : SizedBox(
+                      height: 300.h,
+                      width: ScreenUtil().screenWidth,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemCount: hizmetler.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ServiceListCard(
+                              text: hizmetler[index]!.name!,
+                              imageUrl:
+                                  "https://www.newwell.com.tr/Data/Blog/30.jpg",
+                              radius: 15.sp,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    ),
             ],
           ),
         ));

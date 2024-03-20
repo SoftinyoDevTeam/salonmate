@@ -10,11 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:salonmate/core/functions.dart';
-import 'package:salonmate/core/models/usermodel.dart';
-
-import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:salonmate/core/models/usermodels/usermodel.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
 

@@ -10,12 +10,8 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
-import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
-import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 //Ekranlar
 SalonConfigModel? salonConfig;
@@ -123,6 +119,7 @@ void main() async {
                 home: Center(child: Text("internet bağlantısı yok")));
           }
         },
-        child: await checkLogin() ? ScreenBridge() : SplashScreen()),
+        child:
+            await checkLogin() ? const ScreenBridge() : const SplashScreen()),
   ));
 }

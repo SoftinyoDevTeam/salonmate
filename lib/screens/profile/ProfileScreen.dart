@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/functions.dart';
-import 'package:salonmate/core/models/usermodel.dart';
+import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/screens/auth/LoginScreen.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
-import 'package:salonmate/core/models/bildirimmodel.dart';
+import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/lists/notificationlist.dart';
 import 'package:salonmate/widgets/loader.dart';

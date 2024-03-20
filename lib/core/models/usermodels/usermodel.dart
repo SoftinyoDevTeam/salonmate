@@ -1,13 +1,13 @@
 class UserModel {
   int id;
   String adSoyad;
-  String telefonNumarasi;
-  DateTime dogumTarihi;
-  DateTime kayitTarihi;
-  String kacYillikMusteri;
-  int salonId;
-  String telefonKodu;
-  String affKodu;
+  String? telefonNumarasi;
+  DateTime? dogumTarihi;
+  DateTime? kayitTarihi;
+  String? kacYillikMusteri;
+  int? salonId;
+  String? telefonKodu;
+  String? affKodu;
   String token;
 
   UserModel({

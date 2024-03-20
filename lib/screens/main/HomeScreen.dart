@@ -29,7 +29,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -39,7 +39,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -49,7 +49,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -59,7 +59,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -69,7 +69,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -81,7 +81,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -91,7 +91,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -101,7 +101,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -111,7 +111,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -121,7 +121,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
       width: ScreenUtil().screenWidth,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          image: DecorationImage(
+          image: const DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
                 "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
@@ -153,7 +153,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                     width: 1)),
                             prefixIconColor:
                                 Theme.of(context).dialogBackgroundColor,
-                            prefixIcon: Icon(Icons.search),
+                            prefixIcon: const Icon(Icons.search),
                             hintText: "Ürün arayın"),
                       ),
                     ),
@@ -162,7 +162,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileScreen()));
+                                builder: (context) => const ProfileScreen()));
                       },
                       child: Icon(Icons.person,
                           color: Theme.of(context).dialogBackgroundColor),
@@ -172,7 +172,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => NotificationScreen())));
+                                builder: ((context) =>
+                                    const NotificationScreen())));
                       },
                       child: Icon(Icons.notifications,
                           color: Theme.of(context).dialogBackgroundColor),
@@ -201,7 +202,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => CuzdanimScreen()));
+                                      builder: (context) =>
+                                          const CuzdanimScreen()));
                             },
                             icon: Image.asset(
                               "assets/images/icons/basket.png",
@@ -357,7 +359,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 height: 500.h,
                 width: ScreenUtil().screenWidth,
                 child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemCount: 6,
@@ -367,7 +369,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProductDetailScreen()));
+                                builder: (context) =>
+                                    const ProductDetailScreen()));
                         log("test");
                       },
                       child: Padding(
@@ -383,7 +386,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ProductDetailScreen()));
+                                          const ProductDetailScreen()));
                             },
                             price: 128.99),
                       ),

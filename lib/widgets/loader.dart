@@ -6,7 +6,7 @@ class Loader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [RefreshProgressIndicator(), Text("Yükleniyor")],

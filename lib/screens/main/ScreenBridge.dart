@@ -6,8 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/products/ProductsMainScreen.dart';
 import 'package:salonmate/screens/products/SepetScreen.dart';
-import 'package:salonmate/screens/profile/NotificationsScreen.dart';
-import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
 
 class ScreenBridge extends StatefulWidget {

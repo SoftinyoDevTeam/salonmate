@@ -7,15 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
-import 'package:salonmate/core/models/bildirimmodel.dart';
+import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
+import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
-import 'package:salonmate/core/models/usermodel.dart';
+import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
+import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void setPrefString(String key, String value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString(key, value);
+}
+
+Future<String?> getPrefString(String key) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString(key);
 }
 
 Future<bool> checkLogin() async {
@@ -72,7 +79,7 @@ Future<bool> checkNetwork() async {
 
 Future<String> sendSms(String phoneNumber) async {
   FormData form = FormData.fromMap({"phone": phoneNumber});
-
+  log(phoneNumber);
   try {
     Response response = await Dio().post(
       apiUrl + "?module=login",
@@ -268,6 +275,68 @@ Future<UserModel?> getProfile() async {
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('getProfile: [ERROR] $e', error: e);
+    return notifications;
+  }
+}
+
+Future<CuzdanimModel?> checkCuzdanim() async {
+  CuzdanimModel? notifications;
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=checkCuzdanim",
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    log("checkCuzdanim : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      notifications = CuzdanimModel.fromJson(response.data["data"]);
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('checkCuzdanim: [ERROR] ${response.data}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('checkCuzdanim: [ERROR] $e', error: e);
+    return notifications;
+  }
+}
+
+Future<List<HizmetKategoriModel?>> checkHizmetler() async {
+  List<HizmetKategoriModel?> notifications = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=services",
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    log("checkCuzdanim : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      response.data["data"].forEach((element) {
+        notifications.add(HizmetKategoriModel.fromJson(element));
+      });
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('checkCuzdanim: [ERROR] ${response.data}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('checkCuzdanim: [ERROR] $e', error: e);
     return notifications;
   }
 }
