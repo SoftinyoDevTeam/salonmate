@@ -11,9 +11,17 @@ class RadioSelectModels {
 
   factory RadioSelectModels.fromJson(Map<String, dynamic> json) {
     return RadioSelectModels(
-      ID: json['ID'],
-      fullName: json['fullName'],
-      imageUrl: json['imageUrl'],
+      ID: json['staffID'] != null
+          ? json["staffID"]
+          : json["ID"] == null
+              ? ""
+              : json["ID"],
+      fullName: json['fullName'] != null
+          ? json["name"]
+          : json["name"] == null
+              ? ""
+              : json["name"],
+      imageUrl: json['imageUrl'] != null ? json["imageurl"] : "test",
     );
   }
 }

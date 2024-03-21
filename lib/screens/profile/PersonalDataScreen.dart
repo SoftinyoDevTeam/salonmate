@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/buttons.dart';
@@ -62,7 +66,14 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               padding: const EdgeInsets.only(top: 18.0),
               child: MateButon(
                 title: "Güncelle",
-                onPressed: () {},
+                onPressed: () async {
+                  log("güncelle");
+                  if (await updateMyDataMobile("fullName", fullName.text)) {
+                    getProfile();
+                    Fluttertoast.showToast(
+                        msg: "Bilgiler başarıyla güncellendi");
+                  }
+                },
                 textcolor: Theme.of(context).primaryColorLight,
                 color: Theme.of(context).colorScheme.secondary,
                 minimumSize: Size(ScreenUtil().screenWidth, 40.h),

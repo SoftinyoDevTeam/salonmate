@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
+import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
+import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
@@ -246,6 +248,41 @@ logout() async {
   prefs.clear();
 }
 
+Future<List<SalonProductsModel?>> getProducts() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  FormData form = FormData.fromMap({"token": prefs.getString("token")});
+  List<SalonProductsModel?> notifications = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getProducts",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+    log("getProducts : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      response.data["data"].forEach((element) {
+        notifications.add(SalonProductsModel.fromJson(element));
+      });
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('getProducts: [ERROR] ${response.data["message"]}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('getProducts: [ERROR] $e', error: e);
+    return notifications;
+  }
+}
+
 Future<UserModel?> getProfile() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -338,5 +375,68 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('checkCuzdanim: [ERROR] $e', error: e);
     return notifications;
+  }
+}
+
+Future<List<RadioSelectModels?>> checkRadioList(
+    String module, FormData formData) async {
+  List<RadioSelectModels?> elements = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=$module",
+      data: formData,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    log("checkRadioList : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      response.data["data"].forEach((element) {
+        elements.add(RadioSelectModels.fromJson(element));
+      });
+      return elements;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('checkRadioList: [ERROR] ${response.data}');
+      return elements;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('checkRadioList: [ERROR] $e', error: e);
+    return elements;
+  }
+}
+
+Future<bool> updateMyDataMobile(String column, String value) async {
+  FormData form = FormData.fromMap({"column": column, "value": value});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=updateMyDataMobile",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('updateMyDataMobile: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('updateMyDataMobile: [ERROR] $e', error: e);
+    return false;
   }
 }

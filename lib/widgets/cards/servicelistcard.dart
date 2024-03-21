@@ -22,8 +22,8 @@ class _ServiceListCardState extends State<ServiceListCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        RadioSelectBottomSheet(context, "imageUrl", "fullName", "getStaffs",
-            FormData.fromMap({"subeID": "1"}));
+        RadioSelectBottomSheet(
+            context, false, true, "getAllSube", FormData.fromMap({}));
       },
       child: Container(
           height: 132.w,

@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/main/SallaKazan.dart';
@@ -11,6 +13,7 @@ import 'package:salonmate/screens/profile/NotificationsScreen.dart';
 import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:salonmate/widgets/loader.dart';
 
 class SalonmateHomeScreen extends StatefulWidget {
   const SalonmateHomeScreen({super.key});
@@ -20,6 +23,12 @@ class SalonmateHomeScreen extends StatefulWidget {
 }
 
 class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
+  List<SalonProductsModel?> products = [];
+  void awaitgetProducts() async {
+    products = await getProducts();
+    setState(() {});
+  }
+
   PageController pageController = PageController();
   PageController pageController2 = PageController();
   int currentIndexPage = 0;
@@ -129,6 +138,13 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
     ),
   ];
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    awaitgetProducts();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -206,7 +222,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                           const CuzdanimScreen()));
                             },
                             icon: Image.asset(
-                              "assets/images/icons/basket.png",
+                              "assets/images/icons/wallet.png",
                               width: 24,
                               height: 24,
                             ),
@@ -240,7 +256,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                               );
                             },
                             icon: Image.asset(
-                              "assets/images/icons/bell.png",
+                              "assets/images/icons/shakewin.png",
                               width: 24,
                               height: 24,
                             ),
@@ -355,45 +371,47 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                     ),
                 ],
               ),
-              SizedBox(
-                height: 500.h,
-                width: ScreenUtil().screenWidth,
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ProductDetailScreen()));
-                        log("test");
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ProductCard(
-                            width: 120.w,
-                            height: 80.w,
-                            title: "title",
-                            imageUrl:
-                                "https://sdcdn.io/mac/tr/mac_sku_SK6R01_1x1_0.png",
-                            onPressed: () {
+              products.length >= 0
+                  ? SizedBox(
+                      height: 500.h,
+                      width: ScreenUtil().screenWidth,
+                      child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const ProductDetailScreen()));
+                              log("test");
                             },
-                            price: 128.99),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ProductCard(
+                                  width: 120.w,
+                                  height: 80.w,
+                                  title: products[index]!.name!,
+                                  imageUrl: products[index]!.imgUrl!,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ProductDetailScreen()));
+                                  },
+                                  price: products[index]!.price!.toDouble()),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    )
+                  : Loader(),
             ],
           ),
         ),

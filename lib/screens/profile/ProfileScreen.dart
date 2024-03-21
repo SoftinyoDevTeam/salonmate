@@ -422,43 +422,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Icon(
-                                      Icons.lock,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        "Şifre Değişikliği",
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .primaryColorDark),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.chevron_right_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Divider(
-                                height: 1,
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
-                            ),
-                            Container(
-                              height: 60.h,
-                              width: ScreenUtil().screenWidth,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
                                       Icons.language_outlined,
                                       color: Theme.of(context).hintColor,
                                     ),
