@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
+import 'package:salonmate/widgets/loader.dart';
 
 class ProductCard extends StatelessWidget {
   final String title;
@@ -28,12 +31,11 @@ class ProductCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: width - (width / 50),
-            height: height - (height / 50),
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(20.sp)),
-            child: Image.network(imageUrl),
-          ),
+              width: width - (width / 50),
+              height: height - (height / 50),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20.sp)),
+              child: MateImage(imageUrl: imageUrl)),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(

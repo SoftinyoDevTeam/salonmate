@@ -13,6 +13,7 @@ import 'package:salonmate/screens/profile/NotificationsScreen.dart';
 import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 class SalonmateHomeScreen extends StatefulWidget {
@@ -36,53 +37,38 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
   List<Widget> Sliderlist = [
     Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
+      child: MateImage(
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
+      ),
     ),
     Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
+      child: MateImage(
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
+      ),
     ),
     Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
+      child: MateImage(
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
+      ),
     ),
     Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
+      child: MateImage(
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
+      ),
     ),
     Container(
       width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
+      child: MateImage(
+        imageUrl:
+            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
+      ),
     ),
   ];
   List<Widget> Sliderlist2 = [
@@ -298,7 +284,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 ),
                 height: 150.h,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24.h),
+                  borderRadius: BorderRadius.circular(40.h),
                   child: PageView.builder(
                     controller: pageController,
                     itemCount: Sliderlist.length,

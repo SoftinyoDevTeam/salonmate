@@ -19,9 +19,19 @@ class SiparisWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 1,
-      borderRadius: BorderRadius.circular(20),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            spreadRadius: 0,
+            blurRadius: 10,
+            offset: Offset(0, 0), // changes position of shadow
+          ),
+        ],
+      ),
       child: Container(
         padding: EdgeInsets.all(16),
         // Widget'ın içeriği

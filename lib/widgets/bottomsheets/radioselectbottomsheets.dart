@@ -7,12 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
+import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 void RadioSelectBottomSheet(BuildContext context, bool imageColumn,
-    bool titleColumn, String module, FormData formData,
+    bool titleColumn, String module, FormData formData, Function onSelected,
     {String title = "Seçiminizi Yapın"}) async {
-  int selectedTab = 0;
+  RadioSelectModels? selectedItems;
   List<RadioSelectModels?> data = [];
   bool isfetch = false;
   showModalBottomSheet(
@@ -82,89 +83,110 @@ void RadioSelectBottomSheet(BuildContext context, bool imageColumn,
                             : Column(
                                 children: [
                                   for (var item in data)
-                                    Container(
-                                        padding: EdgeInsets.only(bottom: 5),
-                                        margin: EdgeInsets.only(bottom: 5),
-                                        decoration: selectedTab == item!.ID
-                                            ? BoxDecoration(
-                                                border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary),
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              )
-                                            : BoxDecoration(
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 224, 224, 228)),
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  imageColumn == true
-                                                      ? Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: CircleAvatar(
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                              item!.imageUrl!,
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            selectedItems = item;
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          margin: EdgeInsets.only(bottom: 5),
+                                          decoration: selectedItems == item
+                                              ? BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                )
+                                              : BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 224, 224, 228)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    imageColumn == true
+                                                        ? Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: CircleAvatar(
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                item!.imageUrl!,
+                                                              ),
                                                             ),
-                                                          ),
+                                                          )
+                                                        : Container(),
+                                                    titleColumn == true
+                                                        ? Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Text(
+                                                              item!.fullName!,
+                                                              style: TextStyle(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .primaryColorLight,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                                  ],
+                                                ),
+                                                IconButton(
+                                                  color: Theme.of(context)
+                                                      .primaryColorLight,
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        selectedItems = item!;
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: selectedItems == item
+                                                      ? Icon(
+                                                          Icons
+                                                              .radio_button_checked,
                                                         )
-                                                      : Container(),
-                                                  titleColumn == true
-                                                      ? Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            item!.fullName!,
-                                                            style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .primaryColorLight,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        )
-                                                      : Container(),
-                                                ],
-                                              ),
-                                              IconButton(
-                                                color: Theme.of(context)
-                                                    .primaryColorLight,
-                                                onPressed: () {
-                                                  setState(
-                                                    () {
-                                                      selectedTab = item.ID!;
-                                                    },
-                                                  );
-                                                },
-                                                icon: selectedTab == item.ID
-                                                    ? Icon(
-                                                        Icons
-                                                            .radio_button_checked,
-                                                      )
-                                                    : Icon(
-                                                        Icons.circle_outlined,
-                                                      ),
-                                              ),
-                                            ])),
+                                                      : Icon(
+                                                          Icons.circle_outlined,
+                                                        ),
+                                                ),
+                                              ])),
+                                    ),
                                 ],
                               )
                       ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: MateButon(
+                          title: "Seç",
+                          minimumSize: Size.fromHeight(40.h),
+                          onPressed: () {
+                            onSelected(selectedItems);
+                          },
+                          color: Theme.of(context).primaryColor,
+                          textcolor: Theme.of(context).primaryColorLight),
                     )
                   ]),
             );

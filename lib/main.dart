@@ -1,4 +1,6 @@
 //Flutter dart paketleri
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 // Core ek paketler
@@ -8,6 +10,7 @@ import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
+import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
@@ -27,6 +30,7 @@ void main() async {
   // Internet bağlantısı kontrol ediliyor
 
   prefs = await SharedPreferences.getInstance();
+
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
     path: localizationDir,
@@ -46,6 +50,10 @@ void main() async {
               debugShowCheckedModeBanner: false,
               title: appname,
               theme: ThemeData(
+                appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  surfaceTintColor: Colors.transparent,
+                ),
                 radioTheme: RadioThemeData(fillColor:
                     MaterialStateProperty.resolveWith<Color>(
                         (Set<MaterialState> states) {
@@ -99,12 +107,10 @@ void main() async {
                   onPrimary: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
                   secondary: "#272E54".toColor(),
-                  onSecondary: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor(),
+                  onSecondary: "#C5C5D4".toColor(),
                   error: salonConfig!.data!.salonConfig!.primaryColorDark!
                       .toColor(),
-                  onError: salonConfig!.data!.salonConfig!.primaryColorDark!
-                      .toColor(),
+                  onError: "#02C081".toColor(),
                   onBackground: salonConfig!
                       .data!.salonConfig!.primaryColorDark!
                       .toColor(),

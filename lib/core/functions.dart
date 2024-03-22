@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
+import 'package:salonmate/core/models/othermodels/stafffilledschedules.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
@@ -360,7 +361,7 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
       ),
     );
 
-    log("checkCuzdanim : [ RESPONSE ]" + response.data.toString());
+    log("checkHizmetler : [ RESPONSE ]" + response.data.toString());
     if (response.data["status"] == "200") {
       response.data["data"].forEach((element) {
         notifications.add(HizmetKategoriModel.fromJson(element));
@@ -368,12 +369,12 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
       return notifications;
     } else {
       Fluttertoast.showToast(msg: "${response.data["message"]}");
-      log('checkCuzdanim: [ERROR] ${response.data}');
+      log('checkHizmetler: [ERROR] ${response.data}');
       return notifications;
     }
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
-    log('checkCuzdanim: [ERROR] $e', error: e);
+    log('checkHizmetler: [ERROR] $e', error: e);
     return notifications;
   }
 }
@@ -412,6 +413,50 @@ Future<List<RadioSelectModels?>> checkRadioList(
   }
 }
 
+Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
+  List<DateTime> elements = [];
+  FormData data = FormData.fromMap({"staffID": staffID});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getFilledSchedules",
+      data: data,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    //log("checkStaffFilledSchedules : [ RESPONSE ]" + response.data.toString());
+    if (response.data["status"] == "200") {
+      response.data["data"].forEach((element) {
+        DateTime scheduleStart = DateTime.parse(element["scheduleStart"]);
+        DateTime scheduleEnd = DateTime.parse(element["scheduleEnd"]);
+        int serviceDuration = scheduleEnd.difference(scheduleStart).inMinutes;
+
+        double parts = serviceDuration / 15;
+        log(parts.toString());
+        for (var i = 0; i < parts; i++) {
+          elements.add(scheduleStart);
+          scheduleStart = scheduleStart.add(Duration(minutes: 15));
+        }
+        elements.add(scheduleEnd);
+      });
+      return elements;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('checkStaffFilledSchedules: [ERROR] ${response.data}');
+      return elements;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('checkStaffFilledSchedules: [ERROR] $e', error: e);
+    return elements;
+  }
+}
+
 Future<bool> updateMyDataMobile(String column, String value) async {
   FormData form = FormData.fromMap({"column": column, "value": value});
   try {
@@ -437,6 +482,84 @@ Future<bool> updateMyDataMobile(String column, String value) async {
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('updateMyDataMobile: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+List<DateTimeRange> getEmptySchedule(
+    DateTime day, TimeOfDay sTime, TimeOfDay dTime) {
+  //o günün giriş çıkış saatleri
+  var period = Duration(minutes: 15);
+  var startDateTime =
+      DateTime(day.year, day.month, day.day, sTime.hour, sTime.minute);
+  var departureDateTime =
+      DateTime(day.year, day.month, day.day, dTime.hour, dTime.minute);
+  var dateTimeRanges = <DateTimeRange>[];
+  var current = startDateTime;
+  while (current.isBefore(departureDateTime)) {
+    dateTimeRanges.add(DateTimeRange(start: current, end: current.add(period)));
+    current = current.add(period);
+  }
+  return dateTimeRanges;
+}
+
+List<DateTimeRange> parseFilledShedule(List<DateTimeRange> schedule) {
+  List<DateTimeRange> list = [];
+  for (var i = 0; i < schedule.length; i++) {
+    list.addAll(divideDateTimeRange(schedule[i]));
+    list.sort((a, b) => a.start.compareTo(b.start));
+  }
+  return list;
+}
+
+List<DateTimeRange> divideDateTimeRange(DateTimeRange dateTimeRange) {
+  var period = Duration(minutes: 15);
+  List<DateTimeRange> list = [];
+  //print(dateTimeRange.duration.inMinutes);
+  if (dateTimeRange.duration.inMinutes > 15) {
+    var start = dateTimeRange.start;
+    while (start.isBefore(dateTimeRange.end)) {
+      list.add(DateTimeRange(start: start, end: start.add(period)));
+      start = start.add(period);
+    }
+    return list;
+  } else {
+    return list = [dateTimeRange];
+  }
+}
+
+Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
+    int duration, int subeID) async {
+  FormData form = FormData.fromMap({
+    "serviceID": serviceID,
+    "staffID": staffID,
+    "scheduleStart": start.toString(),
+    "duration": duration,
+    "subeID": subeID
+  });
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=addRandevu",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('addRandevu: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('addRandevu: [ERROR] $e', error: e);
     return false;
   }
 }

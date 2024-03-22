@@ -21,12 +21,21 @@ class HizmetModel {
   int? ID;
   String? totalPrice;
   String? name;
+  double? prePaymentMinRate;
+  int? serviceDuration;
 
-  HizmetModel({this.ID, this.totalPrice, this.name});
+  HizmetModel(
+      {this.ID,
+      this.totalPrice,
+      this.name,
+      this.prePaymentMinRate,
+      this.serviceDuration});
 
   HizmetModel.fromJson(Map<String, dynamic> json) {
     ID = json['ID'];
     totalPrice = json['totalPrice'];
     name = json['name'];
+    prePaymentMinRate = double.parse(json['prePaymentMinRate']);
+    serviceDuration = json['serviceDuration'];
   }
 }

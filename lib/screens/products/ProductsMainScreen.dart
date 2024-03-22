@@ -71,7 +71,9 @@ class _ProductsMainScreenState extends State<ProductsMainScreen> {
         appBar: AppBar(
           title: Text(
             "Ürünler",
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            style: TextStyle(
+                color: Theme.of(context).primaryColorDark,
+                fontWeight: FontWeight.bold),
           ),
         ),
         body: Padding(

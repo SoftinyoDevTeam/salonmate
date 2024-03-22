@@ -17,11 +17,11 @@ class RadioSelectModels {
               ? ""
               : json["ID"],
       fullName: json['fullName'] != null
-          ? json["name"]
+          ? json["fullName"]
           : json["name"] == null
               ? ""
               : json["name"],
-      imageUrl: json['imageUrl'] != null ? json["imageurl"] : "test",
+      imageUrl: json['imageUrl'] != null ? json["imageUrl"] : "test",
     );
   }
 }

@@ -174,6 +174,7 @@ class _RandevuMainScreenState extends State<RandevuMainScreen> {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ServiceListCard(
+                              hizmetler: hizmetler[index]!.list!,
                               text: hizmetler[index]!.name!,
                               imageUrl:
                                   "https://www.newwell.com.tr/Data/Blog/30.jpg",

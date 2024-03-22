@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_shopping_cart/model/cart_model.dart';
-import 'package:persistent_shopping_cart/persistent_shopping_cart.dart';
+
 import 'package:salonmate/widgets/buttons.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -93,16 +92,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               MateButon(
                   title: "Sepete Ekle",
                   minimumSize: Size(50.w, 40.h),
-                  onPressed: () async {
-                    await PersistentShoppingCart().addToCart(
-                        PersistentShoppingCartItem(
-                            productThumbnail:
-                                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-                            productId: "1",
-                            productName: "Nars The Orginal Multi-Purpose Stick",
-                            unitPrice: 300.90,
-                            quantity: quantity));
-                  },
+                  onPressed: () async {},
                   color: Theme.of(context).primaryColor,
                   textcolor: Theme.of(context).primaryColorLight)
             ],
