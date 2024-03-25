@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/main.dart';
+import 'package:salonmate/screens/campaigns/CampaingLists.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/main/SallaKazan.dart';
 import 'package:salonmate/screens/products/ProductDetailScreen.dart';
@@ -257,17 +258,22 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                     ]),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Kampanyalar',
+                      Text('Kampanyalar',
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 16,
+                              fontSize: 15.sp,
                               fontWeight: FontWeight.w700)),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => CampaignLists())));
+                        },
                         child: const Text('Tümünü Gör',
                             style: TextStyle(
                                 color: Colors.pink,
@@ -357,9 +363,22 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                     ),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      "Öne Çıkan Ürünler",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15.sp),
+                    ),
+                  ),
+                ],
+              ),
               products.length >= 0
                   ? SizedBox(
-                      height: 500.h,
+                      height: 800.h,
                       width: ScreenUtil().screenWidth,
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/main.dart';
-
+import 'package:collection/collection.dart';
+import 'package:salonmate/screens/products/PaymentScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
 
 class SepetScreen extends StatefulWidget {
   const SepetScreen({super.key});
@@ -12,7 +16,25 @@ class SepetScreen extends StatefulWidget {
 }
 
 class _SepetScreenState extends State<SepetScreen> {
-  final items = List<String>.generate(20, (i) => 'Item ${i + 1}');
+  List<SepetModel?> sepetim = [];
+  double sepetTotal = 0;
+  void getSepetContent() async {
+    sepetTotal = 0;
+    sepetim = await getCart();
+    sepetim.forEach(
+      (element) {
+        sepetTotal = sepetTotal + element!.price!;
+      },
+    );
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getSepetContent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,109 +62,108 @@ class _SepetScreenState extends State<SepetScreen> {
             ),
             preferredSize: Size.fromHeight(4.0)),
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: Dismissible(
-              direction: DismissDirection.endToStart,
-              // Each Dismissible must contain a Key. Keys allow Flutter to
-              // uniquely identify widgets.
-              key: Key(item),
-              // Provide a function that tells the app
-              // what to do after an item has been swiped away.
-              onDismissed: (direction) {
-                // Remove the item from the data source.
-                setState(() {
-                  items.removeAt(index);
-                });
-              },
-              // Show a red background as the item is swiped away.
-              background: Container(
-                color: Colors.red,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.delete,
-                      color: Theme.of(context).primaryColorLight,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4, right: 22.0),
-                      child: Text(
-                        "Kaldır",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColorLight),
+      body: sepetim.isEmpty
+          ? Container()
+          : ListView.builder(
+              itemCount: sepetim.length,
+              itemBuilder: (context, index) {
+                var urun = sepetim[index];
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Dismissible(
+                    direction: DismissDirection.endToStart,
+                    // Each Dismissible must contain a Key. Keys allow Flutter to
+                    // uniquely identify widgets.
+                    key: Key(urun!.imgUrl!),
+                    // Provide a function that tells the app
+                    // what to do after an item has been swiped away.
+                    onDismissed: (direction) {
+                      // Remove the item from the data source.
+                      setState(() {});
+                    },
+                    // Show a red background as the item is swiped away.
+                    background: Container(
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.delete,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 4, right: 22.0),
+                            child: Text(
+                              "Kaldır",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColorLight),
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-              child: Container(
-                decoration:
-                    BoxDecoration(color: Theme.of(context).primaryColorLight),
-                width: ScreenUtil().screenWidth,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 90.h,
-                        width: 90.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.sp),
-                          border: Border.all(
-                              width: 1.sp,
-                              color: Theme.of(context).colorScheme.outline),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Container(
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorLight),
+                      width: ScreenUtil().screenWidth,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
                               height: 90.h,
-                              width: 90.h,
+                              width: 90.w,
                               decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                        "assets/images/backgrounds/sallakazan.png",
-                                      )),
-                                  borderRadius: BorderRadius.circular(12.sp))),
-                        ),
+                                borderRadius: BorderRadius.circular(12.sp),
+                                border: Border.all(
+                                    width: 1.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.outline),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  height: 90.h,
+                                  width: 90.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(12.sp)),
+                                  child: MateImage(imageUrl: urun.imgUrl!),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                urun.title!,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                              ),
+                              Text(
+                                "${urun.price.toString()} TL",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                              )
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "data",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.secondary),
-                        ),
-                        Text(
-                          "data",
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              color: Theme.of(context).colorScheme.secondary),
-                        ),
-                        Text(
-                          "203,00 TL",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).colorScheme.secondary),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.background,
@@ -169,7 +190,7 @@ class _SepetScreenState extends State<SepetScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "354,21 TL",
+                        "${sepetTotal.toString()} TL",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 16.sp),
                       ),
@@ -185,7 +206,12 @@ class _SepetScreenState extends State<SepetScreen> {
               MateButon(
                   title: "Sepeti Onayla",
                   minimumSize: Size(20.w, 40.h),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PaymentScreen()));
+                  },
                   color: Theme.of(context).primaryColor,
                   textcolor: Theme.of(context).primaryColorLight)
             ],

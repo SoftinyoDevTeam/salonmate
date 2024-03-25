@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
 
@@ -92,7 +93,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               MateButon(
                   title: "Sepete Ekle",
                   minimumSize: Size(50.w, 40.h),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    String? userToken = await getPrefString("token");
+                    bool status = await addToCart(3, "URUN", userToken!);
+                  },
                   color: Theme.of(context).primaryColor,
                   textcolor: Theme.of(context).primaryColorLight)
             ],

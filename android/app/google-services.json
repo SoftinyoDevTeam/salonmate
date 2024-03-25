@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "278842032835",
+    "project_id": "salonmate-10a7a",
+    "storage_bucket": "salonmate-10a7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278842032835:android:20d17a053f02f6fe561876",
+        "android_client_info": {
+          "package_name": "com.example.salonmate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqetJMH_JgkoexRrYul1-yazXbMBxXwuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

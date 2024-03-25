@@ -573,7 +573,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       ? MateButon(
                           title: "Sepete Ekle",
                           minimumSize: Size(100.w, 120.h),
-                          onPressed: () {
+                          onPressed: () async {
+                            var usertoken = await getPrefString("token");
+                            bool sepet = await addToCart(
+                                selectedService!.ID!, "HIZMET", usertoken!);
                             setState(() {});
                           },
                           color: Theme.of(context).colorScheme.secondary,

@@ -22,26 +22,46 @@ class _CampaignListCardState extends State<CampaignListCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.radius),
-          color: Colors.white),
+        color: Theme.of(context).primaryColorLight,
+        boxShadow: [
+          BoxShadow(spreadRadius: 1, color: Colors.grey.withOpacity(0.2))
+        ],
+        borderRadius: BorderRadius.circular(widget.radius),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(widget.radius)),
-              child: Image.network(widget.imageUrl),
+              child: Container(
+                  height: 100.h,
+                  width: 400.w,
+                  child: Image.network(
+                    widget.imageUrl,
+                    fit: BoxFit.cover,
+                  )),
             ),
           ),
           SizedBox(
             height: 10.h,
           ),
-          Text(widget.heading),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.heading,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
           SizedBox(
             height: 10.h,
           ),
-          Text(widget.description)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(widget.description),
+          )
         ],
       ),
     );

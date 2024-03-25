@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
+import 'package:salonmate/core/models/othermodels/RandevuModel.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
+import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/core/models/othermodels/stafffilledschedules.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
@@ -51,7 +53,7 @@ Future<SalonConfigModel?> getSalonConfig() async {
         },
       ),
     );
-    log('getSalonConfig: [RESPONSE] ${response.data}');
+
     if (response.data["status"] == "200") {
       config = SalonConfigModel.fromJson(response.data);
       return config;
@@ -82,7 +84,6 @@ Future<bool> checkNetwork() async {
 
 Future<String> sendSms(String phoneNumber) async {
   FormData form = FormData.fromMap({"phone": phoneNumber});
-  log(phoneNumber);
   try {
     Response response = await Dio().post(
       apiUrl + "?module=login",
@@ -95,7 +96,7 @@ Future<String> sendSms(String phoneNumber) async {
         },
       ),
     );
-    log(response.data.toString());
+
     if (response.data["status"] == "200") {
       return response.data["data"]["hash"];
     } else {
@@ -110,10 +111,10 @@ Future<String> sendSms(String phoneNumber) async {
   }
 }
 
-Future<String> login(
-    String phoneNumber, String code, String hash, BuildContext context) async {
-  FormData form =
-      FormData.fromMap({"phone": phoneNumber, "key": code, "hash": hash});
+Future<String> login(String phoneNumber, String code, String hash,
+    BuildContext context, String fcmToken) async {
+  FormData form = FormData.fromMap(
+      {"phone": phoneNumber, "key": code, "hash": hash, "fcmToken": fcmToken});
 
   try {
     Response response = await Dio().post(
@@ -127,7 +128,7 @@ Future<String> login(
         },
       ),
     );
-    log(response.data.toString());
+
     if (response.data["status"] == "200") {
       UserModel user = UserModel.fromJson(response.data["data"]);
       setPrefString("token", user.token);
@@ -163,7 +164,7 @@ Future<UserModel?> checkRegister(String phoneNumber) async {
         },
       ),
     );
-    log("[ checkRegister : RESPONSE ]" + response.data.toString());
+
     if (response.data["status"] == "200") {
       return UserModel.fromJson(response.data["data"]);
     } else {
@@ -193,7 +194,7 @@ Future<List<Bildirim?>> notificationlist() async {
         },
       ),
     );
-    log("notificationlist : [ RESPONSE ]" + response.data.toString());
+
     if (response.data["status"] == "200") {
       for (var e in response.data["data"]) {
         notifications.add(Bildirim.fromJson(e));
@@ -211,6 +212,39 @@ Future<List<Bildirim?>> notificationlist() async {
   }
 }
 
+Future<List<SepetModel?>> getCart() async {
+  FormData form = FormData.fromMap({"phone": ""});
+  List<SepetModel?> products = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getCart",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      for (var e in response.data["data"]) {
+        products.add(SepetModel.fromJson(e));
+      }
+      return products;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('getCart: [ERROR] ${response.data["message"]}');
+      return products;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('getCart: [ERROR] $e', error: e);
+    return products;
+  }
+}
+
 Future<String> register(FormData form, BuildContext context) async {
   try {
     Response response = await Dio().post(
@@ -224,7 +258,7 @@ Future<String> register(FormData form, BuildContext context) async {
         },
       ),
     );
-    log("[ register : RESPONSE ]" + response.toString());
+
     if (response.data["status"] == "200") {
       UserModel user = UserModel.fromJson(response.data["data"]);
       setPrefString("token", user.token);
@@ -266,7 +300,7 @@ Future<List<SalonProductsModel?>> getProducts() async {
         },
       ),
     );
-    log("getProducts : [ RESPONSE ]" + response.data.toString());
+
     if (response.data["status"] == "200") {
       response.data["data"].forEach((element) {
         notifications.add(SalonProductsModel.fromJson(element));
@@ -301,7 +335,7 @@ Future<UserModel?> getProfile() async {
         },
       ),
     );
-    log("getProfile : [ RESPONSE ]" + response.data.toString());
+
     if (response.data["status"] == "200") {
       notifications = UserModel.fromJson(response.data["data"]);
       return notifications;
@@ -331,7 +365,6 @@ Future<CuzdanimModel?> checkCuzdanim() async {
       ),
     );
 
-    log("checkCuzdanim : [ RESPONSE ]" + response.data.toString());
     if (response.data["status"] == "200") {
       notifications = CuzdanimModel.fromJson(response.data["data"]);
       return notifications;
@@ -361,7 +394,6 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
       ),
     );
 
-    log("checkHizmetler : [ RESPONSE ]" + response.data.toString());
     if (response.data["status"] == "200") {
       response.data["data"].forEach((element) {
         notifications.add(HizmetKategoriModel.fromJson(element));
@@ -395,7 +427,6 @@ Future<List<RadioSelectModels?>> checkRadioList(
       ),
     );
 
-    log("checkRadioList : [ RESPONSE ]" + response.data.toString());
     if (response.data["status"] == "200") {
       response.data["data"].forEach((element) {
         elements.add(RadioSelectModels.fromJson(element));
@@ -409,6 +440,37 @@ Future<List<RadioSelectModels?>> checkRadioList(
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('checkRadioList: [ERROR] $e', error: e);
+    return elements;
+  }
+}
+
+Future<List<RandevuModel?>> fetchRandevu() async {
+  List<RandevuModel?> elements = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=fetchRandevu",
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      response.data["data"].forEach((element) {
+        elements.add(RandevuModel.fromJson(element));
+      });
+      return elements;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('fetchRandevu: [ERROR] ${response.data}');
+      return elements;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('fetchRandevu: [ERROR] $e', error: e);
     return elements;
   }
 }
@@ -437,7 +499,7 @@ Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
         int serviceDuration = scheduleEnd.difference(scheduleStart).inMinutes;
 
         double parts = serviceDuration / 15;
-        log(parts.toString());
+
         for (var i = 0; i < parts; i++) {
           elements.add(scheduleStart);
           scheduleStart = scheduleStart.add(Duration(minutes: 15));
@@ -479,6 +541,30 @@ Future<bool> updateMyDataMobile(String column, String value) async {
       log('updateMyDataMobile: [ERROR] ${response.data}');
       return false;
     }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('updateMyDataMobile: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<bool> shakeWin() async {
+  FormData form = FormData.fromMap({});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=shakeWin",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+    log(response.data);
+    Fluttertoast.showToast(msg: response.data["message"]);
+    return true;
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('updateMyDataMobile: [ERROR] $e', error: e);
@@ -560,6 +646,65 @@ Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('addRandevu: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<bool> addToCart(int seyID, String ney, String customerToken) async {
+  FormData form = FormData.fromMap(
+      {"seyID": seyID, "ney": ney, "customerToken": customerToken});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=AddToCart",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('AddToCart: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('AddToCart: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<bool> sendReview(int scheduleID, int star, String customerReview) async {
+  FormData form = FormData.fromMap({
+    "scheduleID": scheduleID,
+    "star": star,
+    "customerReview": customerReview
+  });
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=sendReview",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    Fluttertoast.showToast(msg: response.data["message"]);
+
+    return true;
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Başarıyla değerlendirmeniz alınmıştır. $e");
+    log('sendReview: [ERROR] $e', error: e);
     return false;
   }
 }
