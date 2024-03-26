@@ -78,6 +78,7 @@ class SalonConfig {
   String? livechat;
   String? textColor;
   String? buttonColor;
+  String? urunkampanyatext;
   SalonConfig(
       {this.fontFamily,
       this.primaryColor,
@@ -86,7 +87,8 @@ class SalonConfig {
       this.backgroundColor,
       this.livechat,
       this.textColor,
-      this.buttonColor});
+      this.buttonColor,
+      this.urunkampanyatext});
 
   SalonConfig.fromJson(Map<String, dynamic> json) {
     fontFamily = json['fontFamily'];
@@ -97,6 +99,7 @@ class SalonConfig {
     livechat = json['livechat'];
     textColor = json['textColor'];
     buttonColor = json['buttonColor'];
+    urunkampanyatext = json['urunkampanyatext'];
   }
 
   Map<String, dynamic> toJson() {
@@ -109,6 +112,7 @@ class SalonConfig {
     data['livechat'] = this.livechat;
     data['textColor'] = this.textColor;
     data['buttonColor'] = this.buttonColor;
+    data['urunkampanyatext'] = this.urunkampanyatext;
     return data;
   }
 }

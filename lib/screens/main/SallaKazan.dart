@@ -16,20 +16,26 @@ class SallaKazanScreen extends StatefulWidget {
 }
 
 class _SallaKazanScreenState extends State<SallaKazanScreen> {
+  ShakeDetector detector = ShakeDetector.waitForStart(
+      shakeThresholdGravity: 1,
+      minimumShakeCount: 3,
+      shakeSlopTimeMS: 1000,
+      onShake: () {
+        shakeWin();
+      });
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    ShakeDetector detector = ShakeDetector.autoStart(
-        shakeThresholdGravity: 1,
-        minimumShakeCount: 1,
-        shakeSlopTimeMS: 1000,
-        onShake: () {
-          shakeWin();
-        });
 
-// start listening later on, after using waitForStart constructor
     detector.startListening();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    detector.stopListening();
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/campaigns/CampaingLists.dart';
@@ -15,6 +16,7 @@ import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
+import 'package:salonmate/widgets/custom/mateslider.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 class SalonmateHomeScreen extends StatefulWidget {
@@ -26,8 +28,10 @@ class SalonmateHomeScreen extends StatefulWidget {
 
 class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
   List<SalonProductsModel?> products = [];
+  List<CampaignModel?> kampanyalar = [];
   void awaitgetProducts() async {
     products = await getProducts();
+    kampanyalar = await getCampaigns();
     setState(() {});
   }
 
@@ -35,95 +39,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
   PageController pageController2 = PageController();
   int currentIndexPage = 0;
   int currentIndexPage2 = 0;
-  List<Widget> Sliderlist = [
-    Container(
-      width: ScreenUtil().screenWidth,
-      child: MateImage(
-        imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-      ),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      child: MateImage(
-        imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-      ),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      child: MateImage(
-        imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-      ),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      child: MateImage(
-        imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-      ),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      child: MateImage(
-        imageUrl:
-            "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-      ),
-    ),
-  ];
-  List<Widget> Sliderlist2 = [
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.sp),
-          image: const DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-  ];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -283,86 +199,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                       )
                     ]),
               ),
-              SizedBox(
-                  child: Container(
-                foregroundDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.h),
-                ),
-                height: 150.h,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40.h),
-                  child: PageView.builder(
-                    controller: pageController,
-                    itemCount: Sliderlist.length,
-                    itemBuilder: (context, i) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Sliderlist[i],
-                      );
-                    },
-                    onPageChanged: (value) {
-                      setState(() => currentIndexPage = value);
-                    },
-                  ),
-                ),
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < Sliderlist.length; i++)
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 7,
-                      width: i == currentIndexPage ? 20 : 10,
-                      decoration: BoxDecoration(
-                        color: i == currentIndexPage
-                            ? const Color.fromARGB(255, 253, 51, 87)
-                            : Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                ],
-              ),
-              SizedBox(
-                  child: Container(
-                foregroundDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.h),
-                ),
-                height: 150.h,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(24.h),
-                  child: PageView.builder(
-                    controller: pageController2,
-                    itemCount: Sliderlist2.length,
-                    itemBuilder: (context, i) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Sliderlist2[i],
-                      );
-                    },
-                    onPageChanged: (value) {
-                      setState(() => currentIndexPage2 = value);
-                    },
-                  ),
-                ),
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < Sliderlist.length; i++)
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 7,
-                      width: i == currentIndexPage2 ? 20 : 10,
-                      decoration: BoxDecoration(
-                        color: i == currentIndexPage2
-                            ? const Color.fromARGB(255, 253, 51, 87)
-                            : Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                ],
-              ),
+              MateSlider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -392,9 +229,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProductDetailScreen()));
-                              log("test");
+                                      builder: (context) => ProductDetailScreen(
+                                          product: products[index]!)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -408,7 +244,9 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const ProductDetailScreen()));
+                                                ProductDetailScreen(
+                                                    product:
+                                                        products[index]!)));
                                   },
                                   price: products[index]!.price!.toDouble()),
                             ),

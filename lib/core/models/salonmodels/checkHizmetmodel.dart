@@ -23,13 +23,15 @@ class HizmetModel {
   String? name;
   double? prePaymentMinRate;
   int? serviceDuration;
+  String? ney;
 
   HizmetModel(
       {this.ID,
       this.totalPrice,
       this.name,
       this.prePaymentMinRate,
-      this.serviceDuration});
+      this.serviceDuration,
+      this.ney});
 
   HizmetModel.fromJson(Map<String, dynamic> json) {
     ID = json['ID'];
@@ -37,5 +39,6 @@ class HizmetModel {
     name = json['name'];
     prePaymentMinRate = double.parse(json['prePaymentMinRate']);
     serviceDuration = json['serviceDuration'];
+    ney = json['ney'] == null ? "" : json['ney'];
   }
 }

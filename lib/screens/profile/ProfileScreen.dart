@@ -5,6 +5,7 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/screens/auth/LoginScreen.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
+import 'package:salonmate/screens/campaigns/CampaingLists.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/profile/PersonalDataScreen.dart';
@@ -339,33 +340,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            Container(
-                              height: 60.h,
-                              width: ScreenUtil().screenWidth,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.campaign,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        "Kampanyalar",
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .primaryColorDark),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CampaignLists()));
+                              },
+                              child: Container(
+                                height: 60.h,
+                                width: ScreenUtil().screenWidth,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.campaign,
+                                        color: Theme.of(context).hintColor,
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.chevron_right_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          "Kampanyalar",
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.chevron_right_outlined,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -376,80 +386,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            Container(
-                              height: 60.h,
-                              width: ScreenUtil().screenWidth,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.location_on_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        "Adreslerim",
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .primaryColorDark),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.chevron_right_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Divider(
-                                height: 1,
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
-                            ),
-                            Container(
-                              height: 60.h,
-                              width: ScreenUtil().screenWidth,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.language_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(
-                                        "Dil Değiştir",
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .primaryColorDark),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.chevron_right_outlined,
-                                      color: Theme.of(context).hintColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Divider(
-                                height: 1,
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
-                            ),
+                            // Container(
+                            //   height: 60.h,
+                            //   width: ScreenUtil().screenWidth,
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(18.0),
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.start,
+                            //       children: [
+                            //         Icon(
+                            //           Icons.location_on_outlined,
+                            //           color: Theme.of(context).hintColor,
+                            //         ),
+                            //         Padding(
+                            //           padding: const EdgeInsets.only(left: 8.0),
+                            //           child: Text(
+                            //             "Adreslerim",
+                            //             style: TextStyle(
+                            //                 color: Theme.of(context)
+                            //                     .primaryColorDark),
+                            //           ),
+                            //         ),
+                            //         Spacer(),
+                            //         Icon(
+                            //           Icons.chevron_right_outlined,
+                            //           color: Theme.of(context).hintColor,
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 18.0),
+                            //   child: Divider(
+                            //     height: 1,
+                            //     color: Theme.of(context).colorScheme.outline,
+                            //   ),
+                            // ),
+                            // Container(
+                            //   height: 60.h,
+                            //   width: ScreenUtil().screenWidth,
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(18.0),
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.start,
+                            //       children: [
+                            //         Icon(
+                            //           Icons.language_outlined,
+                            //           color: Theme.of(context).hintColor,
+                            //         ),
+                            //         Padding(
+                            //           padding: const EdgeInsets.only(left: 8.0),
+                            //           child: Text(
+                            //             "Dil Değiştir",
+                            //             style: TextStyle(
+                            //                 color: Theme.of(context)
+                            //                     .primaryColorDark),
+                            //           ),
+                            //         ),
+                            //         Spacer(),
+                            //         Icon(
+                            //           Icons.chevron_right_outlined,
+                            //           color: Theme.of(context).hintColor,
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 18.0),
+                            //   child: Divider(
+                            //     height: 1,
+                            //     color: Theme.of(context).colorScheme.outline,
+                            //   ),
+                            // ),
                             GestureDetector(
                               onTap: () async {
                                 await logout();

@@ -8,11 +8,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/models/othermodels/RandevuModel.dart';
+import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/core/models/othermodels/stafffilledschedules.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
+import 'package:salonmate/core/models/salonmodels/siparisgecmisimodel.dart';
 import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
@@ -229,9 +231,12 @@ Future<List<SepetModel?>> getCart() async {
     );
 
     if (response.data["status"] == "200") {
-      for (var e in response.data["data"]) {
-        products.add(SepetModel.fromJson(e));
+      if (response.data["data"] != null) {
+        for (var e in response.data["data"]) {
+          products.add(SepetModel.fromJson(e));
+        }
       }
+
       return products;
     } else {
       Fluttertoast.showToast(msg: "${response.data["message"]}");
@@ -562,12 +567,46 @@ Future<bool> shakeWin() async {
         },
       ),
     );
-    log(response.data);
-    Fluttertoast.showToast(msg: response.data["message"]);
+    if (response.data["status"] == "200") {
+      Fluttertoast.showToast(
+          msg: "Tebrikler ! ${response.data["data"][0]["name"]} kazandınız !");
+    } else {
+      Fluttertoast.showToast(
+          msg: "Maalesef olmadı lütfen daha sonra tekrar dene");
+    }
+
     return true;
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
-    log('updateMyDataMobile: [ERROR] $e', error: e);
+    log('shakeWin: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<bool> checkAff() async {
+  FormData form = FormData.fromMap({});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=shakeWin",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+    if (response.data["status"] == "200") {
+      Fluttertoast.showToast(
+          msg: "Tebrikler ! ${response.data["data"][0]["name"]} kazandınız !");
+    } else {
+      Fluttertoast.showToast(
+          msg: "Maalesef olmadı lütfen daha sonra tekrar dene");
+    }
+
+    return true;
+  } catch (e) {
+    log('shakeWin: [ERROR] $e', error: e);
     return false;
   }
 }
@@ -706,5 +745,100 @@ Future<bool> sendReview(int scheduleID, int star, String customerReview) async {
     Fluttertoast.showToast(msg: "Başarıyla değerlendirmeniz alınmıştır. $e");
     log('sendReview: [ERROR] $e', error: e);
     return false;
+  }
+}
+
+Future<List<CampaignModel?>> getCampaigns() async {
+  FormData form = FormData.fromMap({"phone": ""});
+  List<CampaignModel?> notifications = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getCampaigns",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      for (var e in response.data["data"]) {
+        notifications.add(CampaignModel.fromJson(e));
+      }
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('getCampaigns: [ERROR] ${response.data["message"]}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('getCampaigns: [ERROR] $e', error: e);
+    return notifications;
+  }
+}
+
+Future<bool> completeCart() async {
+  FormData form = FormData.fromMap({"column": ""});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=completeCart",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('completeCart: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('completeCart: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<List<ProductHistoryModel?>> getsiparislerim() async {
+  FormData form = FormData.fromMap({"phone": ""});
+  List<ProductHistoryModel?> notifications = [];
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=getsiparislerim",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      for (var e in response.data["data"]) {
+        notifications.add(ProductHistoryModel.fromJson(e));
+      }
+      return notifications;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('getsiparislerim: [ERROR] ${response.data["message"]}');
+      return notifications;
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('getsiparislerim: [ERROR] $e', error: e);
+    return notifications;
   }
 }

@@ -42,17 +42,17 @@ class ProductCard extends StatelessWidget {
               children: <Widget>[
                 Flexible(
                     child: Text.rich(TextSpan(children: <InlineSpan>[
+                  // TextSpan(
+                  //   text: 'Wella ',
+                  //   style: TextStyle(
+                  //       fontSize: 14,
+                  //       fontWeight: FontWeight.bold,
+                  //       color: Theme.of(context).colorScheme.primary),
+                  // ),
                   TextSpan(
-                    text: 'Nars',
+                    text: title.length > 30 ? title.substring(0, 30) : title,
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-                  TextSpan(
-                    text: ' The Orginal Multi-Purpose Stick',
-                    style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12.sp,
                         color: Theme.of(context).colorScheme.secondary),
                   )
                 ])))

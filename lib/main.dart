@@ -1,22 +1,15 @@
 //Flutter dart paketleri
-import 'dart:io';
-import 'dart:developer';
-
-import 'package:dart_eval/dart_eval.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 // Core ek paketler
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
-import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';

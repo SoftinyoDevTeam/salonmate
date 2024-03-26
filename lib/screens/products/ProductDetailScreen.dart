@@ -1,67 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
+import 'package:salonmate/main.dart';
+import 'package:salonmate/screens/main/ScreenBridge.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
-
+  const ProductDetailScreen({super.key, required this.product});
+  final SalonProductsModel product;
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  PageController pageController = PageController();
-  int currentIndexPage = 0;
   int quantity = 1;
-  List<Widget> Sliderlist = [
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-    Container(
-      width: ScreenUtil().screenWidth,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                "https://hips.hearstapps.com/hmg-prod/images/beauty-campaigns-celebrating-ageing-revolution-conceal-and-define-1536834974.jpg",
-              ))),
-    ),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +40,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    "300,90 TL",
+                    widget.product.price.toString() + " TL",
                     style:
                         TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   )
@@ -96,6 +52,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   onPressed: () async {
                     String? userToken = await getPrefString("token");
                     bool status = await addToCart(3, "URUN", userToken!);
+
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScreenBridge(),
+                        ),
+                        (route) => false);
                   },
                   color: Theme.of(context).primaryColor,
                   textcolor: Theme.of(context).primaryColorLight)
@@ -117,8 +80,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
         ),
         title: Text(
-          "Ürün Adı",
+          widget.product.name!,
           style: TextStyle(
+            fontSize: 15.sp,
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
@@ -126,214 +90,198 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-                child: Container(
-              height: 150.h,
-              child: ClipRRect(
-                child: PageView.builder(
-                  controller: pageController,
-                  itemCount: Sliderlist.length,
-                  itemBuilder: (context, i) {
-                    return Container(
-                      child: Sliderlist[i],
-                    );
-                  },
-                  onPageChanged: (value) {
-                    setState(() => currentIndexPage = value);
-                  },
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              SizedBox(
+                  child: Container(
+                      height: 150.h,
+                      child: MateImage(
+                        imageUrl: widget.product.imgUrl,
+                        boxFit: BoxFit.cover,
+                      ))),
+              Divider(
+                color: Theme.of(context).colorScheme.outline,
               ),
-            )),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  for (int i = 0; i < Sliderlist.length; i++)
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 7,
-                      width: i == currentIndexPage ? 20 : 10,
-                      decoration: BoxDecoration(
-                        color: i == currentIndexPage
-                            ? const Color.fromARGB(255, 253, 51, 87)
-                            : Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.product.name!.length > 44
+                          ? widget.product.name!.substring(0, 44) + "..."
+                          : widget.product.name!,
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.start,
                     ),
+                  ),
                 ],
               ),
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Nars The Orginal Multi-Purpose Stick",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.start,
+              Divider(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Ürün Özellikleri",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.start,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Ürün Özellikleri",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.start,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: ScreenUtil().screenWidth - 50,
+                      child: Text(
+                        widget.product.name!,
+                        maxLines: 10,
+                        style: TextStyle(fontWeight: FontWeight.w400),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    ' Likit Mat Ruj\n 250 ml \n Lorem ipsum sit amed',
-                    style: TextStyle(fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.start,
+                ],
+              ),
+
+              Divider(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Text(
+              //         "Teslimat Seçenekleri",
+              //         style: TextStyle(fontWeight: FontWeight.w600),
+              //         textAlign: TextAlign.start,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Text(
+              //         'UPS Kargo',
+              //         style: TextStyle(fontWeight: FontWeight.w400),
+              //         textAlign: TextAlign.start,
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Text(
+              //         '12.00 TL',
+              //         style: TextStyle(fontWeight: FontWeight.w400),
+              //         textAlign: TextAlign.start,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Divider(
+              //   color: Theme.of(context).colorScheme.outline,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Adet Seçiniz',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.start,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Teslimat Seçenekleri",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'UPS Kargo',
-                    style: TextStyle(fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '12.00 TL',
-                    style: TextStyle(fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Adet Seçiniz',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.outline)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.remove,
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .primaryColor
-                                  .withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: Theme.of(context).colorScheme.outline)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.remove,
+                              color: Theme.of(context).colorScheme.outline,
                             ),
-                            child: Center(
-                              child: Text(
-                                quantity.toString(),
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.w600),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: 20.w,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  quantity.toString(),
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.add,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.add,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(Icons.discount),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Kampanyalar",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.start,
+                ],
+              ),
+              Divider(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(Icons.discount),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Kampanyalar",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.start,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Theme.of(context).colorScheme.outline,
-            ),
-          ],
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(salonConfig!.data!.salonConfig!.urunkampanyatext!),
+              ),
+              Divider(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+            ],
+          ),
         ),
       ),
     );

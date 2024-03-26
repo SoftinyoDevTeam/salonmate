@@ -70,342 +70,377 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 60.h, left: 10.w, right: 10.w),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.close,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+                ),
+                Text(
+                  "Randevu Oluştur",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
                   Icons.close,
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.background,
+                ),
+              ],
+            ),
+            MateToggle(
+              onSelected: selectedTab,
+            ),
+            if (selectedTab == 0)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.kategori,
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: Wrap(children: [
+                        data.length == 0
+                            ? Loader()
+                            : Column(
+                                children: [
+                                  for (var item in widget.hizmetler)
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            selectedService = item;
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          margin: EdgeInsets.only(bottom: 5),
+                                          decoration: selectedTab == item.ID
+                                              ? BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                )
+                                              : BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 224, 224, 228)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    item.name != null
+                                                        ? Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Text(
+                                                              item.name!,
+                                                              style: TextStyle(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .colorScheme
+                                                                      .secondary,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                                  ],
+                                                ),
+                                                IconButton(
+                                                  hoverColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .onError,
+                                                  focusColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .onError,
+                                                  splashColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .onError,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onError,
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        selectedService = item;
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: selectedService == item
+                                                      ? Icon(
+                                                          Icons
+                                                              .radio_button_checked,
+                                                        )
+                                                      : Icon(
+                                                          Icons.circle_outlined,
+                                                        ),
+                                                ),
+                                              ])),
+                                    ),
+                                ],
+                              )
+                      ]),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                "Randevu Oluştur",
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-              Icon(
-                Icons.close,
-                color: Theme.of(context).colorScheme.background,
-              ),
-            ],
-          ),
-          MateToggle(
-            onSelected: selectedTab,
-          ),
-          if (selectedTab == 0)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.kategori,
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Wrap(children: [
-                      data.length == 0
-                          ? Loader()
-                          : Column(
-                              children: [
-                                for (var item in widget.hizmetler)
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(
-                                        () {
-                                          selectedService = item;
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                        padding: EdgeInsets.only(bottom: 5),
-                                        margin: EdgeInsets.only(bottom: 5),
-                                        decoration: selectedTab == item.ID
-                                            ? BoxDecoration(
-                                                border: Border.all(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary),
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              )
-                                            : BoxDecoration(
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 224, 224, 228)),
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                              ),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  item.name != null
-                                                      ? Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            item.name!,
-                                                            style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .colorScheme
-                                                                    .secondary,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        )
-                                                      : Container(),
-                                                ],
-                                              ),
-                                              IconButton(
-                                                hoverColor: Theme.of(context)
-                                                    .colorScheme
-                                                    .onError,
-                                                focusColor: Theme.of(context)
-                                                    .colorScheme
-                                                    .onError,
-                                                splashColor: Theme.of(context)
-                                                    .colorScheme
-                                                    .onError,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onError,
-                                                onPressed: () {
-                                                  setState(
-                                                    () {
-                                                      selectedService = item;
-                                                    },
-                                                  );
-                                                },
-                                                icon: selectedService == item
-                                                    ? Icon(
-                                                        Icons
-                                                            .radio_button_checked,
-                                                      )
-                                                    : Icon(
-                                                        Icons.circle_outlined,
-                                                      ),
-                                              ),
-                                            ])),
-                                  ),
-                              ],
-                            )
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          if (selectedTab == 1)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hizmet almak istediğiniz personeli seçin",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColorDark,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      RadioSelectBottomSheet(context, true, true, "getStaffs",
-                          FormData.fromMap({"subeID": widget.subeID}),
-                          (value) async {
-                        selectedStaff = value;
-                        staffFilledScheduleList =
-                            await checkStaffFilledSchedules(
-                                selectedStaff!.ID.toString());
-
-                        setState(() {});
-                      });
-                    },
-                    child: Container(
-                      width: ScreenUtil().screenWidth,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.06),
-                                blurRadius: 10)
-                          ]),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            selectedStaff == null
-                                ? Text("Personel Seçin*")
-                                : Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                selectedStaff!.imageUrl!)),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        Text(selectedStaff!.fullName!)
-                                      ]),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Theme.of(context).dialogBackgroundColor,
-                            )
-                          ],
-                        ),
-                      ),
+            if (selectedTab == 1)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hizmet almak istediğiniz personeli seçin",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColorDark,
+                          fontWeight: FontWeight.w600),
                     ),
-                  ),
-                  Column(children: [
                     SizedBox(
-                      height: 120,
-                      child: SfDateRangePicker(
-                        view: DateRangePickerView.month,
-                        minDate: DateTime.now(),
-                        maxDate: DateTime(DateTime.now().year,
-                            DateTime.now().month + 1, DateTime.now().day),
-                        initialSelectedDate: DateTime.now(),
-                        selectionShape: DateRangePickerSelectionShape.rectangle,
-                        selectionColor: Theme.of(context).colorScheme.secondary,
-                        showTodayButton: false,
-                        showNavigationArrow: true,
-                        todayHighlightColor:
-                            Theme.of(context).colorScheme.secondary,
-                        selectionTextStyle: TextStyle(
-                            color: Theme.of(context).primaryColorLight),
-                        onSelectionChanged: (args) {
-                          emptyScheduleList = getEmptySchedule(
-                              args.value, startTime, departureTime);
-                          setState(() {});
-                        },
-                        monthViewSettings: DateRangePickerMonthViewSettings(
-                          numberOfWeeksInView: 1,
-                          firstDayOfWeek: 1,
-                          dayFormat: 'EEE',
-                        ),
-                        selectableDayPredicate: (date) {
-                          if (date.weekday == DateTime.sunday) {
-                            return true;
-                          } else {
-                            return true;
-                          }
-                        },
-                      ),
+                      height: 15.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
+                    GestureDetector(
+                      onTap: () {
+                        RadioSelectBottomSheet(context, true, true, "getStaffs",
+                            FormData.fromMap({"subeID": widget.subeID}),
+                            (value) async {
+                          selectedStaff = value;
+                          staffFilledScheduleList =
+                              await checkStaffFilledSchedules(
+                                  selectedStaff!.ID.toString());
+
+                          setState(() {});
+                        });
+                      },
+                      child: Container(
+                        width: ScreenUtil().screenWidth,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.background,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.06),
+                                  blurRadius: 10)
+                            ]),
+                        child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Saati Belirleyin",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              selectedStaff == null
+                                  ? Text("Personel Seçin*")
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  selectedStaff!.imageUrl!)),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Text(selectedStaff!.fullName!)
+                                        ]),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Theme.of(context).dialogBackgroundColor,
+                              )
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                    Container(
-                      height: 299.h,
-                      child: GridView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemCount: emptyScheduleList.length,
-                          scrollDirection: Axis.vertical,
-                          physics: ScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing:
-                                      MediaQuery.of(context).size.width * 0.01,
-                                  mainAxisSpacing:
-                                      MediaQuery.of(context).size.height * 0.01,
-                                  mainAxisExtent:
-                                      MediaQuery.of(context).size.height *
-                                          0.05),
-                          itemBuilder: (context, index) {
-                            if (!staffFilledScheduleList
-                                    .contains(emptyScheduleList[index].start) &&
-                                emptyScheduleList[index]
-                                    .start
-                                    .isAfter(DateTime.now())) {
-                              return GestureDetector(
-                                onTap: () {
-                                  selectedDate.clear();
+                    Column(children: [
+                      SizedBox(
+                        height: 120,
+                        child: SfDateRangePicker(
+                          view: DateRangePickerView.month,
+                          minDate: DateTime.now(),
+                          maxDate: DateTime(DateTime.now().year,
+                              DateTime.now().month + 1, DateTime.now().day),
+                          initialSelectedDate: DateTime.now(),
+                          selectionShape:
+                              DateRangePickerSelectionShape.rectangle,
+                          selectionColor:
+                              Theme.of(context).colorScheme.secondary,
+                          showTodayButton: false,
+                          showNavigationArrow: true,
+                          todayHighlightColor:
+                              Theme.of(context).colorScheme.secondary,
+                          selectionTextStyle: TextStyle(
+                              color: Theme.of(context).primaryColorLight),
+                          onSelectionChanged: (args) {
+                            emptyScheduleList = getEmptySchedule(
+                                args.value, startTime, departureTime);
+                            setState(() {});
+                          },
+                          monthViewSettings: DateRangePickerMonthViewSettings(
+                            numberOfWeeksInView: 1,
+                            firstDayOfWeek: 1,
+                            dayFormat: 'EEE',
+                          ),
+                          selectableDayPredicate: (date) {
+                            if (date.weekday == DateTime.sunday) {
+                              return true;
+                            } else {
+                              return true;
+                            }
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Saati Belirleyin",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 299.h,
+                        child: GridView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            itemCount: emptyScheduleList.length,
+                            scrollDirection: Axis.vertical,
+                            physics: ScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing:
+                                        MediaQuery.of(context).size.width *
+                                            0.01,
+                                    mainAxisSpacing:
+                                        MediaQuery.of(context).size.height *
+                                            0.01,
+                                    mainAxisExtent:
+                                        MediaQuery.of(context).size.height *
+                                            0.05),
+                            itemBuilder: (context, index) {
+                              if (!staffFilledScheduleList.contains(
+                                      emptyScheduleList[index].start) &&
+                                  emptyScheduleList[index]
+                                      .start
+                                      .isAfter(DateTime.now())) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    selectedDate.clear();
 
-                                  double parts =
-                                      selectedService!.serviceDuration! / 15;
-                                  int count = 0;
-                                  for (var i = 0; i < parts; i++) {
-                                    if (staffFilledScheduleList.contains(
-                                        emptyScheduleList[index]
-                                            .start
-                                            .add(Duration(minutes: count)))) {
-                                      Fluttertoast.showToast(
-                                          msg:
-                                              "Randevunuzun aktif olduğu saatte başka bir randevu başladığı için seçim yasaklanmıştır.");
-                                      selectedDate.clear();
+                                    double parts =
+                                        selectedService!.serviceDuration! / 15;
+                                    int count = 0;
+                                    for (var i = 0; i < parts; i++) {
+                                      if (staffFilledScheduleList.contains(
+                                          emptyScheduleList[index]
+                                              .start
+                                              .add(Duration(minutes: count)))) {
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Randevunuzun aktif olduğu saatte başka bir randevu başladığı için seçim yasaklanmıştır.");
+                                        selectedDate.clear();
+                                      }
+                                      selectedDate.add(emptyScheduleList[index]
+                                          .start
+                                          .add(Duration(minutes: count)));
+                                      count = count + 15;
                                     }
-                                    selectedDate.add(emptyScheduleList[index]
-                                        .start
-                                        .add(Duration(minutes: count)));
-                                    count = count + 15;
-                                  }
 
-                                  setState(() {});
-                                },
-                                child: Padding(
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.5),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: selectedDate.contains(
+                                                      emptyScheduleList[index]
+                                                          .start)
+                                                  ? Colors.transparent
+                                                  : Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary
+                                                      .withOpacity(0.2),
+                                              spreadRadius: 0.5)
+                                        ],
+                                        color: !selectedDate.contains(
+                                                emptyScheduleList[index].start)
+                                            ? Theme.of(context)
+                                                .primaryColorLight
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                        borderRadius: BorderRadius.circular(
+                                            MediaQuery.of(context).size.height *
+                                                0.01),
+                                      ),
+                                      child: Text(
+                                        '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
+                                        style: TextStyle(
+                                            color: !selectedDate.contains(
+                                                    emptyScheduleList[index]
+                                                        .start)
+                                                ? Theme.of(context)
+                                                    .primaryColorDark
+                                                : Theme.of(context)
+                                                    .primaryColorLight),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Padding(
                                   padding: const EdgeInsets.all(2.5),
                                   child: Container(
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: selectedDate.contains(
-                                                    emptyScheduleList[index]
-                                                        .start)
-                                                ? Colors.transparent
-                                                : Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary
-                                                    .withOpacity(0.2),
-                                            spreadRadius: 0.5)
-                                      ],
-                                      color: !selectedDate.contains(
-                                              emptyScheduleList[index].start)
-                                          ? Theme.of(context).primaryColorLight
-                                          : Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
                                       borderRadius: BorderRadius.circular(
                                           MediaQuery.of(context).size.height *
                                               0.01),
@@ -413,127 +448,103 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     child: Text(
                                       '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
                                       style: TextStyle(
-                                          color: !selectedDate.contains(
-                                                  emptyScheduleList[index]
-                                                      .start)
-                                              ? Theme.of(context)
-                                                  .primaryColorDark
-                                              : Theme.of(context)
-                                                  .primaryColorLight),
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context)
+                                              .dialogBackgroundColor),
                                     ),
                                   ),
-                                ),
-                              );
-                            } else {
-                              return Padding(
-                                padding: const EdgeInsets.all(2.5),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .background,
-                                    borderRadius: BorderRadius.circular(
-                                        MediaQuery.of(context).size.height *
-                                            0.01),
-                                  ),
-                                  child: Text(
-                                    '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .dialogBackgroundColor),
-                                  ),
-                                ),
-                              );
-                            }
-                          }),
-                    )
-                  ])
-                ],
+                                );
+                              }
+                            }),
+                      )
+                    ])
+                  ],
+                ),
               ),
-            ),
-          if (selectedTab == 2)
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 210.h,
-                    width: 500.w,
-                    child: MateCard(
-                        widget: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            selectedService!.name!,
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Theme.of(context).colorScheme.secondary,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Text("Personel",
+            if (selectedTab == 2)
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 210.h,
+                      width: 500.w,
+                      child: MateCard(
+                          widget: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              selectedService!.name!,
                               style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: "#BDBDC1".toColor(),
-                              )),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          selectedStaff != null
-                              ? Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                      CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              selectedStaff!.imageUrl!)),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      Text(
-                                        selectedStaff!.fullName!,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500),
-                                      )
-                                    ])
-                              : Container(),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text("Tarih",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: "#BDBDC1".toColor(),
-                              )),
-                          Text(DateFormat('d MMMM yyyy - EEEE')
-                              .format(selectedDate[0])),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text("Saat",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: "#BDBDC1".toColor(),
-                              )),
-                          Text(DateFormat('HH:mm').format(selectedDate[0])),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                        ],
-                      ),
-                    )),
-                  ),
-                )
-              ],
-            )
-        ]),
+                                  fontSize: 15.sp,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text("Personel",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: "#BDBDC1".toColor(),
+                                )),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            selectedStaff != null
+                                ? Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                        CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                selectedStaff!.imageUrl!)),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        Text(
+                                          selectedStaff!.fullName!,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500),
+                                        )
+                                      ])
+                                : Container(),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text("Tarih",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: "#BDBDC1".toColor(),
+                                )),
+                            Text(DateFormat('d MMMM yyyy - EEEE')
+                                .format(selectedDate[0])),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text("Saat",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: "#BDBDC1".toColor(),
+                                )),
+                            Text(DateFormat('HH:mm').format(selectedDate[0])),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                          ],
+                        ),
+                      )),
+                    ),
+                  )
+                ],
+              )
+          ]),
+        ),
       ),
       bottomNavigationBar: Container(
         decoration:
@@ -558,48 +569,62 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     )
                   : Container(),
               selectedTab < 2
-                  ? MateButon(
-                      title: "Sonraki",
-                      minimumSize: Size(100.w, 120.h),
-                      onPressed: () {
-                        selectedTab = selectedTab + 1;
-                        setState(() {});
-                      },
-                      color: Theme.of(context).colorScheme.secondary,
-                      textcolor: Theme.of(context).primaryColorLight,
-                    )
-                  : selectedService!.prePaymentMinRate != null &&
-                          selectedService!.prePaymentMinRate! > 0.00
-                      ? MateButon(
-                          title: "Sepete Ekle",
+                  ? selectedService != null
+                      ? selectedService!.prePaymentMinRate != null &&
+                              selectedService!.prePaymentMinRate! > 0.00
+                          ? MateButon(
+                              title: "Sepete Ekle",
+                              minimumSize: Size(100.w, 120.h),
+                              onPressed: () async {
+                                var usertoken = await getPrefString("token");
+                                bool sepet = await addToCart(
+                                    selectedService!.ID!, "HIZMET", usertoken!);
+                                Fluttertoast.showToast(
+                                    msg:
+                                        "Hizmet başarıyla sepetinize eklendi.");
+                                setState(() {});
+                              },
+                              color: Theme.of(context).colorScheme.secondary,
+                              textcolor: Theme.of(context).primaryColorLight,
+                            )
+                          : MateButon(
+                              title: "Sonraki",
+                              minimumSize: Size(100.w, 120.h),
+                              onPressed: () {
+                                selectedTab = selectedTab + 1;
+                                setState(() {});
+                              },
+                              color: Theme.of(context).colorScheme.secondary,
+                              textcolor: Theme.of(context).primaryColorLight,
+                            )
+                      : MateButon(
+                          title: "Sonraki",
                           minimumSize: Size(100.w, 120.h),
-                          onPressed: () async {
-                            var usertoken = await getPrefString("token");
-                            bool sepet = await addToCart(
-                                selectedService!.ID!, "HIZMET", usertoken!);
+                          onPressed: () {
+                            selectedTab = selectedTab + 1;
                             setState(() {});
                           },
                           color: Theme.of(context).colorScheme.secondary,
                           textcolor: Theme.of(context).primaryColorLight,
                         )
-                      : MateButon(
-                          title: "Randevumu Oluştur",
-                          minimumSize: Size(100.w, 120.h),
-                          onPressed: () async {
-                            setState(() {});
-                            bool randevu = await addRandevu(
-                                selectedService!.ID!,
-                                selectedStaff!.ID!,
-                                selectedDate[0],
-                                selectedService!.serviceDuration!,
-                                widget.subeID);
-                            if (randevu == true) {
-                              Navigator.pop(context);
-                            }
-                          },
-                          color: Theme.of(context).colorScheme.primary,
-                          textcolor: Theme.of(context).primaryColorLight,
-                        )
+                  : MateButon(
+                      title: "Randevumu Oluştur",
+                      minimumSize: Size(100.w, 120.h),
+                      onPressed: () async {
+                        setState(() {});
+                        bool randevu = await addRandevu(
+                            selectedService!.ID!,
+                            selectedStaff!.ID!,
+                            selectedDate[0],
+                            selectedService!.serviceDuration!,
+                            widget.subeID);
+                        if (randevu == true) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      color: Theme.of(context).colorScheme.primary,
+                      textcolor: Theme.of(context).primaryColorLight,
+                    )
             ],
           ),
         ),

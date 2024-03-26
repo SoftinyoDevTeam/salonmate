@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class PaymentForm extends StatefulWidget {
@@ -138,6 +140,12 @@ class PaymentFormState extends State<PaymentForm> {
   }
 
   void _onValidate() {
+    completeCart();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => CuzdanimScreen()),
+        (route) => false);
+
     if (formKey.currentState?.validate() ?? false) {
       print('valid!');
     } else {

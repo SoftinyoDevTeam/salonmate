@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
 
 class SiparisWidget extends StatelessWidget {
   final String? fullName;
@@ -39,9 +40,10 @@ class SiparisWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(imagePath!),
+                Container(
+                  height: 50.w,
+                  width: 50.w,
+                  child: MateImage(imageUrl: imagePath),
                 ),
                 // Kullanıcı adı ve telefon numarası
                 SizedBox(
@@ -52,8 +54,8 @@ class SiparisWidget extends StatelessWidget {
                   children: [
                     Text(
                       fullName!,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 14.sp, fontWeight: FontWeight.bold),
                     ),
                     Text(fiyat!),
                   ],
