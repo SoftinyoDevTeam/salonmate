@@ -41,9 +41,11 @@ class _ServiceListCardState extends State<ServiceListCard> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ScheduleScreen(
-                        subeID: subeSecimi!.ID!,
-                        hizmetler: widget.hizmetler,
-                        kategori: widget.text)));
+                          subeID: subeSecimi!.ID!,
+                          hizmetler: widget.hizmetler,
+                          kategori: widget.text,
+                          cuzdanrandevusu: false,
+                        )));
           });
         },
         child: CachedNetworkImage(

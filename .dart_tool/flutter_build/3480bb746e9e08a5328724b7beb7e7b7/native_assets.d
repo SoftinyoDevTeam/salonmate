@@ -1,1 +1,0 @@
- /Users/alperenozcan/Desktop/salonmate/.dart_tool/flutter_build/3480bb746e9e08a5328724b7beb7e7b7/native_assets.yaml: 

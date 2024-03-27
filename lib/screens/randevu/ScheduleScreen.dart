@@ -17,15 +17,18 @@ import 'package:salonmate/widgets/loader.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ScheduleScreen extends StatefulWidget {
-  ScheduleScreen({
-    super.key,
-    required this.subeID,
-    required this.hizmetler,
-    required this.kategori,
-  });
+  ScheduleScreen(
+      {super.key,
+      required this.subeID,
+      required this.hizmetler,
+      required this.kategori,
+      this.selectedService,
+      required this.cuzdanrandevusu});
   final int subeID;
   final List<HizmetModel> hizmetler;
   final String kategori;
+  final HizmetModel? selectedService;
+  final bool cuzdanrandevusu;
   @override
   State<ScheduleScreen> createState() => _ScheduleScreenState();
 }
@@ -35,6 +38,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   HizmetModel? selectedService;
   RadioSelectModels? selectedStaff;
   List<RadioSelectModels?> data = [];
+
   bool isfetch = false;
   //Saat Listeleme
   late TimeOfDay startTime;
@@ -61,6 +65,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     // TODO: implement initState
     super.initState();
     fetchData();
+    if (widget.selectedService != null) {
+      selectedService = widget.selectedService;
+      selectedTab = 1;
+      setState(() {});
+    }
     startTime = TimeOfDay(hour: 8, minute: 0);
     departureTime = TimeOfDay(hour: 24, minute: 0);
   }
@@ -571,7 +580,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               selectedTab < 2
                   ? selectedService != null
                       ? selectedService!.prePaymentMinRate != null &&
-                              selectedService!.prePaymentMinRate! > 0.00
+                              selectedService!.prePaymentMinRate! > 0.00 &&
+                              widget.cuzdanrandevusu == false
                           ? MateButon(
                               title: "Sepete Ekle",
                               minimumSize: Size(100.w, 120.h),

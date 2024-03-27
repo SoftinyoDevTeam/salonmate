@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
+import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:salonmate/screens/randevu/ScheduleScreen.dart';
+import 'package:salonmate/widgets/bottomsheets/radioselectbottomsheets.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class CuzdanimScreen extends StatefulWidget {
@@ -14,7 +19,10 @@ class CuzdanimScreen extends StatefulWidget {
 
 class _CuzdanimScreenState extends State<CuzdanimScreen> {
   CuzdanimModel? cuzdanim;
+  RadioSelectModels? subeSecimi;
+  List<HizmetKategoriModel?> hizmetler = [];
   void getCuzdanim() async {
+    hizmetler = await checkHizmetler();
     cuzdanim = await checkCuzdanim();
     setState(() {});
   }
@@ -184,7 +192,35 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                     MateButon(
                                         title: "Randevu Al",
                                         minimumSize: Size(20.w, 30.h),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          RadioSelectBottomSheet(
+                                              context,
+                                              false,
+                                              true,
+                                              "getAllSube",
+                                              FormData.fromMap({}), (value) {
+                                            subeSecimi = value;
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ScheduleScreen(
+                                                            subeID:
+                                                                subeSecimi!.ID!,
+                                                            hizmetler:
+                                                                hizmetler[0]!
+                                                                    .list!,
+                                                            kategori: cuzdanim!
+                                                                .hizmetler![0]
+                                                                .name!,
+                                                            selectedService:
+                                                                cuzdanim!
+                                                                        .hizmetler![
+                                                                    0],
+                                                            cuzdanrandevusu:
+                                                                true)));
+                                          });
+                                        },
                                         color: Theme.of(context).primaryColor,
                                         textcolor: Theme.of(context)
                                             .primaryColorLight),
