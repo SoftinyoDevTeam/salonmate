@@ -9,6 +9,7 @@ import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/products/ProductsMainScreen.dart';
 import 'package:salonmate/screens/products/SepetScreen.dart';
 import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
+import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
 import 'package:salonmate/widgets/tooltip.dart';
 
@@ -78,7 +79,13 @@ class _ScreenBridgeState extends State<ScreenBridge> {
         },
         preferredOverlay: GestureDetector(
           onTap: () {
-            _controller.dismiss();
+            var next = _controller.nextPlayIndex;
+            if (next > 3) {
+              _controller.dismiss();
+            } else {
+              _controller.next();
+            }
+
             //move the overlay forward or backwards, or dismiss the overlay
           },
           child: Container(
@@ -94,10 +101,40 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                       displayIndex: 0,
                       tooltip: (controller) => Container(
                           width: 200.w,
-                          height: 200.h,
-                          child: MTooltip(
-                            controller: controller,
-                            title: "Canlı Yardım",
+                          height: 150.h,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MateCard(
+                                widget: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(children: [
+                                Text(
+                                  "Canlı Destek",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    style: TextStyle(fontSize: 11.sp),
+                                    maxLines: 4,
+                                    "Her gün 09:00 - 23:00 arası uygulamamız ile ilgili sorularınızı buradan bize iletebilirsiniz.",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: MateButon(
+                                      title: "Devam",
+                                      minimumSize: Size(30, 30),
+                                      onPressed: () {
+                                        _controller.next();
+                                      },
+                                      color: Theme.of(context).primaryColor,
+                                      textcolor:
+                                          Theme.of(context).primaryColorLight),
+                                )
+                              ]),
+                            )),
                           )),
                       tooltipVerticalPosition: TooltipVerticalPosition.TOP,
                       tooltipHorizontalPosition:

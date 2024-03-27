@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:overlay_tooltip/overlay_tooltip.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
@@ -13,6 +14,8 @@ import 'package:salonmate/screens/main/SallaKazan.dart';
 import 'package:salonmate/screens/products/ProductDetailScreen.dart';
 import 'package:salonmate/screens/profile/NotificationsScreen.dart';
 import 'package:salonmate/screens/profile/ProfileScreen.dart';
+import 'package:salonmate/widgets/buttons.dart';
+import 'package:salonmate/widgets/cards/matecard.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
@@ -105,70 +108,146 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: SizedBox(
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.outline,
-                              surfaceTintColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                              ),
+                      OverlayTooltipItem(
+                        displayIndex: 2,
+                        tooltip: (controller) => Container(
+                            width: 200.w,
+                            height: 150.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MateCard(
+                                  widget: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  Text(
+                                    "Cüzdanım",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      style: TextStyle(fontSize: 11.sp),
+                                      maxLines: 4,
+                                      "Kampanyalarımızdan elde ettiğiniz kazanımları buradan takip edebilirsiniz.",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: MateButon(
+                                        title: "Devam",
+                                        minimumSize: Size(30, 30),
+                                        onPressed: () {},
+                                        color: Theme.of(context).primaryColor,
+                                        textcolor: Theme.of(context)
+                                            .primaryColorLight),
+                                  )
+                                ]),
+                              )),
+                            )),
+                        tooltipVerticalPosition: TooltipVerticalPosition.BOTTOM,
+                        tooltipHorizontalPosition:
+                            TooltipHorizontalPosition.CENTER,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.outline,
+                            surfaceTintColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CuzdanimScreen()));
-                            },
-                            icon: Image.asset(
-                              "assets/images/icons/wallet.png",
-                              width: 24,
-                              height: 24,
-                            ),
-                            label: Text("Cüzdanım",
-                                style: TextStyle(
-                                    color: const Color(0xFF272E54),
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600)),
                           ),
-                        ),
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      Expanded(
-                        child: SizedBox(
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              surfaceTintColor: Colors.transparent,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.outline,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
+                          onPressed: () {
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const SallaKazanScreen()),
-                              );
-                            },
-                            icon: Image.asset(
-                              "assets/images/icons/shakewin.png",
-                              width: 24,
-                              height: 24,
-                            ),
-                            label: Text("Salla Kazan",
-                                style: TextStyle(
-                                    color: const Color(0xFF272E54),
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600)),
+                                        const CuzdanimScreen()));
+                          },
+                          icon: Image.asset(
+                            "assets/images/icons/wallet.png",
+                            width: 24,
+                            height: 24,
                           ),
+                          label: Text("Cüzdanım",
+                              style: TextStyle(
+                                  color: const Color(0xFF272E54),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                      OverlayTooltipItem(
+                        displayIndex: 1,
+                        tooltip: (controller) => Container(
+                            width: 200.w,
+                            height: 150.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MateCard(
+                                  widget: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  Text(
+                                    "Salla Kazan",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      style: TextStyle(fontSize: 11.sp),
+                                      maxLines: 4,
+                                      "Telefonunu salla ve süpriz hediyeler kazanma şansını yakala.",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: MateButon(
+                                        title: "Devam",
+                                        minimumSize: Size(30, 30),
+                                        onPressed: () {},
+                                        color: Theme.of(context).primaryColor,
+                                        textcolor: Theme.of(context)
+                                            .primaryColorLight),
+                                  )
+                                ]),
+                              )),
+                            )),
+                        tooltipVerticalPosition: TooltipVerticalPosition.BOTTOM,
+                        tooltipHorizontalPosition:
+                            TooltipHorizontalPosition.CENTER,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            surfaceTintColor: Colors.transparent,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.outline,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SallaKazanScreen()),
+                            );
+                          },
+                          icon: Image.asset(
+                            "assets/images/icons/shakewin.png",
+                            width: 24,
+                            height: 24,
+                          ),
+                          label: Text("Salla Kazan",
+                              style: TextStyle(
+                                  color: const Color(0xFF272E54),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600)),
                         ),
                       )
                     ]),
