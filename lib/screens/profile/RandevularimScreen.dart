@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/extensions.dart';
@@ -9,7 +8,6 @@ import 'package:salonmate/screens/profile/ReviewScreen.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
-import 'package:salonmate/widgets/loader.dart';
 
 class RandevularimScreen extends StatefulWidget {
   const RandevularimScreen({super.key});
@@ -63,7 +61,7 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                 unselectedLabelColor: Theme.of(context).colorScheme.secondary,
                 unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
                 controller: _tabController,
-                tabs: [
+                tabs: const [
                   Tab(text: "Gelecek Randevularım"),
                   Tab(text: "Geçmiş Randevularım")
                 ]),

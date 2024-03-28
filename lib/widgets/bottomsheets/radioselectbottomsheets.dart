@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/widgets/buttons.dart';
@@ -90,6 +87,8 @@ void RadioSelectBottomSheet(BuildContext context, bool imageColumn,
                                             selectedItems = item;
                                           },
                                         );
+                                        onSelected(selectedItems);
+                                        Navigator.pop(context);
                                       },
                                       child: Container(
                                           padding: EdgeInsets.only(bottom: 5),
@@ -177,17 +176,6 @@ void RadioSelectBottomSheet(BuildContext context, bool imageColumn,
                               )
                       ]),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: MateButon(
-                          title: "Seç",
-                          minimumSize: Size.fromHeight(40.h),
-                          onPressed: () {
-                            onSelected(selectedItems);
-                          },
-                          color: Theme.of(context).primaryColor,
-                          textcolor: Theme.of(context).primaryColorLight),
-                    )
                   ]),
             );
           }),

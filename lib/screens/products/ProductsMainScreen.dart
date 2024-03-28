@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/core/models/salonmodels/productcategorymodel.dart';
 import 'package:salonmate/widgets/cards/productcategorycard.dart';
-import 'package:salonmate/widgets/cards/servicelistcard.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
+import 'package:salonmate/widgets/loader.dart';
 
 class ProductsMainScreen extends StatefulWidget {
   const ProductsMainScreen({super.key});
@@ -12,6 +14,20 @@ class ProductsMainScreen extends StatefulWidget {
 }
 
 class _ProductsMainScreenState extends State<ProductsMainScreen> {
+  List<ProductKategori?> urunler = [];
+
+  void geturunler() async {
+    urunler = await procat();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    geturunler();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,26 +70,28 @@ class _ProductsMainScreenState extends State<ProductsMainScreen> {
                       fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
-                height: 300.h,
-                width: ScreenUtil().screenWidth,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ProductCategoryListCard(
-                        text: "Ürün Adı",
-                        imageUrl:
-                            "https://www.wella.com/sites/default/files/styles/560x560/public/products/1701174615-wella-koleston-intense-sac-boyasi-73-findik-kabugu.png.webp?itok=U63bqTn0",
-                        radius: 15.sp,
+              urunler.isEmpty
+                  ? Loader()
+                  : SizedBox(
+                      height: 300.h,
+                      width: ScreenUtil().screenWidth,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemCount: urunler.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ProductCategoryListCard(
+                              text: urunler[index]!.name!,
+                              imageUrl: urunler[index]!.imgUrl!,
+                              radius: 15.sp,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    ),
             ],
           ),
         ));

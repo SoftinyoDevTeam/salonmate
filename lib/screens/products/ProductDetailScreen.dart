@@ -56,7 +56,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ScreenBridge(),
+                          builder: (context) => const ScreenBridge(),
                         ),
                         (route) => false);
                   },
@@ -89,7 +89,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -113,7 +113,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       widget.product.name!.length > 44
                           ? widget.product.name!.substring(0, 44) + "..."
                           : widget.product.name!,
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -125,8 +125,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Ürün Özellikleri",
                       style: TextStyle(fontWeight: FontWeight.w600),
@@ -145,7 +145,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: Text(
                         widget.product.name!,
                         maxLines: 10,
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                        style: const TextStyle(fontWeight: FontWeight.w400),
                         textAlign: TextAlign.start,
                       ),
                     ),
@@ -196,8 +196,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Adet Seçiniz',
                       style: TextStyle(fontWeight: FontWeight.w600),
@@ -258,12 +258,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Divider(
                 color: Theme.of(context).colorScheme.outline,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Icon(Icons.discount),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Kampanyalar",
                       style: TextStyle(fontWeight: FontWeight.w600),

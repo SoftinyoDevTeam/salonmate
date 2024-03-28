@@ -70,6 +70,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       selectedTab = 1;
       setState(() {});
     }
+
     startTime = TimeOfDay(hour: 8, minute: 0);
     departureTime = TimeOfDay(hour: 24, minute: 0);
   }
@@ -251,7 +252,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           staffFilledScheduleList =
                               await checkStaffFilledSchedules(
                                   selectedStaff!.ID.toString());
-
+                          emptyScheduleList = getEmptySchedule(
+                              DateTime.now(), startTime, departureTime);
                           setState(() {});
                         });
                       },
@@ -566,16 +568,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               selectedTab > 0
-                  ? MateButon(
-                      title: "Geri",
-                      minimumSize: Size(100.w, 120.h),
-                      onPressed: () {
-                        selectedTab = selectedTab - 1;
-                        setState(() {});
-                      },
-                      color: Theme.of(context).primaryColorLight,
-                      textcolor: Theme.of(context).colorScheme.secondary,
-                    )
+                  ? widget.cuzdanrandevusu == false
+                      ? MateButon(
+                          title: "Geri",
+                          minimumSize: Size(100.w, 120.h),
+                          onPressed: () {
+                            selectedTab = selectedTab - 1;
+                            setState(() {});
+                          },
+                          color: Theme.of(context).primaryColorLight,
+                          textcolor: Theme.of(context).colorScheme.secondary,
+                        )
+                      : Container()
                   : Container(),
               selectedTab < 2
                   ? selectedService != null
@@ -628,9 +632,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             selectedDate[0],
                             selectedService!.serviceDuration!,
                             widget.subeID);
-                        if (randevu == true) {
-                          Navigator.pop(context);
-                        }
+
+                        Navigator.pop(context);
                       },
                       color: Theme.of(context).colorScheme.primary,
                       textcolor: Theme.of(context).primaryColorLight,

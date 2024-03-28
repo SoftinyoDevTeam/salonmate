@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
-import 'package:salonmate/main.dart';
-import 'package:collection/collection.dart';
 import 'package:salonmate/screens/products/PaymentScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
@@ -31,7 +29,6 @@ class _SepetScreenState extends State<SepetScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getSepetContent();
   }
@@ -79,7 +76,11 @@ class _SepetScreenState extends State<SepetScreen> {
                     // Provide a function that tells the app
                     // what to do after an item has been swiped away.
                     onDismissed: (direction) {
+                      deleteCart(sepetim[index]!.ID!);
+                      getSepetContent();
                       // Remove the item from the data source.
+                      sepetim.remove(sepetim[index]);
+
                       setState(() {});
                     },
                     // Show a red background as the item is swiped away.

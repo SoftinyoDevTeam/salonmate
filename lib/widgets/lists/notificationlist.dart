@@ -22,7 +22,7 @@ class _NotificationListCardState extends State<NotificationListCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             bottom:
                 BorderSide(width: 1, color: Color.fromARGB(255, 245, 245, 249)),

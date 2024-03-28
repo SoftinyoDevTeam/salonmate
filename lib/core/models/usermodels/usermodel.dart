@@ -28,7 +28,9 @@ class UserModel {
       id: json['ID'],
       adSoyad: json['fullName'],
       telefonNumarasi: json['phone'],
-      dogumTarihi: DateTime.parse(json['birthday']),
+      dogumTarihi: json['birthday'] == null
+          ? DateTime.now()
+          : DateTime.parse(json['birthday']),
       kayitTarihi: DateTime.parse(json['registerDate']),
       kacYillikMusteri:
           json['kacyildirmusteri'] == null ? "0" : json['kacyildirmusteri'],

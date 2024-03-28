@@ -50,7 +50,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 height: 220.h,
                 child: TextFormField(
                   controller: degerlendirme,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Lütfen aldığınız hizmetle ilgili yorum yazın"),
                   maxLines: 10,
                 ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
-import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/core/models/salonmodels/siparisgecmisimodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/cards/sipariscard.dart';

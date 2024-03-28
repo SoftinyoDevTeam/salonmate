@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
@@ -11,7 +10,6 @@ import 'package:salonmate/screens/products/SepetScreen.dart';
 import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
-import 'package:salonmate/widgets/tooltip.dart';
 
 class ScreenBridge extends StatefulWidget {
   const ScreenBridge({super.key});

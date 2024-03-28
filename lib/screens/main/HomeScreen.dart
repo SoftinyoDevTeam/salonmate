@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +5,6 @@ import 'package:overlay_tooltip/overlay_tooltip.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
-import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/campaigns/CampaingLists.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/screens/main/SallaKazan.dart';
@@ -17,8 +14,6 @@ import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:salonmate/widgets/custom/mateimage.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
 import 'package:salonmate/widgets/loader.dart';
 
@@ -119,7 +114,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                   widget: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(children: [
-                                  Text(
+                                  const Text(
                                     "Cüzdanım",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
@@ -190,7 +185,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                   widget: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(children: [
-                                  Text(
+                                  const Text(
                                     "Salla Kazan",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),

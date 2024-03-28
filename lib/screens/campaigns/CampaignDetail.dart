@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
+import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
@@ -38,20 +39,32 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                     width: 400.w,
                     height: 100.h,
                     child: Text(kampanyalar.descriptions!)),
-                MateButon(
-                    title: "Kampanyalı Hizmeti Satın Al",
-                    minimumSize: Size(20, 50),
-                    onPressed: () async {
-                      var ustoken = await getPrefString("token");
-                      bool status = await addToCart(
-                          kampanyalar.ID!, "KAMPANYALIHIZMET", ustoken!);
-                      Navigator.pop(context);
-                      Fluttertoast.showToast(
-                          msg:
-                              "Kampanyalı hizmet sepetinize eklendi lütfen kontrol edin.");
-                    },
-                    color: Theme.of(context).primaryColor,
-                    textcolor: Theme.of(context).primaryColorLight)
+                kampanyalar.type == "AFFILIATE"
+                    ? MateButon(
+                        title: "Kampanyalı Hizmeti Satın Al",
+                        minimumSize: Size(20, 50),
+                        onPressed: () async {
+                          var ustoken = await getPrefString("token");
+                          bool status = await addToCart(
+                              kampanyalar.ID!, "KAMPANYALIHIZMET", ustoken!);
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(
+                              msg:
+                                  "Kampanyalı hizmet sepetinize eklendi lütfen kontrol edin.");
+                        },
+                        color: Theme.of(context).primaryColor,
+                        textcolor: Theme.of(context).primaryColorLight)
+                    : MateButon(
+                        title: "Affiliate Kod İndirimini Kullan",
+                        minimumSize: Size(20, 50),
+                        onPressed: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RandevuMainScreen()));
+                        },
+                        color: Theme.of(context).colorScheme.secondary,
+                        textcolor: Theme.of(context).primaryColorLight)
               ])),
         ));
   }
