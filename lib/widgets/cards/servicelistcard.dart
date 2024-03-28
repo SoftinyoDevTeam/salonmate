@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -29,21 +31,25 @@ class _ServiceListCardState extends State<ServiceListCard> {
   RadioSelectModels? subeSecimi;
   @override
   Widget build(BuildContext context) {
+    subeSecimi != null
+        ? Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ScheduleScreen(
+                      subeID: subeSecimi!.ID!,
+                      hizmetler: widget.hizmetler,
+                      kategori: widget.text,
+                      cuzdanrandevusu: false,
+                    )))
+        : ();
     return GestureDetector(
         onTap: () {
           RadioSelectBottomSheet(
               context, false, true, "getAllSube", FormData.fromMap({}),
               (value) {
             subeSecimi = value;
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ScheduleScreen(
-                          subeID: subeSecimi!.ID!,
-                          hizmetler: widget.hizmetler,
-                          kategori: widget.text,
-                          cuzdanrandevusu: false,
-                        )));
+            setState(() {});
+            log(subeSecimi!.ID.toString());
           });
         },
         child: CachedNetworkImage(

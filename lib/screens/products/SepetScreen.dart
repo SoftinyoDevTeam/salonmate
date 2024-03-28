@@ -5,6 +5,7 @@ import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/screens/products/PaymentScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
+import 'package:salonmate/widgets/empty.dart';
 
 class SepetScreen extends StatefulWidget {
   const SepetScreen({super.key});
@@ -60,7 +61,11 @@ class _SepetScreenState extends State<SepetScreen> {
             preferredSize: Size.fromHeight(4.0)),
       ),
       body: sepetim.isEmpty
-          ? Container()
+          ? EmptyState(
+              image: "assets/images/icons/basket.png",
+              title: "Sepetinizde Ürün Bulunmamaktadır",
+              description: "",
+            )
           : ListView.builder(
               itemCount: sepetim.length,
               itemBuilder: (context, index) {
@@ -132,7 +137,10 @@ class _SepetScreenState extends State<SepetScreen> {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.circular(12.sp)),
-                                  child: MateImage(imageUrl: urun.imgUrl!),
+                                  child: MateImage(
+                                    imageUrl: urun.imgUrl!,
+                                    boxFit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),

@@ -56,7 +56,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ScreenBridge(),
+                          builder: (context) => const ScreenBridge(
+                            selectedScreen: 3,
+                          ),
                         ),
                         (route) => false);
                   },
@@ -113,7 +115,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       widget.product.name!.length > 44
                           ? widget.product.name!.substring(0, 44) + "..."
                           : widget.product.name!,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -143,7 +145,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: Container(
                       width: ScreenUtil().screenWidth - 50,
                       child: Text(
-                        widget.product.name!,
+                        widget.product.description!,
                         maxLines: 10,
                         style: const TextStyle(fontWeight: FontWeight.w400),
                         textAlign: TextAlign.start,

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/widgets/custom/mateimage.dart';
 
 class ProductCategoryListCard extends StatefulWidget {
   final double radius;
@@ -28,7 +30,7 @@ class _ProductCategoryListCardState extends State<ProductCategoryListCard> {
         children: [
           Container(
             height: 70.h,
-            child: Image.network(widget.imageUrl),
+            child: MateImage(imageUrl: widget.imageUrl),
           ),
           Text(
             widget.text,

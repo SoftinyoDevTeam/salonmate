@@ -13,8 +13,8 @@ import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
 
 class ScreenBridge extends StatefulWidget {
-  const ScreenBridge({super.key});
-
+  const ScreenBridge({super.key, required this.selectedScreen});
+  final int selectedScreen;
   @override
   State<ScreenBridge> createState() => _ScreenBridgeState();
 }
@@ -23,6 +23,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
   final TooltipController _controller = TooltipController();
   bool done = false;
 
+  var _bottomNavIndex = 0; //default index of a first screen
   final iconList = <IconData>[
     Icons.home,
     Icons.category_outlined,
@@ -33,6 +34,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _bottomNavIndex = widget.selectedScreen;
     _controller.onDone(() {
       setState(() {
         done = true;
@@ -47,7 +49,6 @@ class _ScreenBridgeState extends State<ScreenBridge> {
     super.dispose();
   }
 
-  var _bottomNavIndex = 0; //default index of a first screen
   Widget child = Container();
   @override
   Widget build(BuildContext context) {

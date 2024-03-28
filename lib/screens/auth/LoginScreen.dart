@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
-import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/widgets/auth/register.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
@@ -38,11 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passController = TextEditingController();
   TextEditingController affCode = TextEditingController();
   String phoneNumber = "";
-  String phoneNumberRegister = "";
-  String registerType = "insert";
+
   String fullName = "";
-  String kacyildirmusteri = "";
-  UserModel? userData;
+
   String OTPhash = "";
   DateTime? birthday;
 
@@ -56,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
   FocusNode password = FocusNode();
 
   bool pinCodevisible = false;
-  bool _isRadioSelected = false;
 
   @override
   void initState() {
@@ -74,166 +68,175 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: false,
-      top: false,
-      child: GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
+        bottom: false,
+        top: false,
+        child: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
 
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Column(
-            children: [
-              Center(
-                  child: Container(
-                      height: 4.h,
-                      width: 50.w,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).dialogBackgroundColor,
-                          borderRadius: BorderRadius.all(
-                              Radius.elliptical(12.sp, 12.sp))))),
-              Padding(
-                padding: EdgeInsets.all(16.sp),
-                child: Container(
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.sp),
-                        color: Theme.of(context).dialogBackgroundColor),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              selectedTab = 0;
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 48.h,
-                              width: (ScreenUtil().screenWidth - 56.sp) / 2,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(14.sp, 14.sp)),
-                                  color: selectedTab == 0
-                                      ? Theme.of(context).primaryColorLight
-                                      : Colors.transparent),
-                              child: const Center(
-                                child: Text(
-                                  "Giriş Yap",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              selectedTab = 1;
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 48.h,
-                              width: (ScreenUtil().screenWidth - 56.sp) / 2,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(14.sp, 14.sp)),
-                                  color: selectedTab == 1
-                                      ? Theme.of(context).primaryColorLight
-                                      : Colors.transparent),
-                              child: const Center(
-                                child: Text(
-                                  "Üye Ol",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              ),
-              selectedTab == 0
-                  ? Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: SizedBox(
-                        height: ScreenUtil().screenHeight / 1.5,
-                        child: Column(
-                          children: [
-                            PhoneFormField(
-                              cursorColor: Theme.of(context).primaryColor,
-                              showDialCode: true,
-                              decoration: const InputDecoration(
-                                hintText: "Telefon Numarası",
-                              ),
-                              inputFormatters: [
-                                new LengthLimitingTextInputFormatter(13),
-                              ],
-                              controller: phoneController,
-                              validator: (phoneNumber) {
-                                phoneNumber!.nsn.length > 9
-                                    ? FocusManager.instance.primaryFocus
-                                        ?.unfocus()
-                                    : print("");
-                              },
-                            ),
-                            SizedBox(height: 15.h),
-                            Visibility(
-                              visible: pinCodevisible,
-                              child: Pinput(
-                                closeKeyboardWhenCompleted: true,
-                                length: 6,
-                                pinAnimationType: PinAnimationType.slide,
-                                onCompleted: (value) async {
-                                  login(phoneNumber, value, OTPhash, context,
-                                      fcmToken!);
-                                },
-                              ),
-                            ),
-                            const Spacer(),
-                            MateButon(
-                                color: Theme.of(context).primaryColor,
-                                textcolor: Theme.of(context).primaryColorLight,
-                                title: "Giriş Yap",
-                                minimumSize: const Size.fromHeight(50),
-                                onPressed: () async {
-                                  phoneNumber = phoneController.value!.nsn;
-                                  if (pinCodevisible == false) {
-                                    var response = await sendSms(phoneNumber);
-                                    if (response == "false") {
-                                      pinCodevisible = false;
-                                    } else {
-                                      pinCodevisible = true;
-                                      OTPhash = response;
-                                    }
-                                  }
-
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(
+                      child: Container(
+                          height: 4.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).dialogBackgroundColor,
+                              borderRadius: BorderRadius.all(
+                                  Radius.elliptical(12.sp, 12.sp))))),
+                  Padding(
+                    padding: EdgeInsets.all(16.sp),
+                    child: Container(
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.sp),
+                            color: Theme.of(context).dialogBackgroundColor),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  selectedTab = 0;
                                   setState(() {});
-                                }),
-                            SizedBox(height: 18.h),
-                          ],
-                        ),
-                      ),
-                    )
-                  : registerPage == 0
+                                },
+                                child: Container(
+                                  height: 48.h,
+                                  width: (ScreenUtil().screenWidth - 56.sp) / 2,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.elliptical(14.sp, 14.sp)),
+                                      color: selectedTab == 0
+                                          ? Theme.of(context).primaryColorLight
+                                          : Colors.transparent),
+                                  child: const Center(
+                                    child: Text(
+                                      "Giriş Yap",
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  selectedTab = 1;
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  height: 48.h,
+                                  width: (ScreenUtil().screenWidth - 56.sp) / 2,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.elliptical(14.sp, 14.sp)),
+                                      color: selectedTab == 1
+                                          ? Theme.of(context).primaryColorLight
+                                          : Colors.transparent),
+                                  child: const Center(
+                                    child: Text(
+                                      "Üye Ol",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )),
+                  ),
+                  selectedTab == 0
                       ? Padding(
                           padding: const EdgeInsets.all(18.0),
                           child: SizedBox(
-                              height: ScreenUtil().screenHeight / 1.5,
-                              child: SizedBox(
-                                  height: ScreenUtil().screenHeight / 1.5,
-                                  child: RegisterWidget(
-                                    fcmToken: fcmToken!,
-                                  ))),
+                            height: ScreenUtil().screenHeight / 1.5,
+                            child: Column(
+                              children: [
+                                PhoneFormField(
+                                  cursorColor: Theme.of(context).primaryColor,
+                                  showDialCode: true,
+                                  decoration: const InputDecoration(
+                                    hintText: "Telefon Numarası",
+                                  ),
+                                  inputFormatters: [
+                                    new LengthLimitingTextInputFormatter(13),
+                                  ],
+                                  controller: phoneController,
+                                  validator: (phoneNumber) {
+                                    phoneNumber!.nsn.length > 9
+                                        ? FocusManager.instance.primaryFocus
+                                            ?.unfocus()
+                                        : print("");
+                                  },
+                                ),
+                                SizedBox(height: 15.h),
+                                Visibility(
+                                  visible: pinCodevisible,
+                                  child: Pinput(
+                                    closeKeyboardWhenCompleted: true,
+                                    length: 6,
+                                    pinAnimationType: PinAnimationType.slide,
+                                    onCompleted: (value) async {
+                                      login(phoneNumber, value, OTPhash,
+                                          context, fcmToken!);
+                                    },
+                                  ),
+                                ),
+                                const Spacer(),
+                                MateButon(
+                                    color: Theme.of(context).primaryColor,
+                                    textcolor:
+                                        Theme.of(context).primaryColorLight,
+                                    title: "Giriş Yap",
+                                    minimumSize: const Size.fromHeight(50),
+                                    onPressed: () async {
+                                      phoneNumber = phoneController.value!.nsn;
+                                      if (pinCodevisible == false) {
+                                        var response =
+                                            await sendSms(phoneNumber);
+                                        if (response == "false") {
+                                          pinCodevisible = false;
+                                        } else {
+                                          pinCodevisible = true;
+                                          OTPhash = response;
+                                        }
+                                      }
+
+                                      setState(() {});
+                                    }),
+                                SizedBox(height: 18.h),
+                              ],
+                            ),
+                          ),
                         )
-                      : Container()
-            ],
+                      : registerPage == 0
+                          ? fcmToken != null
+                              ? Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: SizedBox(
+                                      height: ScreenUtil().screenHeight / 1.5,
+                                      child: SizedBox(
+                                          height:
+                                              ScreenUtil().screenHeight / 1.5,
+                                          child: RegisterWidget(
+                                            fcmToken: fcmToken!,
+                                          ))),
+                                )
+                              : Container()
+                          : Container()
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

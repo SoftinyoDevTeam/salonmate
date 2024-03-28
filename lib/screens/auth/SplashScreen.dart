@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/models/splashmodel.dart';
@@ -213,29 +212,41 @@ class _SplashScreenState extends State<SplashScreen> {
                                           context: context,
                                           isScrollControlled: true,
                                           builder: (BuildContext context) {
-                                            return Container(
-                                                height:
-                                                    ScreenUtil().screenHeight /
-                                                        1.1,
-                                                decoration: new BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      new BorderRadius.only(
-                                                    topLeft:
-                                                        const Radius.circular(
-                                                            20.0),
-                                                    topRight:
-                                                        const Radius.circular(
-                                                            20.0),
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 15.h),
-                                                  child: LoginScreen(
-                                                    tab: 1,
-                                                  ),
-                                                ));
+                                            return SingleChildScrollView(
+                                                child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets
+                                                            .bottom),
+                                                    child: Container(
+                                                        height: ScreenUtil()
+                                                                .screenHeight /
+                                                            1.1,
+                                                        decoration:
+                                                            new BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              new BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                const Radius
+                                                                    .circular(
+                                                                    20.0),
+                                                            topRight:
+                                                                const Radius
+                                                                    .circular(
+                                                                    20.0),
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 15.h),
+                                                          child: LoginScreen(
+                                                            tab: 1,
+                                                          ),
+                                                        ))));
                                           });
                                     },
                                     minimumSize: const Size.fromHeight(50),

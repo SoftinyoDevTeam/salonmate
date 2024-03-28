@@ -15,6 +15,7 @@ import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
+import 'package:salonmate/widgets/empty.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 class SalonmateHomeScreen extends StatefulWidget {
@@ -25,11 +26,13 @@ class SalonmateHomeScreen extends StatefulWidget {
 }
 
 class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
+  bool isLoading = true;
   List<SalonProductsModel?> products = [];
   List<CampaignModel?> kampanyalar = [];
   void awaitgetProducts() async {
     products = await getProducts();
     kampanyalar = await getCampaigns();
+    isLoading = false;
     setState(() {});
   }
 
@@ -287,33 +290,23 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                   ),
                 ],
               ),
-              products.length >= 0
-                  ? SizedBox(
-                      height: 800.h,
-                      width: ScreenUtil().screenWidth,
-                      child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProductDetailScreen(
-                                          product: products[index]!)));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ProductCard(
-                                  width: 120.w,
-                                  height: 80.w,
-                                  title: products[index]!.name!,
-                                  imageUrl: products[index]!.imgUrl!,
-                                  onPressed: () {
+              isLoading == false
+                  ? products.isNotEmpty
+                      ? SizedBox(
+                          height: 800.h,
+                          width: ScreenUtil().screenWidth,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: 0.7, crossAxisCount: 2),
+                            itemCount: products.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -322,13 +315,35 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                                     product:
                                                         products[index]!)));
                                   },
-                                  price: products[index]!.price!.toDouble()),
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                  : Loader(),
+                                  child: ProductCard(
+                                      width: 0.w,
+                                      height: 0.w,
+                                      title: products[index]!.name!,
+                                      imageUrl: products[index]!.imgUrl!,
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductDetailScreen(
+                                                        product:
+                                                            products[index]!)));
+                                      },
+                                      price:
+                                          products[index]!.price!.toDouble()),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: EmptyState(
+                              image: "assets/images/icons/basket.png",
+                              title: "Maalesef",
+                              description: "Öne çıkarılan hiç ürün yok"),
+                        )
+                  : Loader()
             ],
           ),
         ),

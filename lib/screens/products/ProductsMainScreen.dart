@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/salonmodels/productcategorymodel.dart';
+import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
+import 'package:salonmate/screens/products/ProductCategoryScreen.dart';
 import 'package:salonmate/widgets/cards/productcategorycard.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
 import 'package:salonmate/widgets/loader.dart';
@@ -14,7 +16,7 @@ class ProductsMainScreen extends StatefulWidget {
 }
 
 class _ProductsMainScreenState extends State<ProductsMainScreen> {
-  List<ProductKategori?> urunler = [];
+  List<ProductCategoryModel?> urunler = [];
 
   void geturunler() async {
     urunler = await procat();
@@ -83,10 +85,21 @@ class _ProductsMainScreenState extends State<ProductsMainScreen> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ProductCategoryListCard(
-                              text: urunler[index]!.name!,
-                              imageUrl: urunler[index]!.imgUrl!,
-                              radius: 15.sp,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductCategoryScreen(
+                                                products:
+                                                    urunler[index]!.list!)));
+                              },
+                              child: ProductCategoryListCard(
+                                text: urunler[index]!.catname!,
+                                imageUrl: urunler[index]!.imgUrl!,
+                                radius: 15.sp,
+                              ),
                             ),
                           );
                         },

@@ -134,7 +134,7 @@ void main() async {
                     outline: "#F5F5F9".toColor(),
                     background: salonConfig!.data!.salonConfig!.backgroundColor!
                         .toColor(),
-                    brightness: Brightness.dark,
+                    brightness: Brightness.light,
                     primary:
                         salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
                     onPrimary: salonConfig!
@@ -160,7 +160,10 @@ void main() async {
                 home: Center(child: Text("internet bağlantısı yok")));
           }
         },
-        child:
-            await checkLogin() ? const ScreenBridge() : const SplashScreen()),
+        child: await checkLogin()
+            ? const ScreenBridge(
+                selectedScreen: 0,
+              )
+            : const SplashScreen()),
   ));
 }

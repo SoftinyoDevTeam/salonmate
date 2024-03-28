@@ -48,18 +48,19 @@ class _RandevularimScreenState extends State<RandevularimScreen>
           "Randevularım", true, Theme.of(context).colorScheme.secondary,
           height: 100,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(10),
+            preferredSize: const Size.fromHeight(10),
             child: TabBar(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
                 indicatorColor: Theme.of(context).colorScheme.secondary,
-                indicatorPadding: EdgeInsets.all(1),
+                indicatorPadding: const EdgeInsets.all(1),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 2,
                 dividerColor: Colors.transparent,
                 labelColor: Theme.of(context).colorScheme.secondary,
-                labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 unselectedLabelColor: Theme.of(context).colorScheme.secondary,
-                unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
+                unselectedLabelStyle:
+                    const TextStyle(fontWeight: FontWeight.w400),
                 controller: _tabController,
                 tabs: const [
                   Tab(text: "Gelecek Randevularım"),
@@ -88,7 +89,7 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item!.servicename!,
+                                    item.servicename!,
                                     style: TextStyle(
                                         fontSize: 15.sp,
                                         color: Theme.of(context)
@@ -107,13 +108,13 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                                       children: [
                                         CircleAvatar(
                                             backgroundImage:
-                                                NetworkImage(item!.staffimg!)),
+                                                NetworkImage(item.staffimg!)),
                                         SizedBox(
                                           width: 10.w,
                                         ),
                                         Text(
-                                          item!.staffname!,
-                                          style: TextStyle(
+                                          item.staffname!,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500),
                                         )
                                       ]),
@@ -194,7 +195,7 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item!.servicename!,
+                                    item.servicename!,
                                     style: TextStyle(
                                         fontSize: 15.sp,
                                         color: Theme.of(context)
@@ -213,13 +214,13 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                                       children: [
                                         CircleAvatar(
                                             backgroundImage:
-                                                NetworkImage(item!.staffimg!)),
+                                                NetworkImage(item.staffimg!)),
                                         SizedBox(
                                           width: 10.w,
                                         ),
                                         Text(
-                                          item!.staffname!,
-                                          style: TextStyle(
+                                          item.staffname!,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500),
                                         )
                                       ]),

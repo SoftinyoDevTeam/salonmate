@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,12 +26,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   String registerType = "insert";
   PhoneController phoneController =
       PhoneController(PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
-  DateTime? birthday = DateTime.now();
+  String? birthday = DateTime.now().toString();
   bool? yesno;
   double _currentSliderValue = 1;
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController affCode = TextEditingController();
+  TextEditingController birthfield = TextEditingController();
   int kacyildirmusteri = 0;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       child: Column(
         children: [
           user != null
-              ? Container(
+              ? SizedBox(
                   height: 50.h,
                   child: Flexible(
                       child: Text.rich(TextSpan(children: <InlineSpan>[
@@ -64,7 +66,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               : Container(),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Container(
+            child: SizedBox(
               height: 40.h,
               width: ScreenUtil().screenWidth - 30,
               child: PhoneFormField(
@@ -83,10 +85,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   if (value!.isValidLength(type: PhoneNumberType.mobile)) {
                     user = await checkRegister(value!.nsn.replaceAll(" ", ""));
                     if (user != null) {
+                      registerType = "update";
                       var oldname = user!.adSoyad.split(" ");
                       firstname.text = (oldname.first);
                       lastname.text = (oldname.last);
                     } else {
+                      registerType = "insert";
                       firstname.text = "";
                       lastname.text = "";
                     }
@@ -103,17 +107,19 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                     height: 40.h,
                     width: ScreenUtil().screenWidth / 2 - 30,
                     child: TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       controller: firstname,
                       decoration: InputDecoration(hintText: "Ad"),
                     )),
-                Container(
+                SizedBox(
                     height: 40.h,
                     width: ScreenUtil().screenWidth / 2 - 30,
                     child: TextFormField(
+                      textCapitalization: TextCapitalization.words,
                       controller: lastname,
                       decoration: InputDecoration(hintText: "Soyad"),
                     )),
@@ -125,10 +131,15 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               child: GestureDetector(
                 onTap: () async {
                   final result = await showBoardDateTimePicker(
+                      minimumDate:
+                          DateTime.now().subtract(Duration(days: 36500)),
+                      initialDate: DateTime.parse(birthday!),
                       onChanged: (p0) {
-                        birthday = p0 as DateTime?;
+                        birthday = DateFormat("yyyy-MM-d").format(p0);
+
                         setState(() {});
                         log(birthday.toString());
+                        birthfield.text = DateFormat("d MMMM yyyy").format(p0);
                       },
                       context: context,
                       pickerType: DateTimePickerType.date,
@@ -145,6 +156,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 },
                 child: TextFormField(
                   enabled: false,
+                  controller: birthfield,
                   decoration: InputDecoration(hintText: "Doğum Tarihi"),
                 ),
               )),
@@ -241,7 +253,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         height: 50.h,
                                         child: Slider(
                                           inactiveColor: Theme.of(context)
@@ -292,9 +304,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 8.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 40.h,
                                           child: TextFormField(
+                                            textCapitalization:
+                                                TextCapitalization.characters,
                                             controller: affCode,
                                             decoration: InputDecoration(
                                                 hintStyle: TextStyle(
@@ -327,7 +341,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 50.h,
                         child: Slider(
                           inactiveColor:
@@ -363,12 +377,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   final formData = FormData.fromMap({
                     "phone": phoneController.value!.nsn,
                     "birthday": birthday,
-                    "fullName": firstname.text + lastname.text,
+                    "fullName": firstname.text + " " + lastname.text,
                     "type": registerType,
                     "phoneCode": phoneController.value!.countryCode,
                     "affCode": affCode.text,
                     "kacyildirmusteri":
-                        kacyildirmusteri == null ? 0 : kacyildirmusteri,
+                        kacyildirmusteri == null ? 0 : kacyildirmusteri!,
                     "fcmToken": widget.fcmToken
                   });
                   log(formData.fields.toString());

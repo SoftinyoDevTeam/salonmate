@@ -38,10 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           backgroundColor: Theme.of(context).colorScheme.secondary,
           divider: false),
       body: userData == null
-          ? SizedBox(height: 400.h, child: Loader())
+          ? SizedBox(height: 400.h, child: const Loader())
           : SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               child: Stack(
                 alignment: AlignmentDirectional.topCenter,
                 children: [
@@ -129,14 +129,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             )
                                           ]),
-                                      Column(
+                                      const Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: EdgeInsets.all(8.0),
                                             child: Icon(Icons.share_outlined),
                                           )
                                         ],
@@ -146,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ))),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 18.0),
+                        padding: const EdgeInsets.only(top: 18.0),
                         child: Column(
                           children: [
                             GestureDetector(
@@ -180,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -203,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            CuzdanimScreen()));
+                                            const CuzdanimScreen()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -227,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -250,7 +250,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            SiparislerimScreen()));
+                                            const SiparislerimScreen()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -274,7 +274,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -297,7 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            RandevularimScreen()));
+                                            const RandevularimScreen()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -321,7 +321,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -343,7 +343,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => CampaignLists()));
+                                        builder: (context) =>
+                                            const CampaignLists()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -367,7 +368,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -463,7 +464,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 await logout();
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => SplashScreen()),
+                                        builder: (context) =>
+                                            const SplashScreen()),
                                     (Route<dynamic> route) => false);
                               },
                               child: Container(
@@ -488,7 +490,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   .primaryColorDark),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Icon(
                                         Icons.chevron_right_outlined,
                                         color: Theme.of(context).hintColor,
@@ -510,7 +512,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 await logout();
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => SplashScreen()),
+                                        builder: (context) =>
+                                            const SplashScreen()),
                                     (Route<dynamic> route) => false);
                               },
                               child: Container(
@@ -530,7 +533,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             color: Theme.of(context)
                                                 .primaryColorDark),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                     ],
                                   ),
                                 ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,6 +38,17 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
 
   @override
   Widget build(BuildContext context) {
+    subeSecimi != null
+        ? Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ScheduleScreen(
+                    subeID: subeSecimi!.ID!,
+                    hizmetler: hizmetler[0]!.list!,
+                    kategori: cuzdanim!.hizmetler![0].name!,
+                    selectedService: cuzdanim!.hizmetler![0],
+                    cuzdanrandevusu: true)))
+        : ();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -43,7 +56,10 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => ScreenBridge()),
+                  MaterialPageRoute(
+                      builder: (context) => ScreenBridge(
+                            selectedScreen: 0,
+                          )),
                   (route) => false);
             },
             child: Icon(
@@ -198,27 +214,10 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                               false,
                                               true,
                                               "getAllSube",
-                                              FormData.fromMap({}), (value) {
+                                              FormData.fromMap({}),
+                                              (value) async {
                                             subeSecimi = value;
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ScheduleScreen(
-                                                            subeID:
-                                                                subeSecimi!.ID!,
-                                                            hizmetler:
-                                                                hizmetler[0]!
-                                                                    .list!,
-                                                            kategori: cuzdanim!
-                                                                .hizmetler![0]
-                                                                .name!,
-                                                            selectedService:
-                                                                cuzdanim!
-                                                                        .hizmetler![
-                                                                    0],
-                                                            cuzdanrandevusu:
-                                                                true)));
+                                            setState(() {});
                                           });
                                         },
                                         color: Theme.of(context).primaryColor,

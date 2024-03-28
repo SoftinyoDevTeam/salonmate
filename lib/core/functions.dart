@@ -12,7 +12,6 @@ import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
-import 'package:salonmate/core/models/salonmodels/productcategorymodel.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/core/models/salonmodels/siparisgecmisimodel.dart';
 import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
@@ -136,7 +135,10 @@ Future<String> login(String phoneNumber, String code, String hash,
       setPrefString("token", user.token);
 
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => ScreenBridge()),
+          MaterialPageRoute(
+              builder: (context) => ScreenBridge(
+                    selectedScreen: 0,
+                  )),
           (Route<dynamic> route) => false);
       return "true";
     } else {
@@ -267,7 +269,10 @@ Future<String> register(FormData form, BuildContext context) async {
       UserModel user = UserModel.fromJson(response.data["data"]);
       setPrefString("token", user.token);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => ScreenBridge()),
+          MaterialPageRoute(
+              builder: (context) => ScreenBridge(
+                    selectedScreen: 0,
+                  )),
           (Route<dynamic> route) => false);
       return "true";
     } else {
@@ -294,7 +299,7 @@ Future<List<SalonProductsModel?>> getProducts() async {
   List<SalonProductsModel?> notifications = [];
   try {
     Response response = await Dio().post(
-      apiUrl + "?module=getProducts",
+      apiUrl + "?module=getProductsMobile",
       data: form,
       options: Options(
         headers: {
@@ -415,11 +420,11 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
   }
 }
 
-Future<List<ProductKategori?>> procat() async {
-  List<ProductKategori?> notifications = [];
+Future<List<ProductCategoryModel?>> procat() async {
+  List<ProductCategoryModel?> notifications = [];
   try {
     Response response = await Dio().post(
-      apiUrl + "?module=procat",
+      apiUrl + "?module=getProductsWithCategory",
       options: Options(
         headers: {
           "Access-Control-Allow-Origin":
@@ -431,7 +436,7 @@ Future<List<ProductKategori?>> procat() async {
 
     if (response.data["status"] == "200") {
       response.data["data"].forEach((element) {
-        notifications.add(ProductKategori.fromJson(element));
+        notifications.add(ProductCategoryModel.fromJson(element));
       });
       return notifications;
     } else {
@@ -601,8 +606,12 @@ Future<bool> shakeWin() async {
       Fluttertoast.showToast(
           msg: "Tebrikler ! ${response.data["data"][0]["name"]} kazandınız !");
     } else {
-      Fluttertoast.showToast(
-          msg: "Maalesef olmadı lütfen daha sonra tekrar dene");
+      if (response.data["status"] == "404") {
+        Fluttertoast.showToast(
+            msg: "Maalesef olmadı lütfen daha sonra tekrar dene");
+      } else if (response.data["status"] == "405") {
+        Fluttertoast.showToast(msg: "Günde sadece 1 kez oynayabilirsiniz. ");
+      }
     }
 
     return true;

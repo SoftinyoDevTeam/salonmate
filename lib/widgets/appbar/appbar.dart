@@ -33,6 +33,7 @@ class MateBarContent extends StatelessWidget {
         title,
         style: TextStyle(
           color: textColor,
+          fontSize: 16.sp,
           fontWeight: FontWeight.bold,
         ),
       ),

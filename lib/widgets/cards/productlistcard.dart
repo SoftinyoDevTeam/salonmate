@@ -29,11 +29,15 @@ class ProductCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              width: width - (width / 50),
-              height: height - (height / 50),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20.sp)),
-              child: MateImage(imageUrl: imageUrl)),
+              width: 150.w,
+              height: 150.w,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: MateImage(
+                  imageUrl: imageUrl,
+                  boxFit: BoxFit.contain,
+                ),
+              )),
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
@@ -48,8 +52,11 @@ class ProductCard extends StatelessWidget {
                   //       color: Theme.of(context).colorScheme.primary),
                   // ),
                   TextSpan(
-                    text: title.length > 30 ? title.substring(0, 30) : title,
+                    text: title.length > 30
+                        ? title.substring(0, 30) + "..."
+                        : title,
                     style: TextStyle(
+                        fontWeight: FontWeight.w600,
                         fontSize: 12.sp,
                         color: Theme.of(context).colorScheme.secondary),
                   )
@@ -59,11 +66,16 @@ class ProductCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(price.toString() + " " + currency,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12.sp,
-                    color: Theme.of(context).colorScheme.secondary)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(price.toString() + " " + currency,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
+                        color: Theme.of(context).colorScheme.secondary)),
+              ],
+            ),
           )
         ],
       ),

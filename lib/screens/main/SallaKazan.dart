@@ -16,9 +16,10 @@ class _SallaKazanScreenState extends State<SallaKazanScreen> {
       shakeThresholdGravity: 1,
       minimumShakeCount: 3,
       shakeSlopTimeMS: 1000,
-      onShake: () {
-        shakeWin();
+      onShake: () async {
+        await shakeWin();
       });
+
   @override
   void initState() {
     // TODO: implement initState
@@ -31,6 +32,7 @@ class _SallaKazanScreenState extends State<SallaKazanScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+
     detector.stopListening();
   }
 
