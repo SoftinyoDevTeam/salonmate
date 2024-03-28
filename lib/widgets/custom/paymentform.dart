@@ -39,99 +39,95 @@ class PaymentFormState extends State<PaymentForm> {
       resizeToAvoidBottomInset: false,
       body: Builder(
         builder: (BuildContext context) {
-          return Container(
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  CreditCardWidget(
-                    labelValidThru: "",
-                    enableFloatingCard: useFloatingAnimation,
-                    glassmorphismConfig: _getGlassmorphismConfig(),
-                    cardNumber: cardNumber,
-                    expiryDate: expiryDate,
-                    labelCardHolder: "Ad Soyad",
-                    labelExpiredDate: "Ay/Yıl",
-                    cardHolderName: cardHolderName,
-                    cvvCode: cvvCode,
-                    bankName: 'SALONMATE',
-                    frontCardBorder: useGlassMorphism
-                        ? null
-                        : Border.all(color: Colors.grey),
-                    backCardBorder: useGlassMorphism
-                        ? null
-                        : Border.all(color: Colors.grey),
-                    showBackView: isCvvFocused,
-                    obscureCardNumber: false,
-                    obscureCardCvv: false,
-                    isHolderNameVisible: true,
-                    cardBgColor: isLightTheme
-                        ? Theme.of(context).primaryColorLight
-                        : Theme.of(context).primaryColorLight,
-                    backgroundImage: useBackgroundImage
-                        ? 'assets/images/backgrounds/card_bg.png'
-                        : 'assets/images/backgrounds/card_bg.png',
-                    isSwipeGestureEnabled: true,
-                    onCreditCardWidgetChange:
-                        (CreditCardBrand creditCardBrand) {},
-                    customCardTypeIcons: <CustomCardTypeIcon>[
-                      CustomCardTypeIcon(
-                        cardType: CardType.mastercard,
-                        cardImage: Image.asset(
-                          'assets/images/backgrounds/mastercard.png',
-                          height: 48,
-                          width: 48,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          CreditCardForm(
-                            formKey: formKey,
-                            obscureCvv: false,
-                            obscureNumber: false,
-                            cardNumber: cardNumber,
-                            cvvCode: cvvCode,
-                            isHolderNameVisible: true,
-                            isCardNumberVisible: true,
-                            isExpiryDateVisible: true,
-                            cardHolderName: cardHolderName,
-                            expiryDate: expiryDate,
-                            inputConfiguration: const InputConfiguration(
-                              cardNumberDecoration: InputDecoration(
-                                labelText: 'Kart Numarası',
-                                hintText: 'XXXX XXXX XXXX XXXX',
-                              ),
-                              expiryDateDecoration: InputDecoration(
-                                labelText: 'SKT',
-                                hintText: 'XX/XX',
-                              ),
-                              cvvCodeDecoration: InputDecoration(
-                                labelText: 'CVV',
-                                hintText: 'XXX',
-                              ),
-                              cardHolderDecoration: InputDecoration(
-                                labelText: 'İsim Soyisim',
-                              ),
-                            ),
-                            onCreditCardModelChange: onCreditCardModelChange,
-                          ),
-                          const SizedBox(height: 20),
-                          MateButon(
-                              title: "Ödemeyi Yap",
-                              minimumSize: Size(400, 50),
-                              onPressed: _onValidate,
-                              color: Theme.of(context).primaryColor,
-                              textcolor: Theme.of(context).primaryColorLight)
-                        ],
+          return SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                CreditCardWidget(
+                  labelValidThru: "",
+                  enableFloatingCard: useFloatingAnimation,
+                  glassmorphismConfig: _getGlassmorphismConfig(),
+                  cardNumber: cardNumber,
+                  expiryDate: expiryDate,
+                  labelCardHolder: "Ad Soyad",
+                  labelExpiredDate: "Ay/Yıl",
+                  cardHolderName: cardHolderName,
+                  cvvCode: cvvCode,
+                  bankName: 'SALONMATE',
+                  frontCardBorder:
+                      useGlassMorphism ? null : Border.all(color: Colors.grey),
+                  backCardBorder:
+                      useGlassMorphism ? null : Border.all(color: Colors.grey),
+                  showBackView: isCvvFocused,
+                  obscureCardNumber: false,
+                  obscureCardCvv: false,
+                  isHolderNameVisible: true,
+                  cardBgColor: isLightTheme
+                      ? Theme.of(context).primaryColorLight
+                      : Theme.of(context).primaryColorLight,
+                  backgroundImage: useBackgroundImage
+                      ? 'assets/images/backgrounds/card_bg.png'
+                      : 'assets/images/backgrounds/card_bg.png',
+                  isSwipeGestureEnabled: true,
+                  onCreditCardWidgetChange:
+                      (CreditCardBrand creditCardBrand) {},
+                  customCardTypeIcons: <CustomCardTypeIcon>[
+                    CustomCardTypeIcon(
+                      cardType: CardType.mastercard,
+                      cardImage: Image.asset(
+                        'assets/images/backgrounds/mastercard.png',
+                        height: 48,
+                        width: 48,
                       ),
                     ),
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        CreditCardForm(
+                          formKey: formKey,
+                          obscureCvv: false,
+                          obscureNumber: false,
+                          cardNumber: cardNumber,
+                          cvvCode: cvvCode,
+                          isHolderNameVisible: true,
+                          isCardNumberVisible: true,
+                          isExpiryDateVisible: true,
+                          cardHolderName: cardHolderName,
+                          expiryDate: expiryDate,
+                          inputConfiguration: const InputConfiguration(
+                            cardNumberDecoration: InputDecoration(
+                              labelText: 'Kart Numarası',
+                              hintText: 'XXXX XXXX XXXX XXXX',
+                            ),
+                            expiryDateDecoration: InputDecoration(
+                              labelText: 'SKT',
+                              hintText: 'XX/XX',
+                            ),
+                            cvvCodeDecoration: InputDecoration(
+                              labelText: 'CVV',
+                              hintText: 'XXX',
+                            ),
+                            cardHolderDecoration: InputDecoration(
+                              labelText: 'İsim Soyisim',
+                            ),
+                          ),
+                          onCreditCardModelChange: onCreditCardModelChange,
+                        ),
+                        const SizedBox(height: 20),
+                        MateButon(
+                            title: "Ödemeyi Yap",
+                            minimumSize: const Size(400, 50),
+                            onPressed: _onValidate,
+                            color: Theme.of(context).primaryColor,
+                            textcolor: Theme.of(context).primaryColorLight)
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
@@ -143,14 +139,11 @@ class PaymentFormState extends State<PaymentForm> {
     completeCart();
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => CuzdanimScreen()),
+        MaterialPageRoute(builder: (context) => const CuzdanimScreen()),
         (route) => false);
 
     if (formKey.currentState?.validate() ?? false) {
-      print('valid!');
-    } else {
-      print('invalid!');
-    }
+    } else {}
   }
 
   Glassmorphism? _getGlassmorphismConfig() {

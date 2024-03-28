@@ -31,7 +31,7 @@ void main() async {
   // Firebase
   await Firebase.initializeApp();
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
+  FocusManager.instance.primaryFocus?.unfocus();
   await setup();
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
@@ -56,7 +56,7 @@ void main() async {
     showLocalNotification(notification!.title!, notification.body!);
   });
   prefs = await SharedPreferences.getInstance();
-
+  setPrefString("tooltip", "true");
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
     path: localizationDir,
@@ -90,6 +90,9 @@ void main() async {
                     }
                     return Colors.green;
                   })),
+                  sliderTheme: SliderThemeData(
+                    trackHeight: 20, // change height here
+                  ),
                   inputDecorationTheme: InputDecorationTheme(
                     constraints:
                         BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
@@ -131,10 +134,11 @@ void main() async {
                     outline: "#F5F5F9".toColor(),
                     background: salonConfig!.data!.salonConfig!.backgroundColor!
                         .toColor(),
-                    brightness: Brightness.light,
+                    brightness: Brightness.dark,
                     primary:
                         salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
-                    onPrimary: salonConfig!.data!.salonConfig!.primaryColorDark!
+                    onPrimary: salonConfig!
+                        .data!.salonConfig!.primaryColorLight!
                         .toColor(),
                     secondary: "#272E54".toColor(),
                     onSecondary: "#C5C5D4".toColor(),

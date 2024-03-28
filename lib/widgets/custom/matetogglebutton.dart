@@ -16,39 +16,37 @@ class _MateToggleState extends State<MateToggle> {
         padding: const EdgeInsets.only(
           top: 28.0,
         ),
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 3.h,
-                width: ScreenUtil().screenWidth / 3.2,
-                decoration: BoxDecoration(
-                    color: widget.onSelected == 0
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.onSecondary,
-                    borderRadius: BorderRadius.circular(1)),
-              ),
-              Container(
-                height: 3.h,
-                width: ScreenUtil().screenWidth / 3.2,
-                decoration: BoxDecoration(
-                    color: widget.onSelected == 1
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.onSecondary,
-                    borderRadius: BorderRadius.circular(1)),
-              ),
-              Container(
-                height: 3.h,
-                width: ScreenUtil().screenWidth / 3.2,
-                decoration: BoxDecoration(
-                    color: widget.onSelected == 2
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.onSecondary,
-                    borderRadius: BorderRadius.circular(1)),
-              ),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 3.h,
+              width: ScreenUtil().screenWidth / 3.2,
+              decoration: BoxDecoration(
+                  color: widget.onSelected == 0
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(1)),
+            ),
+            Container(
+              height: 3.h,
+              width: ScreenUtil().screenWidth / 3.2,
+              decoration: BoxDecoration(
+                  color: widget.onSelected == 1
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(1)),
+            ),
+            Container(
+              height: 3.h,
+              width: ScreenUtil().screenWidth / 3.2,
+              decoration: BoxDecoration(
+                  color: widget.onSelected == 2
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(1)),
+            ),
+          ],
         ));
   }
 }

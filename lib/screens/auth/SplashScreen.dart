@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           children: [
             splashlist.isEmpty
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
@@ -133,8 +133,8 @@ class _SplashScreenState extends State<SplashScreen> {
                                           splashlist[currentIndexPage].title!,
                                           style: TextStyle(
                                             fontSize: 20.sp,
-                                            color:
-                                                Color.fromARGB(255, 39, 46, 84),
+                                            color: const Color.fromARGB(
+                                                255, 39, 46, 84),
                                             fontWeight: FontWeight.w800,
                                             fontFamily: "Montserrat",
                                           ),
@@ -174,6 +174,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                     showModalBottomSheet<void>(
                                         context: context,
                                         isScrollControlled: true,
+                                        enableDrag: true,
                                         builder: (BuildContext context) {
                                           return Container(
                                               height:
@@ -201,7 +202,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                         });
                                   },
                                   title: "Giriş Yap",
-                                  minimumSize: Size.fromHeight(50),
+                                  minimumSize: const Size.fromHeight(50),
                                 ),
                                 SizedBox(height: 8.h),
                                 MateButon(
@@ -237,7 +238,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                                 ));
                                           });
                                     },
-                                    minimumSize: Size.fromHeight(50),
+                                    minimumSize: const Size.fromHeight(50),
                                     title: "Üye Ol"),
                               ],
                             ),

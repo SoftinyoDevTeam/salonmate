@@ -1,18 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_datetime_picker_bdaya/flutter_datetime_picker_bdaya.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
-import 'package:intl/intl.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
+import 'package:salonmate/widgets/auth/register.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
 
@@ -36,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   PhoneController phoneController =
-      PhoneController(PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
+      PhoneController(const PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
 
   TextEditingController passController = TextEditingController();
   TextEditingController affCode = TextEditingController();
@@ -88,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Column(
             children: [
               Center(
@@ -124,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: selectedTab == 0
                                       ? Theme.of(context).primaryColorLight
                                       : Colors.transparent),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "Giriş Yap",
                                   style: TextStyle(color: Colors.black),
@@ -146,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: selectedTab == 1
                                       ? Theme.of(context).primaryColorLight
                                       : Colors.transparent),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "Üye Ol",
                                   style: TextStyle(color: Colors.black),
@@ -161,21 +159,26 @@ class _LoginScreenState extends State<LoginScreen> {
               selectedTab == 0
                   ? Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Container(
+                      child: SizedBox(
                         height: ScreenUtil().screenHeight / 1.5,
                         child: Column(
                           children: [
                             PhoneFormField(
                               cursorColor: Theme.of(context).primaryColor,
                               showDialCode: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Telefon Numarası",
                               ),
                               inputFormatters: [
                                 new LengthLimitingTextInputFormatter(13),
                               ],
                               controller: phoneController,
-                              validator: (phoneNumber) {},
+                              validator: (phoneNumber) {
+                                phoneNumber!.nsn.length > 9
+                                    ? FocusManager.instance.primaryFocus
+                                        ?.unfocus()
+                                    : print("");
+                              },
                             ),
                             SizedBox(height: 15.h),
                             Visibility(
@@ -190,12 +193,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             MateButon(
                                 color: Theme.of(context).primaryColor,
                                 textcolor: Theme.of(context).primaryColorLight,
                                 title: "Giriş Yap",
-                                minimumSize: Size.fromHeight(50),
+                                minimumSize: const Size.fromHeight(50),
                                 onPressed: () async {
                                   phoneNumber = phoneController.value!.nsn;
                                   if (pinCodevisible == false) {
@@ -218,643 +221,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   : registerPage == 0
                       ? Padding(
                           padding: const EdgeInsets.all(18.0),
-                          child: Container(
-                            height: ScreenUtil().screenHeight / 1.5,
-                            child: Column(
-                              children: [
-                                PhoneFormField(
-                                  decoration: InputDecoration(
-                                      hintText: "Telefon Numarası"),
-                                  inputFormatters: [
-                                    new LengthLimitingTextInputFormatter(13),
-                                  ],
-                                  controller: phoneController,
-                                  validator: (phoneNumber) {
-                                    phoneNumberRegister = phoneNumber!.nsn;
-                                  },
-                                ),
-                                Spacer(),
-                                MateButon(
-                                    color:
-                                        phoneController.value!.nsn.length == 10
-                                            ? Theme.of(context).primaryColor
-                                            : Theme.of(context)
-                                                .dialogBackgroundColor,
-                                    textcolor:
-                                        Theme.of(context).primaryColorLight,
-                                    title: "Devam Et",
-                                    minimumSize: Size.fromHeight(50),
-                                    onPressed: () async {
-                                      log(phoneNumberRegister);
-                                      userData = await checkRegister(
-                                          phoneNumberRegister);
-                                      if (userData == null) {
-                                        registerType = "insert";
-                                      } else {
-                                        registerType = "update";
-                                      }
-                                      registerPage = 1;
-                                      setState(() {});
-                                    }),
-                              ],
-                            ),
-                          ),
+                          child: SizedBox(
+                              height: ScreenUtil().screenHeight / 1.5,
+                              child: SizedBox(
+                                  height: ScreenUtil().screenHeight / 1.5,
+                                  child: RegisterWidget(
+                                    fcmToken: fcmToken!,
+                                  ))),
                         )
-                      : registerType == "insert"
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 10.0, left: 10.0),
-                              child: SingleChildScrollView(
-                                physics: ScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                child: Container(
-                                  height: 450.h,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text("Ad Soyad"),
-                                              ),
-                                            ],
-                                          ),
-                                          TextFormField(
-                                              onChanged: (value) {
-                                                fullName = value;
-                                                setState(() {});
-                                              },
-                                              decoration: InputDecoration(
-                                                  hintText:
-                                                      "Adınızı ve Soyadınızı Yazınız"))
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Container(
-                                        height: 45.h,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Theme.of(context)
-                                                .dialogBackgroundColor,
-                                            width: 0.5,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                        ),
-                                        child: CupertinoButton(
-                                          onPressed: () => {
-                                            DatePickerBdaya.showDatePicker(
-                                                context,
-                                                showTitleActions: true,
-                                                minTime: DateTime(1930, 1, 1),
-                                                maxTime: DateTime(2023, 1, 1),
-                                                onChanged: (date) {
-                                              birthday = date;
-                                              setState(() {});
-                                            }, onConfirm: (date) {
-                                              birthday = date;
-                                              setState(() {});
-                                            },
-                                                currentTime: DateTime.now(),
-                                                locale: LocaleType.tr)
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                  birthday == null
-                                                      ? "Doğum Tarihi*"
-                                                      : DateFormat.yMMMMd()
-                                                          .format(birthday!),
-                                                  style: TextStyle(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.grey[600],
-                                                  )),
-                                              Spacer(),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Colors.grey[600],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                                "Daha önce bizden hizmet aldınız mı ?"),
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Container(
-                                            width:
-                                                ScreenUtil().screenWidth / 2 -
-                                                    20.w,
-                                            height: 45.h,
-                                            child: RadioListTile(
-                                                title: Text("Evet"),
-                                                shape: RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        color: Theme.of(context)
-                                                            .dialogBackgroundColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12)),
-                                                value: isSelected2[0],
-                                                groupValue: _isRadioSelected,
-                                                onChanged: (test) {
-                                                  isSelected2 = <bool>[
-                                                    true,
-                                                    true,
-                                                    true
-                                                  ];
-
-                                                  isSelected2[0] = test == true
-                                                      ? false
-                                                      : true;
-                                                  setState(() {});
-                                                }),
-                                          ),
-                                          Spacer(),
-                                          Container(
-                                            width:
-                                                ScreenUtil().screenWidth / 2 -
-                                                    20.w,
-                                            child: RadioListTile(
-                                                title: Text("Hayır"),
-                                                shape: RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        color: Theme.of(context)
-                                                            .dialogBackgroundColor),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12)),
-                                                value: isSelected2[1],
-                                                groupValue: _isRadioSelected,
-                                                onChanged: (test) {
-                                                  isSelected2 = <bool>[
-                                                    true,
-                                                    true,
-                                                    true
-                                                  ];
-                                                  isSelected2[1] = test == true
-                                                      ? false
-                                                      : true;
-                                                  setState(() {});
-                                                }),
-                                          ),
-                                        ],
-                                      ),
-                                      Visibility(
-                                        visible: isSelected2[1],
-                                        child: Container(
-                                          height: 180.h,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: const Text(
-                                                      "Ne Kadar Süredir Müşterimizsiniz ?",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title: Text("1 seneden az"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .dialogBackgroundColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[0],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-
-                                                    isSelected[0] = test == true
-                                                        ? false
-                                                        : true;
-                                                    setState(() {});
-                                                  }),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title: Text("1-3 sene"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: isSelected[1]
-                                                              ? Theme.of(
-                                                                      context)
-                                                                  .dialogBackgroundColor
-                                                              : Colors.green),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[1],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-                                                    isSelected[1] = test == true
-                                                        ? false
-                                                        : true;
-                                                    setState(() {});
-                                                  }),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title:
-                                                      Text("3 seneden fazla"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .dialogBackgroundColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[2],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-
-                                                    isSelected[2] = test == true
-                                                        ? false
-                                                        : true;
-
-                                                    setState(() {});
-                                                  }),
-                                              Spacer()
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Visibility(
-                                          visible: isSelected2[0],
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                        "Davet kodunuz var mı ?"),
-                                                  ),
-                                                ],
-                                              ),
-                                              TextFormField(
-                                                  controller: affCode,
-                                                  onChanged: (value) {},
-                                                  decoration: InputDecoration(
-                                                      hintText:
-                                                          "Davet Kodu (Kodunuz yoksa boş bırakın)"))
-                                            ],
-                                          )),
-                                      Spacer(),
-                                      MateButon(
-                                          color: phoneController
-                                                      .value!.nsn.length ==
-                                                  10
-                                              ? Theme.of(context).primaryColor
-                                              : Theme.of(context)
-                                                  .dialogBackgroundColor,
-                                          textcolor: Theme.of(context)
-                                              .primaryColorLight,
-                                          title: "Üye Ol",
-                                          minimumSize: Size.fromHeight(50),
-                                          onPressed: () async {
-                                            registerPage = 1;
-                                            final formData = FormData.fromMap({
-                                              "phone":
-                                                  phoneController.value!.nsn,
-                                              "birthday": birthday,
-                                              "fullName": fullName,
-                                              "type": registerType,
-                                              "phoneCode": phoneController
-                                                  .value!.countryCode,
-                                              "affCode": affCode.text,
-                                              "kacyildirmusteri":
-                                                  kacyildirmusteri == ""
-                                                      ? "0"
-                                                      : kacyildirmusteri,
-                                              "fcmToken": fcmToken
-                                            });
-                                            log(formData.fields.toString());
-                                            var response = await register(
-                                                formData, context);
-                                            if (response == "true") {
-                                              selectedTab = 0;
-                                            }
-                                            setState(() {});
-                                          }),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 10.0, left: 10.0),
-                              child: SingleChildScrollView(
-                                physics: ScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                child: Container(
-                                  height: 450.h,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          text: 'Hoşgeldiniz ',
-                                          style: DefaultTextStyle.of(context)
-                                              .style
-                                              .copyWith(fontSize: 10.sp),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text: '${userData!.adSoyad}\n',
-                                                style: TextStyle(
-                                                    fontSize: 10.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            TextSpan(
-                                                style:
-                                                    TextStyle(fontSize: 10.sp),
-                                                text:
-                                                    "Sistemimizde kayıtlı ${userData!.telefonKodu}${userData!.telefonNumarasi} numaralı telefonunuz ile üyeliğinizi tamamlayabilirsiniz."),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Container(
-                                        height: 45.h,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Theme.of(context)
-                                                .dialogBackgroundColor,
-                                            width: 0.5,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                        ),
-                                        child: CupertinoButton(
-                                          onPressed: () => {
-                                            DatePickerBdaya.showDatePicker(
-                                                context,
-                                                showTitleActions: true,
-                                                minTime: DateTime(1930, 1, 1),
-                                                maxTime: DateTime(2023, 1, 1),
-                                                onChanged: (date) {
-                                              birthday = date;
-                                              setState(() {});
-                                            }, onConfirm: (date) {
-                                              birthday = date;
-                                              setState(() {});
-                                            },
-                                                currentTime: DateTime.now(),
-                                                locale: LocaleType.tr)
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                  birthday == null
-                                                      ? "Doğum Tarihi*"
-                                                      : DateFormat.yMMMMd()
-                                                          .format(birthday!),
-                                                  style: TextStyle(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.grey[600],
-                                                  )),
-                                              Spacer(),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: Colors.grey[600],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Visibility(
-                                        visible: isSelected2[1],
-                                        child: Container(
-                                          height: 180.h,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: const Text(
-                                                      "Ne Kadar Süredir Müşterimizsiniz ?",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title: Text("1 seneden az"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .dialogBackgroundColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[0],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-
-                                                    isSelected[0] = test == true
-                                                        ? false
-                                                        : true;
-                                                    setState(() {});
-                                                  }),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title: Text("1-3 sene"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: isSelected[1]
-                                                              ? Theme.of(
-                                                                      context)
-                                                                  .dialogBackgroundColor
-                                                              : Colors.green),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[1],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-                                                    isSelected[1] = test == true
-                                                        ? false
-                                                        : true;
-                                                    setState(() {});
-                                                  }),
-                                              Spacer(),
-                                              RadioListTile(
-                                                  title:
-                                                      Text("3 seneden fazla"),
-                                                  shape: RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .dialogBackgroundColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  value: isSelected[2],
-                                                  groupValue: _isRadioSelected,
-                                                  onChanged: (test) {
-                                                    isSelected = <bool>[
-                                                      true,
-                                                      true,
-                                                      true
-                                                    ];
-
-                                                    isSelected[2] = test == true
-                                                        ? false
-                                                        : true;
-
-                                                    setState(() {});
-                                                  }),
-                                              Spacer()
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Visibility(
-                                          visible: isSelected2[0],
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                        "Davet kodunuz var mı ?"),
-                                                  ),
-                                                ],
-                                              ),
-                                              TextFormField(
-                                                  controller: affCode,
-                                                  decoration: InputDecoration(
-                                                      hintText:
-                                                          "Davet Kodu (Kodunuz yoksa boş bırakın)"))
-                                            ],
-                                          )),
-                                      Spacer(),
-                                      MateButon(
-                                          color: phoneController
-                                                      .value!.nsn.length ==
-                                                  10
-                                              ? Theme.of(context).primaryColor
-                                              : Theme.of(context)
-                                                  .dialogBackgroundColor,
-                                          textcolor: Theme.of(context)
-                                              .primaryColorLight,
-                                          title: "Üye Ol",
-                                          minimumSize: Size.fromHeight(50),
-                                          onPressed: () async {
-                                            registerPage = 1;
-                                            final formData = FormData.fromMap({
-                                              "phone": phoneNumber,
-                                              "birthday": birthday,
-                                              "fullName": fullName,
-                                              "type": registerType,
-                                              "phoneCode": phoneController
-                                                  .value!.countryCode,
-                                              "affCode": affCode.text,
-                                              "kacyildirmusteri":
-                                                  kacyildirmusteri,
-                                            });
-
-                                            var response = await register(
-                                                formData, context);
-                                            if (response == "true") {
-                                              selectedTab = 0;
-                                            }
-
-                                            setState(() {});
-                                          }),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )
+                      : Container()
             ],
           ),
         ),

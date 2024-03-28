@@ -4,6 +4,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
+import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/products/ProductsMainScreen.dart';
 import 'package:salonmate/screens/products/SepetScreen.dart';
@@ -36,6 +37,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
       setState(() {
         done = true;
       });
+      setPrefString("tooltip", "false");
     });
   }
 
@@ -72,8 +74,12 @@ class _ScreenBridgeState extends State<ScreenBridge> {
         tooltipAnimationDuration: const Duration(milliseconds: 1000),
         controller: _controller,
         startWhen: (initializedWidgetLength) async {
-          await Future.delayed(const Duration(milliseconds: 500));
-          return initializedWidgetLength == 1 && !done;
+          if (await getPrefString("tooltip") == "false") {
+            await Future.delayed(const Duration(milliseconds: 500));
+            return initializedWidgetLength == 1 && !done;
+          } else {
+            return false;
+          }
         },
         preferredOverlay: GestureDetector(
           onTap: () {
@@ -99,7 +105,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                       displayIndex: 0,
                       tooltip: (controller) => Container(
                           width: 200.w,
-                          height: 150.h,
+                          height: 160.h,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MateCard(
