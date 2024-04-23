@@ -36,7 +36,6 @@ class _ServiceListCardState extends State<ServiceListCard> {
             context,
             MaterialPageRoute(
                 builder: (context) => ScheduleScreen(
-                      subeID: subeSecimi!.ID!,
                       hizmetler: widget.hizmetler,
                       kategori: widget.text,
                       cuzdanrandevusu: false,
@@ -44,13 +43,13 @@ class _ServiceListCardState extends State<ServiceListCard> {
         : ();
     return GestureDetector(
         onTap: () {
-          RadioSelectBottomSheet(
-              context, false, true, "getAllSube", FormData.fromMap({}),
-              (value) {
-            subeSecimi = value;
-            setState(() {});
-            log(subeSecimi!.ID.toString());
-          });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ScheduleScreen(
+                      hizmetler: widget.hizmetler,
+                      kategori: widget.text,
+                      cuzdanrandevusu: false)));
         },
         child: CachedNetworkImage(
           height: 132.w,

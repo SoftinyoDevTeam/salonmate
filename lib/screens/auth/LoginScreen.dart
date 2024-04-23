@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/main.dart';
 import 'package:salonmate/widgets/auth/register.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
@@ -23,7 +24,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String? fcmToken;
-
+  final pinputFocusNode = FocusNode();
   void getFcm() async {
     fcmToken = await FirebaseMessaging.instance.getToken();
     setState(() {});
@@ -71,13 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
         bottom: false,
         top: false,
         child: GestureDetector(
-          onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
-
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
+          onTap: () {},
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Container(
@@ -112,7 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Container(
                                   height: 48.h,
-                                  width: (ScreenUtil().screenWidth - 56.sp) / 2,
+                                  width: deviceType == "phone"
+                                      ? (ScreenUtil().screenWidth - 56.sp) / 2
+                                      : (ScreenUtil().screenWidth - 156.sp) / 2,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
                                           Radius.elliptical(14.sp, 14.sp)),
@@ -135,7 +132,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Container(
                                   height: 48.h,
-                                  width: (ScreenUtil().screenWidth - 56.sp) / 2,
+                                  width: deviceType == "phone"
+                                      ? (ScreenUtil().screenWidth - 56.sp) / 2
+                                      : (ScreenUtil().screenWidth - 156.sp) / 2,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
                                           Radius.elliptical(14.sp, 14.sp)),
@@ -171,17 +170,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     new LengthLimitingTextInputFormatter(13),
                                   ],
                                   controller: phoneController,
-                                  validator: (phoneNumber) {
-                                    phoneNumber!.nsn.length > 9
-                                        ? FocusManager.instance.primaryFocus
-                                            ?.unfocus()
-                                        : print("");
-                                  },
+                                  validator: (phoneNumber) {},
                                 ),
                                 SizedBox(height: 15.h),
                                 Visibility(
                                   visible: pinCodevisible,
                                   child: Pinput(
+                                    focusNode: pinputFocusNode,
+                                    autofocus: true,
                                     closeKeyboardWhenCompleted: true,
                                     length: 6,
                                     pinAnimationType: PinAnimationType.slide,
@@ -199,6 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     title: "Giriş Yap",
                                     minimumSize: const Size.fromHeight(50),
                                     onPressed: () async {
+                                      pinputFocusNode.requestFocus();
                                       phoneNumber = phoneController.value!.nsn;
                                       if (pinCodevisible == false) {
                                         var response =

@@ -9,6 +9,8 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/othermodels/stafffilledschedules.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
+import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:salonmate/screens/profile/RandevularimScreen.dart';
 import 'package:salonmate/widgets/bottomsheets/radioselectbottomsheets.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
@@ -19,12 +21,10 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 class ScheduleScreen extends StatefulWidget {
   ScheduleScreen(
       {super.key,
-      required this.subeID,
       required this.hizmetler,
       required this.kategori,
       this.selectedService,
       required this.cuzdanrandevusu});
-  final int subeID;
   final List<HizmetModel> hizmetler;
   final String kategori;
   final HizmetModel? selectedService;
@@ -35,10 +35,11 @@ class ScheduleScreen extends StatefulWidget {
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
   int selectedTab = 0;
+  int? subeID = 0;
   HizmetModel? selectedService;
   RadioSelectModels? selectedStaff;
   List<RadioSelectModels?> data = [];
-
+  List<RadioSelectModels?> subeler = [];
   bool isfetch = false;
   //Saat Listeleme
   late TimeOfDay startTime;
@@ -50,14 +51,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   late List<DateTime> selectedDate = [DateTime.now()];
 
   List<DateTimeRange> emptyScheduleList = [];
+  RadioSelectModels? selectedItems;
 
   void fetchData() async {
-    data = await checkRadioList(
-        "getStaffs", FormData.fromMap({"subeID": widget.subeID}));
-    isfetch = true;
+    subeler = await checkRadioList("getAllSube", FormData.fromMap({}));
+
     setState(
       () {},
     );
+
+    if (selectedItems != null) {
+      data = await checkRadioList(
+          "getStaffs", FormData.fromMap({"subeID": subeID}));
+      isfetch = true;
+      setState(
+        () {},
+      );
+    }
   }
 
   @override
@@ -112,6 +122,118 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               onSelected: selectedTab,
             ),
             if (selectedTab == 0)
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Text(
+                              "Şube Seçiniz",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColorDark),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Wrap(children: [
+                        subeler.length == 0
+                            ? Loader()
+                            : Column(
+                                children: [
+                                  for (var item in subeler)
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            selectedItems = item;
+                                            subeID = item.ID!;
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          margin: EdgeInsets.only(bottom: 5),
+                                          decoration: selectedItems == item
+                                              ? BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                )
+                                              : BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 224, 224, 228)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        item!.fullName!,
+                                                        style: TextStyle(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColorDark,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                IconButton(
+                                                  color: Theme.of(context)
+                                                      .primaryColorDark,
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        subeID = item.ID;
+                                                        selectedItems = item!;
+                                                      },
+                                                    );
+                                                  },
+                                                  icon: selectedItems == item
+                                                      ? Icon(
+                                                          Icons
+                                                              .radio_button_checked,
+                                                        )
+                                                      : Icon(
+                                                          Icons.circle_outlined,
+                                                        ),
+                                                ),
+                                              ])),
+                                    ),
+                                ],
+                              )
+                      ]),
+                    ),
+                  ]),
+            if (selectedTab == 1)
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -128,7 +250,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: Wrap(children: [
-                        data.length == 0
+                        subeID == 0
                             ? Loader()
                             : Column(
                                 children: [
@@ -228,7 +350,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ],
                 ),
               ),
-            if (selectedTab == 1)
+            if (selectedTab == 2)
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -246,7 +368,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     GestureDetector(
                       onTap: () {
                         RadioSelectBottomSheet(context, true, true, "getStaffs",
-                            FormData.fromMap({"subeID": widget.subeID}),
+                            FormData.fromMap({"subeID": subeID}),
                             (value) async {
                           selectedStaff = value;
                           staffFilledScheduleList =
@@ -299,180 +421,166 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ),
                       ),
                     ),
-                    Column(children: [
-                      SizedBox(
-                        height: 120,
-                        child: SfDateRangePicker(
-                          view: DateRangePickerView.month,
-                          minDate: DateTime.now(),
-                          maxDate: DateTime(DateTime.now().year,
-                              DateTime.now().month + 1, DateTime.now().day),
-                          initialSelectedDate: DateTime.now(),
-                          selectionShape:
-                              DateRangePickerSelectionShape.rectangle,
-                          selectionColor:
-                              Theme.of(context).colorScheme.secondary,
-                          showTodayButton: false,
-                          showNavigationArrow: true,
-                          todayHighlightColor:
-                              Theme.of(context).colorScheme.secondary,
-                          selectionTextStyle: TextStyle(
-                              color: Theme.of(context).primaryColorLight),
-                          onSelectionChanged: (args) {
-                            emptyScheduleList = getEmptySchedule(
-                                args.value, startTime, departureTime);
-                            setState(() {});
-                          },
-                          monthViewSettings: DateRangePickerMonthViewSettings(
-                            numberOfWeeksInView: 1,
-                            firstDayOfWeek: 1,
-                            dayFormat: 'EEE',
-                          ),
-                          selectableDayPredicate: (date) {
-                            if (date.weekday == DateTime.sunday) {
-                              return true;
-                            } else {
-                              return true;
-                            }
-                          },
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Saati Belirleyin",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 299.h,
-                        child: GridView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            itemCount: emptyScheduleList.length,
-                            scrollDirection: Axis.vertical,
-                            physics: ScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing:
-                                        MediaQuery.of(context).size.width *
-                                            0.01,
-                                    mainAxisSpacing:
-                                        MediaQuery.of(context).size.height *
-                                            0.01,
-                                    mainAxisExtent:
-                                        MediaQuery.of(context).size.height *
-                                            0.05),
-                            itemBuilder: (context, index) {
-                              if (!staffFilledScheduleList.contains(
-                                      emptyScheduleList[index].start) &&
-                                  emptyScheduleList[index]
-                                      .start
-                                      .isAfter(DateTime.now())) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    selectedDate.clear();
-
-                                    double parts =
-                                        selectedService!.serviceDuration! / 15;
-                                    int count = 0;
-                                    for (var i = 0; i < parts; i++) {
-                                      if (staffFilledScheduleList.contains(
-                                          emptyScheduleList[index]
-                                              .start
-                                              .add(Duration(minutes: count)))) {
-                                        Fluttertoast.showToast(
-                                            msg:
-                                                "Randevunuzun aktif olduğu saatte başka bir randevu başladığı için seçim yasaklanmıştır.");
-                                        selectedDate.clear();
-                                      }
-                                      selectedDate.add(emptyScheduleList[index]
-                                          .start
-                                          .add(Duration(minutes: count)));
-                                      count = count + 15;
-                                    }
-
-                                    setState(() {});
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(2.5),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: selectedDate.contains(
-                                                      emptyScheduleList[index]
-                                                          .start)
-                                                  ? Colors.transparent
-                                                  : Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary
-                                                      .withOpacity(0.2),
-                                              spreadRadius: 0.5)
-                                        ],
-                                        color: !selectedDate.contains(
-                                                emptyScheduleList[index].start)
-                                            ? Theme.of(context)
-                                                .primaryColorLight
-                                            : Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                        borderRadius: BorderRadius.circular(
-                                            MediaQuery.of(context).size.height *
-                                                0.01),
-                                      ),
-                                      child: Text(
-                                        '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
-                                        style: TextStyle(
-                                            color: !selectedDate.contains(
-                                                    emptyScheduleList[index]
-                                                        .start)
-                                                ? Theme.of(context)
-                                                    .primaryColorDark
-                                                : Theme.of(context)
-                                                    .primaryColorLight),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return Padding(
-                                  padding: const EdgeInsets.all(2.5),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background,
-                                      borderRadius: BorderRadius.circular(
-                                          MediaQuery.of(context).size.height *
-                                              0.01),
-                                    ),
-                                    child: Text(
-                                      '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context)
-                                              .dialogBackgroundColor),
-                                    ),
-                                  ),
-                                );
-                              }
-                            }),
-                      )
-                    ])
                   ],
                 ),
               ),
-            if (selectedTab == 2)
+            if (selectedTab == 3)
+              Column(children: [
+                SizedBox(
+                  height: 120,
+                  child: SfDateRangePicker(
+                    view: DateRangePickerView.month,
+                    minDate: DateTime.now(),
+                    maxDate: DateTime(DateTime.now().year,
+                        DateTime.now().month + 1, DateTime.now().day),
+                    initialSelectedDate: DateTime.now(),
+                    selectionShape: DateRangePickerSelectionShape.rectangle,
+                    selectionColor: Theme.of(context).colorScheme.secondary,
+                    showTodayButton: false,
+                    showNavigationArrow: true,
+                    todayHighlightColor:
+                        Theme.of(context).colorScheme.secondary,
+                    selectionTextStyle:
+                        TextStyle(color: Theme.of(context).primaryColorLight),
+                    onSelectionChanged: (args) {
+                      emptyScheduleList = getEmptySchedule(
+                          args.value, startTime, departureTime);
+                      setState(() {});
+                    },
+                    monthViewSettings: DateRangePickerMonthViewSettings(
+                      numberOfWeeksInView: 1,
+                      firstDayOfWeek: 1,
+                      dayFormat: 'EEE',
+                    ),
+                    selectableDayPredicate: (date) {
+                      if (date.weekday == DateTime.sunday) {
+                        return true;
+                      } else {
+                        return true;
+                      }
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Saati Belirleyin",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 299.h,
+                  child: GridView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: emptyScheduleList.length,
+                      scrollDirection: Axis.vertical,
+                      physics: ScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing:
+                              MediaQuery.of(context).size.width * 0.01,
+                          mainAxisSpacing:
+                              MediaQuery.of(context).size.height * 0.01,
+                          mainAxisExtent:
+                              MediaQuery.of(context).size.height * 0.05),
+                      itemBuilder: (context, index) {
+                        if (!staffFilledScheduleList
+                                .contains(emptyScheduleList[index].start) &&
+                            emptyScheduleList[index]
+                                .start
+                                .isAfter(DateTime.now())) {
+                          return GestureDetector(
+                            onTap: () {
+                              selectedDate.clear();
+
+                              double parts =
+                                  selectedService!.serviceDuration! / 15;
+                              int count = 0;
+                              for (var i = 0; i < parts; i++) {
+                                if (staffFilledScheduleList.contains(
+                                    emptyScheduleList[index]
+                                        .start
+                                        .add(Duration(minutes: count)))) {
+                                  Fluttertoast.showToast(
+                                      msg:
+                                          "Randevunuzun aktif olduğu saatte başka bir randevu başladığı için seçim yasaklanmıştır.");
+                                  selectedDate.clear();
+                                }
+                                selectedDate.add(emptyScheduleList[index]
+                                    .start
+                                    .add(Duration(minutes: count)));
+                                count = count + 15;
+                              }
+
+                              setState(() {});
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.5),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: selectedDate.contains(
+                                                emptyScheduleList[index].start)
+                                            ? Colors.transparent
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .secondary
+                                                .withOpacity(0.2),
+                                        spreadRadius: 0.5)
+                                  ],
+                                  color: !selectedDate.contains(
+                                          emptyScheduleList[index].start)
+                                      ? Theme.of(context).primaryColorLight
+                                      : Theme.of(context).colorScheme.secondary,
+                                  borderRadius: BorderRadius.circular(
+                                      MediaQuery.of(context).size.height *
+                                          0.01),
+                                ),
+                                child: Text(
+                                  '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
+                                  style: TextStyle(
+                                      color: !selectedDate.contains(
+                                              emptyScheduleList[index].start)
+                                          ? Theme.of(context).primaryColorDark
+                                          : Theme.of(context)
+                                              .primaryColorLight),
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(2.5),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                borderRadius: BorderRadius.circular(
+                                    MediaQuery.of(context).size.height * 0.01),
+                              ),
+                              child: Text(
+                                '${DateFormat('HH:mm').format(emptyScheduleList[index].start)}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context)
+                                        .dialogBackgroundColor),
+                              ),
+                            ),
+                          );
+                        }
+                      }),
+                )
+              ]),
+            if (selectedTab == 4)
               Column(
                 children: [
                   Padding(
@@ -553,7 +661,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   )
                 ],
-              )
+              ),
           ]),
         ),
       ),
@@ -581,7 +689,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         )
                       : Container()
                   : Container(),
-              selectedTab < 2
+              selectedTab < 4
                   ? selectedService != null
                       ? selectedService!.prePaymentMinRate != null &&
                               selectedService!.prePaymentMinRate! > 0.00 &&
@@ -596,6 +704,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 Fluttertoast.showToast(
                                     msg:
                                         "Hizmet başarıyla sepetinize eklendi.");
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ScreenBridge(selectedScreen: 2)),
+                                    (route) => false);
                                 setState(() {});
                               },
                               color: Theme.of(context).colorScheme.secondary,
@@ -631,9 +745,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             selectedStaff!.ID!,
                             selectedDate[0],
                             selectedService!.serviceDuration!,
-                            widget.subeID);
+                            subeID!);
 
-                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RandevularimScreen()),
+                            (route) => false);
                       },
                       color: Theme.of(context).colorScheme.primary,
                       textcolor: Theme.of(context).primaryColorLight,

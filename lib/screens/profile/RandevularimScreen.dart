@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
@@ -75,7 +78,7 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                 child: Column(
                   children: [
                     for (var item in randevularim)
-                      if (item!.scheduleStart!.isAfter(DateTime.now()))
+                      if (DateTime.now().isBefore(item!.scheduleStart!))
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -145,29 +148,28 @@ class _RandevularimScreenState extends State<RandevularimScreen>
                                     color:
                                         Theme.of(context).dialogBackgroundColor,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      MateButon(
-                                          title: "Düzenle",
-                                          minimumSize: Size(20.w, 30.h),
-                                          onPressed: () {},
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          textcolor: Theme.of(context)
-                                              .primaryColorLight),
-                                      MateButon(
-                                          title: "İptal Et",
-                                          minimumSize: Size(20.w, 30.h),
-                                          onPressed: () {},
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
-                                          textcolor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary),
-                                    ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      log("message");
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        MateButon(
+                                            title: "İptal Et",
+                                            minimumSize: Size(20.w, 30.h),
+                                            onPressed: () async {
+                                              log("message");
+                                              cancelService(item.ID!);
+                                              getPage();
+                                            },
+                                            color: Theme.of(context)
+                                                .primaryColorLight,
+                                            textcolor: Theme.of(context)
+                                                .colorScheme
+                                                .secondary),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

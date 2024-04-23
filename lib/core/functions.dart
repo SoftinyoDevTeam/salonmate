@@ -701,6 +701,7 @@ Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
     "duration": duration,
     "subeID": subeID
   });
+
   try {
     Response response = await Dio().post(
       apiUrl + "?module=addRandevu",
@@ -722,8 +723,38 @@ Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
       return false;
     }
   } catch (e) {
+    debugPrint(e.toString());
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log("addRandevu: [ERROR] ${e.toString()}", error: e);
+    return false;
+  }
+}
+
+Future<bool> cancelService(int sID) async {
+  FormData form = FormData.fromMap({"sID": sID});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=randevuCancel",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('CANCELSERVICE: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
-    log('addRandevu: [ERROR] $e', error: e);
+    log('CANCELSERVICE: [ERROR] $e', error: e);
     return false;
   }
 }

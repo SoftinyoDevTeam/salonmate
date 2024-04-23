@@ -38,17 +38,6 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
 
   @override
   Widget build(BuildContext context) {
-    subeSecimi != null
-        ? Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ScheduleScreen(
-                    subeID: subeSecimi!.ID!,
-                    hizmetler: hizmetler[0]!.list!,
-                    kategori: cuzdanim!.hizmetler![0].name!,
-                    selectedService: cuzdanim!.hizmetler![0],
-                    cuzdanrandevusu: true)))
-        : ();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -217,6 +206,24 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                               FormData.fromMap({}),
                                               (value) async {
                                             subeSecimi = value;
+
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ScheduleScreen(
+                                                            hizmetler:
+                                                                hizmetler[0]!
+                                                                    .list!,
+                                                            kategori: cuzdanim!
+                                                                .hizmetler![0]
+                                                                .name!,
+                                                            selectedService:
+                                                                cuzdanim!
+                                                                        .hizmetler![
+                                                                    0],
+                                                            cuzdanrandevusu:
+                                                                true)));
+
                                             setState(() {});
                                           });
                                         },

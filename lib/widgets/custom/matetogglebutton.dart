@@ -21,7 +21,7 @@ class _MateToggleState extends State<MateToggle> {
           children: [
             Container(
               height: 3.h,
-              width: ScreenUtil().screenWidth / 3.2,
+              width: ScreenUtil().screenWidth / 5.5,
               decoration: BoxDecoration(
                   color: widget.onSelected == 0
                       ? Theme.of(context).colorScheme.secondary
@@ -30,7 +30,7 @@ class _MateToggleState extends State<MateToggle> {
             ),
             Container(
               height: 3.h,
-              width: ScreenUtil().screenWidth / 3.2,
+              width: ScreenUtil().screenWidth / 5.5,
               decoration: BoxDecoration(
                   color: widget.onSelected == 1
                       ? Theme.of(context).colorScheme.secondary
@@ -39,9 +39,27 @@ class _MateToggleState extends State<MateToggle> {
             ),
             Container(
               height: 3.h,
-              width: ScreenUtil().screenWidth / 3.2,
+              width: ScreenUtil().screenWidth / 5.5,
               decoration: BoxDecoration(
                   color: widget.onSelected == 2
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(1)),
+            ),
+            Container(
+              height: 3.h,
+              width: ScreenUtil().screenWidth / 5.5,
+              decoration: BoxDecoration(
+                  color: widget.onSelected == 3
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onSecondary,
+                  borderRadius: BorderRadius.circular(1)),
+            ),
+            Container(
+              height: 3.h,
+              width: ScreenUtil().screenWidth / 5.5,
+              decoration: BoxDecoration(
+                  color: widget.onSelected == 4
                       ? Theme.of(context).colorScheme.secondary
                       : Theme.of(context).colorScheme.onSecondary,
                   borderRadius: BorderRadius.circular(1)),

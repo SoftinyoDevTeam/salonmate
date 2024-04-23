@@ -6,11 +6,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
+import 'package:salonmate/main.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -22,6 +24,7 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  bool isChecked = false;
   UserModel? user;
   String registerType = "insert";
   PhoneController phoneController =
@@ -109,7 +112,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               children: [
                 SizedBox(
                     height: 40.h,
-                    width: ScreenUtil().screenWidth / 2 - 30,
+                    width: deviceType == "phone"
+                        ? (ScreenUtil().screenWidth - 56.sp) / 2
+                        : (ScreenUtil().screenWidth - 126.sp) / 2,
                     child: TextFormField(
                       textCapitalization: TextCapitalization.words,
                       controller: firstname,
@@ -117,7 +122,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     )),
                 SizedBox(
                     height: 40.h,
-                    width: ScreenUtil().screenWidth / 2 - 30,
+                    width: deviceType == "phone"
+                        ? (ScreenUtil().screenWidth - 56.sp) / 2
+                        : (ScreenUtil().screenWidth - 126.sp) / 2,
                     child: TextFormField(
                       textCapitalization: TextCapitalization.words,
                       controller: lastname,
@@ -182,7 +189,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         children: [
                           Container(
                             height: 50.h,
-                            width: ScreenUtil().screenWidth / 2 - 30,
+                            width: deviceType == "phone"
+                                ? (ScreenUtil().screenWidth - 30.sp) / 2
+                                : (ScreenUtil().screenWidth - 116.sp) / 2,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: (yesno == null ? false : yesno!)
@@ -209,7 +218,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           ),
                           Container(
                             height: 50.h,
-                            width: ScreenUtil().screenWidth / 2 - 30,
+                            width: deviceType == "phone"
+                                ? (ScreenUtil().screenWidth - 30.sp) / 2
+                                : (ScreenUtil().screenWidth - 116.sp) / 2,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: (yesno == null ? false : !yesno!)
@@ -369,7 +380,27 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   ),
                 ),
           Padding(
-            padding: const EdgeInsets.only(top: 150),
+            padding: const EdgeInsets.only(top: 28.0),
+            child: Row(
+              children: [
+                Checkbox(
+                  checkColor: Colors.white,
+                  value: isChecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isChecked = value!;
+                    });
+                  },
+                ),
+                Expanded(
+                  child: Text(
+                      "Kullanıcı sözleşmesini ve gizlilik anlaşmasını okudum anladım kabul ediyorum."),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
             child: MateButon(
                 title: "Kayıt Ol",
                 minimumSize: Size(400.w, 40.h),

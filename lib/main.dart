@@ -1,4 +1,7 @@
 //Flutter dart paketleri
+
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +22,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 //Ekranlar
 SalonConfigModel? salonConfig;
 SharedPreferences? prefs;
-
+String deviceType = "phone";
 void main() async {
   bool? internet = true;
+
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
@@ -57,6 +61,7 @@ void main() async {
   });
   prefs = await SharedPreferences.getInstance();
   setPrefString("tooltip", "true");
+
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
     path: localizationDir,
@@ -68,6 +73,10 @@ void main() async {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
+          double screenWidth = ScreenUtil().screenWidth;
+          if (screenWidth > 600) {
+            deviceType = "tablet";
+          }
           if (internet == true) {
             return GestureDetector(
               onTap: () {},
