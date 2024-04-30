@@ -76,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             padding: const EdgeInsets.only(top: 18.0),
                             child: Container(
                                 height: 70.h,
-                                width: ScreenUtil().screenWidth - 40.w,
+                                width: ScreenUtil().screenWidth - 20.w,
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).primaryColorLight,
                                     border: Border.all(
@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Affiliate Kodunu Paylaş",
+                                                  "Davet Kodunu Paylaş : $affCodePrefix${userData!.id}",
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -103,17 +103,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                           .colorScheme
                                                           .secondary),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 4.0),
-                                                  child: Icon(
-                                                    Icons.info,
-                                                    size: 18,
-                                                    color: Theme.of(context)
-                                                        .hintColor,
-                                                  ),
-                                                )
                                               ],
                                             ),
                                             Padding(
@@ -149,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.only(top: 18.0),
                         child: Column(
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -197,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -244,7 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -291,7 +280,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -338,7 +327,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,

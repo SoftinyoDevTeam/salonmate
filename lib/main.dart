@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 // Core ek paketler
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
@@ -17,6 +18,7 @@ import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:salonmate/screens/profile/NotificationsScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Ekranlar
@@ -59,8 +61,12 @@ void main() async {
 
     showLocalNotification(notification!.title!, notification.body!);
   });
+
   prefs = await SharedPreferences.getInstance();
   setPrefString("tooltip", "true");
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(EasyLocalization(
     supportedLocales: supportedLocalesdef,
@@ -87,7 +93,7 @@ void main() async {
                 debugShowCheckedModeBanner: false,
                 title: appname,
                 theme: ThemeData(
-                  appBarTheme: AppBarTheme(
+                  appBarTheme: const AppBarTheme(
                     backgroundColor: Colors.transparent,
                     surfaceTintColor: Colors.transparent,
                   ),
@@ -99,7 +105,7 @@ void main() async {
                     }
                     return Colors.green;
                   })),
-                  sliderTheme: SliderThemeData(
+                  sliderTheme: const SliderThemeData(
                     trackHeight: 20, // change height here
                   ),
                   inputDecorationTheme: InputDecorationTheme(

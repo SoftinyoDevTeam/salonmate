@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.18+1
+version: 1.0.19+1
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -26,6 +26,7 @@ dependencies:
   easy_localization: ^3.0.3
   flutter_screenutil: ^5.9.0
   dio: ^5.4.0
+  flutter_widget_from_html: ^0.14.11
   fluttertoast: ^8.2.4
   shared_preferences: ^2.2.2
   phone_form_field: ^8.1.1

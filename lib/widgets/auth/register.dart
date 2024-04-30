@@ -13,6 +13,7 @@ import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/main.dart';
+import 'package:salonmate/screens/auth/SozlesmeScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -29,7 +30,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   String registerType = "insert";
   PhoneController phoneController =
       PhoneController(PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
-  String? birthday = DateTime.now().toString();
+  String? birthday = "";
   bool? yesno;
   double _currentSliderValue = 1;
   TextEditingController firstname = TextEditingController();
@@ -45,8 +46,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           user != null
               ? SizedBox(
                   height: 50.h,
-                  child: Flexible(
-                      child: Text.rich(TextSpan(children: <InlineSpan>[
+                  child: Text.rich(TextSpan(children: <InlineSpan>[
                     TextSpan(text: "Hoşgeldiniz "),
                     TextSpan(
                       text: user!.adSoyad,
@@ -65,7 +65,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     TextSpan(
                         text:
                             " numaralı telefonunuzla sistemimize üye oluyorsunuz."),
-                  ]))))
+                  ])))
               : Container(),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -113,7 +113,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 SizedBox(
                     height: 40.h,
                     width: deviceType == "phone"
-                        ? (ScreenUtil().screenWidth - 56.sp) / 2
+                        ? (ScreenUtil().screenWidth - 46.sp) / 2
                         : (ScreenUtil().screenWidth - 126.sp) / 2,
                     child: TextFormField(
                       textCapitalization: TextCapitalization.words,
@@ -123,7 +123,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 SizedBox(
                     height: 40.h,
                     width: deviceType == "phone"
-                        ? (ScreenUtil().screenWidth - 56.sp) / 2
+                        ? (ScreenUtil().screenWidth - 46.sp) / 2
                         : (ScreenUtil().screenWidth - 126.sp) / 2,
                     child: TextFormField(
                       textCapitalization: TextCapitalization.words,
@@ -140,7 +140,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   final result = await showBoardDateTimePicker(
                       minimumDate:
                           DateTime.now().subtract(Duration(days: 36500)),
-                      initialDate: DateTime.parse(birthday!),
+                      initialDate: DateTime.now(),
                       onChanged: (p0) {
                         birthday = DateFormat("yyyy-MM-d").format(p0);
 
@@ -164,7 +164,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 child: TextFormField(
                   enabled: false,
                   controller: birthfield,
-                  decoration: InputDecoration(hintText: "Doğum Tarihi"),
+                  decoration:
+                      InputDecoration(hintText: "Doğum Tarihi (Opsiyonel)"),
                 ),
               )),
           user == null
@@ -190,7 +191,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           Container(
                             height: 50.h,
                             width: deviceType == "phone"
-                                ? (ScreenUtil().screenWidth - 30.sp) / 2
+                                ? (ScreenUtil().screenWidth - 50.sp) / 2
                                 : (ScreenUtil().screenWidth - 116.sp) / 2,
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -219,7 +220,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           Container(
                             height: 50.h,
                             width: deviceType == "phone"
-                                ? (ScreenUtil().screenWidth - 30.sp) / 2
+                                ? (ScreenUtil().screenWidth - 50.sp) / 2
                                 : (ScreenUtil().screenWidth - 116.sp) / 2,
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -265,32 +266,69 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 50.h,
-                                        child: Slider(
-                                          inactiveColor: Theme.of(context)
-                                              .dialogBackgroundColor,
-                                          secondaryActiveColor:
-                                              Theme.of(context)
+                                        height: 60.h,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "1 Yıldan Az",
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondary),
+                                                ),
+                                                Text(
+                                                  "1-3 Yıl Arası",
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondary),
+                                                ),
+                                                Text(
+                                                  "3 Yıldan Fazla",
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondary),
+                                                ),
+                                              ],
+                                            ),
+                                            Slider(
+                                              inactiveColor: Theme.of(context)
+                                                  .dialogBackgroundColor,
+                                              secondaryActiveColor:
+                                                  Theme.of(context)
+                                                      .primaryColorLight,
+                                              thumbColor: Theme.of(context)
                                                   .primaryColorLight,
-                                          thumbColor: Theme.of(context)
-                                              .primaryColorLight,
-                                          activeColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          value: _currentSliderValue,
-                                          max: 2,
-                                          divisions: 2,
-                                          label: _currentSliderValue.round() <=
-                                                  0
-                                              ? "1 Yıldan Az"
-                                              : _currentSliderValue.round() >= 2
-                                                  ? "3 Yıldan Fazla"
-                                                  : "1-3 Yıl Arası",
-                                          onChanged: (double value) {
-                                            setState(() {
-                                              _currentSliderValue = value;
-                                            });
-                                          },
+                                              activeColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              value: _currentSliderValue,
+                                              max: 2,
+                                              divisions: 2,
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  kacyildirmusteri =
+                                                      value.toInt();
+                                                  _currentSliderValue = value;
+                                                });
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -393,8 +431,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   },
                 ),
                 Expanded(
-                  child: Text(
-                      "Kullanıcı sözleşmesini ve gizlilik anlaşmasını okudum anladım kabul ediyorum."),
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                          context: context,
+                          isScrollControlled: true,
+                          enableDrag: true,
+                          builder: (BuildContext context) {
+                            return Container(
+                                height: ScreenUtil().screenHeight / 1.4,
+                                child: SozlesmeScreen());
+                          });
+                    },
+                    child: Text(
+                        "Kullanıcı sözleşmesini ve gizlilik anlaşmasını okudum anladım kabul ediyorum."),
+                  ),
                 )
               ],
             ),

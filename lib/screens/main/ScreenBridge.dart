@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
@@ -8,6 +9,7 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/products/ProductsMainScreen.dart';
 import 'package:salonmate/screens/products/SepetScreen.dart';
+import 'package:salonmate/screens/profile/NotificationsScreen.dart';
 import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
@@ -40,6 +42,14 @@ class _ScreenBridgeState extends State<ScreenBridge> {
         done = true;
       });
       setPrefString("tooltip", "false");
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      String screen = event.data["screen"];
+      switch (screen) {
+        case "/notificationscreen":
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => NotificationScreen()));
+      }
     });
   }
 

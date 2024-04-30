@@ -58,45 +58,43 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      width: ScreenUtil().screenWidth / 1.5,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                gapPadding: 4,
-                                borderRadius: BorderRadius.circular(45.sp),
-                                borderSide: BorderSide(
-                                    color:
-                                        Theme.of(context).dialogBackgroundColor,
-                                    width: 1)),
-                            prefixIconColor:
-                                Theme.of(context).dialogBackgroundColor,
-                            prefixIcon: const Icon(Icons.search),
-                            hintText: "Ürün arayın"),
+                        width: ScreenUtil().screenWidth / 2.5,
+                        child: MateButon(
+                          minimumSize: Size(200.w, 40.h),
+                          color: Theme.of(context).colorScheme.secondary,
+                          textcolor: Colors.white,
+                          title: "Canlı Yardım",
+                          onPressed: () {},
+                        )),
+                    Padding(
+                      padding: EdgeInsets.only(left: 98.w),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ProfileScreen()));
+                        },
+                        child: Icon(Icons.person,
+                            color: Theme.of(context).dialogBackgroundColor),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfileScreen()));
-                      },
-                      child: Icon(Icons.person,
-                          color: Theme.of(context).dialogBackgroundColor),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) =>
-                                    const NotificationScreen())));
-                      },
-                      child: Icon(Icons.notifications,
-                          color: Theme.of(context).dialogBackgroundColor),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) =>
+                                      const NotificationScreen())));
+                        },
+                        child: Icon(Icons.notifications,
+                            color: Theme.of(context).dialogBackgroundColor),
+                      ),
                     )
                   ],
                 ),

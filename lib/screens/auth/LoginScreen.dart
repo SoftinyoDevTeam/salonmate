@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -161,6 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                               children: [
                                 PhoneFormField(
+                                  keyboardType: Platform.isIOS
+                                      ? TextInputType.number
+                                      : TextInputType.number,
+                                  textInputAction: TextInputAction.done,
                                   cursorColor: Theme.of(context).primaryColor,
                                   showDialCode: true,
                                   decoration: const InputDecoration(
@@ -170,6 +177,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     new LengthLimitingTextInputFormatter(13),
                                   ],
                                   controller: phoneController,
+                                  onChanged: (value) {
+                                    if (value!.nsn.length == 10) {
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                    log(value!.nsn.length.toString());
+                                  },
                                   validator: (phoneNumber) {},
                                 ),
                                 SizedBox(height: 15.h),

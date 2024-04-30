@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
+import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:salonmate/screens/randevu/RandevuMainScreen.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/buttons.dart';
@@ -61,7 +62,21 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                         child: Text(kampanyalar.descriptions!)),
                   ),
                   Spacer(),
-                  kampanyalar.type != "AFFILIATE"
+                  kampanyalar.type == "URUNKAMPANYA"
+                      ? MateButon(
+                          title: "Ürün Satın Al & Hizmet Kazan",
+                          minimumSize: Size(20, 50),
+                          onPressed: () async {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ScreenBridge(selectedScreen: 1)));
+                          },
+                          color: Theme.of(context).primaryColor,
+                          textcolor: Theme.of(context).primaryColorLight)
+                      : Container(),
+                  kampanyalar.type == "KAMPANYALIHIZMET"
                       ? MateButon(
                           title: "Kampanyalı Hizmeti Satın Al",
                           minimumSize: Size(20, 50),
@@ -76,7 +91,9 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                           },
                           color: Theme.of(context).primaryColor,
                           textcolor: Theme.of(context).primaryColorLight)
-                      : MateButon(
+                      : Container(),
+                  kampanyalar.type == "AFFILIATE"
+                      ? MateButon(
                           title: "İndirimli Randevu Oluştur",
                           minimumSize: Size(20, 50),
                           onPressed: () async {
@@ -87,6 +104,7 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                           },
                           color: Theme.of(context).colorScheme.secondary,
                           textcolor: Theme.of(context).primaryColorLight)
+                      : Container()
                 ]),
               )),
         ));
