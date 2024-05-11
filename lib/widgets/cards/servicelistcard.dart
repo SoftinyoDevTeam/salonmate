@@ -69,10 +69,17 @@ class _ServiceListCardState extends State<ServiceListCard> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    widget.text,
-                    style:
-                        TextStyle(color: Theme.of(context).primaryColorLight),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Text(
+                      widget.text,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                    ),
                   ),
                 ],
               )),

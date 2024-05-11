@@ -76,7 +76,7 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                           color: Theme.of(context).primaryColor,
                           textcolor: Theme.of(context).primaryColorLight)
                       : Container(),
-                  kampanyalar.type == "KAMPANYALIHIZMET"
+                  kampanyalar.type == "HIZMETKAMPANYA"
                       ? MateButon(
                           title: "Kampanyalı Hizmeti Satın Al",
                           minimumSize: Size(20, 50),

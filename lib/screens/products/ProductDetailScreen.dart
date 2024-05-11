@@ -51,7 +51,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   minimumSize: Size(50.w, 40.h),
                   onPressed: () async {
                     String? userToken = await getPrefString("token");
-                    bool status = await addToCart(3, "URUN", userToken!);
+                    bool status =
+                        await addToCart(widget.product.ID!, "URUN", userToken!);
 
                     Navigator.pushAndRemoveUntil(
                         context,

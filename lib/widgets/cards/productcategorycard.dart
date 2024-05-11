@@ -23,7 +23,7 @@ class _ProductCategoryListCardState extends State<ProductCategoryListCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).hintColor, width: 1),
+        border: Border.all(color: Theme.of(context).hintColor, width: 0.5),
         borderRadius: BorderRadius.circular(widget.radius),
       ),
       child: Column(
@@ -32,10 +32,11 @@ class _ProductCategoryListCardState extends State<ProductCategoryListCard> {
             height: 70.h,
             child: MateImage(imageUrl: widget.imageUrl),
           ),
-          Text(
-            widget.text,
-            style: TextStyle(color: Theme.of(context).primaryColorDark),
-          ),
+          Text(widget.text,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 9.sp,
+                  fontWeight: FontWeight.bold)),
         ],
       ),
     );

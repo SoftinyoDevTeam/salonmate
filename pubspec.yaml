@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.19+1
+version: 1.0.22+0001
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -47,12 +47,14 @@ dependencies:
   dart_eval: ^0.7.9
   path_provider: ^2.1.2
   overlay_tooltip: ^0.2.3
-
-
-
+  webviewx_plus: ^0.5.0
+  font_awesome_flutter: ^10.7.0
+  vibration: ^1.8.4
+  search_field_autocomplete: ^1.0.0 
+  ios_keyboard_action: ^0.0.2
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+    sdk: flutter 
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

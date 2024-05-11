@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
@@ -145,26 +146,28 @@ class _SepetScreenState extends State<SepetScreen> {
                               ),
                             ),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                urun.title!,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary),
-                              ),
-                              Text(
-                                "${urun.price.toString()} TL",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary),
-                              )
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  urun.title!,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                ),
+                                Text(
+                                  "${urun.price.toString()} TL",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),

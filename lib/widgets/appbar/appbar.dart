@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/screens/main/ScreenBridge.dart';
 
 class MateBarContent extends StatelessWidget {
   final String title;
@@ -25,7 +26,10 @@ class MateBarContent extends StatelessWidget {
       backgroundColor: Colors.transparent,
       leading: GestureDetector(
         onTap: () {
-          Navigator.pop(context);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ScreenBridge(selectedScreen: 0)));
         },
         child: Icon(Icons.arrow_back_ios_new_rounded, color: textColor),
       ),

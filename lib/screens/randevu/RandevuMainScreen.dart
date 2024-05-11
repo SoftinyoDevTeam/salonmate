@@ -91,8 +91,7 @@ class _RandevuMainScreenState extends State<RandevuMainScreen> {
                             child: ServiceListCard(
                               hizmetler: hizmetler[index]!.list!,
                               text: hizmetler[index]!.name!,
-                              imageUrl:
-                                  "https://www.newwell.com.tr/Data/Blog/30.jpg",
+                              imageUrl: hizmetler[index]!.imageURL!,
                               radius: 15.sp,
                             ),
                           );

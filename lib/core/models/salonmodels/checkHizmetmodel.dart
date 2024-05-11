@@ -2,6 +2,7 @@ class HizmetKategoriModel {
   int? ID;
   String? name;
   int? rate;
+  String? imageURL;
   List<HizmetModel>? list;
 
   HizmetKategoriModel({this.ID, this.name, this.rate, this.list});
@@ -9,6 +10,7 @@ class HizmetKategoriModel {
   HizmetKategoriModel.fromJson(Map<String, dynamic> json) {
     ID = json['ID'];
     name = json['name'];
+    imageURL = json['imageURL'];
     rate = json['rate'];
     list = json['list'] != null
         ? List<HizmetModel>.from(
@@ -24,6 +26,7 @@ class HizmetModel {
   double? prePaymentMinRate;
   int? serviceDuration;
   String? ney;
+  int? cuzdanID;
 
   HizmetModel(
       {this.ID,
@@ -31,7 +34,8 @@ class HizmetModel {
       this.name,
       this.prePaymentMinRate,
       this.serviceDuration,
-      this.ney});
+      this.ney,
+      this.cuzdanID});
 
   HizmetModel.fromJson(Map<String, dynamic> json) {
     ID = json['ID'];
@@ -40,5 +44,8 @@ class HizmetModel {
     prePaymentMinRate = double.parse(json['prePaymentMinRate']);
     serviceDuration = json['serviceDuration'];
     ney = json['ney'] == null ? "" : json['ney'];
+    cuzdanID = json["cuzdanID"] == null || json["cuzdanID"] == 0
+        ? 0
+        : json["cuzdanID"];
   }
 }

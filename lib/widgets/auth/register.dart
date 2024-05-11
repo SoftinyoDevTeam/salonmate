@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ios_keyboard_action/ios_keyboard_action.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/auth/SozlesmeScreen.dart';
+import 'package:salonmate/widgets/auth/registerPin.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -25,6 +27,9 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  final nextFieldFocus = FocusNode();
+  final previousFieldFocus = FocusNode();
+  final doneFieldFocus = FocusNode();
   bool isChecked = false;
   UserModel? user;
   String registerType = "insert";
@@ -72,37 +77,46 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             child: SizedBox(
               height: 40.h,
               width: ScreenUtil().screenWidth - 30,
-              child: PhoneFormField(
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
-                cursorColor: Theme.of(context).primaryColor,
-                showDialCode: true,
-                decoration: InputDecoration(
-                  hintText: "Telefon Numarası",
-                ),
-                inputFormatters: [
-                  new LengthLimitingTextInputFormatter(13),
-                ],
-                controller: phoneController,
-                onChanged: (value) async {
-                  if (value!.isValidLength(type: PhoneNumberType.mobile)) {
-                    user = await checkRegister(value!.nsn.replaceAll(" ", ""));
-                    if (user != null) {
-                      registerType = "update";
-                      var oldname = user!.adSoyad.split(" ");
-                      firstname.text = (oldname.first);
-                      lastname.text = (oldname.last);
-                    } else {
-                      registerType = "insert";
-                      firstname.text = "";
-                      lastname.text = "";
-                    }
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    setState(() {});
-                  }
-                },
-                validator: (phoneNumber) {},
-              ),
+              child: IOSKeyboardAction(
+                  backgroundColor: CupertinoColors.lightBackgroundGray,
+                  textColor: Theme.of(context).primaryColor,
+                  label: 'Sonraki',
+                  focusNode: previousFieldFocus,
+                  focusActionType: FocusActionType.next,
+                  onTap: () => log("print"),
+                  child: PhoneFormField(
+                    focusNode: previousFieldFocus,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    cursorColor: Theme.of(context).primaryColor,
+                    showDialCode: true,
+                    decoration: InputDecoration(
+                      hintText: "Telefon Numarası",
+                    ),
+                    inputFormatters: [
+                      new LengthLimitingTextInputFormatter(13),
+                    ],
+                    controller: phoneController,
+                    onChanged: (value) async {
+                      if (value!.isValidLength(type: PhoneNumberType.mobile)) {
+                        user =
+                            await checkRegister(value!.nsn.replaceAll(" ", ""));
+                        if (user != null) {
+                          registerType = "update";
+                          var oldname = user!.adSoyad.split(" ");
+                          firstname.text = (oldname.first);
+                          lastname.text = (oldname.last);
+                        } else {
+                          registerType = "insert";
+                          firstname.text = "";
+                          lastname.text = "";
+                        }
+                        //FocusManager.instance.primaryFocus?.unfocus();
+                        setState(() {});
+                      }
+                    },
+                    validator: (phoneNumber) {},
+                  )),
             ),
           ),
           Padding(
@@ -115,20 +129,36 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     width: deviceType == "phone"
                         ? (ScreenUtil().screenWidth - 46.sp) / 2
                         : (ScreenUtil().screenWidth - 126.sp) / 2,
-                    child: TextFormField(
-                      textCapitalization: TextCapitalization.words,
-                      controller: firstname,
-                      decoration: InputDecoration(hintText: "Ad"),
-                    )),
+                    child: IOSKeyboardAction(
+                        backgroundColor: CupertinoColors.lightBackgroundGray,
+                        textColor: Theme.of(context).primaryColor,
+                        label: 'Sonraki',
+                        focusNode: nextFieldFocus,
+                        focusActionType: FocusActionType.next,
+                        onTap: () => log("print"),
+                        child: TextFormField(
+                          textCapitalization: TextCapitalization.words,
+                          controller: firstname,
+                          focusNode: nextFieldFocus,
+                          decoration: InputDecoration(hintText: "Ad"),
+                        ))),
                 SizedBox(
                     height: 40.h,
                     width: deviceType == "phone"
                         ? (ScreenUtil().screenWidth - 46.sp) / 2
                         : (ScreenUtil().screenWidth - 126.sp) / 2,
-                    child: TextFormField(
-                      textCapitalization: TextCapitalization.words,
-                      controller: lastname,
-                      decoration: InputDecoration(hintText: "Soyad"),
+                    child: IOSKeyboardAction(
+                      backgroundColor: CupertinoColors.lightBackgroundGray,
+                      textColor: Theme.of(context).primaryColor,
+                      label: 'Tamam',
+                      focusNode: doneFieldFocus,
+                      focusActionType: FocusActionType.done,
+                      onTap: () => log("print"),
+                      child: TextFormField(
+                          focusNode: doneFieldFocus,
+                          textCapitalization: TextCapitalization.words,
+                          controller: lastname,
+                          decoration: InputDecoration(hintText: "Soyad")),
                     )),
               ],
             ),
@@ -137,29 +167,24 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               padding: EdgeInsets.only(top: 8),
               child: GestureDetector(
                 onTap: () async {
-                  final result = await showBoardDateTimePicker(
-                      minimumDate:
-                          DateTime.now().subtract(Duration(days: 36500)),
-                      initialDate: DateTime.now(),
-                      onChanged: (p0) {
-                        birthday = DateFormat("yyyy-MM-d").format(p0);
-
-                        setState(() {});
-                        log(birthday.toString());
-                        birthfield.text = DateFormat("d MMMM yyyy").format(p0);
-                      },
-                      context: context,
-                      pickerType: DateTimePickerType.date,
-                      maximumDate: DateTime.now(),
-                      options: BoardDateTimeOptions(
-                          showDateButton: false,
-                          boardTitle: "Doğum Tarihinizi Seçiniz",
-                          languages: BoardPickerLanguages(locale: "tr"),
-                          pickerFormat: PickerFormat.dmy,
-                          foregroundColor:
-                              Theme.of(context).dialogBackgroundColor,
-                          backgroundColor: Theme.of(context).primaryColorLight,
-                          activeColor: Theme.of(context).primaryColorDark));
+                  showCupDialog(
+                      CupertinoDatePicker(
+                        initialDateTime:
+                            DateTime.now().subtract(Duration(days: 5000)),
+                        mode: CupertinoDatePickerMode.date,
+                        use24hFormat: true,
+                        // This shows day of week alongside day of month
+                        showDayOfWeek: false,
+                        // This is called when the user changes the date.
+                        onDateTimeChanged: (DateTime newDate) {
+                          birthday = DateFormat("yyyy-MM-d").format(newDate);
+                          setState(() {});
+                          log(birthday.toString());
+                          birthfield.text =
+                              DateFormat("d MMMM yyyy").format(newDate);
+                        },
+                      ),
+                      context);
                 },
                 child: TextFormField(
                   enabled: false,
@@ -345,7 +370,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         padding:
                                             const EdgeInsets.only(left: 3.0),
                                         child: Text(
-                                          "Ne kadar süredir müşterimizsiniz ?",
+                                          "Davet Kodu",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -467,8 +492,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         kacyildirmusteri == null ? 0 : kacyildirmusteri!,
                     "fcmToken": widget.fcmToken
                   });
-                  log(formData.fields.toString());
-                  var response = await register(formData, context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              RegisterPinPage(formData: formData)));
+                  //var response = await register(formData, context);
                 },
                 color: Theme.of(context).primaryColor,
                 textcolor: Theme.of(context).primaryColorLight),

@@ -19,6 +19,7 @@ import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:salonmate/screens/profile/NotificationsScreen.dart';
+import 'package:salonmate/widgets/auth/registerPin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Ekranlar
@@ -63,18 +64,19 @@ void main() async {
   });
 
   prefs = await SharedPreferences.getInstance();
+
   setPrefString("tooltip", "true");
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
   runApp(EasyLocalization(
-    supportedLocales: supportedLocalesdef,
-    path: localizationDir,
-    assetLoader: const CodegenLoader(),
-    fallbackLocale: defaultLocale,
-    useOnlyLangCode: true,
-    child: ScreenUtilInit(
+      supportedLocales: supportedLocalesdef,
+      path: localizationDir,
+      assetLoader: const CodegenLoader(),
+      fallbackLocale: defaultLocale,
+      useOnlyLangCode: true,
+      child: ScreenUtilInit(
         designSize: screenDesignSize,
         minTextAdapt: true,
         splitScreenMode: true,
@@ -179,6 +181,6 @@ void main() async {
             ? const ScreenBridge(
                 selectedScreen: 0,
               )
-            : const SplashScreen()),
-  ));
+            : const SplashScreen(),
+      )));
 }

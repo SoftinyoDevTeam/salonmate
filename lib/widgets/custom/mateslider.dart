@@ -37,12 +37,7 @@ class _MateSliderState extends State<MateSlider> {
             ? Loader()
             : SizedBox(
                 child: Container(
-                foregroundDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.h),
-                ),
-                height: 150.h,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40.h),
+                  height: 150.h,
                   child: PageView.builder(
                     controller: pageController,
                     itemCount: kampanyalar.length,
@@ -57,15 +52,14 @@ class _MateSliderState extends State<MateSlider> {
                                       )));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Container(
-                            width: ScreenUtil().screenWidth,
-                            child: MateImage(
-                              boxFit: BoxFit.cover,
-                              imageUrl: kampanyalar[i]!.imageUrl!,
-                            ),
-                          ),
-                        ),
+                            padding: const EdgeInsets.all(12),
+                            child: Container(
+                              width: ScreenUtil().screenWidth,
+                              child: MateImage(
+                                boxFit: BoxFit.cover,
+                                imageUrl: kampanyalar[i]!.imageUrl!,
+                              ),
+                            )),
                       );
                     },
                     onPageChanged: (value) {
@@ -73,7 +67,7 @@ class _MateSliderState extends State<MateSlider> {
                     },
                   ),
                 ),
-              )),
+              ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

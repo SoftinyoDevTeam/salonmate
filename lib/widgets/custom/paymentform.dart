@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -135,15 +137,19 @@ class PaymentFormState extends State<PaymentForm> {
     );
   }
 
-  void _onValidate() {
-    completeCart();
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const CuzdanimScreen()),
-        (route) => false);
-
-    if (formKey.currentState?.validate() ?? false) {
-    } else {}
+  void _onValidate() async {
+    if (formKey.currentState?.validate() == false) {
+      log("Lütfen kart bilgilerinizi eksiksiz ve doğru şekilde girin.");
+    } else {
+      bool cardisOkay =
+          await completeCart(cardHolderName, cardNumber, expiryDate, cvvCode);
+      if (cardisOkay) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const CuzdanimScreen()),
+            (route) => false);
+      }
+    }
   }
 
   Glassmorphism? _getGlassmorphismConfig() {

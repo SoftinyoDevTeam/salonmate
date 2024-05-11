@@ -202,17 +202,19 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       ScheduleScreen(
-                                                          selectedService:
-                                                              cuzdanim!
-                                                                      .hizmetler![
-                                                                  i],
-                                                          hizmetler: cuzdanim!
-                                                              .hizmetler!,
-                                                          kategori: cuzdanim!
-                                                              .hizmetler![i]
-                                                              .name!,
-                                                          cuzdanrandevusu:
-                                                              false)));
+                                                        selectedService:
+                                                            cuzdanim!
+                                                                .hizmetler![i],
+                                                        hizmetler: cuzdanim!
+                                                            .hizmetler!,
+                                                        kategori: cuzdanim!
+                                                            .hizmetler![i]
+                                                            .name!,
+                                                        cuzdanrandevusu: false,
+                                                        cuzdanID: cuzdanim!
+                                                            .hizmetler![i]
+                                                            .cuzdanID,
+                                                      )));
                                         },
                                         color: Theme.of(context).primaryColor,
                                         textcolor: Theme.of(context)

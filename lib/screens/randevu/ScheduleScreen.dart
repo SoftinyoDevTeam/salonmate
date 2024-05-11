@@ -24,11 +24,13 @@ class ScheduleScreen extends StatefulWidget {
       required this.hizmetler,
       required this.kategori,
       this.selectedService,
-      required this.cuzdanrandevusu});
+      required this.cuzdanrandevusu,
+      this.cuzdanID});
   final List<HizmetModel> hizmetler;
   final String kategori;
   final HizmetModel? selectedService;
   final bool cuzdanrandevusu;
+  final int? cuzdanID;
   @override
   State<ScheduleScreen> createState() => _ScheduleScreenState();
 }
@@ -44,7 +46,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   //Saat Listeleme
   late TimeOfDay startTime;
   late TimeOfDay departureTime;
-
+  int cuzdanID = 0;
   late List<StaffFilledSchedules?> filledSchedules;
   List<DateTime> staffFilledScheduleList = [];
 
@@ -74,10 +76,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    if (widget.cuzdanID == null) {
+      cuzdanID = 0;
+    } else {
+      cuzdanID = widget.cuzdanID!;
+    }
     fetchData();
     if (widget.selectedService != null) {
       selectedService = widget.selectedService;
-      selectedTab = 1;
+      selectedTab = 0;
       setState(() {});
     }
 
@@ -745,12 +752,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             selectedStaff!.ID!,
                             selectedDate[0],
                             selectedService!.serviceDuration!,
-                            subeID!);
+                            subeID!,
+                            cuzdanID);
 
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RandevularimScreen()),
+                                builder: (context) => RandevularimScreen(
+                                      backProfile: true,
+                                    )),
                             (route) => false);
                       },
                       color: Theme.of(context).colorScheme.primary,

@@ -4,8 +4,10 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/screens/main/CanliDestek.dart';
 import 'package:salonmate/screens/main/HomeScreen.dart';
 import 'package:salonmate/screens/products/ProductsMainScreen.dart';
 import 'package:salonmate/screens/products/SepetScreen.dart';
@@ -27,10 +29,10 @@ class _ScreenBridgeState extends State<ScreenBridge> {
 
   var _bottomNavIndex = 0; //default index of a first screen
   final iconList = <IconData>[
-    Icons.home,
-    Icons.category_outlined,
-    Icons.calendar_month,
-    Icons.shopping_bag_outlined,
+    FontAwesomeIcons.house,
+    FontAwesomeIcons.tag,
+    FontAwesomeIcons.calendar,
+    FontAwesomeIcons.basketShopping,
   ];
   @override
   void initState() {
@@ -75,6 +77,10 @@ class _ScreenBridgeState extends State<ScreenBridge> {
         break;
       case 3:
         child = SepetScreen();
+        setState(() {});
+        break;
+      case 4:
+        child = CanliDestekScreen();
         setState(() {});
         break;
     }
@@ -156,7 +162,8 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                           TooltipHorizontalPosition.CENTER,
                       child: GestureDetector(
                         onTap: () {
-                          log("message");
+                          _bottomNavIndex = 4;
+                          setState(() {});
                         },
                         child: SizedBox(
                           height: 50.h,
@@ -176,6 +183,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                   blurEffect: true,
                   backgroundColor: Theme.of(context).primaryColorLight,
                   activeColor: Theme.of(context).colorScheme.secondary,
+                  splashColor: Theme.of(context).colorScheme.secondary,
                   icons: iconList,
                   inactiveColor: Theme.of(context).primaryColorDark,
                   activeIndex: _bottomNavIndex,
@@ -183,7 +191,6 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                   notchSmoothness: NotchSmoothness.defaultEdge,
                   onTap: (index) {
                     setState(() => _bottomNavIndex = index);
-                    log(_bottomNavIndex.toString());
                   }),
             ));
   }

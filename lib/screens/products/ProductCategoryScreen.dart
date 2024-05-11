@@ -33,7 +33,6 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
         ),
       ),
       body: SizedBox(
-        height: 800.h,
         width: ScreenUtil().screenWidth,
         child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),

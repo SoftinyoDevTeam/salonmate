@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -20,6 +21,28 @@ import 'package:salonmate/core/models/usermodels/cuzdanimmodel.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+void showCupDialog(Widget child, BuildContext context) {
+  showCupertinoModalPopup<void>(
+    context: context,
+    builder: (BuildContext context) => Container(
+      height: 216,
+      padding: const EdgeInsets.only(top: 6.0),
+      // The Bottom margin is provided to align the popup above the system
+      // navigation bar.
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      // Provide a background color for the popup.
+      color: CupertinoColors.systemBackground.resolveFrom(context),
+      // Use a SafeArea widget to avoid system overlaps.
+      child: SafeArea(
+        top: false,
+        child: child,
+      ),
+    ),
+  );
+}
 
 void setPrefString(String key, String value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -81,6 +104,35 @@ Future<bool> checkNetwork() async {
     isConnected = false;
   }
   return isConnected;
+}
+
+Future<String> sendSmsforRegister(String phoneNumber) async {
+  FormData form = FormData.fromMap({"phone": phoneNumber});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=register",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+
+    if (response.data["status"] == "200") {
+      return response.data["data"]["hash"];
+    } else {
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('sendSms: [ERROR] ${response.data["message"]}');
+      return "false";
+    }
+  } catch (e) {
+    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('sendSms: [ERROR] $e', error: e);
+    return "false";
+  }
 }
 
 Future<String> sendSms(String phoneNumber) async {
@@ -393,7 +445,7 @@ Future<List<HizmetKategoriModel?>> checkHizmetler() async {
   List<HizmetKategoriModel?> notifications = [];
   try {
     Response response = await Dio().post(
-      apiUrl + "?module=services",
+      apiUrl + "?module=services&mobile=1",
       options: Options(
         headers: {
           "Access-Control-Allow-Origin":
@@ -498,13 +550,13 @@ Future<List<RandevuModel?>> fetchRandevu() async {
       ),
     );
 
-    if (response.data["status"] == "200") {
+    if (response.data["status"] == "200" && response.data["data"] is List) {
       response.data["data"].forEach((element) {
         elements.add(RandevuModel.fromJson(element));
       });
       return elements;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      Fluttertoast.showToast(msg: "Hiç Randevunuz Yok");
       log('fetchRandevu: [ERROR] ${response.data}');
       return elements;
     }
@@ -588,7 +640,7 @@ Future<bool> updateMyDataMobile(String column, String value) async {
   }
 }
 
-Future<bool> shakeWin() async {
+Future<String> shakeWin() async {
   FormData form = FormData.fromMap({});
   try {
     Response response = await Dio().post(
@@ -603,21 +655,19 @@ Future<bool> shakeWin() async {
       ),
     );
     if (response.data["status"] == "200") {
-      Fluttertoast.showToast(
-          msg: "Tebrikler ! ${response.data["data"][0]["name"]} kazandınız !");
+      return "Tebrik Ederiz ! ${response.data["data"][0]["name"]} kazandınız !";
     } else {
       if (response.data["status"] == "404") {
-        Fluttertoast.showToast(
-            msg: "Maalesef olmadı lütfen daha sonra tekrar dene");
+        return "Kazanamadınız ! Yarın tekrar deneyin.";
       } else if (response.data["status"] == "405") {
-        Fluttertoast.showToast(msg: "Günde sadece 1 kez oynayabilirsiniz. ");
+        return "Günde sadece 1 kez oynayabilirsiniz. ";
       }
     }
 
-    return true;
+    return "";
   } catch (e) {
     log('shakeWin: [ERROR] $e', error: e);
-    return false;
+    return "Maalesef olmadı !";
   }
 }
 
@@ -693,13 +743,14 @@ List<DateTimeRange> divideDateTimeRange(DateTimeRange dateTimeRange) {
 }
 
 Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
-    int duration, int subeID) async {
+    int duration, int subeID, int cuzdanID) async {
   FormData form = FormData.fromMap({
     "serviceID": serviceID,
     "staffID": staffID,
     "scheduleStart": start.toString(),
     "duration": duration,
-    "subeID": subeID
+    "subeID": subeID,
+    "cuzdanID": cuzdanID
   });
 
   try {
@@ -852,8 +903,17 @@ Future<List<CampaignModel?>> getCampaigns() async {
   }
 }
 
-Future<bool> completeCart() async {
-  FormData form = FormData.fromMap({"column": ""});
+Future<bool> completeCart(
+    String ccOwner, String card_number, String expirydate, String cvv) async {
+  String expiry_month = expirydate[0] + expirydate[1];
+  String expiry_year = expirydate[3] + expirydate[4];
+  FormData form = FormData.fromMap({
+    "cc_owner": ccOwner,
+    "card_number": card_number.replaceAll(" ", ""),
+    "expiry_month": expiry_month,
+    "expiry_year": expiry_year,
+    "cvv": cvv
+  });
   try {
     Response response = await Dio().post(
       apiUrl + "?module=completeCart",
@@ -866,7 +926,7 @@ Future<bool> completeCart() async {
         },
       ),
     );
-
+    log(response.data.toString());
     if (response.data["status"] == "200") {
       return true;
     } else {
@@ -897,13 +957,13 @@ Future<List<ProductHistoryModel?>> getsiparislerim() async {
       ),
     );
 
-    if (response.data["status"] == "200") {
+    if (response.data["status"] == "200" && response.data["data"] is List) {
       for (var e in response.data["data"]) {
         notifications.add(ProductHistoryModel.fromJson(e));
       }
       return notifications;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      Fluttertoast.showToast(msg: "Hiç siparişiniz yok");
       log('getsiparislerim: [ERROR] ${response.data["message"]}');
       return notifications;
     }

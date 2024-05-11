@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     List<SplashModel> list = [];
 
     list.add(SplashModel(
-        image: 'assets/images/splash/model_one.png',
+        image: 'assets/images/splash/Onbording_1.png',
         title: 'Saç ürünlerini en avantajlı koşullarla satın alın.',
         subTitle:
             'Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.'));
