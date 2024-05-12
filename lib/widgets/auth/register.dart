@@ -168,23 +168,52 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               child: GestureDetector(
                 onTap: () async {
                   showCupDialog(
-                      CupertinoDatePicker(
-                        initialDateTime:
-                            DateTime.now().subtract(Duration(days: 5000)),
-                        mode: CupertinoDatePickerMode.date,
-                        use24hFormat: true,
-                        // This shows day of week alongside day of month
-                        showDayOfWeek: false,
-                        // This is called when the user changes the date.
-                        onDateTimeChanged: (DateTime newDate) {
-                          birthday = DateFormat("yyyy-MM-d").format(newDate);
-                          setState(() {});
-                          log(birthday.toString());
-                          birthfield.text =
-                              DateFormat("d MMMM yyyy").format(newDate);
-                        },
+                      Material(
+                        child: Container(
+                          color: Colors.white,
+                          child: Column(children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "Tamam",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: CupertinoColors.activeBlue),
+                                      )),
+                                )
+                              ],
+                            ),
+                            Flexible(
+                              child: CupertinoDatePicker(
+                                initialDateTime: DateTime.now()
+                                    .subtract(Duration(days: 5000)),
+                                mode: CupertinoDatePickerMode.date,
+                                use24hFormat: true,
+                                // This shows day of week alongside day of month
+                                showDayOfWeek: false,
+                                // This is called when the user changes the date.
+                                onDateTimeChanged: (DateTime newDate) {
+                                  birthday =
+                                      DateFormat("yyyy-MM-d").format(newDate);
+                                  setState(() {});
+                                  log(birthday.toString());
+                                  birthfield.text =
+                                      DateFormat("d MMMM yyyy").format(newDate);
+                                },
+                              ),
+                            )
+                          ]),
+                        ),
                       ),
-                      context);
+                      context,
+                      false);
                 },
                 child: TextFormField(
                   enabled: false,

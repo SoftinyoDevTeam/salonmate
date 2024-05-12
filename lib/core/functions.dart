@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
@@ -22,11 +23,12 @@ import 'package:salonmate/core/models/usermodels/usermodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void showCupDialog(Widget child, BuildContext context) {
+void showCupDialog(Widget child, BuildContext context, bool dismisable) {
   showCupertinoModalPopup<void>(
+    barrierDismissible: dismisable,
     context: context,
     builder: (BuildContext context) => Container(
-      height: 216,
+      height: ScreenUtil().screenHeight / 2.5,
       padding: const EdgeInsets.only(top: 6.0),
       // The Bottom margin is provided to align the popup above the system
       // navigation bar.
