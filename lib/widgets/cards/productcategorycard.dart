@@ -23,7 +23,15 @@ class _ProductCategoryListCardState extends State<ProductCategoryListCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).hintColor, width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).primaryColor.withOpacity(.1),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          )
+        ],
+        color: Colors.white,
         borderRadius: BorderRadius.circular(widget.radius),
       ),
       child: Column(

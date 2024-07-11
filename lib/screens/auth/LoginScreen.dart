@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     length: 6,
                                     pinAnimationType: PinAnimationType.slide,
                                     onCompleted: (value) async {
-                                      login(phoneNumber, value, OTPhash,
+                                      await login(phoneNumber, value, OTPhash,
                                           context, fcmToken!);
                                     },
                                   ),

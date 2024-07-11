@@ -50,7 +50,7 @@ class _SiparislerimScreenState extends State<SiparislerimScreen> {
                             fiyat:
                                 siparislerim[index]!.price!.toString() + " TL",
                             urunSayisi: 1,
-                            status: "2",
+                            status: siparislerim[index]!.statusID.toString(),
                           ),
                         );
                       }),

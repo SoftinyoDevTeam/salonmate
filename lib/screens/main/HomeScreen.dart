@@ -335,7 +335,6 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 isLoading == false
                     ? products.isNotEmpty
                         ? SizedBox(
-                            height: 800.h,
                             width: ScreenUtil().screenWidth,
                             child: GridView.builder(
                               shrinkWrap: true,

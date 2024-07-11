@@ -121,7 +121,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: EdgeInsets.only(
+                                top: ScreenUtil().screenHeight / 15,
+                                left: 20,
+                                right: 20),
                             height: 140.h,
                             child: Column(
                               children: [
@@ -131,7 +134,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                       child: Text(
                                           splashlist[currentIndexPage].title!,
                                           style: TextStyle(
-                                            fontSize: 20.sp,
+                                            fontSize: 14.sp,
                                             color: const Color.fromARGB(
                                                 255, 39, 46, 84),
                                             fontWeight: FontWeight.w800,

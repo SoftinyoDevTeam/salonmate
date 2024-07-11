@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
 import 'package:salonmate/screens/products/PaymentScreen.dart';
@@ -78,15 +79,12 @@ class _SepetScreenState extends State<SepetScreen> {
                     direction: DismissDirection.endToStart,
                     // Each Dismissible must contain a Key. Keys allow Flutter to
                     // uniquely identify widgets.
-                    key: Key(urun!.imgUrl!),
+                    key: Key(urun!.ID!.toString()),
                     // Provide a function that tells the app
                     // what to do after an item has been swiped away.
-                    onDismissed: (direction) {
-                      deleteCart(sepetim[index]!.ID!);
+                    onDismissed: (direction) async {
+                      await deleteCart(sepetim[index]!.ID!);
                       getSepetContent();
-                      // Remove the item from the data source.
-                      sepetim.remove(sepetim[index]);
-
                       setState(() {});
                     },
                     // Show a red background as the item is swiped away.
@@ -219,10 +217,15 @@ class _SepetScreenState extends State<SepetScreen> {
                   title: "Sepeti Onayla",
                   minimumSize: Size(20.w, 40.h),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PaymentScreen()));
+                    if (sepetTotal > 0.0) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PaymentScreen()));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "Önce sepete bişeyler ekleyin.");
+                    }
                   },
                   color: Theme.of(context).primaryColor,
                   textcolor: Theme.of(context).primaryColorLight)

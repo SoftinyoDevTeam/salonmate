@@ -196,71 +196,71 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               // Divider(
               //   color: Theme.of(context).colorScheme.outline,
               // ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Adet Seçiniz',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.zero,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: Theme.of(context).colorScheme.outline)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.remove,
-                              color: Theme.of(context).colorScheme.outline,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 20.w,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  quantity.toString(),
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.add,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Divider(
-                color: Theme.of(context).colorScheme.outline,
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Padding(
+              //       padding: EdgeInsets.all(8.0),
+              //       child: Text(
+              //         'Adet Seçiniz',
+              //         style: TextStyle(fontWeight: FontWeight.w600),
+              //         textAlign: TextAlign.start,
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Container(
+              //         padding: EdgeInsets.zero,
+              //         decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(10),
+              //             border: Border.all(
+              //                 color: Theme.of(context).colorScheme.outline)),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Padding(
+              //               padding: const EdgeInsets.all(8.0),
+              //               child: Icon(
+              //                 Icons.remove,
+              //                 color: Theme.of(context).colorScheme.outline,
+              //               ),
+              //             ),
+              //             Padding(
+              //               padding: const EdgeInsets.all(8.0),
+              //               child: Container(
+              //                 width: 20.w,
+              //                 decoration: BoxDecoration(
+              //                   color: Theme.of(context)
+              //                       .primaryColor
+              //                       .withOpacity(0.2),
+              //                   borderRadius: BorderRadius.circular(10),
+              //                 ),
+              //                 child: Center(
+              //                   child: Text(
+              //                     quantity.toString(),
+              //                     style: TextStyle(
+              //                         color: Theme.of(context).primaryColor,
+              //                         fontWeight: FontWeight.w600),
+              //                   ),
+              //                 ),
+              //               ),
+              //             ),
+              //             Padding(
+              //               padding: const EdgeInsets.all(8.0),
+              //               child: Icon(
+              //                 Icons.add,
+              //                 color: Theme.of(context).colorScheme.primary,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Divider(
+              //   color: Theme.of(context).colorScheme.outline,
+              // ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

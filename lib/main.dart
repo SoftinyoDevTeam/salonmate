@@ -94,8 +94,19 @@ void main() async {
                 locale: _.locale,
                 debugShowCheckedModeBanner: false,
                 title: appname,
+                themeMode: ThemeMode.light,
                 theme: ThemeData(
                   appBarTheme: const AppBarTheme(
+                    systemOverlayStyle: SystemUiOverlayStyle(
+                      // Status bar color
+                      statusBarColor: Colors.red,
+
+                      // Status bar brightness (optional)
+                      statusBarIconBrightness:
+                          Brightness.dark, // For Android (dark icons)
+                      statusBarBrightness:
+                          Brightness.light, // For iOS (dark icons)
+                    ),
                     backgroundColor: Colors.transparent,
                     surfaceTintColor: Colors.transparent,
                   ),

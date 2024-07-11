@@ -22,17 +22,20 @@ class ProductHistoryModel {
   String? name;
   String? imgUrl;
   int? price;
+  int? statusID;
 
   ProductHistoryModel(
       {required this.ID,
       required this.name,
       required this.imgUrl,
-      required this.price});
+      required this.price,
+      required this.statusID});
   factory ProductHistoryModel.fromJson(Map<String, dynamic> json) {
     return ProductHistoryModel(
         ID: json['ID'],
         name: json["name"],
         imgUrl: json["imgUrl"],
-        price: json["price"]);
+        price: json["price"],
+        statusID: json["orderStatus"]);
   }
 }

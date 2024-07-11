@@ -39,6 +39,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
     // TODO: implement initState
     super.initState();
     _bottomNavIndex = widget.selectedScreen;
+
     _controller.onDone(() {
       setState(() {
         done = true;

@@ -52,14 +52,18 @@ class _MateSliderState extends State<MateSlider> {
                                       )));
                         },
                         child: Padding(
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(10),
                             child: Container(
-                              width: ScreenUtil().screenWidth,
-                              child: MateImage(
-                                boxFit: BoxFit.cover,
-                                imageUrl: kampanyalar[i]!.imageUrl!,
-                              ),
-                            )),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20)),
+                                width: ScreenUtil().screenWidth,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: MateImage(
+                                    boxFit: BoxFit.cover,
+                                    imageUrl: kampanyalar[i]!.imageUrl!,
+                                  ),
+                                ))),
                       );
                     },
                     onPageChanged: (value) {

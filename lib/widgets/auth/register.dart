@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -492,9 +491,19 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           isScrollControlled: true,
                           enableDrag: true,
                           builder: (BuildContext context) {
-                            return Container(
-                                height: ScreenUtil().screenHeight / 1.4,
-                                child: SozlesmeScreen());
+                            return DraggableScrollableSheet(
+                                snap: true,
+                                expand: false,
+                                builder: (context, scrollController) {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20)),
+                                    child: Container(
+                                        height: ScreenUtil().screenHeight / 1.1,
+                                        child: SozlesmeScreen()),
+                                  );
+                                });
                           });
                     },
                     child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
 
 class SiparisWidget extends StatelessWidget {
@@ -53,7 +54,7 @@ class SiparisWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      fullName!,
+                      fullName!.kisalt(25),
                       style: TextStyle(
                           fontSize: 14.sp, fontWeight: FontWeight.bold),
                     ),
@@ -72,6 +73,18 @@ class SiparisWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                if (status == "0")
+                  Text(
+                    "Ödeme Onay Bekliyor",
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  ),
+                if (status == "1")
+                  Text(
+                    "Ödeme Onaylandı, Teslimat Alınmadı",
+                    style: TextStyle(
+                        color: Colors.yellow, fontWeight: FontWeight.bold),
+                  ),
                 if (status == "2")
                   Text(
                     "Teslim Edildi",

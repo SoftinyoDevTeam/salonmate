@@ -34,16 +34,18 @@ class _CampaignListCardState extends State<CampaignListCard> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(widget.radius)),
-              child: Container(
-                  height: 100.h,
-                  width: 400.w,
-                  child: Image.network(
-                    widget.imageUrl,
-                    fit: BoxFit.cover,
-                  )),
-            ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(widget.radius)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                      height: 100.h,
+                      width: 400.w,
+                      child: Image.network(
+                        widget.imageUrl,
+                        fit: BoxFit.cover,
+                      )),
+                )),
           ),
           SizedBox(
             height: 10.h,

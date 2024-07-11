@@ -56,101 +56,131 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Container(
-                        width: 400.w,
                         height: 100.h,
-                        child: Text(kampanyalar.descriptions!)),
+                        child: Text(
+                          kampanyalar.descriptions!,
+                          textAlign: TextAlign.start,
+                        )),
                   ),
                   Spacer(),
+                  kampanyalar.type == "AFFILIATE"
+                      ? Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: MateButon(
+                              title: "Ürün Satın Al & Hizmet Kazan",
+                              minimumSize: Size(4050, 50),
+                              onPressed: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ScreenBridge(selectedScreen: 1)));
+                              },
+                              color: Theme.of(context).primaryColor,
+                              textcolor: Theme.of(context).primaryColorLight),
+                        )
+                      : Container(),
                   kampanyalar.type == "URUNKAMPANYA"
-                      ? MateButon(
-                          title: "Ürün Satın Al & Hizmet Kazan",
-                          minimumSize: Size(20, 50),
-                          onPressed: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ScreenBridge(selectedScreen: 1)));
-                          },
-                          color: Theme.of(context).primaryColor,
-                          textcolor: Theme.of(context).primaryColorLight)
+                      ? Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: MateButon(
+                              title: "Ürün Satın Al & Hizmet Kazan",
+                              minimumSize: Size(4050, 50),
+                              onPressed: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ScreenBridge(selectedScreen: 1)));
+                              },
+                              color: Theme.of(context).primaryColor,
+                              textcolor: Theme.of(context).primaryColorLight),
+                        )
                       : Container(),
                   kampanyalar.type == "HIZMETKAMPANYA"
-                      ? MateButon(
-                          title: "Kampanyalı Hizmeti Satın Al",
-                          minimumSize: Size(20, 50),
-                          onPressed: () async {
-                            var ustoken = await getPrefString("token");
-                            bool status = await addToCart(
-                                kampanyalar.ID!, "KAMPANYALIHIZMET", ustoken!);
-                            showCupertinoModalPopup<void>(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  CupertinoActionSheet(
-                                title: Text(
-                                  'Tebrikler !',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13.sp),
-                                ),
-                                message: const Text(
-                                    'Kampanyalı hizmet başarıyla sepetenize eklendi.'),
-                                actions: <CupertinoActionSheetAction>[
-                                  CupertinoActionSheetAction(
-                                    /// This parameter indicates the action would be a default
-                                    /// default behavior, turns the action's text to bold text.
-                                    isDefaultAction: true,
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ScreenBridge(
-                                                      selectedScreen: 0)));
-                                    },
-                                    child: const Text(
-                                      'Anasayfaya Git',
+                      ? Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: MateButon(
+                              title: "Kampanyalı Hizmeti Satın Al",
+                              minimumSize: Size(4050, 50),
+                              onPressed: () async {
+                                var ustoken = await getPrefString("token");
+                                bool status = await addToCart(kampanyalar.ID!,
+                                    "KAMPANYALIHIZMET", ustoken!);
+                                showCupertinoModalPopup<void>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CupertinoActionSheet(
+                                    title: Text(
+                                      'Tebrikler !',
                                       style: TextStyle(
-                                          color: CupertinoColors.activeBlue),
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13.sp),
                                     ),
+                                    message: const Text(
+                                        'Kampanyalı hizmet başarıyla sepetenize eklendi.'),
+                                    actions: <CupertinoActionSheetAction>[
+                                      CupertinoActionSheetAction(
+                                        /// This parameter indicates the action would be a default
+                                        /// default behavior, turns the action's text to bold text.
+                                        isDefaultAction: true,
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ScreenBridge(
+                                                          selectedScreen: 0)));
+                                        },
+                                        child: const Text(
+                                          'Anasayfaya Git',
+                                          style: TextStyle(
+                                              color:
+                                                  CupertinoColors.activeBlue),
+                                        ),
+                                      ),
+                                      CupertinoActionSheetAction(
+                                        /// This parameter indicates the action would perform
+                                        /// a destructive action such as delete or exit and turns
+                                        /// the action's text color to red.
+                                        isDestructiveAction: true,
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ScreenBridge(
+                                                          selectedScreen: 3)));
+                                        },
+                                        child: const Text('Sepete Git'),
+                                      ),
+                                    ],
                                   ),
-                                  CupertinoActionSheetAction(
-                                    /// This parameter indicates the action would perform
-                                    /// a destructive action such as delete or exit and turns
-                                    /// the action's text color to red.
-                                    isDestructiveAction: true,
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ScreenBridge(
-                                                      selectedScreen: 3)));
-                                    },
-                                    child: const Text('Sepete Git'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          color: Theme.of(context).primaryColor,
-                          textcolor: Theme.of(context).primaryColorLight)
+                                );
+                              },
+                              color: Theme.of(context).primaryColor,
+                              textcolor: Theme.of(context).primaryColorLight),
+                        )
                       : Container(),
                   kampanyalar.type == "AFFILIATE"
-                      ? MateButon(
-                          title: "İndirimli Randevu Oluştur",
-                          minimumSize: Size(20, 50),
-                          onPressed: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RandevuMainScreen()));
-                          },
-                          color: Theme.of(context).colorScheme.secondary,
-                          textcolor: Theme.of(context).primaryColorLight)
+                      ? Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: MateButon(
+                              title: "İndirimli Randevu Oluştur",
+                              minimumSize: Size(4050, 50),
+                              onPressed: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            RandevuMainScreen()));
+                              },
+                              color: Theme.of(context).colorScheme.secondary,
+                              textcolor: Theme.of(context).primaryColorLight),
+                        )
                       : Container()
                 ]),
               )),

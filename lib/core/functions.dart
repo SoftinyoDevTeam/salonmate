@@ -744,6 +744,11 @@ List<DateTimeRange> divideDateTimeRange(DateTimeRange dateTimeRange) {
   }
 }
 
+extension StringExtension on String {
+  String kisalt(int maxLength) =>
+      (this.length <= maxLength) ? this : '${this.substring(0, maxLength)}...';
+}
+
 Future<bool> addRandevu(int serviceID, int staffID, DateTime start,
     int duration, int subeID, int cuzdanID) async {
   FormData form = FormData.fromMap({

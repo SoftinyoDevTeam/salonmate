@@ -34,7 +34,7 @@ class _CampaignListsState extends State<CampaignLists> {
           "Kampanyalar",
           true,
           Theme.of(context).colorScheme.secondary,
-          height: 100,
+          height: 70,
         ),
         body: SingleChildScrollView(
           child: Padding(

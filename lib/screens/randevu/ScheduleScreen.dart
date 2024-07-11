@@ -56,7 +56,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   RadioSelectModels? selectedItems;
 
   void fetchData() async {
-    subeler = await checkRadioList("getAllSube", FormData.fromMap({}));
+    subeler = await checkRadioList("getAllSubeMobile", FormData.fromMap({}));
 
     setState(
       () {},
@@ -64,7 +64,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
     if (selectedItems != null) {
       data = await checkRadioList(
-          "getStaffs", FormData.fromMap({"subeID": subeID}));
+          "getStaffsmobile", FormData.fromMap({"subeID": subeID}));
       isfetch = true;
       setState(
         () {},
@@ -374,7 +374,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        RadioSelectBottomSheet(context, true, true, "getStaffs",
+                        RadioSelectBottomSheet(
+                            context,
+                            true,
+                            true,
+                            "getStaffsmobile",
                             FormData.fromMap({"subeID": subeID}),
                             (value) async {
                           selectedStaff = value;
