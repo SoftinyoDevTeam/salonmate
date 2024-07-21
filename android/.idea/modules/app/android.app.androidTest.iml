@@ -57,35 +57,78 @@
     <content url="file://$MODULE_DIR$/../../../../build/app/generated/source/buildConfig/androidTest/debug" />
     <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="android.audio_session.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.device_info_plus.main" scope="TEST" />
     <orderEntry type="module" module-name="android.firebase_core.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.sqflite.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.firebase_messaging.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.flutter_credit_card.main" scope="TEST" />
     <orderEntry type="module" module-name="android.flutter_local_notifications.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.url_launcher_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.fluttertoast.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.just_audio.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.package_info_plus.main" scope="TEST" />
     <orderEntry type="module" module-name="android.path_provider_android.main" scope="TEST" />
     <orderEntry type="module" module-name="android.sensors_plus.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.smart_auth.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.flutter_credit_card.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.webview_flutter_android.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.just_audio.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.shared_preferences_android.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.wakelock_plus.main" scope="TEST" />
     <orderEntry type="module" module-name="android.share_plus.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.package_info_plus.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.fluttertoast.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.audio_session.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.shared_preferences_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.smart_auth.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.sqflite.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.url_launcher_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.vibration.main" scope="TEST" />
     <orderEntry type="module" module-name="android.video_player_android.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.firebase_messaging.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.wakelock_plus.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.webview_flutter_android.main" scope="TEST" />
     <orderEntry type="module" module-name="android.app.main" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.2.0@aar" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.lifecycle:lifecycle-runtime:2.2.0@aar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/2beecc94cb4042b3c049d52107e7131e/transformed/lifecycle-runtime-2.2.0/jars/classes.jar!/" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/2beecc94cb4042b3c049d52107e7131e/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.fragment:fragment:1.1.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.6.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.1.0@aar" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.core:core:1.6.0@aar">
+        <ANNOTATIONS>
+          <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/58157449278788b03f4bb9de04340ff4/transformed/core-1.6.0/annotations.zip!/" />
+        </ANNOTATIONS>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/58157449278788b03f4bb9de04340ff4/transformed/core-1.6.0/jars/classes.jar!/" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/58157449278788b03f4bb9de04340ff4/transformed/core-1.6.0/res" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/58157449278788b03f4bb9de04340ff4/transformed/core-1.6.0/AndroidManifest.xml" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.annotation:annotation-experimental:1.1.0@aar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/7925730c46fd9cdcfc9590715fe48edd/transformed/jetified-annotation-experimental-1.1.0/jars/classes.jar!/" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/7925730c46fd9cdcfc9590715fe48edd/transformed/jetified-annotation-experimental-1.1.0/res" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/7925730c46fd9cdcfc9590715fe48edd/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.customview:customview:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.loader:loader:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-livedata:2.0.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/09b36815c42ce34485c55bd06cf2a92c/transformed/core-runtime-2.0.0/jars/classes.jar!/" />
+          <root url="file://$USER_HOME$/.gradle/caches/transforms-4/09b36815c42ce34485c55bd06cf2a92c/transformed/core-runtime-2.0.0/AndroidManifest.xml" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.activity:activity:1.0.0@aar" level="project" />
@@ -113,23 +156,63 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-installations-interop:17.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-measurement-connector:19.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-measurement-sdk:21.0.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common:2.2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.lifecycle:lifecycle-common:2.2.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.2.0/4ef09a745007778eef83b92f8f23987a8ea59496/lifecycle-common-2.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.2.0/d38861c5e1656c5eb1890b1fa149510f38aa5d42/lifecycle-common-2.2.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: androidx.annotation:annotation:1.2.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0/57136ff68ee784c6e19db34ed4a175338fadfde1/annotation-1.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0/8945212022e5276658ab7864714ced3553ea724a/annotation-1.2.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.8.22" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.8.22" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: org.jetbrains:annotations:13.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/73368c3b0887f3adc2c2730dd1b95d7c3781aaf3/annotations-13.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.5.2/f4cc07a50437659e0043e7da762809a46932b6a0/kotlinx-coroutines-core-jvm-1.5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_64_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_64_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-annotations:16.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: /Users/superapple/Desktop/salonmate/build/app/intermediates/flutter/debug/libs.jar" level="project" />
   </component>

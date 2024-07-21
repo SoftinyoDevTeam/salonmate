@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "278842032835",
-    "project_id": "salonmate-10a7a",
-    "storage_bucket": "salonmate-10a7a.appspot.com"
+    "project_number": "154061292288",
+    "project_id": "sabitakkaya-f8ba0",
+    "storage_bucket": "sabitakkaya-f8ba0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:278842032835:android:20d17a053f02f6fe561876",
+        "mobilesdk_app_id": "1:154061292288:android:cebd2da32ea9613f18e9e5",
         "android_client_info": {
-          "package_name": "com.sabitakkaya.salonmate"
+          "package_name": "com.sabitakgaya"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBqetJMH_JgkoexRrYul1-yazXbMBxXwuU"
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
         }
       ],
       "services": {

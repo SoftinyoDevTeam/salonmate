@@ -111,8 +111,8 @@ void main() async {
                     surfaceTintColor: Colors.transparent,
                   ),
                   radioTheme: RadioThemeData(fillColor:
-                      MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
+                      WidgetStateProperty.resolveWith<Color>(
+                          (Set<WidgetState> states) {
                     if (states.contains(MaterialState.disabled)) {
                       return Colors.grey;
                     }

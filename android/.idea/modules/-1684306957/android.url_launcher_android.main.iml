@@ -22,17 +22,11 @@
       <sourceFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.1/android/src/main/java" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/aidl_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/ap_generated_sources/debug/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/ap_generated_sources/debug/out" />
     <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/renderscript_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/res/resValues/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/res/resValues/debug" type="java-resource" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/res/resValues/debug" />
     <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/res/rs/debug" />
-    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/source/buildConfig/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/url_launcher_android/generated/source/buildConfig/debug" />
     <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.3.1@aar" level="project" />
@@ -53,7 +47,7 @@
     <orderEntry type="library" name="Gradle: androidx.window:window-java:1.0.0-beta04@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.window:window:1.0.0-beta04@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.browser:browser:1.5.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.3.1" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation-jvm:1.7.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.8.22" level="project" />
@@ -66,6 +60,18 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: com.google.guava:listenablefuture:1.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/c949a840a6acbc5268d088e47b04177bf90b3cad/listenablefuture-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/c6fc3e29c8cc24b39c2cd8f66b41bf40e342901c/listenablefuture-1.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/be1234988ac73d61e52e35a912169b06020caa7/listenablefuture-1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

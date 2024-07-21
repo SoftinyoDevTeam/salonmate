@@ -1,4 +1,4 @@
-package com.sabitakkaya.salonmate
+package com.sabitakgaya
 
 import io.flutter.embedding.android.FlutterActivity
 

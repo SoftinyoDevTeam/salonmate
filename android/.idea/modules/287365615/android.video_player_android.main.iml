@@ -22,17 +22,11 @@
       <sourceFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/video_player_android-2.4.14/android/src/main/java" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/aidl_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/ap_generated_sources/debug/out">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/ap_generated_sources/debug/out" />
     <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/renderscript_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/res/resValues/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/res/resValues/debug" type="java-resource" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/res/resValues/debug" />
     <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/res/rs/debug" />
-    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/source/buildConfig/debug">
-      <sourceFolder url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/video_player_android/generated/source/buildConfig/debug" />
     <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.3.1@aar" level="project" />
@@ -61,7 +55,7 @@
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-hls:2.18.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-dash:2.18.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.7@aar" level="project" />
-    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-e76c956498841e1ab458577d3892003e553e4f3c" level="project" />
+    <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-edd8546116457bdf1c5bdfb13ecb9463d2bb5ed4" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.3.1" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.3.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
@@ -74,7 +68,19 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.guava:guava:31.0.1-android" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: com.google.guava:guava:31.0.1-android">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/31.0.1-android/b400db548e748a1a60ba18543ad4fbb44a675a69/guava-31.0.1-android.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/31.0.1-android/823c6181cb515aff4bf67c6531725b0a1005ceae/guava-31.0.1-android-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/31.0.1-android/4714c9d696a156b739ff3d48d6306e9bf25bd735/guava-31.0.1-android-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
   </component>
