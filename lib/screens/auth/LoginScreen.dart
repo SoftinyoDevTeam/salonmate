@@ -211,8 +211,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       pinputFocusNode.requestFocus();
                                       phoneNumber = phoneController.value!.nsn;
                                       if (pinCodevisible == false) {
-                                        var response =
-                                            await sendSms(phoneNumber);
+                                        var response = await sendSms(
+                                            phoneNumber,
+                                            phoneController.value!.countryCode);
                                         if (response == "false") {
                                           pinCodevisible = false;
                                         } else {

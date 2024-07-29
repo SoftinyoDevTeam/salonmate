@@ -20,8 +20,8 @@ class RegisterPinPage extends StatefulWidget {
 class _RegisterPinPageState extends State<RegisterPinPage> {
   String hash = "";
 
-  void sendsms(String phoneNumber) async {
-    hash = await sendSmsforRegister(phoneNumber);
+  void sendsms(String phoneNumber, String phoneCode) async {
+    hash = await sendSmsforRegister(phoneNumber, phoneCode);
 
     setState(() {});
   }
@@ -30,7 +30,9 @@ class _RegisterPinPageState extends State<RegisterPinPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    sendsms(widget.formData.fields[0].value);
+    log(widget.formData.fields[0].value +
+        widget.formData.fields[4].value.toString());
+    sendsms(widget.formData.fields[0].value, widget.formData.fields[4].value);
   }
 
   TextEditingController pinController = TextEditingController();

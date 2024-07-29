@@ -1,5 +1,4 @@
 //Flutter dart paketleri
-
 import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +17,6 @@ import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
-import 'package:salonmate/screens/profile/NotificationsScreen.dart';
-import 'package:salonmate/widgets/auth/registerPin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Ekranlar

@@ -22,6 +22,7 @@ const screenDesignSize = Size(360, 690);
 // API AND 3rdParty const
 
 const apiUrl = 'https://salonmate.co/inc/api.php';
+const socketUrl = 'wss://sock.salonmate.co/';
 
 // Dynamic app configuration in functions.dart
 

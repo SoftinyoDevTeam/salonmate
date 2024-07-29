@@ -87,6 +87,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                             textColor: Theme.of(context).primaryColor,
                             focusNode: searchFocusNode,
                             child: SearchFieldAutoComplete(
+                              placeholder: 'Ürün Ara',
                               focusNode: searchFocusNode,
                               suggestionsDecoration: SuggestionDecoration(
                                 marginSuggestions: const EdgeInsets.all(1.0),

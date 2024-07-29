@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'dart:io';
@@ -108,8 +109,10 @@ Future<bool> checkNetwork() async {
   return isConnected;
 }
 
-Future<String> sendSmsforRegister(String phoneNumber) async {
-  FormData form = FormData.fromMap({"phone": phoneNumber});
+Future<String> sendSmsforRegister(String phoneNumber, String phoneCode) async {
+  FormData form =
+      FormData.fromMap({"phone": phoneNumber, "phoneCode": phoneCode});
+  log(phoneCode);
   try {
     Response response = await Dio().post(
       apiUrl + "?module=register",
@@ -137,8 +140,9 @@ Future<String> sendSmsforRegister(String phoneNumber) async {
   }
 }
 
-Future<String> sendSms(String phoneNumber) async {
-  FormData form = FormData.fromMap({"phone": phoneNumber});
+Future<String> sendSms(String phoneNumber, String phoneCode) async {
+  FormData form =
+      FormData.fromMap({"phone": phoneNumber, "phoneCode": phoneCode});
   try {
     Response response = await Dio().post(
       apiUrl + "?module=login",
@@ -159,9 +163,15 @@ Future<String> sendSms(String phoneNumber) async {
       log('sendSms: [ERROR] ${response.data["message"]}');
       return "false";
     }
-  } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
-    log('sendSms: [ERROR] $e', error: e);
+  } on DioException catch (e) {
+    log(e.requestOptions.data.fields.toString());
+    log("sendSms : ${e.toString()}");
+    if (e.response != null) {
+      log(e.response!.data);
+      log(e.response!.headers.toString());
+      log(e.response!.requestOptions.toString());
+    }
+
     return "false";
   }
 }
@@ -910,7 +920,7 @@ Future<List<CampaignModel?>> getCampaigns() async {
   }
 }
 
-Future<bool> completeCart(
+Future<String> completeCart(
     String ccOwner, String card_number, String expirydate, String cvv) async {
   String expiry_month = expirydate[0] + expirydate[1];
   String expiry_year = expirydate[3] + expirydate[4];
@@ -935,16 +945,18 @@ Future<bool> completeCart(
     );
     log(response.data.toString());
     if (response.data["status"] == "200") {
-      return true;
+      return response.data["data"] == null
+          ? "Ödemeniz başarıyla alınmış ve işleminiz tamamlanmıştır."
+          : response.data["data"];
     } else {
       Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('completeCart: [ERROR] ${response.data}');
-      return false;
+      return response.data["data"];
     }
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('completeCart: [ERROR] $e', error: e);
-    return false;
+    return "<>hata<>";
   }
 }
 
