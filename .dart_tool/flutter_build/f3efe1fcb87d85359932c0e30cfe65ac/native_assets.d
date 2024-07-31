@@ -1,0 +1,1 @@
+ /Users/superapple/Desktop/salonmate/.dart_tool/flutter_build/f3efe1fcb87d85359932c0e30cfe65ac/native_assets.yaml: 
