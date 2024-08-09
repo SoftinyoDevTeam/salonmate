@@ -77,111 +77,123 @@ void RadioSelectBottomSheet(BuildContext context, bool imageColumn,
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Wrap(children: [
-                          data.length == 0
+                          !isfetch
                               ? Loader()
                               : Column(
                                   children: [
-                                    for (var item in data)
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(
-                                            () {
-                                              selectedItems = item;
-                                            },
-                                          );
-                                          onSelected(selectedItems);
-                                          Navigator.pop(context);
-                                        },
-                                        child: Container(
-                                            padding: EdgeInsets.only(bottom: 5),
-                                            margin: EdgeInsets.only(bottom: 5),
-                                            decoration: selectedItems == item
-                                                ? BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .secondary),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  )
-                                                : BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            224,
-                                                            224,
-                                                            228)),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                  ),
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      imageColumn == true
-                                                          ? Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child:
-                                                                  CircleAvatar(
-                                                                backgroundImage:
-                                                                    NetworkImage(
-                                                                  item!
-                                                                      .imageUrl!,
+                                    if (data.length > 0)
+                                      for (var item in data)
+                                        GestureDetector(
+                                          onTap: () {
+                                            setState(
+                                              () {
+                                                selectedItems = item;
+                                              },
+                                            );
+                                            onSelected(selectedItems);
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 5),
+                                              margin:
+                                                  EdgeInsets.only(bottom: 5),
+                                              decoration: selectedItems == item
+                                                  ? BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .secondary),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    )
+                                                  : BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              224,
+                                                              224,
+                                                              228)),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        imageColumn == true
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child:
+                                                                    CircleAvatar(
+                                                                  backgroundImage:
+                                                                      NetworkImage(
+                                                                    item!
+                                                                        .imageUrl!,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                      titleColumn == true
-                                                          ? Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Text(
-                                                                item!.fullName!,
-                                                                style: TextStyle(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .primaryColorDark,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                    ],
-                                                  ),
-                                                  IconButton(
-                                                    color: Theme.of(context)
-                                                        .primaryColorLight,
-                                                    onPressed: () {
-                                                      setState(
-                                                        () {
-                                                          selectedItems = item!;
-                                                        },
-                                                      );
-                                                    },
-                                                    icon: selectedItems == item
-                                                        ? Icon(
-                                                            Icons
-                                                                .radio_button_checked,
-                                                          )
-                                                        : Icon(
-                                                            Icons
-                                                                .circle_outlined,
-                                                          ),
-                                                  ),
-                                                ])),
-                                      ),
+                                                              )
+                                                            : Container(),
+                                                        titleColumn == true
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Text(
+                                                                  item!
+                                                                      .fullName!,
+                                                                  style: TextStyle(
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .primaryColorDark,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              )
+                                                            : Container(),
+                                                      ],
+                                                    ),
+                                                    IconButton(
+                                                      color: Theme.of(context)
+                                                          .primaryColorLight,
+                                                      onPressed: () {
+                                                        setState(
+                                                          () {
+                                                            selectedItems =
+                                                                item!;
+                                                          },
+                                                        );
+                                                      },
+                                                      icon:
+                                                          selectedItems == item
+                                                              ? Icon(
+                                                                  Icons
+                                                                      .radio_button_checked,
+                                                                )
+                                                              : Icon(
+                                                                  Icons
+                                                                      .circle_outlined,
+                                                                ),
+                                                    ),
+                                                  ])),
+                                        ),
+                                    if (data.length == 0)
+                                      Text(
+                                          "Seçtiğiniz Kriterlerde Bir Sonuç Bulunamadı")
                                   ],
                                 )
                         ]),

@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(price.toString() + " " + currency,
+                Text(price.toString().replaceAll(".0", "") + ",00 " + currency,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.sp,

@@ -91,7 +91,7 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
               SizedBox(height: 15.h),
               Container(
                 width: ScreenUtil().screenWidth - 20,
-                height: 70.h,
+                height: 80.h,
                 decoration: BoxDecoration(
                     border: Border.all(
                         color: Theme.of(context).colorScheme.outline),
@@ -123,7 +123,14 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                     fontSize: 24.sp,
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .secondary))
+                                        .secondary)),
+                        Text(
+                          "1 Puan 1 TL'ye eşittir.\n Puanlar gerçek paraya dönüştürülemez yada ürün alımlarında kullanılamaz.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 8.sp,
+                              color: Theme.of(context).disabledColor),
+                        )
                       ],
                     )),
               ),
@@ -210,7 +217,7 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                                                         kategori: cuzdanim!
                                                             .hizmetler![i]
                                                             .name!,
-                                                        cuzdanrandevusu: false,
+                                                        cuzdanrandevusu: true,
                                                         cuzdanID: cuzdanim!
                                                             .hizmetler![i]
                                                             .cuzdanID,

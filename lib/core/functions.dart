@@ -85,12 +85,12 @@ Future<SalonConfigModel?> getSalonConfig() async {
       config = SalonConfigModel.fromJson(response.data);
       return config;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('getSalonConfig: [ERROR] ${response.data["message"]}');
       return null;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('getSalonConfig: [ERROR] $e', error: e);
     return null;
   }
@@ -157,6 +157,7 @@ Future<String> sendSms(String phoneNumber, String phoneCode) async {
     );
 
     if (response.data["status"] == "200") {
+      log(response.data["data"]["hash"]);
       return response.data["data"]["hash"];
     } else {
       Fluttertoast.showToast(msg: "${response.data["message"]}");
@@ -537,12 +538,12 @@ Future<List<RadioSelectModels?>> checkRadioList(
       });
       return elements;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('checkRadioList: [ERROR] ${response.data}');
       return elements;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //wFluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('checkRadioList: [ERROR] $e', error: e);
     return elements;
   }

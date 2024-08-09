@@ -52,7 +52,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: ProductCard(
                     width: 120.w,
-                    height: 80.w,
+                    height: 90.w,
                     title: widget.products[index]!.name!,
                     imageUrl: widget.products[index]!.imgUrl!,
                     onPressed: () {

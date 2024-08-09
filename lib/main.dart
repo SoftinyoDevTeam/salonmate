@@ -16,6 +16,7 @@ import 'package:salonmate/core/langs/codegen_loader.g.dart';
 import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
+import 'package:salonmate/screens/errorPages/NoInternetScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,14 +25,21 @@ SalonConfigModel? salonConfig;
 SharedPreferences? prefs;
 String deviceType = "phone";
 void main() async {
-  bool? internet = true;
-
+  bool internet = true;
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
   await EasyLocalization.ensureInitialized();
   // Salonmate sunucularından salon configi çekiliyor
-  salonConfig = await getSalonConfig();
+  salonConfig = await getSalonConfig() == null
+      ? SalonConfigModel(status: "404", message: "Internet yok", data: null)
+      : await getSalonConfig();
+
+  if (salonConfig!.status != "404") {
+    internet = true;
+  } else {
+    internet = false;
+  }
   // Firebase
   await Firebase.initializeApp();
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -181,8 +189,7 @@ void main() async {
               ),
             );
           } else {
-            return const MaterialApp(
-                home: Center(child: Text("internet bağlantısı yok")));
+            return NoInternetScreen();
           }
         },
         child: await checkLogin()

@@ -52,7 +52,7 @@
     <content url="file://$MODULE_DIR$/../../../../build/wakelock_plus/generated/source/buildConfig/debug" />
     <orderEntry type="jdk" jdkName="Android API 33 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="android.package_info_plus.main" />
+    <orderEntry type="module" module-name="dev.fluttercommunity.plus.packageinfo.android.package_info_plus.main" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core:1.6.0@aar" level="project" />

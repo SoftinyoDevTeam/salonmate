@@ -137,7 +137,9 @@ class _SepetScreenState extends State<SepetScreen> {
                                       borderRadius:
                                           BorderRadius.circular(12.sp)),
                                   child: MateImage(
-                                    imageUrl: urun.imgUrl!,
+                                    imageUrl: urun.imgUrl == null
+                                        ? "https://salonmate.co/favicon.ico"
+                                        : urun.imgUrl,
                                     boxFit: BoxFit.contain,
                                   ),
                                 ),

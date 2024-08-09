@@ -319,7 +319,16 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                         )
                       ]),
                 ),
-                MateSlider(),
+                Container(
+                    decoration: BoxDecoration(boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 0,
+                        blurRadius: 10,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ]),
+                    child: MateSlider()),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

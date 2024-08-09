@@ -379,8 +379,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             true,
                             true,
                             "getStaffsmobile",
-                            FormData.fromMap({"subeID": subeID}),
-                            (value) async {
+                            FormData.fromMap({
+                              "subeID": subeID,
+                              "serviceID": selectedService!.ID.toString()
+                            }), (value) async {
                           selectedStaff = value;
                           staffFilledScheduleList =
                               await checkStaffFilledSchedules(
