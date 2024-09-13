@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":sensors_plus" external.linked.project.path="$USER_HOME$/.pub-cache/hosted/pub.dev/sensors_plus-4.0.2/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="dev.fluttercommunity.plus.sensors" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":smart_auth" external.linked.project.path="$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-2.0.0/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="fman.ge.smart_auth" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet external-system-id="GRADLE" type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -22,10 +22,10 @@
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <exclude-output />
-    <content url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sensors_plus-4.0.2/android">
-      <excludeFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sensors_plus-4.0.2/android/.gradle" />
+    <content url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-2.0.0/android">
+      <excludeFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/smart_auth-2.0.0/android/.gradle" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 33 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

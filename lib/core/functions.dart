@@ -67,11 +67,11 @@ Future<bool> checkLogin() async {
   }
 }
 
-Future<SalonConfigModel?> getSalonConfig() async {
+Future<SalonConfigModel?> getSalonConfig(String buildNumber) async {
   SalonConfigModel? config;
   try {
     Response response = await Dio().post(
-      apiUrl + "?module=checkSalon",
+      apiUrl + "?module=checkSalon&version=$buildNumber",
       options: Options(
         headers: {
           "Access-Control-Allow-Origin":
@@ -81,7 +81,7 @@ Future<SalonConfigModel?> getSalonConfig() async {
       ),
     );
 
-    if (response.data["status"] == "200") {
+    if (response.data["status"] == "200" || response.data["status"] == "500") {
       config = SalonConfigModel.fromJson(response.data);
       return config;
     } else {
@@ -161,12 +161,12 @@ Future<String> sendSms(String phoneNumber, String phoneCode) async {
       return response.data["data"]["hash"];
     } else {
       Fluttertoast.showToast(msg: "${response.data["message"]}");
-      log('sendSms: [ERROR] ${response.data["message"]}');
+      log('sendSmss: [ERROR] ${response.data["message"]}');
       return "false";
     }
   } on DioException catch (e) {
     log(e.requestOptions.data.fields.toString());
-    log("sendSms : ${e.toString()}");
+    log("sendSmss : ${e.toString()}");
     if (e.response != null) {
       log(e.response!.data);
       log(e.response!.headers.toString());

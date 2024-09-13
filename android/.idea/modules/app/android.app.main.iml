@@ -62,7 +62,7 @@
     <orderEntry type="module" module-name="android.flutter_local_notifications.main" />
     <orderEntry type="module" module-name="android.fluttertoast.main" />
     <orderEntry type="module" module-name="android.just_audio.main" />
-    <orderEntry type="module" module-name="dev.fluttercommunity.plus.packageinfo.android.package_info_plus.main" />
+    <orderEntry type="module" module-name="dev.fluttercommunity.plus.packageinfo.android.package_info_plus.main~1" />
     <orderEntry type="module" module-name="android.path_provider_android.main" />
     <orderEntry type="module" module-name="android.sensors_plus.main" />
     <orderEntry type="module" module-name="android.share_plus.main" />

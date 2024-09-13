@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
@@ -17,6 +18,7 @@ import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/errorPages/NoInternetScreen.dart';
+import 'package:salonmate/screens/errorPages/OldVersionScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,20 +28,35 @@ SharedPreferences? prefs;
 String deviceType = "phone";
 void main() async {
   bool internet = true;
+  bool oldversion = false;
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
   await EasyLocalization.ensureInitialized();
   // Salonmate sunucularından salon configi çekiliyor
-  salonConfig = await getSalonConfig() == null
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  String appName = packageInfo.appName;
+  String packageName = packageInfo.packageName;
+  String version = packageInfo.version;
+  String buildNumber = packageInfo.buildNumber;
+
+  salonConfig = await getSalonConfig(buildNumber) == null
       ? SalonConfigModel(status: "404", message: "Internet yok", data: null)
-      : await getSalonConfig();
+      : await getSalonConfig(buildNumber);
 
   if (salonConfig!.status != "404") {
     internet = true;
   } else {
     internet = false;
   }
+
+  if (salonConfig!.status! == "500") {
+    oldversion = true;
+  } else {
+    oldversion = false;
+  }
+
   // Firebase
   await Firebase.initializeApp();
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -192,10 +209,12 @@ void main() async {
             return NoInternetScreen();
           }
         },
-        child: await checkLogin()
-            ? const ScreenBridge(
-                selectedScreen: 0,
-              )
-            : const SplashScreen(),
+        child: oldversion
+            ? OldVersionScreen()
+            : await checkLogin()
+                ? const ScreenBridge(
+                    selectedScreen: 0,
+                  )
+                : const SplashScreen(),
       )));
 }

@@ -32,6 +32,8 @@ class Data {
   String? createdDate;
   String? lastActivityTime;
   String? matetoken;
+  String? appStoreLink;
+  String? playStoreLink;
 
   Data(
       {this.iD,
@@ -40,7 +42,9 @@ class Data {
       this.salonConfig,
       this.createdDate,
       this.lastActivityTime,
-      this.matetoken});
+      this.matetoken,
+      this.appStoreLink,
+      this.playStoreLink});
 
   Data.fromJson(Map<String, dynamic> json) {
     iD = json['ID'];
@@ -52,6 +56,8 @@ class Data {
     createdDate = json['createdDate'];
     lastActivityTime = json['lastActivityTime'];
     matetoken = json['matetoken'];
+    appStoreLink = json['appStoreLink'];
+    playStoreLink = json['playStoreLink'];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,6 +71,8 @@ class Data {
     data['createdDate'] = this.createdDate;
     data['lastActivityTime'] = this.lastActivityTime;
     data['matetoken'] = this.matetoken;
+    data['appStoreLink'] = this.appStoreLink;
+    data['playStoreLink'] = this.playStoreLink;
     return data;
   }
 }
