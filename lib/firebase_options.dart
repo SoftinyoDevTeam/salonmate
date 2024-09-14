@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,38 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCCCYLNoqa8yrMPCx-yVn1rONfINJxaHEI',
-    appId: '1:278842032835:web:e2584258ed58622a561876',
-    messagingSenderId: '278842032835',
-    projectId: 'salonmate-10a7a',
-    authDomain: 'salonmate-10a7a.firebaseapp.com',
-    storageBucket: 'salonmate-10a7a.appspot.com',
-    measurementId: 'G-Y51JMZFL9P',
+    apiKey: 'AIzaSyCmXaGCQboY_sv3qDBmok9Ba5qu317rHyo',
+    appId: '1:1049642020228:web:ff709302a4c3d6dad741d1',
+    messagingSenderId: '1049642020228',
+    projectId: 'baharbabacan-33d86',
+    authDomain: 'baharbabacan-33d86.firebaseapp.com',
+    storageBucket: 'baharbabacan-33d86.appspot.com',
+    measurementId: 'G-BWEJM1W57G',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBqetJMH_JgkoexRrYul1-yazXbMBxXwuU',
-    appId: '1:278842032835:android:20d17a053f02f6fe561876',
-    messagingSenderId: '278842032835',
-    projectId: 'salonmate-10a7a',
-    storageBucket: 'salonmate-10a7a.appspot.com',
+    apiKey: 'AIzaSyA-EVSn6FhWI371D67QJmmZ2Z4y282_Z0s',
+    appId: '1:1049642020228:android:60bcc692cea4e75ed741d1',
+    messagingSenderId: '1049642020228',
+    projectId: 'baharbabacan-33d86',
+    storageBucket: 'baharbabacan-33d86.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAht4MAd4Csusl_Uy7rtrvz2tqUiOca8to',
-    appId: '1:278842032835:ios:7a5f9a7174d3b4a2561876',
-    messagingSenderId: '278842032835',
-    projectId: 'salonmate-10a7a',
-    storageBucket: 'salonmate-10a7a.appspot.com',
-    iosBundleId: 'com.softinyo.sabitak',
+    apiKey: 'AIzaSyCFQILUoJb9JDw3QQ39pB5cLFuzuCHbL_E',
+    appId: '1:1049642020228:ios:0509bd9b5d68bd91d741d1',
+    messagingSenderId: '1049642020228',
+    projectId: 'baharbabacan-33d86',
+    storageBucket: 'baharbabacan-33d86.appspot.com',
+    iosBundleId: 'com.salonmate.baharbabacan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAht4MAd4Csusl_Uy7rtrvz2tqUiOca8to',
-    appId: '1:278842032835:ios:e3e14e8c5d0d1cb9561876',
-    messagingSenderId: '278842032835',
-    projectId: 'salonmate-10a7a',
-    storageBucket: 'salonmate-10a7a.appspot.com',
-    iosBundleId: 'com.example.salonmate.RunnerTests',
+    apiKey: 'AIzaSyCFQILUoJb9JDw3QQ39pB5cLFuzuCHbL_E',
+    appId: '1:1049642020228:ios:18ead32233b22d85d741d1',
+    messagingSenderId: '1049642020228',
+    projectId: 'baharbabacan-33d86',
+    storageBucket: 'baharbabacan-33d86.appspot.com',
+    iosBundleId: 'com.sabitakkaya.salonmate',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCmXaGCQboY_sv3qDBmok9Ba5qu317rHyo',
+    appId: '1:1049642020228:web:95654f7f4f6d00ffd741d1',
+    messagingSenderId: '1049642020228',
+    projectId: 'baharbabacan-33d86',
+    authDomain: 'baharbabacan-33d86.firebaseapp.com',
+    storageBucket: 'baharbabacan-33d86.appspot.com',
+    measurementId: 'G-D1Q3600891',
+  );
+
 }

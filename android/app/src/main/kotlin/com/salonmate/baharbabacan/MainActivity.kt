@@ -1,4 +1,4 @@
-package com.sabitakgaya
+package com.salonmate.baharbabacan
 
 import io.flutter.embedding.android.FlutterActivity
 

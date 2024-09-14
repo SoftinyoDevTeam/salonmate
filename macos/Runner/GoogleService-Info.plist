@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAht4MAd4Csusl_Uy7rtrvz2tqUiOca8to</string>
+	<string>AIzaSyCFQILUoJb9JDw3QQ39pB5cLFuzuCHbL_E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>278842032835</string>
+	<string>1049642020228</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.salonmate.RunnerTests</string>
+	<string>com.sabitakkaya.salonmate</string>
 	<key>PROJECT_ID</key>
-	<string>salonmate-10a7a</string>
+	<string>baharbabacan-33d86</string>
 	<key>STORAGE_BUCKET</key>
-	<string>salonmate-10a7a.appspot.com</string>
+	<string>baharbabacan-33d86.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:278842032835:ios:e3e14e8c5d0d1cb9561876</string>
+	<string>1:1049642020228:ios:18ead32233b22d85d741d1</string>
 </dict>
 </plist>

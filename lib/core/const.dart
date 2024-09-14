@@ -7,7 +7,7 @@ const appname = 'SALONMATE';
 const affCodePrefix = 'MATE';
 const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
-String mateKey = "a690ecb2-e0c6-44c5-ac17-d8fcf947ff0c";
+String mateKey = "bahars-s0e6-44c5-ac17-a9bcd947ff0c";
 
 // Localization const
 

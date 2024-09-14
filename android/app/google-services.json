@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "154061292288",
-    "project_id": "sabitakkaya-f8ba0",
-    "storage_bucket": "sabitakkaya-f8ba0.appspot.com"
+    "project_number": "1049642020228",
+    "project_id": "baharbabacan-33d86",
+    "storage_bucket": "baharbabacan-33d86.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:154061292288:android:cebd2da32ea9613f18e9e5",
+        "mobilesdk_app_id": "1:1049642020228:android:60bcc692cea4e75ed741d1",
         "android_client_info": {
-          "package_name": "com.sabitakgaya"
+          "package_name": "com.salonmate.baharbabacan"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+          "current_key": "AIzaSyA-EVSn6FhWI371D67QJmmZ2Z4y282_Z0s"
         }
       ],
       "services": {
