@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/main.dart';
@@ -278,7 +279,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(salonConfig!.data!.salonConfig!.urunkampanyatext!),
+                child: Text(Provider.of<MateServices>(context)
+                    .salonConfig!
+                    .data!
+                    .salonConfig!
+                    .urunkampanyatext!),
               ),
               Divider(
                 color: Theme.of(context).colorScheme.outline,

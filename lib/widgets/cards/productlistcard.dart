@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
         children: [
           Container(
               width: 150.w,
-              height: 150.w,
+              height: height - 20,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: MateImage(
@@ -57,7 +57,7 @@ class ProductCard extends StatelessWidget {
                         : title,
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 12.sp,
+                        fontSize: 11.sp,
                         color: Theme.of(context).colorScheme.secondary),
                   )
                 ])))

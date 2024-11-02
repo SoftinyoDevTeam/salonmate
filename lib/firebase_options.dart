@@ -41,49 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCmXaGCQboY_sv3qDBmok9Ba5qu317rHyo',
-    appId: '1:1049642020228:web:ff709302a4c3d6dad741d1',
-    messagingSenderId: '1049642020228',
-    projectId: 'baharbabacan-33d86',
-    authDomain: 'baharbabacan-33d86.firebaseapp.com',
-    storageBucket: 'baharbabacan-33d86.appspot.com',
-    measurementId: 'G-BWEJM1W57G',
+    apiKey: 'AIzaSyDgNhpa7Vod71EoijqY5Fxumif98TkAU80',
+    appId: '1:154061292288:web:241acec17b6cbfad18e9e5',
+    messagingSenderId: '154061292288',
+    projectId: 'sabitakkaya-f8ba0',
+    authDomain: 'sabitakkaya-f8ba0.firebaseapp.com',
+    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    measurementId: 'G-J0S4LRH678',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA-EVSn6FhWI371D67QJmmZ2Z4y282_Z0s',
-    appId: '1:1049642020228:android:60bcc692cea4e75ed741d1',
-    messagingSenderId: '1049642020228',
-    projectId: 'baharbabacan-33d86',
-    storageBucket: 'baharbabacan-33d86.appspot.com',
+    apiKey: 'AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM',
+    appId: '1:154061292288:android:c870f7802543c64d18e9e5',
+    messagingSenderId: '154061292288',
+    projectId: 'sabitakkaya-f8ba0',
+    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCFQILUoJb9JDw3QQ39pB5cLFuzuCHbL_E',
-    appId: '1:1049642020228:ios:0509bd9b5d68bd91d741d1',
-    messagingSenderId: '1049642020228',
-    projectId: 'baharbabacan-33d86',
-    storageBucket: 'baharbabacan-33d86.appspot.com',
+    apiKey: 'AIzaSyDgAlKn07GPz12J6-j_NpEGOxjCBOjgQWg',
+    appId: '1:154061292288:ios:804d47984396858e18e9e5',
+    messagingSenderId: '154061292288',
+    projectId: 'sabitakkaya-f8ba0',
+    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
     iosBundleId: 'com.salonmate.baharbabacan',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCFQILUoJb9JDw3QQ39pB5cLFuzuCHbL_E',
-    appId: '1:1049642020228:ios:18ead32233b22d85d741d1',
-    messagingSenderId: '1049642020228',
-    projectId: 'baharbabacan-33d86',
-    storageBucket: 'baharbabacan-33d86.appspot.com',
+    apiKey: 'AIzaSyDgAlKn07GPz12J6-j_NpEGOxjCBOjgQWg',
+    appId: '1:154061292288:ios:2262b403b4c38ae118e9e5',
+    messagingSenderId: '154061292288',
+    projectId: 'sabitakkaya-f8ba0',
+    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
     iosBundleId: 'com.sabitakkaya.salonmate',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCmXaGCQboY_sv3qDBmok9Ba5qu317rHyo',
-    appId: '1:1049642020228:web:95654f7f4f6d00ffd741d1',
-    messagingSenderId: '1049642020228',
-    projectId: 'baharbabacan-33d86',
-    authDomain: 'baharbabacan-33d86.firebaseapp.com',
-    storageBucket: 'baharbabacan-33d86.appspot.com',
-    measurementId: 'G-D1Q3600891',
+    apiKey: 'AIzaSyDgNhpa7Vod71EoijqY5Fxumif98TkAU80',
+    appId: '1:154061292288:web:27fa93d1f7a47f0d18e9e5',
+    messagingSenderId: '154061292288',
+    projectId: 'sabitakkaya-f8ba0',
+    authDomain: 'sabitakkaya-f8ba0.firebaseapp.com',
+    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    measurementId: 'G-W8N52MJS7W',
   );
 
 }

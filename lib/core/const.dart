@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 // General const
 
-const appname = 'SALONMATE';
+const appname = 'Bahar Babacan';
 const affCodePrefix = 'MATE';
 const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
-String mateKey = "bahars-s0e6-44c5-ac17-a9bcd947ff0c";
+
+String mateKey = "mate"; // mate -- yadasalon token
 
 // Localization const
 
@@ -26,3 +27,4 @@ const socketUrl = 'wss://sock.salonmate.co/';
 
 // Dynamic app configuration in functions.dart
 
+String buildNumber = "212";

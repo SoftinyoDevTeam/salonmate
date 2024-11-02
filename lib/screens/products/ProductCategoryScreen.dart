@@ -35,7 +35,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
       body: SizedBox(
         width: ScreenUtil().screenWidth,
         child: GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: ScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           itemCount: widget.products.length,

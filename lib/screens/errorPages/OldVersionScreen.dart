@@ -1,6 +1,8 @@
 import 'package:easy_url_launcher/easy_url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/main.dart';
 import 'dart:io' show Platform;
 
@@ -22,8 +24,14 @@ class _OldVersionScreenState extends State<OldVersionScreen> {
         onTap: () async {
           await EasyLauncher.url(
               url: Platform.isAndroid
-                  ? salonConfig!.data!.playStoreLink!
-                  : salonConfig!.data!.appStoreLink!,
+                  ? Provider.of<MateServices>(context)
+                      .salonConfig!
+                      .data!
+                      .playStoreLink!
+                  : Provider.of<MateServices>(context)
+                      .salonConfig!
+                      .data!
+                      .appStoreLink!,
               mode: Mode.externalApp);
         },
         child: Column(

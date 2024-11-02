@@ -6,10 +6,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:salonmate/core/const.dart';
+import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/models/othermodels/RandevuModel.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
@@ -67,6 +69,28 @@ Future<bool> checkLogin() async {
   }
 }
 
+Future<String?> findSalonToken(String key) async {
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=findSalonToken",
+      data: FormData.fromMap({"subdomain": key}),
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": mateKey,
+        },
+      ),
+    );
+
+    return response.data["data"];
+  } catch (e) {
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('findSalonToken: [ERRORs] $e', error: e);
+    return null;
+  }
+}
+
 Future<SalonConfigModel?> getSalonConfig(String buildNumber) async {
   SalonConfigModel? config;
   try {
@@ -85,13 +109,12 @@ Future<SalonConfigModel?> getSalonConfig(String buildNumber) async {
       config = SalonConfigModel.fromJson(response.data);
       return config;
     } else {
-      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('getSalonConfig: [ERROR] ${response.data["message"]}');
       return null;
     }
   } catch (e) {
     //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
-    log('getSalonConfig: [ERROR] $e', error: e);
+    log('getSalonConfig: [ERRORs] $e', error: e);
     return null;
   }
 }
@@ -381,7 +404,7 @@ Future<List<SalonProductsModel?>> getProducts() async {
       });
       return notifications;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('getProducts: [ERROR] ${response.data["message"]}');
       return notifications;
     }
@@ -1020,5 +1043,88 @@ Future<bool> deleteCart(int ID) async {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('deleteCart: [ERROR] $e', error: e);
     return false;
+  }
+}
+
+class MateServices extends ChangeNotifier {
+  ThemeData themeData = ThemeData().copyWith();
+  SalonConfigModel? salonConfig;
+
+  changeThemeData() async {
+    salonConfig = await getSalonConfig(buildNumber);
+
+    themeData = ThemeData(
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.red,
+
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+      ),
+      radioTheme: RadioThemeData(fillColor:
+          WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return Colors.grey;
+        }
+        return Colors.green;
+      })),
+      sliderTheme: const SliderThemeData(
+        trackHeight: 20, // change height here
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        constraints: BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
+        contentPadding:
+            const EdgeInsets.only(left: 10.0, top: 10.0, bottom: 15.0),
+        hintStyle: TextStyle(
+          color: "E0E0E4".toColor(),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(
+            color: "#E0E0E4".toColor(),
+            width: 0.5,
+          ),
+        ),
+        border: OutlineInputBorder(
+            gapPadding: 4,
+            borderRadius: BorderRadius.circular(15.sp),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5)),
+      ),
+      dialogBackgroundColor: "E0E0E4".toColor(),
+      useMaterial3: true,
+      fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
+      primaryColor: salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
+      primaryColorLight:
+          salonConfig!.data!.salonConfig!.primaryColorLight!.toColor(),
+      primaryColorDark:
+          salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
+      colorScheme: ColorScheme(
+          outline: "#F5F5F9".toColor(),
+          background:
+              salonConfig!.data!.salonConfig!.backgroundColor!.toColor(),
+          brightness: Brightness.light,
+          primary: salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
+          onPrimary:
+              salonConfig!.data!.salonConfig!.primaryColorLight!.toColor(),
+          secondary: "#272E54".toColor(),
+          onSecondary: "#C5C5D4".toColor(),
+          error: salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
+          onError: "#02C081".toColor(),
+          onBackground:
+              salonConfig!.data!.salonConfig!.primaryColorDark!.toColor(),
+          surface: Colors.white,
+          onSurface: Colors.black),
+    );
+
+    notifyListeners();
   }
 }

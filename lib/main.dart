@@ -1,65 +1,51 @@
-//Flutter dart paketleri
+// Flutter & Dart paketleri
 import 'dart:developer';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Core ek paketler
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
 import 'package:salonmate/core/const.dart';
-import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
-import 'package:salonmate/core/models/salonconfigmodel.dart';
 import 'package:salonmate/core/notifications.dart';
+
+// Pub get paketler
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+// Ekran Paketleri
+import 'package:salonmate/screens/auth/SalonSecScreen.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/errorPages/NoInternetScreen.dart';
 import 'package:salonmate/screens/errorPages/OldVersionScreen.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-//Ekranlar
-SalonConfigModel? salonConfig;
 SharedPreferences? prefs;
+FirebaseMessaging messaging = FirebaseMessaging.instance;
 String deviceType = "phone";
+
 void main() async {
   bool internet = true;
   bool oldversion = false;
+  bool salonmateMode = false;
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
   await EasyLocalization.ensureInitialized();
   // Salonmate sunucularından salon configi çekiliyor
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-  String appName = packageInfo.appName;
-  String packageName = packageInfo.packageName;
-  String version = packageInfo.version;
-  String buildNumber = packageInfo.buildNumber;
-
-  salonConfig = await getSalonConfig(buildNumber) == null
-      ? SalonConfigModel(status: "404", message: "Internet yok", data: null)
-      : await getSalonConfig(buildNumber);
-
-  if (salonConfig!.status != "404") {
-    internet = true;
-  } else {
-    internet = false;
-  }
-
-  if (salonConfig!.status! == "500") {
-    oldversion = true;
-  } else {
-    oldversion = false;
-  }
+  if (mateKey == "mate") {
+    salonmateMode = true;
+  } else {}
 
   // Firebase
   await Firebase.initializeApp();
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
   FocusManager.instance.primaryFocus?.unfocus();
   await setup();
   NotificationSettings settings = await messaging.requestPermission(
@@ -108,102 +94,26 @@ void main() async {
             deviceType = "tablet";
           }
           if (internet == true) {
-            return GestureDetector(
-              onTap: () {},
-              child: MaterialApp(
-                supportedLocales: _.supportedLocales,
-                localizationsDelegates: _.localizationDelegates,
-                locale: _.locale,
-                debugShowCheckedModeBanner: false,
-                title: appname,
-                themeMode: ThemeMode.light,
-                theme: ThemeData(
-                  appBarTheme: const AppBarTheme(
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                      // Status bar color
-                      statusBarColor: Colors.red,
-
-                      // Status bar brightness (optional)
-                      statusBarIconBrightness:
-                          Brightness.dark, // For Android (dark icons)
-                      statusBarBrightness:
-                          Brightness.light, // For iOS (dark icons)
-                    ),
-                    backgroundColor: Colors.transparent,
-                    surfaceTintColor: Colors.transparent,
-                  ),
-                  radioTheme: RadioThemeData(fillColor:
-                      WidgetStateProperty.resolveWith<Color>(
-                          (Set<WidgetState> states) {
-                    if (states.contains(MaterialState.disabled)) {
-                      return Colors.grey;
-                    }
-                    return Colors.green;
-                  })),
-                  sliderTheme: const SliderThemeData(
-                    trackHeight: 20, // change height here
-                  ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    constraints:
-                        BoxConstraints(minHeight: 45.h, maxHeight: 45.h),
-                    contentPadding: const EdgeInsets.only(
-                        left: 10.0, top: 10.0, bottom: 15.0),
-                    hintStyle: TextStyle(
-                      color: "E0E0E4".toColor(),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide:
-                          BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                      borderSide: BorderSide(
-                        color: "#E0E0E4".toColor(),
-                        width: 0.5,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                        gapPadding: 4,
-                        borderRadius: BorderRadius.circular(15.sp),
-                        borderSide:
-                            const BorderSide(color: Colors.red, width: 0.5)),
-                  ),
-                  dialogBackgroundColor: "E0E0E4".toColor(),
-                  useMaterial3: true,
-                  fontFamily: salonConfig!.data!.salonConfig!.fontFamily,
-                  primaryColor:
-                      salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
-                  primaryColorLight: salonConfig!
-                      .data!.salonConfig!.primaryColorLight!
-                      .toColor(),
-                  primaryColorDark: salonConfig!
-                      .data!.salonConfig!.primaryColorDark!
-                      .toColor(),
-                  colorScheme: ColorScheme(
-                    outline: "#F5F5F9".toColor(),
-                    background: salonConfig!.data!.salonConfig!.backgroundColor!
-                        .toColor(),
-                    brightness: Brightness.light,
-                    primary:
-                        salonConfig!.data!.salonConfig!.primaryColor!.toColor(),
-                    onPrimary: salonConfig!
-                        .data!.salonConfig!.primaryColorLight!
-                        .toColor(),
-                    secondary: "#272E54".toColor(),
-                    onSecondary: "#C5C5D4".toColor(),
-                    error: salonConfig!.data!.salonConfig!.primaryColorDark!
-                        .toColor(),
-                    onError: "#02C081".toColor(),
-                    onBackground: salonConfig!
-                        .data!.salonConfig!.primaryColorDark!
-                        .toColor(),
-                    surface: "#272E54".toColor(),
-                    onSurface: "#272E54".toColor(),
-                  ),
-                ),
-                home: child,
-              ),
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => MateServices())
+              ],
+              builder: (context, childs) {
+                if (salonmateMode == false)
+                  Provider.of<MateServices>(context, listen: false)
+                      .changeThemeData();
+                return MaterialApp(
+                  supportedLocales: _.supportedLocales,
+                  localizationsDelegates: _.localizationDelegates,
+                  locale: _.locale,
+                  debugShowCheckedModeBanner: false,
+                  title: appname,
+                  themeMode: ThemeMode.light,
+                  theme: Provider.of<MateServices>(context).themeData,
+                  home: child,
+                );
+              },
+              child: child,
             );
           } else {
             return NoInternetScreen();
@@ -215,6 +125,8 @@ void main() async {
                 ? const ScreenBridge(
                     selectedScreen: 0,
                   )
-                : const SplashScreen(),
+                : salonmateMode
+                    ? const SalonSecScreen()
+                    : const SplashScreen(),
       )));
 }

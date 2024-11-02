@@ -29,8 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String? fcmToken;
   final pinputFocusNode = FocusNode();
   void getFcm() async {
-    fcmToken = await FirebaseMessaging.instance.getToken();
-    setState(() {});
+    fcmToken = await messaging.getToken();
   }
 
   PhoneController phoneController =
@@ -199,8 +198,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 length: 6,
                                 pinAnimationType: PinAnimationType.slide,
                                 onCompleted: (value) async {
-                                  await login(phoneNumber, value, OTPhash,
-                                      context, fcmToken!);
+                                  await login(
+                                      phoneNumber,
+                                      value,
+                                      OTPhash,
+                                      context,
+                                      fcmToken == null
+                                          ? "cantfetchfcm"
+                                          : fcmToken!);
                                 },
                               ),
                             ),
@@ -243,7 +248,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         fcmToken: fcmToken!,
                                       ))),
                             )
-                          : Container()
+                          : Container(
+                              child: Text("FCM Token alınamadı"),
+                            )
                       : Container()
             ],
           ),

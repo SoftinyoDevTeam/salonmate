@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       GestureDetector(
                         onTap: () {
                           Share.share(
-                              """$affCodePrefix${userData!.id} davet kodumla Sabit Akkaya uygulamasını indir ilk harcamanda %30 indirim kazan.
+                              """$affCodePrefix${userData!.id} davet kodumla ${appname} uygulamasını indir ilk harcamanda %30 indirim kazan.
                             iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr
                             Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate
                             """,
