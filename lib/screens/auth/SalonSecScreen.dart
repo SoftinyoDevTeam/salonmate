@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,6 +25,7 @@ class _SalonSecScreenState extends State<SalonSecScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: SafeArea(
               child: Padding(
@@ -90,7 +92,7 @@ class _SalonSecScreenState extends State<SalonSecScreen> {
             MateButon(
                 color: "#FD3553".toColor(),
                 textcolor: Colors.white,
-                title: "Giriş Yap",
+                title: ("general.login").tr(),
                 minimumSize: const Size.fromHeight(50),
                 onPressed: () async {})
           ],

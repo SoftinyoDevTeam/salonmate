@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/screens/products/ProductDetailScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
+import 'package:salonmate/widgets/empty.dart';
 
 class ProductCategoryScreen extends StatefulWidget {
   const ProductCategoryScreen({super.key, required this.products});
@@ -17,7 +18,6 @@ class ProductCategoryScreen extends StatefulWidget {
 class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    log(widget.products.toString());
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -34,39 +34,47 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
       ),
       body: SizedBox(
         width: ScreenUtil().screenWidth,
-        child: GridView.builder(
-          physics: ScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
-          itemCount: widget.products.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProductDetailScreen(
-                            product: widget.products[index]!)));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ProductCard(
-                    width: 120.w,
-                    height: 90.w,
-                    title: widget.products[index]!.name!,
-                    imageUrl: widget.products[index]!.imgUrl!,
-                    onPressed: () {
+        child: widget.products.length < 1
+            ? Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: EmptyState(
+                    image: "assets/images/icons/basket.png",
+                    title: "Maalesef",
+                    description: "Öne çıkarılan hiç ürün yok"),
+              )
+            : GridView.builder(
+                physics: ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemCount: widget.products.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProductDetailScreen(
                                   product: widget.products[index]!)));
                     },
-                    price: widget.products[index]!.price!.toDouble()),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ProductCard(
+                          width: 120.w,
+                          height: 90.w,
+                          title: widget.products[index]!.name!,
+                          imageUrl: widget.products[index]!.imgUrl!,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailScreen(
+                                        product: widget.products[index]!)));
+                          },
+                          price: widget.products[index]!.price!.toDouble()),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
     );
   }

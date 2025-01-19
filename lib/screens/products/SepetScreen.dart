@@ -84,8 +84,10 @@ class _SepetScreenState extends State<SepetScreen> {
                     // what to do after an item has been swiped away.
                     onDismissed: (direction) async {
                       await deleteCart(sepetim[index]!.ID!);
-                      getSepetContent();
-                      setState(() {});
+                      setState(() {
+                        sepetim.removeAt(index);
+                        getSepetContent();
+                      });
                     },
                     // Show a red background as the item is swiped away.
                     background: Container(

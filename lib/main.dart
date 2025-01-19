@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Core ek paketler
-
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/langs/codegen_loader.g.dart';
@@ -14,6 +13,7 @@ import 'package:salonmate/core/notifications.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:salonmate/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -33,6 +33,7 @@ void main() async {
   bool internet = true;
   bool oldversion = false;
   bool salonmateMode = false;
+  bool temainitialized = false;
   // Flutter initialize ediliyor
   WidgetsFlutterBinding.ensureInitialized();
   // Easy localization yükleniyor
@@ -44,7 +45,7 @@ void main() async {
   } else {}
 
   // Firebase
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FocusManager.instance.primaryFocus?.unfocus();
   await setup();
@@ -72,7 +73,7 @@ void main() async {
   });
 
   prefs = await SharedPreferences.getInstance();
-
+  //prefs!.clear();
   setPrefString("tooltip", "true");
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -81,7 +82,7 @@ void main() async {
   runApp(EasyLocalization(
       supportedLocales: supportedLocalesdef,
       path: localizationDir,
-      assetLoader: const CodegenLoader(),
+      assetLoader: CodegenLoader(),
       fallbackLocale: defaultLocale,
       useOnlyLangCode: true,
       child: ScreenUtilInit(
@@ -99,14 +100,19 @@ void main() async {
                 ChangeNotifierProvider(create: (context) => MateServices())
               ],
               builder: (context, childs) {
-                if (salonmateMode == false)
-                  Provider.of<MateServices>(context, listen: false)
-                      .changeThemeData();
+                if (salonmateMode == false) {
+                  if (temainitialized == false) {
+                    Provider.of<MateServices>(context, listen: false)
+                        .changeThemeData();
+                    temainitialized = true;
+                  }
+                }
                 return MaterialApp(
                   supportedLocales: _.supportedLocales,
                   localizationsDelegates: _.localizationDelegates,
                   locale: _.locale,
                   debugShowCheckedModeBanner: false,
+                  debugShowMaterialGrid: false,
                   title: appname,
                   themeMode: ThemeMode.light,
                   theme: Provider.of<MateServices>(context).themeData,
@@ -122,11 +128,11 @@ void main() async {
         child: oldversion
             ? OldVersionScreen()
             : await checkLogin()
-                ? const ScreenBridge(
+                ? ScreenBridge(
                     selectedScreen: 0,
                   )
                 : salonmateMode
-                    ? const SalonSecScreen()
-                    : const SplashScreen(),
+                    ? SalonSecScreen()
+                    : SplashScreen(),
       )));
 }

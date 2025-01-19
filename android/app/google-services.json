@@ -2,9 +2,28 @@
   "project_info": {
     "project_number": "154061292288",
     "project_id": "sabitakkaya-f8ba0",
-    "storage_bucket": "sabitakkaya-f8ba0.appspot.com"
+    "storage_bucket": "sabitakkaya-f8ba0.firebasestorage.app"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154061292288:android:6bf80329eb90dc3118e9e5",
+        "android_client_info": {
+          "package_name": "com.lala.omarov"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:154061292288:android:cebd2da32ea9613f18e9e5",
@@ -26,9 +45,85 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:154061292288:android:6eade4280470fb2f18e9e5",
+        "android_client_info": {
+          "package_name": "com.sabitakkaya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154061292288:android:7aa3d2492f5049b318e9e5",
+        "android_client_info": {
+          "package_name": "com.sacinlainatlasma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:154061292288:android:c870f7802543c64d18e9e5",
         "android_client_info": {
           "package_name": "com.salonmate.baharbabacan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154061292288:android:db7fae12e8eeedc518e9e5",
+        "android_client_info": {
+          "package_name": "com.salonmate.gercekguzellik"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154061292288:android:d0eaf4c97daee66c18e9e5",
+        "android_client_info": {
+          "package_name": "com.salonmate.musteri"
         }
       },
       "oauth_client": [],

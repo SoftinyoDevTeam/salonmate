@@ -113,7 +113,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ),
                 ),
                 Text(
-                  "Randevu Oluştur",
+                  ("ScheduleScreen.appointment_create").tr(),
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontSize: 15.sp,
@@ -141,7 +141,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 18.0),
                             child: Text(
-                              "Şube Seçiniz",
+                              ("ScheduleScreen.select_branch").tr(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context).primaryColorDark),
@@ -276,9 +276,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                           decoration: selectedTab == item.ID
                                               ? BoxDecoration(
                                                   border: Border.all(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary),
+                                                      color: Color.fromARGB(
+                                                          255, 224, 224, 228)),
                                                   borderRadius:
                                                       BorderRadius.circular(12),
                                                 )
@@ -364,7 +363,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hizmet almak istediğiniz personeli seçin",
+                      ("ScheduleScreen.select_personnel").tr(),
                       style: TextStyle(
                           color: Theme.of(context).primaryColorDark,
                           fontWeight: FontWeight.w600),
@@ -714,15 +713,121 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 var usertoken = await getPrefString("token");
                                 bool sepet = await addToCart(
                                     selectedService!.ID!, "HIZMET", usertoken!);
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Hizmet başarıyla sepetinize eklendi.");
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ScreenBridge(selectedScreen: 2)),
-                                    (route) => false);
+
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      height: ScreenUtil().screenHeight * 0.9,
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            width: 40,
+                                            height: 5,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          SizedBox(height: 20),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                ("ScheduleScreen.service_added_to_cart")
+                                                    .tr(),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.sp),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Text(
+                                                ("ScheduleScreen.prepayment_required")
+                                                    .tr(),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16.sp),
+                                              ),
+                                              SizedBox(
+                                                height: 27.h,
+                                              ),
+                                              Text(
+                                                "Ön ödeme yaptıktan sonra almak istediğiniz hizmet için personel, gün ve saat seçebilirsiniz.",
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              MateButon(
+                                                onPressed: () {
+                                                  // Ön ödeme yap action
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ScreenBridge(
+                                                                  selectedScreen:
+                                                                      3)),
+                                                      (route) => false);
+                                                },
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                textcolor: Theme.of(context)
+                                                    .primaryColorLight,
+                                                minimumSize: Size(180.w, 50.h),
+                                                title: "Ön Ödeme Yap",
+                                              ),
+                                              SizedBox(
+                                                height: 50.h,
+                                              ),
+                                              Text(
+                                                "Randevu ekle butonuna basarak başka bir hizmeti daha sepetenize ekleyebilirsiniz.",
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              SizedBox(
+                                                height: 20.h,
+                                              ),
+                                              MateButon(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                                textcolor: Theme.of(context)
+                                                    .primaryColorLight,
+                                                minimumSize: Size(180.w, 50.h),
+                                                onPressed: () {
+                                                  // Randevu ekle action
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ScreenBridge(
+                                                                  selectedScreen:
+                                                                      2)),
+                                                      (route) => false);
+                                                },
+                                                title: "Randevu Ekle",
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+
                                 setState(() {});
                               },
                               color: Theme.of(context).colorScheme.secondary,

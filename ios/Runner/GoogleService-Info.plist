@@ -9,11 +9,11 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.salonmate.baharbabacan</string>
+	<string>com.lala.omarov</string>
 	<key>PROJECT_ID</key>
 	<string>sabitakkaya-f8ba0</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sabitakkaya-f8ba0.appspot.com</string>
+	<string>sabitakkaya-f8ba0.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:154061292288:ios:804d47984396858e18e9e5</string>
+	<string>1:154061292288:ios:c8f84b8462b6b2a018e9e5</string>
 </dict>
 </plist>

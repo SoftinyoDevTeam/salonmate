@@ -1,0 +1,14 @@
+{
+    "general":{
+        "login":"Giriş Yap",
+        "register":"Üye Ol"
+    },
+    "SplashScreen":{
+        "splash_title_1":"Saç ürünlerini en avantajlı koşullarla satın alın.",
+        "splash_text_1":"Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.",  
+        "splash_title_2":"Kazandıran Arkadaşlık",
+        "splash_text_2":"Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.",  
+        "splash_title_3":"Salla Kazan",
+        "splash_text_3":"Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın."
+    }
+}

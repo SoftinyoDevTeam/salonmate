@@ -117,82 +117,56 @@ class _ScreenBridgeState extends State<ScreenBridge> {
           ),
         ),
         builder: (context) => Scaffold(
-              body: child,
-              floatingActionButton: showFab
-                  ? OverlayTooltipItem(
-                      displayIndex: 0,
-                      tooltip: (controller) => Container(
-                          width: 200.w,
-                          height: 160.h,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: MateCard(
-                                widget: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(children: [
-                                Text(
-                                  "Canlı Destek",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    style: TextStyle(fontSize: 11.sp),
-                                    maxLines: 4,
-                                    "Her gün 09:00 - 23:00 arası uygulamamız ile ilgili sorularınızı buradan bize iletebilirsiniz.",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: MateButon(
-                                      title: "Devam",
-                                      minimumSize: Size(30, 30),
-                                      onPressed: () {
-                                        _controller.next();
-                                      },
-                                      color: Theme.of(context).primaryColor,
-                                      textcolor:
-                                          Theme.of(context).primaryColorLight),
-                                )
-                              ]),
-                            )),
-                          )),
-                      tooltipVerticalPosition: TooltipVerticalPosition.TOP,
-                      tooltipHorizontalPosition:
-                          TooltipHorizontalPosition.CENTER,
-                      child: GestureDetector(
-                        onTap: () {
-                          _bottomNavIndex = 4;
-                          setState(() {});
-                        },
-                        child: SizedBox(
-                          height: 50.h,
-                          width: 50.h,
-                          child: CircleAvatar(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.secondary,
-                              backgroundImage:
-                                  AssetImage("assets/images/icons/online.gif")),
-                        ),
-                      ))
-                  : null,
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
-              bottomNavigationBar: AnimatedBottomNavigationBar(
-                  borderColor: Theme.of(context).colorScheme.outline,
-                  blurEffect: true,
-                  backgroundColor: Theme.of(context).primaryColorLight,
-                  activeColor: Theme.of(context).colorScheme.secondary,
-                  splashColor: Theme.of(context).colorScheme.secondary,
-                  icons: iconList,
-                  inactiveColor: Theme.of(context).primaryColorDark,
-                  activeIndex: _bottomNavIndex,
-                  gapLocation: GapLocation.center,
-                  notchSmoothness: NotchSmoothness.defaultEdge,
-                  onTap: (index) {
-                    setState(() => _bottomNavIndex = index);
-                  }),
+            body: child,
+            bottomNavigationBar: BottomNavigationBar(
+                currentIndex: _bottomNavIndex,
+                onTap: (value) {
+                  setState(() => _bottomNavIndex = value);
+                },
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(iconList[0]), label: "Anasayfa"),
+                  BottomNavigationBarItem(
+                      icon: Icon(iconList[1]), label: "Ürünler"),
+                  BottomNavigationBarItem(
+                      icon: Icon(iconList[2]), label: "Randevu"),
+                  BottomNavigationBarItem(
+                      icon: Icon(iconList[3]), label: "Sepetim"),
+                ])
+
+            // AnimatedBottomNavigationBar.builder(
+            //     itemCount: iconList.length,
+            //     tabBuilder: (int index, bool isActive) {
+            //       return InkWell(
+            //         onTap: () {
+            //           log("message");
+            //           setState(() => _bottomNavIndex = index);
+            //         },
+            //         child: Container(
+            //           height: 40.h,
+            //           width: 40.h,
+            //           child: Icon(
+            //             iconList[index],
+            //             size: 24,
+            //             color: isActive
+            //                 ? Theme.of(context).colorScheme.secondary
+            //                 : Theme.of(context).primaryColorDark,
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //     borderColor: Theme.of(context).colorScheme.outline,
+            //     blurEffect: true,
+            //     backgroundColor: Theme.of(context).primaryColorLight,
+            //     splashColor: Theme.of(context).colorScheme.secondary,
+            //     activeIndex: _bottomNavIndex,
+            //     gapLocation: GapLocation.center,
+            //     notchSmoothness: NotchSmoothness.defaultEdge,
+            //     onTap: (index) {
+            //       log("message");
+            //       setState(() => _bottomNavIndex = index);
+            //     }),
             ));
   }
 }

@@ -46,25 +46,25 @@ class DefaultFirebaseOptions {
     messagingSenderId: '154061292288',
     projectId: 'sabitakkaya-f8ba0',
     authDomain: 'sabitakkaya-f8ba0.firebaseapp.com',
-    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    storageBucket: 'sabitakkaya-f8ba0.firebasestorage.app',
     measurementId: 'G-J0S4LRH678',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAyJlqr-m7Ak-9vcZVieVT8YalCMpwP0FM',
-    appId: '1:154061292288:android:c870f7802543c64d18e9e5',
+    appId: '1:154061292288:android:6bf80329eb90dc3118e9e5',
     messagingSenderId: '154061292288',
     projectId: 'sabitakkaya-f8ba0',
-    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    storageBucket: 'sabitakkaya-f8ba0.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDgAlKn07GPz12J6-j_NpEGOxjCBOjgQWg',
-    appId: '1:154061292288:ios:804d47984396858e18e9e5',
+    appId: '1:154061292288:ios:c8f84b8462b6b2a018e9e5',
     messagingSenderId: '154061292288',
     projectId: 'sabitakkaya-f8ba0',
-    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
-    iosBundleId: 'com.salonmate.baharbabacan',
+    storageBucket: 'sabitakkaya-f8ba0.firebasestorage.app',
+    iosBundleId: 'com.lala.omarov',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
     appId: '1:154061292288:ios:2262b403b4c38ae118e9e5',
     messagingSenderId: '154061292288',
     projectId: 'sabitakkaya-f8ba0',
-    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    storageBucket: 'sabitakkaya-f8ba0.firebasestorage.app',
     iosBundleId: 'com.sabitakkaya.salonmate',
   );
 
@@ -82,7 +82,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '154061292288',
     projectId: 'sabitakkaya-f8ba0',
     authDomain: 'sabitakkaya-f8ba0.firebaseapp.com',
-    storageBucket: 'sabitakkaya-f8ba0.appspot.com',
+    storageBucket: 'sabitakkaya-f8ba0.firebasestorage.app',
     measurementId: 'G-W8N52MJS7W',
   );
 

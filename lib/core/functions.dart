@@ -62,6 +62,7 @@ Future<String?> getPrefString(String key) async {
 Future<bool> checkLogin() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = await prefs.get("token");
+  log("token : $token");
   if (token != null && token != "") {
     return true;
   } else {
@@ -318,22 +319,22 @@ Future<List<SepetModel?>> getCart() async {
         },
       ),
     );
-
+    log(response.data.toString());
     if (response.data["status"] == "200") {
       if (response.data["data"] != null) {
-        for (var e in response.data["data"]) {
-          products.add(SepetModel.fromJson(e));
-        }
+        response.data["data"].forEach((element) {
+          products.add(SepetModel.fromJson(element));
+        });
       }
 
       return products;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('getCart: [ERROR] ${response.data["message"]}');
       return products;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('getCart: [ERROR] $e', error: e);
     return products;
   }
@@ -364,12 +365,12 @@ Future<String> register(FormData form, BuildContext context) async {
           (Route<dynamic> route) => false);
       return "true";
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('register: [ERROR] ${response.data}');
       return "false";
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('register: [ERROR] $e', error: e);
     return "false";
   }
@@ -409,7 +410,7 @@ Future<List<SalonProductsModel?>> getProducts() async {
       return notifications;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('getProducts: [ERROR] $e', error: e);
     return notifications;
   }
@@ -428,7 +429,7 @@ Future<UserModel?> getProfile() async {
         headers: {
           "Access-Control-Allow-Origin":
               "*", // Required for CORS support to work
-          "Matekey": mateKey,
+          "Matekey": await prefs.getString("token"),
         },
       ),
     );
@@ -437,12 +438,12 @@ Future<UserModel?> getProfile() async {
       notifications = UserModel.fromJson(response.data["data"]);
       return notifications;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('getProfile: [ERROR] ${response.data["message"]}');
       return notifications;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('getProfile: [ERROR] $e', error: e);
     return notifications;
   }
@@ -528,12 +529,12 @@ Future<List<ProductCategoryModel?>> procat() async {
       });
       return notifications;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('procat: [ERROR] ${response.data}');
       return notifications;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('procat: [ERROR] $e', error: e);
     return notifications;
   }
@@ -592,7 +593,7 @@ Future<List<RandevuModel?>> fetchRandevu() async {
       });
       return elements;
     } else {
-      Fluttertoast.showToast(msg: "Hiç Randevunuz Yok");
+      //Fluttertoast.showToast(msg: "Hiç Randevunuz Yok");
       log('fetchRandevu: [ERROR] ${response.data}');
       return elements;
     }
@@ -636,12 +637,12 @@ Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
       });
       return elements;
     } else {
-      Fluttertoast.showToast(msg: "${response.data["message"]}");
+      // Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('checkStaffFilledSchedules: [ERROR] ${response.data}');
       return elements;
     }
   } catch (e) {
-    Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    //  Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('checkStaffFilledSchedules: [ERROR] $e', error: e);
     return elements;
   }

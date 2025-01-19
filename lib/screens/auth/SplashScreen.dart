@@ -1,5 +1,12 @@
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ios_keyboard_action/ios_keyboard_action.dart';
+import 'package:salonmate/core/libs/phone_form_field/src/phone_form_field.dart';
+import 'package:salonmate/core/libs/phone_form_field/src/validation/phone_validator.dart';
 import 'package:salonmate/core/models/splashmodel.dart';
 import 'package:salonmate/screens/auth/LoginScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
@@ -17,21 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
     List<SplashModel> list = [];
 
     list.add(SplashModel(
-        image: 'assets/images/splash/Onbording_1.png',
-        title: 'Saç ürünlerini en avantajlı koşullarla satın alın.',
-        subTitle:
-            'Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.'));
+        image: 'assets/images/splash/baharsplash.jpeg',
+        title: ('SplashScreen.splash_title_1').tr(),
+        subTitle: ('SplashScreen.splash_text_1').tr()));
     list.add(SplashModel(
         image: 'assets/images/splash/model_two.png',
-        title: 'Kazandıran Arkadaşlık',
-        subTitle:
-            'Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.'));
+        title: ('SplashScreen.splash_title_2').tr(),
+        subTitle: ('SplashScreen.splash_text_2').tr()));
     list.add(SplashModel(
         image: 'assets/images/splash/model_three.png',
-        title: 'Salla Kazan',
-        subTitle:
-            'Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın.'));
-
+        title: ('SplashScreen.splash_title_3').tr(),
+        subTitle: ('SplashScreen.splash_text_3').tr()));
     return list;
   }
 
@@ -203,7 +206,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                               ));
                                         });
                                   },
-                                  title: "Giriş Yap",
+                                  title: ("general.login").tr(),
                                   minimumSize: const Size.fromHeight(50),
                                 ),
                                 SizedBox(height: 8.h),
@@ -253,7 +256,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                           });
                                     },
                                     minimumSize: const Size.fromHeight(50),
-                                    title: "Üye Ol"),
+                                    title: ("general.register").tr()),
                               ],
                             ),
                           ),

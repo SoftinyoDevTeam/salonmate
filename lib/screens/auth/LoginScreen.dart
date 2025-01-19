@@ -1,18 +1,20 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ios_keyboard_action/ios_keyboard_action.dart';
-import 'package:phone_form_field/phone_form_field.dart';
+import 'package:salonmate/core/libs/phone_form_field//phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/main.dart';
 import 'package:salonmate/widgets/auth/register.dart';
 import 'package:salonmate/widgets/buttons.dart';
+import 'package:salonmate/widgets/loader.dart';
 
 class LoginScreen extends StatefulWidget {
   int tab;
@@ -29,11 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
   String? fcmToken;
   final pinputFocusNode = FocusNode();
   void getFcm() async {
+    await Future.delayed(Duration(seconds: 1));
     fcmToken = await messaging.getToken();
+    setState(() {});
   }
 
   PhoneController phoneController =
-      PhoneController(const PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
+      PhoneController(initialValue: PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
   FocusNode phoneFocusNode = FocusNode();
   TextEditingController passController = TextEditingController();
   TextEditingController affCode = TextEditingController();
@@ -116,9 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: selectedTab == 0
                                       ? Theme.of(context).primaryColorLight
                                       : Colors.transparent),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "Giriş Yap",
+                                  ("general.login").tr(),
                                   style: const TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -140,9 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: selectedTab == 1
                                       ? Theme.of(context).primaryColorLight
                                       : Colors.transparent),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "Üye Ol",
+                                  ("general.register").tr(),
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -172,9 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : TextInputType.number,
                                   textInputAction: TextInputAction.done,
                                   cursorColor: Theme.of(context).primaryColor,
-                                  showDialCode: true,
-                                  decoration: const InputDecoration(
-                                    hintText: "Telefon Numarası",
+                                  decoration: InputDecoration(
+                                    hintText: ("general.phone").tr(),
                                   ),
                                   inputFormatters: [
                                     new LengthLimitingTextInputFormatter(13),
@@ -186,7 +189,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                     log(value!.nsn.length.toString());
                                   },
-                                  validator: (phoneNumber) {},
+                                  validator: PhoneValidator.compose([
+                                    PhoneValidator.validMobile(context,
+                                        errorText:
+                                            ("general.errors.wrong_phone_number")
+                                                .tr()),
+                                    PhoneValidator.required(context,
+                                        errorText:
+                                            ("general.errors.required_phone_number")
+                                                .tr())
+                                  ]),
                                 )),
                             SizedBox(height: 15.h),
                             Visibility(
@@ -213,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MateButon(
                                 color: Theme.of(context).primaryColor,
                                 textcolor: Theme.of(context).primaryColorLight,
-                                title: "Giriş Yap",
+                                title: ("general.login").tr(),
                                 minimumSize: const Size.fromHeight(50),
                                 onPressed: () async {
                                   pinputFocusNode.requestFocus();
@@ -248,8 +260,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         fcmToken: fcmToken!,
                                       ))),
                             )
-                          : Container(
-                              child: Text("FCM Token alınamadı"),
+                          : Center(
+                              child: Loader(),
                             )
                       : Container()
             ],

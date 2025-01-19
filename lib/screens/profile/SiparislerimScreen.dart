@@ -4,6 +4,7 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/salonmodels/siparisgecmisimodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/cards/sipariscard.dart';
+import 'package:salonmate/widgets/empty.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 class SiparislerimScreen extends StatefulWidget {
@@ -35,28 +36,33 @@ class _SiparislerimScreenState extends State<SiparislerimScreen> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: siparislerim.isNotEmpty
-              ? Container(
-                  height: ScreenUtil().screenHeight - 90.h,
-                  child: ListView.builder(
-                      itemCount: siparislerim.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SiparisWidget(
-                            fullName: siparislerim[index]!.name!,
-                            imagePath: siparislerim[index]!.imgUrl,
-                            fiyat:
-                                siparislerim[index]!.price!.toString() + " TL",
-                            urunSayisi: 1,
-                            status: siparislerim[index]!.statusID.toString(),
-                          ),
-                        );
-                      }),
-                )
-              : Loader(),
-        ),
+            padding: const EdgeInsets.all(16.0),
+            child: siparislerim.isNotEmpty
+                ? Container(
+                    height: ScreenUtil().screenHeight - 90.h,
+                    child: ListView.builder(
+                        itemCount: siparislerim.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SiparisWidget(
+                              fullName: siparislerim[index]!.name!,
+                              imagePath: siparislerim[index]!.imgUrl,
+                              fiyat: siparislerim[index]!.price!.toString() +
+                                  " TL",
+                              urunSayisi: 1,
+                              status: siparislerim[index]!.statusID.toString(),
+                            ),
+                          );
+                        }),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: EmptyState(
+                        image: "assets/images/icons/basket.png",
+                        title: "Maalesef",
+                        description: "Şuanda hiç siparişiniz yok"),
+                  )),
       ),
     );
   }

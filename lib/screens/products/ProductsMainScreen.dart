@@ -6,6 +6,7 @@ import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/screens/products/ProductCategoryScreen.dart';
 import 'package:salonmate/widgets/cards/productcategorycard.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
+import 'package:salonmate/widgets/empty.dart';
 import 'package:salonmate/widgets/loader.dart';
 
 class ProductsMainScreen extends StatefulWidget {
@@ -73,7 +74,13 @@ class _ProductsMainScreenState extends State<ProductsMainScreen> {
                 ),
               ),
               urunler.isEmpty
-                  ? Loader()
+                  ? Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: EmptyState(
+                          image: "assets/images/icons/basket.png",
+                          title: "Maalesef",
+                          description: "Öne çıkarılan hiç ürün yok"),
+                    )
                   : SizedBox(
                       height: 300.h,
                       width: ScreenUtil().screenWidth,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/bildirimmodel.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
+import 'package:salonmate/widgets/empty.dart';
 import 'package:salonmate/widgets/lists/notificationlist.dart';
 import 'package:salonmate/widgets/loader.dart';
 
@@ -32,7 +33,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
         body: Column(
           children: [
             notifications.isEmpty
-                ? SizedBox(height: 500.h, child: Center(child: Loader()))
+                ? Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: EmptyState(
+                        image: "assets/images/icons/bell.png",
+                        title: "Maalesef",
+                        description: "Size gönderilmiş hiçbir bildirim yok."),
+                  )
                 : SizedBox(
                     height: 500.h,
                     width: ScreenUtil().screenWidth,

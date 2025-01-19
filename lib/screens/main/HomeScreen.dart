@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -230,8 +231,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                     widget: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(children: [
-                                    const Text(
-                                      "Salla Kazan",
+                                    Text(
+                                      ("general.shakewin").tr(),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -284,7 +285,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                               width: 24,
                               height: 24,
                             ),
-                            label: Text("Salla Kazan",
+                            label: Text(("general.shakewin").tr(),
                                 style: TextStyle(
                                     color: const Color(0xFF272E54),
                                     fontSize: 14.sp,
@@ -368,7 +369,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                     },
                                     child: ProductCard(
                                         width: 0.w,
-                                        height: 0.w,
+                                        height: 150.w,
                                         title: products[index]!.name!,
                                         imageUrl: products[index]!.imgUrl!,
                                         onPressed: () {

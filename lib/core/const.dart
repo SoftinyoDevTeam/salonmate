@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // General const
 
-const appname = 'Bahar Babacan';
+const appname = 'SALONMATE';
 const affCodePrefix = 'MATE';
 const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
@@ -12,8 +12,13 @@ String mateKey = "mate"; // mate -- yadasalon token
 
 // Localization const
 
-const defaultLocale = Locale('en');
-const supportedLocalesdef = [Locale('tr'), Locale('en')];
+const defaultLocale = Locale('tr');
+const supportedLocalesdef = [
+  Locale('tr'),
+  Locale('en'),
+  Locale('et'),
+  Locale('ru')
+];
 const localizationDir = 'assets/translations';
 
 // Responsibility and sizes const

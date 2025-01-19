@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ios_keyboard_action/ios_keyboard_action.dart';
-import 'package:phone_form_field/phone_form_field.dart';
+import 'package:salonmate/core/libs/phone_form_field//phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/usermodels/usermodel.dart';
@@ -33,7 +33,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   UserModel? user;
   String registerType = "insert";
   PhoneController phoneController =
-      PhoneController(PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
+      PhoneController(initialValue: PhoneNumber(isoCode: IsoCode.TR, nsn: ""));
   String? birthday = "";
   bool? yesno;
   double _currentSliderValue = 1;
@@ -51,7 +51,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ? SizedBox(
                   height: 50.h,
                   child: Text.rich(TextSpan(children: <InlineSpan>[
-                    TextSpan(text: "Hoşgeldiniz "),
+                    TextSpan(text: ("general.welcome").tr()),
                     TextSpan(
                       text: user!.adSoyad,
                       style: TextStyle(
@@ -74,49 +74,51 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: SizedBox(
-              height: 40.h,
-              width: ScreenUtil().screenWidth - 30,
-              child: IOSKeyboardAction(
-                  backgroundColor: CupertinoColors.lightBackgroundGray,
-                  textColor: Theme.of(context).primaryColor,
-                  label: 'Sonraki',
+                height: 40.h,
+                width: ScreenUtil().screenWidth - 30,
+                child: PhoneFormField(
                   focusNode: previousFieldFocus,
-                  focusActionType: FocusActionType.next,
-                  onTap: () => log("print"),
-                  child: PhoneFormField(
-                    focusNode: previousFieldFocus,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    cursorColor: Theme.of(context).primaryColor,
-                    showDialCode: true,
-                    decoration: InputDecoration(
-                      hintText: "Telefon Numarası",
-                    ),
-                    inputFormatters: [
-                      new LengthLimitingTextInputFormatter(13),
-                    ],
-                    controller: phoneController,
-                    onChanged: (value) async {
-                      if (value!.isValidLength(type: PhoneNumberType.mobile)) {
-                        user =
-                            await checkRegister(value!.nsn.replaceAll(" ", ""));
-                        if (user != null) {
-                          registerType = "update";
-                          var oldname = user!.adSoyad.split(" ");
-                          firstname.text = (oldname.first);
-                          lastname.text = (oldname.last);
-                        } else {
-                          registerType = "insert";
-                          firstname.text = "";
-                          lastname.text = "";
-                        }
-                        //FocusManager.instance.primaryFocus?.unfocus();
-                        setState(() {});
+                  countryButtonStyle: CountryButtonStyle(),
+                  isCountrySelectionEnabled: true,
+                  isCountryButtonPersistent: true,
+                  countrySelectorNavigator:
+                      CountrySelectorNavigator.draggableBottomSheet(),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
+                  cursorColor: Theme.of(context).primaryColor,
+                  decoration: InputDecoration(
+                    hintText: ("general.phone").tr(),
+                  ),
+                  inputFormatters: [
+                    new LengthLimitingTextInputFormatter(13),
+                  ],
+                  controller: phoneController,
+                  onChanged: (value) async {
+                    if (value!.isValidLength(type: PhoneNumberType.mobile)) {
+                      user =
+                          await checkRegister(value!.nsn.replaceAll(" ", ""));
+                      if (user != null) {
+                        registerType = "update";
+                        var oldname = user!.adSoyad.split(" ");
+                        firstname.text = (oldname.first);
+                        lastname.text = (oldname.last);
+                      } else {
+                        registerType = "insert";
+                        firstname.text = "";
+                        lastname.text = "";
                       }
-                    },
-                    validator: (phoneNumber) {},
-                  )),
-            ),
+                      //FocusManager.instance.primaryFocus?.unfocus();
+                      setState(() {});
+                    }
+                  },
+                  validator: PhoneValidator.compose([
+                    PhoneValidator.validMobile(context,
+                        errorText: ("general.errors.wrong_phone_number").tr()),
+                    PhoneValidator.required(context,
+                        errorText:
+                            ("general.errors.required_phone_number").tr())
+                  ]),
+                )),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -131,7 +133,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     child: IOSKeyboardAction(
                         backgroundColor: CupertinoColors.lightBackgroundGray,
                         textColor: Theme.of(context).primaryColor,
-                        label: 'Sonraki',
+                        label: ("general.next").tr(),
                         focusNode: nextFieldFocus,
                         focusActionType: FocusActionType.next,
                         onTap: () => log("print"),
@@ -139,7 +141,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           textCapitalization: TextCapitalization.words,
                           controller: firstname,
                           focusNode: nextFieldFocus,
-                          decoration: InputDecoration(hintText: "Ad"),
+                          decoration:
+                              InputDecoration(hintText: ("general.fname").tr()),
                         ))),
                 SizedBox(
                     height: 40.h,
@@ -149,7 +152,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     child: IOSKeyboardAction(
                       backgroundColor: CupertinoColors.lightBackgroundGray,
                       textColor: Theme.of(context).primaryColor,
-                      label: 'Tamam',
+                      label: ("general.done").tr(),
                       focusNode: doneFieldFocus,
                       focusActionType: FocusActionType.done,
                       onTap: () => log("print"),
@@ -157,7 +160,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           focusNode: doneFieldFocus,
                           textCapitalization: TextCapitalization.words,
                           controller: lastname,
-                          decoration: InputDecoration(hintText: "Soyad")),
+                          decoration: InputDecoration(
+                              hintText: ("general.lname").tr())),
                     )),
               ],
             ),
@@ -218,7 +222,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   enabled: false,
                   controller: birthfield,
                   decoration:
-                      InputDecoration(hintText: "Doğum Tarihi (Opsiyonel)"),
+                      InputDecoration(hintText: ("general.birthday").tr()),
                 ),
               )),
           user == null
@@ -231,7 +235,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       Padding(
                         padding: const EdgeInsets.only(left: 3.0),
                         child: Text(
-                          "Daha önce bizden hizmet aldınız mı ?",
+                          ("RegisterWidget.didyouservicefromus").tr(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -260,7 +264,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   color: Color.fromARGB(255, 224, 224, 228)),
                               checkboxShape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
-                              title: Text("Evet"),
+                              title: Text(("general.yes").tr()),
                               activeColor: Colors.green,
                               checkColor: Colors.white,
                               value: yesno == null ? false : yesno!,
@@ -288,7 +292,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                   color: Color.fromARGB(255, 224, 224, 228)),
                               checkboxShape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
-                              title: Text("Hayır"),
+                              title: Text(("general.no").tr()),
                               activeColor: Colors.green,
                               checkColor: Colors.white,
                               value: yesno == null ? false : !yesno!,
@@ -398,7 +402,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                         padding:
                                             const EdgeInsets.only(left: 3.0),
                                         child: Text(
-                                          "Davet Kodu",
+                                          ("RegisterWidget.affiliate_code")
+                                              .tr(),
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -419,7 +424,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                                         .withOpacity(0.7),
                                                     fontSize: 14.sp),
                                                 hintText:
-                                                    "Davet Kodunuzu Girin   (Zorunlu Değildir)"),
+                                                    ("RegisterWidget.affiliate_code_enter")
+                                                        .tr()),
                                           ),
                                         ),
                                       ),
@@ -439,7 +445,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       Padding(
                         padding: const EdgeInsets.only(left: 3.0),
                         child: Text(
-                          "Ne kadar süredir müşterimizsiniz ?",
+                          ("RegisterWidget.howlongcustomeryouare").tr(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -456,10 +462,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           max: 2,
                           divisions: 2,
                           label: _currentSliderValue.round() <= 0
-                              ? "1 Yıldan Az"
+                              ? ("RegisterWidget.lessthan1year")
                               : _currentSliderValue.round() >= 2
-                                  ? "3 Yıldan Fazla"
-                                  : "1-3 Yıl Arası",
+                                  ? ("RegisterWidget.morethan3year")
+                                  : ("RegisterWidget.13year"),
                           onChanged: (double value) {
                             setState(() {
                               _currentSliderValue = value;
@@ -506,8 +512,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                                 });
                           });
                     },
-                    child: Text(
-                        "Kullanıcı sözleşmesini ve gizlilik anlaşmasını okudum anladım kabul ediyorum."),
+                    child: Text(("RegisterWidget.agreement_confirm").tr()),
                   ),
                 )
               ],
@@ -516,7 +521,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 40),
             child: MateButon(
-                title: "Kayıt Ol",
+                title: ("general.register").tr(),
                 minimumSize: Size(400.w, 40.h),
                 onPressed: () async {
                   final formData = FormData.fromMap({
