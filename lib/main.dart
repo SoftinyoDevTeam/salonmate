@@ -91,9 +91,7 @@ void main() async {
         splitScreenMode: true,
         builder: (_, child) {
           double screenWidth = ScreenUtil().screenWidth;
-          if (screenWidth > 600) {
-            deviceType = "tablet";
-          }
+
           if (internet == true) {
             return MultiProvider(
               providers: [

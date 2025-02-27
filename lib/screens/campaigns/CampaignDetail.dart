@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,9 @@ class _CampaignDetailsState extends State<CampaignDetails> {
     CampaignModel? kampanyalar = widget.campaignModel;
     return Scaffold(
         appBar: MateBar(
-          kampanyalar!.name == null ? "Yükleniyor" : kampanyalar!.name!,
+          kampanyalar!.name == null
+              ? "CampaignDetail.loading".tr()
+              : kampanyalar!.name!,
           true,
           Theme.of(context).colorScheme.secondary,
           height: 60,
@@ -69,7 +72,8 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                       ? Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: MateButon(
-                              title: "Ürün Satın Al & Hizmet Kazan",
+                              title:
+                                  "CampaignDetail.buy_product_get_service".tr(),
                               minimumSize: Size(4050, 50),
                               onPressed: () async {
                                 Navigator.push(
@@ -86,7 +90,8 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                       ? Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: MateButon(
-                              title: "Ürün Satın Al & Hizmet Kazan",
+                              title:
+                                  "CampaignDetail.buy_product_get_service".tr(),
                               minimumSize: Size(4050, 50),
                               onPressed: () async {
                                 Navigator.push(
@@ -103,7 +108,8 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                       ? Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: MateButon(
-                              title: "Kampanyalı Hizmeti Satın Al",
+                              title:
+                                  "CampaignDetail.buy_discounted_service".tr(),
                               minimumSize: Size(4050, 50),
                               onPressed: () async {
                                 var ustoken = await getPrefString("token");
@@ -114,14 +120,15 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                                   builder: (BuildContext context) =>
                                       CupertinoActionSheet(
                                     title: Text(
-                                      'Tebrikler !',
+                                      'CampaignDetail.congratulations'.tr(),
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 13.sp),
                                     ),
-                                    message: const Text(
-                                        'Kampanyalı hizmet başarıyla sepetenize eklendi.'),
+                                    message: Text(
+                                        'CampaignDetail.service_added_to_cart'
+                                            .tr()),
                                     actions: <CupertinoActionSheetAction>[
                                       CupertinoActionSheetAction(
                                         /// This parameter indicates the action would be a default
@@ -135,8 +142,8 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                                                       ScreenBridge(
                                                           selectedScreen: 0)));
                                         },
-                                        child: const Text(
-                                          'Anasayfaya Git',
+                                        child: Text(
+                                          'CampaignDetail.go_to_home'.tr(),
                                           style: TextStyle(
                                               color:
                                                   CupertinoColors.activeBlue),
@@ -155,7 +162,8 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                                                       ScreenBridge(
                                                           selectedScreen: 3)));
                                         },
-                                        child: const Text('Sepete Git'),
+                                        child: Text(
+                                            'CampaignDetail.go_to_cart'.tr()),
                                       ),
                                     ],
                                   ),
@@ -169,7 +177,9 @@ class _CampaignDetailsState extends State<CampaignDetails> {
                       ? Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: MateButon(
-                              title: "İndirimli Randevu Oluştur",
+                              title:
+                                  "CampaignDetail.create_discounted_appointment"
+                                      .tr(),
                               minimumSize: Size(4050, 50),
                               onPressed: () async {
                                 Navigator.push(

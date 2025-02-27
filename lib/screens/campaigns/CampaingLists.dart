@@ -5,6 +5,7 @@ import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/screens/campaigns/CampaignDetail.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/cards/campaignlistcard.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CampaignLists extends StatefulWidget {
   const CampaignLists({super.key});
@@ -31,7 +32,7 @@ class _CampaignListsState extends State<CampaignLists> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MateBar(
-          "Kampanyalar",
+          "CampaignList.campaigns".tr(),
           true,
           Theme.of(context).colorScheme.secondary,
           height: 70,

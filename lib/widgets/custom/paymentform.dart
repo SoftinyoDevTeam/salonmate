@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -65,8 +66,9 @@ class PaymentFormState extends State<PaymentForm> {
                         glassmorphismConfig: _getGlassmorphismConfig(),
                         cardNumber: cardNumber,
                         expiryDate: expiryDate,
-                        labelCardHolder: "Ad Soyad",
-                        labelExpiredDate: "Ay/Yıl",
+                        labelCardHolder:
+                            ("PaymentScreen.card_holder_name").tr(),
+                        labelExpiredDate: ("PaymentScreen.expiry_date").tr(),
                         cardHolderName: cardHolderName,
                         cvvCode: cvvCode,
                         bankName: 'SALONMATE',
@@ -115,21 +117,24 @@ class PaymentFormState extends State<PaymentForm> {
                                 isExpiryDateVisible: true,
                                 cardHolderName: cardHolderName,
                                 expiryDate: expiryDate,
-                                inputConfiguration: const InputConfiguration(
+                                inputConfiguration: InputConfiguration(
                                   cardNumberDecoration: InputDecoration(
-                                    labelText: 'Kart Numarası',
+                                    labelText:
+                                        ("PaymentScreen.card_number").tr(),
                                     hintText: 'XXXX XXXX XXXX XXXX',
                                   ),
                                   expiryDateDecoration: InputDecoration(
-                                    labelText: 'SKT',
+                                    labelText:
+                                        ("PaymentScreen.expiry_date").tr(),
                                     hintText: 'XX/XX',
                                   ),
                                   cvvCodeDecoration: InputDecoration(
-                                    labelText: 'CVV',
+                                    labelText: ("PaymentScreen.cvv").tr(),
                                     hintText: 'XXX',
                                   ),
                                   cardHolderDecoration: InputDecoration(
-                                    labelText: 'İsim Soyisim',
+                                    labelText:
+                                        ("PaymentScreen.card_holder_name").tr(),
                                   ),
                                 ),
                                 onCreditCardModelChange:
@@ -137,7 +142,7 @@ class PaymentFormState extends State<PaymentForm> {
                               ),
                               const SizedBox(height: 20),
                               MateButon(
-                                  title: "Ödemeyi Yap",
+                                  title: ("PaymentScreen.pay_now").tr(),
                                   minimumSize: const Size(400, 50),
                                   onPressed: _onValidate,
                                   color: Theme.of(context).primaryColor,
@@ -165,7 +170,7 @@ class PaymentFormState extends State<PaymentForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Lütfen kart bilgilerinizi eksiksiz ve doğru şekilde girin.",
+                ("PaymentScreen.payment_failed").tr(),
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),

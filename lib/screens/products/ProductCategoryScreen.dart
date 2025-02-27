@@ -7,6 +7,7 @@ import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/screens/products/ProductDetailScreen.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
 import 'package:salonmate/widgets/empty.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProductCategoryScreen extends StatefulWidget {
   const ProductCategoryScreen({super.key, required this.products});
@@ -24,7 +25,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Ürün Listesi",
+              "ProductCategoryScreen.product_list".tr(),
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.bold),
@@ -38,10 +39,11 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             ? Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: EmptyState(
-                    image: "assets/images/icons/basket.png",
-                    title: "Maalesef",
-                    description: "Öne çıkarılan hiç ürün yok"),
-              )
+                  image: "assets/images/icons/basket.png",
+                  title: "ProductCategoryScreen.unfortunately".tr(),
+                  description:
+                      "ProductCategoryScreen.no_featured_products".tr(),
+                ))
             : GridView.builder(
                 physics: ScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

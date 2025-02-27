@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +18,7 @@ class SallaKazanScreen extends StatefulWidget {
   State<SallaKazanScreen> createState() => _SallaKazanScreenState();
 }
 
-String message = "Ödülleri kazanmak için şimdi salla !";
+String message = ("SallaKazan.shake_to_win").tr();
 late ShakeDetector controller;
 
 class _SallaKazanScreenState extends State<SallaKazanScreen> {
@@ -49,7 +50,7 @@ class _SallaKazanScreenState extends State<SallaKazanScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    message = "Ödülleri kazanmak için şimdi salla !";
+    message = ("SallaKazan.shake_to_win").tr();
     controller.stopListening();
     setState(() {});
     //detector.stopListening();

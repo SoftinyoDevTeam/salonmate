@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:salonmate/widgets/custom/paymentform.dart';
 
@@ -34,7 +35,7 @@ class _PaymentScreenState extends State<PaymentScreen>
             padding: const EdgeInsets.all(12.0),
             child: Container(
               child: Text(
-                "Ödeme Ekranı",
+                ("PaymentScreen.payment_screen_title").tr(),
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                   fontWeight: FontWeight.bold,

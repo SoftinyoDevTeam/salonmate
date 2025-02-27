@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/main.dart';
 import 'dart:io' show Platform;
+import 'package:easy_localization/easy_localization.dart';
 
 class OldVersionScreen extends StatefulWidget {
   const OldVersionScreen({super.key});
@@ -45,7 +46,7 @@ class _OldVersionScreenState extends State<OldVersionScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    "Uygulama Sürümünüz Eski",
+                    "OldVersionScreen.old_version".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 24.sp,
@@ -63,7 +64,7 @@ class _OldVersionScreenState extends State<OldVersionScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    "Uygulamayı kullanmak için lütfen gerekli güncellemeleri yapınız. Güncelleme yapmak için butona tıklayabilirsiniz.",
+                    "OldVersionScreen.update_prompt".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14.sp,

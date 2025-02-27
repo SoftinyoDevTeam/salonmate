@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NoInternetScreen extends StatefulWidget {
   const NoInternetScreen({super.key});
@@ -22,7 +23,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Lütfen İnternet Bağlantınızı Kontrol Edin",
+                        "NoInternetScreen.check_connection".tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 24.sp, color: Colors.black),
                       ),

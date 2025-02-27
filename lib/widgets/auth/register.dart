@@ -26,6 +26,7 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  final registerphonenumberfocusnode = FocusNode();
   final nextFieldFocus = FocusNode();
   final previousFieldFocus = FocusNode();
   final doneFieldFocus = FocusNode();
@@ -76,49 +77,57 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             child: SizedBox(
                 height: 40.h,
                 width: ScreenUtil().screenWidth - 30,
-                child: PhoneFormField(
-                  focusNode: previousFieldFocus,
-                  countryButtonStyle: CountryButtonStyle(),
-                  isCountrySelectionEnabled: true,
-                  isCountryButtonPersistent: true,
-                  countrySelectorNavigator:
-                      CountrySelectorNavigator.draggableBottomSheet(),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  cursorColor: Theme.of(context).primaryColor,
-                  decoration: InputDecoration(
-                    hintText: ("general.phone").tr(),
-                  ),
-                  inputFormatters: [
-                    new LengthLimitingTextInputFormatter(13),
-                  ],
-                  controller: phoneController,
-                  onChanged: (value) async {
-                    if (value!.isValidLength(type: PhoneNumberType.mobile)) {
-                      user =
-                          await checkRegister(value!.nsn.replaceAll(" ", ""));
-                      if (user != null) {
-                        registerType = "update";
-                        var oldname = user!.adSoyad.split(" ");
-                        firstname.text = (oldname.first);
-                        lastname.text = (oldname.last);
-                      } else {
-                        registerType = "insert";
-                        firstname.text = "";
-                        lastname.text = "";
-                      }
-                      //FocusManager.instance.primaryFocus?.unfocus();
-                      setState(() {});
-                    }
-                  },
-                  validator: PhoneValidator.compose([
-                    PhoneValidator.validMobile(context,
-                        errorText: ("general.errors.wrong_phone_number").tr()),
-                    PhoneValidator.required(context,
-                        errorText:
-                            ("general.errors.required_phone_number").tr())
-                  ]),
-                )),
+                child: IOSKeyboardAction(
+                    focusActionType: FocusActionType.next,
+                    label: ("general.next").tr(),
+                    backgroundColor: CupertinoColors.lightBackgroundGray,
+                    textColor: Theme.of(context).primaryColor,
+                    focusNode: registerphonenumberfocusnode,
+                    child: PhoneFormField(
+                      autofocus: true,
+                      focusNode: registerphonenumberfocusnode,
+                      isCountrySelectionEnabled: true,
+                      isCountryButtonPersistent: true,
+                      countrySelectorNavigator:
+                          CountrySelectorNavigator.draggableBottomSheet(),
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      cursorColor: Theme.of(context).primaryColor,
+                      decoration: InputDecoration(
+                        hintText: ("general.phone").tr(),
+                      ),
+                      inputFormatters: [
+                        new LengthLimitingTextInputFormatter(13),
+                      ],
+                      controller: phoneController,
+                      onChanged: (value) async {
+                        if (value!
+                            .isValidLength(type: PhoneNumberType.mobile)) {
+                          user = await checkRegister(
+                              value!.nsn.replaceAll(" ", ""));
+                          if (user != null) {
+                            registerType = "update";
+                            var oldname = user!.adSoyad.split(" ");
+                            firstname.text = (oldname.first);
+                            lastname.text = (oldname.last);
+                          } else {
+                            registerType = "insert";
+                            firstname.text = "";
+                            lastname.text = "";
+                          }
+                          //FocusManager.instance.primaryFocus?.unfocus();
+                          setState(() {});
+                        }
+                      },
+                      validator: PhoneValidator.compose([
+                        PhoneValidator.validMobile(context,
+                            errorText:
+                                ("general.errors.wrong_phone_number").tr()),
+                        PhoneValidator.required(context,
+                            errorText:
+                                ("general.errors.required_phone_number").tr())
+                      ]),
+                    ))),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

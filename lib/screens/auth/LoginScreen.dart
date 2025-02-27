@@ -165,12 +165,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             IOSKeyboardAction(
                                 focusActionType: FocusActionType.done,
-                                label: "Klavyeyi Kapat",
+                                label: ("general.close_keyboard").tr(),
                                 backgroundColor:
                                     CupertinoColors.lightBackgroundGray,
                                 textColor: Theme.of(context).primaryColor,
                                 focusNode: phoneFocusNode,
                                 child: PhoneFormField(
+                                  focusNode: phoneFocusNode,
+                                  autofocus: true,
                                   keyboardType: Platform.isIOS
                                       ? TextInputType.number
                                       : TextInputType.number,

@@ -1,4 +1,4 @@
-package com.salonmate.musteri
+package com.salonmate.baharbabacan
 
 import io.flutter.embedding.android.FlutterActivity
 

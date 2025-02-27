@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/screens/main/SallaKazan.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SallaKazanSonuc extends StatefulWidget {
   const SallaKazanSonuc({super.key, required this.message});
@@ -67,7 +68,7 @@ class _SallaKazanSonucState extends State<SallaKazanSonuc> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Hediye Hizmetlerime Git",
+                              "SallaKazanSonuc.go_to_gift_services".tr(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color:

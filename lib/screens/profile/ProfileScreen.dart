@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salonmate/core/const.dart';
@@ -12,6 +13,7 @@ import 'package:salonmate/screens/profile/SiparislerimScreen.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
 import 'package:salonmate/widgets/loader.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -34,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MateBar("Profilim", true, Colors.white,
+      appBar: MateBar(("ProfileScreen.my_profile").tr(), true, Colors.white,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           divider: false),
       body: userData == null
@@ -98,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Davet Kodunu Paylaş : $affCodePrefix${userData!.id}",
+                                                  "${("ProfileScreen.share_invite_code").tr()} : $affCodePrefix${userData!.id}",
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -111,13 +113,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0),
-                                              child: Text(
-                                                "Kodu istediğiniz kadar arkadaşınızla paylaşıp sunduğumuz \navantajlardan faydalanabilirsiniz.",
-                                                style: TextStyle(
-                                                    fontSize: 8.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Theme.of(context)
-                                                        .hintColor),
+                                              child: Container(
+                                                width: 200.w,
+                                                child: Text(
+                                                  ("ProfileScreen.invite_code_message")
+                                                      .tr(),
+                                                  style: TextStyle(
+                                                      fontSize: 8.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Theme.of(context)
+                                                          .hintColor),
+                                                ),
                                               ),
                                             )
                                           ]),
@@ -166,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Kişisel Bilgilerim",
+                                          ("ProfileScreen.personal_info").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -213,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Cüzdanım",
+                                          ("ProfileScreen.my_wallet").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -260,7 +267,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Siparişlerim",
+                                          ("ProfileScreen.my_orders").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -307,7 +314,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Randevularım",
+                                          ("ProfileScreen.my_appointments")
+                                              .tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -354,7 +362,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Kampanyalar",
+                                          ("ProfileScreen.campaigns").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -407,50 +415,74 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             //     ),
                             //   ),
                             // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 18.0),
-                            //   child: Divider(
-                            //     height: 1,
-                            //     color: Theme.of(context).colorScheme.outline,
-                            //   ),
-                            // ),
-                            // Container(
-                            //   height: 60.h,
-                            //   width: ScreenUtil().screenWidth,
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(18.0),
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.start,
-                            //       children: [
-                            //         Icon(
-                            //           Icons.language_outlined,
-                            //           color: Theme.of(context).hintColor,
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(left: 8.0),
-                            //           child: Text(
-                            //             "Dil Değiştir",
-                            //             style: TextStyle(
-                            //                 color: Theme.of(context)
-                            //                     .primaryColorDark),
-                            //           ),
-                            //         ),
-                            //         Spacer(),
-                            //         Icon(
-                            //           Icons.chevron_right_outlined,
-                            //           color: Theme.of(context).hintColor,
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 18.0),
-                            //   child: Divider(
-                            //     height: 1,
-                            //     color: Theme.of(context).colorScheme.outline,
-                            //   ),
-                            // ),
+
+                            GestureDetector(
+                              onTap: () async {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CupertinoActionSheet(
+                                      title: Text(
+                                          "ProfileScreen.change_language".tr()),
+                                      actions: context.supportedLocales
+                                          .map((Locale locale) {
+                                        return CupertinoActionSheetAction(
+                                          onPressed: () {
+                                            context.setLocale(locale);
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text(locale.languageCode).tr(),
+                                        );
+                                      }).toList(),
+                                      cancelButton: CupertinoActionSheetAction(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text("general.cancel").tr(),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 60.h,
+                                width: ScreenUtil().screenWidth,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.language_outlined,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          "ProfileScreen.change_language".tr(),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Icon(
+                                        Icons.chevron_right_outlined,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 18.0),
+                              child: Divider(
+                                height: 1,
+                                color: Theme.of(context).colorScheme.outline,
+                              ),
+                            ),
                             GestureDetector(
                               onTap: () async {
                                 await logout();
@@ -476,7 +508,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          "Çıkış Yap",
+                                          "ProfileScreen.logout".tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -519,7 +551,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Hesabımı Kalıcı Olarak Sil",
+                                        "ProfileScreen.delete_account".tr(),
                                         style: TextStyle(
                                             fontSize: 10.sp,
                                             color: Theme.of(context)

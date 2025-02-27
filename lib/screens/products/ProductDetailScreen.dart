@@ -5,6 +5,7 @@ import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/custom/mateimage.dart';
@@ -34,7 +35,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Toplam",
+                    "ProductDetailScreen.total".tr(),
                     style: TextStyle(
                         fontSize: 8.sp,
                         color: Theme.of(context).colorScheme.error,
@@ -48,7 +49,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ],
               ),
               MateButon(
-                  title: "Sepete Ekle",
+                  title: "ProductDetailScreen.add_to_cart".tr(),
                   minimumSize: Size(50.w, 40.h),
                   onPressed: () async {
                     String? userToken = await getPrefString("token");
@@ -129,10 +130,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Ürün Özellikleri",
+                      "ProductDetailScreen.product_features".tr(),
                       style: TextStyle(fontWeight: FontWeight.w600),
                       textAlign: TextAlign.start,
                     ),
@@ -262,14 +263,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               // Divider(
               //   color: Theme.of(context).colorScheme.outline,
               // ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Icon(Icons.discount),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Kampanyalar",
+                      "ProductDetailScreen.campaigns".tr(),
                       style: TextStyle(fontWeight: FontWeight.w600),
                       textAlign: TextAlign.start,
                     ),

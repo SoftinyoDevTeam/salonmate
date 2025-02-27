@@ -24,12 +24,15 @@ class CodegenLoader extends AssetLoader{
     "birthday": "Doğum Tarihi",
     "okey": "Tamam",
     "done": "Bitti",
+    "cancel": "İptal",
     "next": "Sonraki",
     "prev": "Önceki",
     "welcome": "Hoş Geldiniz",
     "yes": "Evet",
     "no": "Hayır",
     "shakewin": "Salla ve Kazan",
+    "close_keyboard": "Klavyeyi Kapat",
+    "search_product": "Ürün Ara",
     "errors": {
       "required_phone_number": "Telefon numarası gereklidir",
       "wrong_phone_number": "Geçersiz telefon numarası"
@@ -75,72 +78,278 @@ class CodegenLoader extends AssetLoader{
     "create_appointment": "Randevumu Oluştur",
     "prepayment": "Ön Ödeme Yap",
     "add_appointment": "Randevu Ekle"
+  },
+  "HomeScreen": {
+    "wallet": "Cüzdanım",
+    "campaigns": "Kampanyalar",
+    "see_all": "Tümünü Gör",
+    "featured_products": "Öne Çıkan Ürünler",
+    "no_featured_products": "Öne çıkarılan hiç ürün yok",
+    "unfortunately": "Maalesef"
+  },
+  "SallaKazan": {
+    "shake_to_win": "Ödülleri kazanmak için şimdi salla!",
+    "shaking": "Sallıyorsunuz...",
+    "congratulations": "Tebrikler!",
+    "you_won": "Kazandınız!",
+    "try_again": "Tekrar Deneyin"
+  },
+  "SallaKazanSonuc": {
+    "go_to_gift_services": "Hediye Hizmetlerime Git"
+  },
+  "ScreenBridge": {
+    "home": "Anasayfa",
+    "products": "Ürünler",
+    "appointment": "Randevu",
+    "cart": "Sepetim",
+    "support": "Canlı Destek"
+  },
+  "PaymentScreen": {
+    "payment_screen_title": "Ödeme Ekranı",
+    "total_amount": "Toplam Tutar",
+    "payment_method": "Ödeme Yöntemi",
+    "credit_card": "Kredi Kartı",
+    "cash": "Nakit",
+    "pay_now": "Şimdi Öde",
+    "enter_card_details": "Kart Bilgilerini Girin",
+    "card_number": "Kart Numarası",
+    "expiry_date": "Ay/Yıl",
+    "cvv": "CVV",
+    "card_holder_name": "Kart Sahibi Adı",
+    "payment_successful": "Ödeme Başarılı",
+    "payment_failed": "Ödeme Başarısız",
+    "try_again": "Tekrar Deneyin"
+  },
+  "ProfileScreen": {
+    "my_profile": "Profilim",
+    "share_invite_code": "Davet Kodunu Paylaş",
+    "personal_info": "Kişisel Bilgilerim",
+    "my_wallet": "Cüzdanım",
+    "my_orders": "Siparişlerim",
+    "my_appointments": "Randevularım",
+    "campaigns": "Kampanyalar",
+    "change_language": "Dil Değiştir",
+    "logout": "Çıkış Yap",
+    "delete_account": "Hesabımı Kalıcı Olarak Sil",
+    "invite_code_message": "Kodu istediğiniz kadar arkadaşınızla paylaşıp sunduğumuz avantajlardan faydalanabilirsiniz.",
+    "invite_code_subject": "Davet Kodumla Üye Ol %30 İndirim Kazan",
+    "invite_code_text": "davet kodumla uygulamayı indir ilk harcamanda %30 indirim kazan.",
+    "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+  },
+  "SalonSecScreen": {
+    "enter_code": "Lütfen salonunuzdan aldığınız kodu giriniz",
+    "wrong_salon_code": "Yanlış salon kodu girdiniz. Lütfen tekrar deneyin..."
+  },
+  "SozlesmeScreen": {
+    "accept_terms": "Okudum Anladım Kabul Ettim"
+  },
+  "CampaignDetail": {
+    "loading": "Yükleniyor",
+    "buy_product_get_service": "Ürün Satın Al & Hizmet Kazan",
+    "buy_discounted_service": "Kampanyalı Hizmeti Satın Al",
+    "congratulations": "Tebrikler !",
+    "service_added_to_cart": "Kampanyalı hizmet başarıyla sepetenize eklendi.",
+    "go_to_home": "Anasayfaya Git",
+    "go_to_cart": "Sepete Git",
+    "create_discounted_appointment": "İndirimli Randevu Oluştur"
+  },
+  "CampaignList": {
+    "campaigns": "Kampanyalar"
+  },
+  "NoInternetScreen": {
+    "check_connection": "Lütfen İnternet Bağlantınızı Kontrol Edin"
+  },
+  "OldVersionScreen": {
+    "old_version": "Uygulama Sürümünüz Eski",
+    "update_prompt": "Uygulamayı kullanmak için lütfen gerekli güncellemeleri yapınız. Güncelleme yapmak için butona tıklayabilirsiniz."
+  },
+  "ProductCategoryScreen": {
+    "product_list": "Ürün Listesi",
+    "unfortunately": "Maalesef",
+    "no_featured_products": "Öne çıkarılan hiç ürün yok"
+  },
+  "ProductDetailScreen": {
+    "total": "Toplam",
+    "add_to_cart": "Sepete Ekle",
+    "product_features": "Ürün Özellikleri",
+    "campaigns": "Kampanyalar"
   }
 };
 static const Map<String,dynamic> ru = {
   "general": {
-    "login": "Giriş Yap",
-    "register": "Üye Ol"
+    "login": "Войти",
+    "register": "Зарегистрироваться",
+    "phone": "Номер телефона",
+    "fname": "Имя",
+    "lname": "Фамилия",
+    "birthday": "Дата рождения",
+    "okey": "ОК",
+    "done": "Готово",
+    "cancel": "Отмена",
+    "next": "Далее",
+    "prev": "Назад",
+    "welcome": "Добро пожаловать",
+    "yes": "Да",
+    "no": "Нет",
+    "shakewin": "встряхнуть победу",
+    "close_keyboard": "Закрыть клавиатуру",
+    "search_product": "Поиск продукта",
+    "errors": {
+      "required_phone_number": "Требуется номер телефона",
+      "wrong_phone_number": "Неверный номер телефона"
+    }
   },
   "SplashScreen": {
-    "splash_title_1": "Saç ürünlerini en avantajlı koşullarla satın alın.",
-    "splash_text_1": "Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.",
-    "splash_title_2": "Kazandıran Arkadaşlık",
-    "splash_text_2": "Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.",
-    "splash_title_3": "Salla Kazan",
-    "splash_text_3": "Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın."
+    "splash_title_1": "Покупайте средства для волос на самых выгодных условиях.",
+    "splash_text_1": "При покупке продукта через наше приложение вы получаете бесплатную услугу в нашем салоне.",
+    "splash_title_2": "Дружба с наградами",
+    "splash_text_2": "Рекомендуйте наше приложение своим друзьям. Ваши друзья получат скидку на первую услугу, а вы заработаете баллы.",
+    "splash_title_3": "Тряси и выигрывай",
+    "splash_text_3": "Трясите телефон раз в день и выигрывайте сюрпризы, действующие в нашем салоне."
+  },
+  "RegisterWidget": {
+    "agreement_confirm": "Я прочитал и принимаю Пользовательское соглашение и Политику конфиденциальности.",
+    "didyouservicefromus": "Вы уже пользовались нашими услугами?",
+    "affiliate_code": "Код партнера",
+    "affiliate_code_enter": "Введите ваш партнерский код",
+    "howlongcustomeryouare": "Как долго вы являетесь нашим клиентом?",
+    "lessthan1year": "Менее 1 года",
+    "13year": "1-3 года",
+    "morethan3year": "Более 3 лет"
+  },
+  "LoginScreen": {},
+  "ScheduleScreen": {
+    "appointment_create": "Создать запись",
+    "select_branch": "Выберите филиал",
+    "select_personnel": "Выберите персонал",
+    "service_added_to_cart": "Услуга добавлена в корзину.",
+    "prepayment_required": "Для создания записи требуется предоплата.",
+    "prepayment_info": "После предоплаты вы сможете выбрать персонал, дату и время для услуги.",
+    "add_another_appointment": "Нажмите кнопку 'Добавить запись', чтобы добавить еще одну услугу в корзину.",
+    "select_personnel_prompt": "Выберите персонал*",
+    "branch_selection": "Выберите филиал",
+    "select_time": "Выберите время",
+    "service": "Услуга",
+    "personnel": "Персонал",
+    "date": "Дата",
+    "time": "Время",
+    "back": "Назад",
+    "add_to_cart": "Добавить в корзину",
+    "next": "Далее",
+    "create_appointment": "Создать запись",
+    "prepayment": "Сделать предоплату",
+    "add_appointment": "Добавить запись"
+  },
+  "HomeScreen": {
+    "wallet": "Мой кошелек",
+    "campaigns": "Кампании",
+    "see_all": "Смотреть все",
+    "featured_products": "Рекомендуемые продукты",
+    "no_featured_products": "Нет рекомендуемых продуктов",
+    "unfortunately": "К сожалению"
+  },
+  "SallaKazan": {
+    "shake_to_win": "Тряси, чтобы выиграть призы!",
+    "shaking": "Трясете...",
+    "congratulations": "Поздравляем!",
+    "you_won": "Вы выиграли!",
+    "try_again": "Попробуйте снова"
+  },
+  "ScreenBridge": {
+    "home": "Главная",
+    "products": "Продукты",
+    "appointment": "Запись",
+    "cart": "Корзина",
+    "support": "Поддержка"
+  },
+  "PaymentScreen": {
+    "payment_screen_title": "Экран оплаты",
+    "total_amount": "Общая сумма",
+    "payment_method": "Способ оплаты",
+    "credit_card": "Кредитная карта",
+    "cash": "Наличные",
+    "pay_now": "Оплатить сейчас",
+    "enter_card_details": "Введите данные карты",
+    "card_number": "Номер карты",
+    "expiry_date": "Месяц/Год",
+    "cvv": "CVV",
+    "card_holder_name": "Имя владельца карты",
+    "payment_successful": "Оплата успешна",
+    "payment_failed": "Оплата не удалась",
+    "try_again": "Попробуйте снова"
+  },
+  "ProfileScreen": {
+    "my_profile": "Мой профиль",
+    "share_invite_code": "Поделиться кодом приглашения",
+    "personal_info": "Моя личная информация",
+    "my_wallet": "Мой кошелек",
+    "my_orders": "Мои заказы",
+    "my_appointments": "Мои записи",
+    "campaigns": "Кампании",
+    "change_language": "Сменить язык",
+    "logout": "Выйти",
+    "delete_account": "Удалить аккаунт навсегда",
+    "invite_code_message": "Поделитесь кодом с друзьями и воспользуйтесь нашими преимуществами.",
+    "invite_code_subject": "Зарегистрируйтесь с моим кодом и получите скидку 30%",
+    "invite_code_text": "Скачайте приложение с моим кодом и получите скидку 30% на первую покупку.",
+    "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
   }
 };
 static const Map<String,dynamic> en = {
   "general": {
-    "login": "Log In",
-    "register": "Sign Up",
+    "login": "Login",
+    "register": "Register",
     "phone": "Phone Number",
     "fname": "First Name",
     "lname": "Last Name",
     "birthday": "Date of Birth",
     "okey": "OK",
     "done": "Done",
+    "cancel": "Cancel",
     "next": "Next",
     "prev": "Previous",
     "welcome": "Welcome",
     "yes": "Yes",
     "no": "No",
     "shakewin": "Shake and Win",
+    "close_keyboard": "Close Keyboard",
+    "search_product": "Search Product",
     "errors": {
       "required_phone_number": "Phone number is required",
       "wrong_phone_number": "Invalid phone number"
     }
   },
   "SplashScreen": {
-    "splash_title_1": "Buy hair products at the most advantageous conditions.",
-    "splash_text_1": "When you purchase a product from our app, you earn a free service from our salon.",
-    "splash_title_2": "Rewarding Friendship",
-    "splash_text_2": "Recommend our app to your friends. Both your friends get their first service at a discount and you earn points.",
+    "splash_title_1": "Buy hair products at the best conditions.",
+    "splash_text_1": "When you purchase a product through our app, you get a free service at our salon.",
+    "splash_title_2": "Friendship with Rewards",
+    "splash_text_2": "Recommend our app to your friends. Your friends will get a discount on their first service, and you will earn points.",
     "splash_title_3": "Shake and Win",
-    "splash_text_3": "Shake your phone once a day and win surprise gifts valid at our salon."
+    "splash_text_3": "Shake your phone once a day and win surprises valid at our salon."
   },
   "RegisterWidget": {
-    "agreement_confirm": "I have read and agree to the Terms of Use and Privacy Policy.",
-    "didyouservicefromus": "Have you ever received a service from us before?",
+    "agreement_confirm": "I have read and accept the User Agreement and Privacy Policy.",
+    "didyouservicefromus": "Have you used our services before?",
     "affiliate_code": "Affiliate Code",
-    "affiliate_code_enter": "Please enter your affiliate code",
+    "affiliate_code_enter": "Enter your affiliate code",
     "howlongcustomeryouare": "How long have you been our customer?",
     "lessthan1year": "Less than 1 year",
-    "13year": "1-3 Years",
+    "13year": "1-3 years",
     "morethan3year": "More than 3 years"
   },
   "LoginScreen": {},
   "ScheduleScreen": {
     "appointment_create": "Create Appointment",
     "select_branch": "Select Branch",
-    "select_personnel": "Select the personnel you want to receive service from",
-    "service_added_to_cart": "Your service has been added to the cart.",
-    "prepayment_required": "You need to make a prepayment to create your appointment.",
-    "prepayment_info": "After making the prepayment, you can select the personnel, day, and time for the service you want to receive.",
-    "add_another_appointment": "You can add another service to your cart by clicking the add appointment button.",
+    "select_personnel": "Select Personnel",
+    "service_added_to_cart": "Service added to cart.",
+    "prepayment_required": "Prepayment is required to create an appointment.",
+    "prepayment_info": "After prepayment, you can select personnel, date, and time for the service.",
+    "add_another_appointment": "Click 'Add Appointment' to add another service to your cart.",
     "select_personnel_prompt": "Select Personnel*",
-    "branch_selection": "Branch Selection",
+    "branch_selection": "Select Branch",
     "select_time": "Select Time",
     "service": "Service",
     "personnel": "Personnel",
@@ -149,23 +358,185 @@ static const Map<String,dynamic> en = {
     "back": "Back",
     "add_to_cart": "Add to Cart",
     "next": "Next",
-    "create_appointment": "Create My Appointment",
+    "create_appointment": "Create Appointment",
     "prepayment": "Make Prepayment",
     "add_appointment": "Add Appointment"
+  },
+  "HomeScreen": {
+    "wallet": "My Wallet",
+    "campaigns": "Campaigns",
+    "see_all": "See All",
+    "featured_products": "Featured Products",
+    "no_featured_products": "No featured products",
+    "unfortunately": "Unfortunately"
+  },
+  "SallaKazan": {
+    "shake_to_win": "Shake to win prizes!",
+    "shaking": "Shaking...",
+    "congratulations": "Congratulations!",
+    "you_won": "You won!",
+    "try_again": "Try Again"
+  },
+  "ScreenBridge": {
+    "home": "Home",
+    "products": "Products",
+    "appointment": "Appointment",
+    "cart": "Cart",
+    "support": "Support"
+  },
+  "PaymentScreen": {
+    "payment_screen_title": "Payment Screen",
+    "total_amount": "Total Amount",
+    "payment_method": "Payment Method",
+    "credit_card": "Credit Card",
+    "cash": "Cash",
+    "pay_now": "Pay Now",
+    "enter_card_details": "Enter Card Details",
+    "card_number": "Card Number",
+    "expiry_date": "Month/Year",
+    "cvv": "CVV",
+    "card_holder_name": "Card Holder Name",
+    "payment_successful": "Payment Successful",
+    "payment_failed": "Payment Failed",
+    "try_again": "Try Again"
+  },
+  "ProfileScreen": {
+    "my_profile": "My Profile",
+    "share_invite_code": "Share Invite Code",
+    "personal_info": "My Personal Information",
+    "my_wallet": "My Wallet",
+    "my_orders": "My Orders",
+    "my_appointments": "My Appointments",
+    "campaigns": "Campaigns",
+    "change_language": "Change Language",
+    "logout": "Logout",
+    "delete_account": "Delete Account Permanently",
+    "invite_code_message": "Share the code with your friends and enjoy our benefits.",
+    "invite_code_subject": "Register with my code and get a 30% discount",
+    "invite_code_text": "Download the app with my code and get a 30% discount on your first purchase.",
+    "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
   }
 };
 static const Map<String,dynamic> et = {
   "general": {
-    "login": "Giriş Yap",
-    "register": "Üye Ol"
+    "login": "Logi sisse",
+    "register": "Registreeru",
+    "phone": "Telefoninumber",
+    "fname": "Eesnimi",
+    "lname": "Perekonnanimi",
+    "birthday": "Sünnikuupäev",
+    "okey": "OK",
+    "done": "Valmis",
+    "cancel": "Tühista",
+    "next": "Järgmine",
+    "prev": "Eelmine",
+    "welcome": "Tere tulemast",
+    "yes": "Jah",
+    "no": "Ei",
+    "shakewin": "Raputa ja võida",
+    "close_keyboard": "Sulge klaviatuur",
+    "search_product": "Otsi toodet",
+    "errors": {
+      "required_phone_number": "Telefoninumber on kohustuslik",
+      "wrong_phone_number": "Vale telefoninumber"
+    }
   },
   "SplashScreen": {
-    "splash_title_1": "Saç ürünlerini en avantajlı koşullarla satın alın.",
-    "splash_text_1": "Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.",
-    "splash_title_2": "Kazandıran Arkadaşlık",
-    "splash_text_2": "Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.",
-    "splash_title_3": "Salla Kazan",
-    "splash_text_3": "Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın."
+    "splash_title_1": "Osta juuksetooteid parimatel tingimustel.",
+    "splash_text_1": "Kui ostate toote meie rakenduse kaudu, saate meie salongis tasuta teenuse.",
+    "splash_title_2": "Sõprus koos preemiatega",
+    "splash_text_2": "Soovitage meie rakendust oma sõpradele. Teie sõbrad saavad oma esimese teenuse soodustusega ja teie teenite punkte.",
+    "splash_title_3": "Raputa ja võida",
+    "splash_text_3": "Raputage oma telefoni kord päevas ja võitke üllatusi, mis kehtivad meie salongis."
+  },
+  "RegisterWidget": {
+    "agreement_confirm": "Olen lugenud ja nõustun Kasutajalepingu ja Privaatsuspoliitikaga.",
+    "didyouservicefromus": "Kas olete varem meie teenuseid kasutanud?",
+    "affiliate_code": "Partnerkood",
+    "affiliate_code_enter": "Sisestage oma partnerkood",
+    "howlongcustomeryouare": "Kui kaua olete olnud meie klient?",
+    "lessthan1year": "Vähem kui 1 aasta",
+    "13year": "1-3 aastat",
+    "morethan3year": "Rohkem kui 3 aastat"
+  },
+  "LoginScreen": {},
+  "ScheduleScreen": {
+    "appointment_create": "Loo kohtumine",
+    "select_branch": "Valige haru",
+    "select_personnel": "Valige personal",
+    "service_added_to_cart": "Teenuse lisamine ostukorvi.",
+    "prepayment_required": "Kohtumise loomiseks on vajalik ettemaks.",
+    "prepayment_info": "Pärast ettemaksu saate valida teenuse jaoks personali, kuupäeva ja kellaaja.",
+    "add_another_appointment": "Klõpsake 'Lisa kohtumine', et lisada oma ostukorvi veel üks teenus.",
+    "select_personnel_prompt": "Valige personal*",
+    "branch_selection": "Valige haru",
+    "select_time": "Valige aeg",
+    "service": "Teenindus",
+    "personnel": "Personal",
+    "date": "Kuupäev",
+    "time": "Aeg",
+    "back": "Tagasi",
+    "add_to_cart": "Lisa ostukorvi",
+    "next": "Järgmine",
+    "create_appointment": "Loo kohtumine",
+    "prepayment": "Tee ettemaks",
+    "add_appointment": "Lisa kohtumine"
+  },
+  "HomeScreen": {
+    "wallet": "Minu rahakott",
+    "campaigns": "Kampaaniad",
+    "see_all": "Vaata kõiki",
+    "featured_products": "Esiletõstetud tooted",
+    "no_featured_products": "Esiletõstetud tooted puuduvad",
+    "unfortunately": "Kahjuks"
+  },
+  "SallaKazan": {
+    "shake_to_win": "Raputa, et võita auhindu!",
+    "shaking": "Raputamine...",
+    "congratulations": "Palju õnne!",
+    "you_won": "Sa võitsid!",
+    "try_again": "Proovi uuesti"
+  },
+  "ScreenBridge": {
+    "home": "Kodu",
+    "products": "Tooted",
+    "appointment": "Kohtumine",
+    "cart": "Ostukorv",
+    "support": "Tugi"
+  },
+  "PaymentScreen": {
+    "payment_screen_title": "Makseekraan",
+    "total_amount": "Kogusumma",
+    "payment_method": "Makseviis",
+    "credit_card": "Krediitkaart",
+    "cash": "Sularaha",
+    "pay_now": "Maksa kohe",
+    "enter_card_details": "Sisestage kaardi andmed",
+    "card_number": "Kaardi number",
+    "expiry_date": "Kuu/Aasta",
+    "cvv": "CVV",
+    "card_holder_name": "Kaardiomaniku nimi",
+    "payment_successful": "Makse õnnestus",
+    "payment_failed": "Makse ebaõnnestus",
+    "try_again": "Proovi uuesti"
+  },
+  "ProfileScreen": {
+    "my_profile": "Minu profiil",
+    "share_invite_code": "Jaga kutsekoodi",
+    "personal_info": "Minu isiklik teave",
+    "my_wallet": "Minu rahakott",
+    "my_orders": "Minu tellimused",
+    "my_appointments": "Minu kohtumised",
+    "campaigns": "Kampaaniad",
+    "change_language": "Muuda keelt",
+    "logout": "Logi välja",
+    "delete_account": "Kustuta konto jäädavalt",
+    "invite_code_message": "Jagage koodi oma sõpradega ja nautige meie eeliseid.",
+    "invite_code_subject": "Registreeru minu koodiga ja saa 30% allahindlust",
+    "invite_code_text": "Laadige rakendus alla minu koodiga ja saate oma esimese ostu puhul 30% allahindlust.",
+    "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "ru": ru, "en": en, "et": et};

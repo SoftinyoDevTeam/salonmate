@@ -1,14 +1,123 @@
 {
-    "general":{
-        "login":"Giriş Yap",
-        "register":"Üye Ol"
+    "general": {
+        "login": "Logi sisse",
+        "register": "Registreeru",
+        "phone": "Telefoninumber",
+        "fname": "Eesnimi",
+        "lname": "Perekonnanimi",
+        "birthday": "Sünnikuupäev",
+        "okey": "OK",
+        "done": "Valmis",
+        "cancel": "Tühista",
+        "next": "Järgmine",
+        "prev": "Eelmine",
+        "welcome": "Tere tulemast",
+        "yes": "Jah",
+        "no": "Ei",
+        "shakewin": "Raputa ja võida",
+        "close_keyboard": "Sulge klaviatuur",
+        "search_product": "Otsi toodet",
+        "errors": {
+            "required_phone_number": "Telefoninumber on kohustuslik",
+            "wrong_phone_number": "Vale telefoninumber"
+        }
     },
-    "SplashScreen":{
-        "splash_title_1":"Saç ürünlerini en avantajlı koşullarla satın alın.",
-        "splash_text_1":"Uygulamamızdan ürün satın aldığınızda salonumuzdan hediye hizmet kazanırsınız.",  
-        "splash_title_2":"Kazandıran Arkadaşlık",
-        "splash_text_2":"Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alsınlar hem de siz puan kazanın.",  
-        "splash_title_3":"Salla Kazan",
-        "splash_text_3":"Telefonunuzu günde bir defa sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın."
+    "SplashScreen": {
+        "splash_title_1": "Osta juuksetooteid parimatel tingimustel.",
+        "splash_text_1": "Kui ostate toote meie rakenduse kaudu, saate meie salongis tasuta teenuse.",
+        "splash_title_2": "Sõprus koos preemiatega",
+        "splash_text_2": "Soovitage meie rakendust oma sõpradele. Teie sõbrad saavad oma esimese teenuse soodustusega ja teie teenite punkte.",
+        "splash_title_3": "Raputa ja võida",
+        "splash_text_3": "Raputage oma telefoni kord päevas ja võitke üllatusi, mis kehtivad meie salongis."
+    },
+    "RegisterWidget": {
+        "agreement_confirm": "Olen lugenud ja nõustun Kasutajalepingu ja Privaatsuspoliitikaga.",
+        "didyouservicefromus": "Kas olete varem meie teenuseid kasutanud?",
+        "affiliate_code": "Partnerkood",
+        "affiliate_code_enter": "Sisestage oma partnerkood",
+        "howlongcustomeryouare": "Kui kaua olete olnud meie klient?",
+        "lessthan1year": "Vähem kui 1 aasta",
+        "13year": "1-3 aastat",
+        "morethan3year": "Rohkem kui 3 aastat"
+    },
+    "LoginScreen": {
+
+    },
+    "ScheduleScreen": {
+        "appointment_create": "Loo kohtumine",
+        "select_branch": "Valige haru",
+        "select_personnel": "Valige personal",
+        "service_added_to_cart": "Teenuse lisamine ostukorvi.",
+        "prepayment_required": "Kohtumise loomiseks on vajalik ettemaks.",
+        "prepayment_info": "Pärast ettemaksu saate valida teenuse jaoks personali, kuupäeva ja kellaaja.",
+        "add_another_appointment": "Klõpsake 'Lisa kohtumine', et lisada oma ostukorvi veel üks teenus.",
+        "select_personnel_prompt": "Valige personal*",
+        "branch_selection": "Valige haru",
+        "select_time": "Valige aeg",
+        "service": "Teenindus",
+        "personnel": "Personal",
+        "date": "Kuupäev",
+        "time": "Aeg",
+        "back": "Tagasi",
+        "add_to_cart": "Lisa ostukorvi",
+        "next": "Järgmine",
+        "create_appointment": "Loo kohtumine",
+        "prepayment": "Tee ettemaks",
+        "add_appointment": "Lisa kohtumine"
+    },
+    "HomeScreen": {
+        "wallet": "Minu rahakott",
+        "campaigns": "Kampaaniad",
+        "see_all": "Vaata kõiki",
+        "featured_products": "Esiletõstetud tooted",
+        "no_featured_products": "Esiletõstetud tooted puuduvad",
+        "unfortunately": "Kahjuks"
+    },
+    "SallaKazan": {
+        "shake_to_win": "Raputa, et võita auhindu!",
+        "shaking": "Raputamine...",
+        "congratulations": "Palju õnne!",
+        "you_won": "Sa võitsid!",
+        "try_again": "Proovi uuesti"
+    },
+    "ScreenBridge": {
+        "home": "Kodu",
+        "products": "Tooted",
+        "appointment": "Kohtumine",
+        "cart": "Ostukorv",
+        "support": "Tugi"
+    },
+    "PaymentScreen": {
+        "payment_screen_title": "Makseekraan",
+        "total_amount": "Kogusumma",
+        "payment_method": "Makseviis",
+        "credit_card": "Krediitkaart",
+        "cash": "Sularaha",
+        "pay_now": "Maksa kohe",
+        "enter_card_details": "Sisestage kaardi andmed",
+        "card_number": "Kaardi number",
+        "expiry_date": "Kuu/Aasta",
+        "cvv": "CVV",
+        "card_holder_name": "Kaardiomaniku nimi",
+        "payment_successful": "Makse õnnestus",
+        "payment_failed": "Makse ebaõnnestus",
+        "try_again": "Proovi uuesti"
+    },
+    "ProfileScreen": {
+        "my_profile": "Minu profiil",
+        "share_invite_code": "Jaga kutsekoodi",
+        "personal_info": "Minu isiklik teave",
+        "my_wallet": "Minu rahakott",
+        "my_orders": "Minu tellimused",
+        "my_appointments": "Minu kohtumised",
+        "campaigns": "Kampaaniad",
+        "change_language": "Muuda keelt",
+        "logout": "Logi välja",
+        "delete_account": "Kustuta konto jäädavalt",
+        "invite_code_message": "Jagage koodi oma sõpradega ja nautige meie eeliseid.",
+        "invite_code_subject": "Registreeru minu koodiga ja saa 30% allahindlust",
+        "invite_code_text": "Laadige rakendus alla minu koodiga ja saate oma esimese ostu puhul 30% allahindlust.",
+        "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
     }
 }

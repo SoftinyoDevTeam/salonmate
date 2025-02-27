@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
+import 'package:salonmate/main.dart';
 import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 
@@ -55,7 +56,7 @@ class _SalonSecScreenState extends State<SalonSecScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 3.0),
               child: Text(
-                "Lütfen salonunuzdan aldığınız kodu giriniz",
+                "SalonSecScreen.enter_code".tr(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -66,13 +67,17 @@ class _SalonSecScreenState extends State<SalonSecScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Pinput(
+                  autofocus: true,
+                  defaultPinTheme: deviceType == "tablet"
+                      ? defaultPinThemetablet
+                      : defaultPinThemetablet,
                   controller: pincontroller,
                   length: 6,
                   onCompleted: (value) async {
                     var token = await findSalonToken(pincontroller.text);
                     if (token == null) {
                       Fluttertoast.showToast(
-                          msg: "Yanlış kod girdiniz. Lütfen tekrar deneyin...");
+                          msg: "SalonSecScreen.wrong_salon_code".tr());
                     } else {
                       mateKey = token;
                       await Provider.of<MateServices>(context, listen: false)

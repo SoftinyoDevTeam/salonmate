@@ -169,8 +169,10 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
+                          height: 80.h,
                           width: ScreenUtil().screenWidth - 20,
                           decoration: BoxDecoration(
+                              color: Colors.black,
                               border: Border.all(
                                   color: Theme.of(context).colorScheme.outline),
                               borderRadius: BorderRadius.circular(12)),

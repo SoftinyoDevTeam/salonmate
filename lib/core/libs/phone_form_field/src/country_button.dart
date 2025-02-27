@@ -1,5 +1,7 @@
 import 'package:circle_flags/circle_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/libs/flutter_country_selector//flutter_country_selector.dart';
 
 @Deprecated('Use [CountryButton] instead')
@@ -43,7 +45,7 @@ class CountryButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: padding,
+        padding: EdgeInsets.all(8.sp),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

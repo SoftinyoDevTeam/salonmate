@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -126,13 +127,17 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                 type: BottomNavigationBarType.fixed,
                 items: [
                   BottomNavigationBarItem(
-                      icon: Icon(iconList[0]), label: "Anasayfa"),
+                      icon: Icon(iconList[0]),
+                      label: ("ScreenBridge.home").tr()),
                   BottomNavigationBarItem(
-                      icon: Icon(iconList[1]), label: "Ürünler"),
+                      icon: Icon(iconList[1]),
+                      label: ("ScreenBridge.products").tr()),
                   BottomNavigationBarItem(
-                      icon: Icon(iconList[2]), label: "Randevu"),
+                      icon: Icon(iconList[2]),
+                      label: ("ScreenBridge.appointment").tr()),
                   BottomNavigationBarItem(
-                      icon: Icon(iconList[3]), label: "Sepetim"),
+                      icon: Icon(iconList[3]),
+                      label: ("ScreenBridge.cart").tr()),
                 ])
 
             // AnimatedBottomNavigationBar.builder(

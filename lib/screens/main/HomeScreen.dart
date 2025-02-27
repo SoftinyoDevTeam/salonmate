@@ -82,13 +82,13 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                           height: 35.h,
                           child: IOSKeyboardAction(
                             focusActionType: FocusActionType.done,
-                            label: "Klavyeyi Kapat",
+                            label: ("general.close_keyboard").tr(),
                             backgroundColor:
                                 CupertinoColors.lightBackgroundGray,
                             textColor: Theme.of(context).primaryColor,
                             focusNode: searchFocusNode,
                             child: SearchFieldAutoComplete(
-                              placeholder: 'Ürün Ara',
+                              placeholder: ("general.search_product").tr(),
                               focusNode: searchFocusNode,
                               suggestionsDecoration: SuggestionDecoration(
                                 marginSuggestions: const EdgeInsets.all(1.0),
@@ -158,8 +158,8 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                     widget: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(children: [
-                                    const Text(
-                                      "Cüzdanım",
+                                    Text(
+                                      ("HomeScreen.wallet").tr(),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -211,10 +211,10 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                               width: 24,
                               height: 24,
                             ),
-                            label: Text("Cüzdanım",
+                            label: Text(("HomeScreen.wallet").tr(),
                                 style: TextStyle(
                                     color: const Color(0xFF272E54),
-                                    fontSize: 14.sp,
+                                    fontSize: 11.sp,
                                     fontWeight: FontWeight.w600)),
                           ),
                         ),
@@ -234,6 +234,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                     Text(
                                       ("general.shakewin").tr(),
                                       style: TextStyle(
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Padding(
@@ -288,7 +289,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                             label: Text(("general.shakewin").tr(),
                                 style: TextStyle(
                                     color: const Color(0xFF272E54),
-                                    fontSize: 14.sp,
+                                    fontSize: 11.sp,
                                     fontWeight: FontWeight.w600)),
                           ),
                         )
@@ -299,7 +300,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Kampanyalar',
+                        Text(('HomeScreen.campaigns').tr(),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15.sp,
@@ -311,7 +312,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                                 MaterialPageRoute(
                                     builder: ((context) => CampaignLists())));
                           },
-                          child: const Text('Tümünü Gör',
+                          child: Text(('HomeScreen.see_all').tr(),
                               style: TextStyle(
                                   color: Colors.pink,
                                   fontSize: 13,
@@ -336,7 +337,7 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
-                        "Öne Çıkan Ürünler",
+                        ("HomeScreen.featured_products").tr(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15.sp),
                       ),
@@ -392,8 +393,9 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                             padding: const EdgeInsets.all(30.0),
                             child: EmptyState(
                                 image: "assets/images/icons/basket.png",
-                                title: "Maalesef",
-                                description: "Öne çıkarılan hiç ürün yok"),
+                                title: ("HomeScreen.unfortunately").tr(),
+                                description:
+                                    ("HomeScreen.no_featured_products").tr()),
                           )
                     : Loader()
               ],
