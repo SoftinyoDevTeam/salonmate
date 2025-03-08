@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ios_keyboard_action/ios_keyboard_action.dart';
+import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/libs/phone_form_field//phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salonmate/core/functions.dart';
@@ -69,107 +69,111 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    phoneFocusNode.dispose();
+    pinputFocusNode.dispose();
+    passController.dispose();
+    password.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      top: false,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: SafeArea(
+        bottom: false,
+        top: false,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(
+                    child: Container(
+                        height: 4.h,
+                        width: 50.w,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).dialogBackgroundColor,
+                            borderRadius: BorderRadius.all(
+                                Radius.elliptical(12.sp, 12.sp))))),
+                Padding(
+                  padding: EdgeInsets.all(16.sp),
                   child: Container(
-                      height: 4.h,
-                      width: 50.w,
+                      height: 50.h,
                       decoration: BoxDecoration(
-                          color: Theme.of(context).dialogBackgroundColor,
-                          borderRadius: BorderRadius.all(
-                              Radius.elliptical(12.sp, 12.sp))))),
-              Padding(
-                padding: EdgeInsets.all(16.sp),
-                child: Container(
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.sp),
-                        color: Theme.of(context).dialogBackgroundColor),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              selectedTab = 0;
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 48.h,
-                              width: deviceType == "phone"
-                                  ? (ScreenUtil().screenWidth - 56.sp) / 2
-                                  : (ScreenUtil().screenWidth - 156.sp) / 2,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(14.sp, 14.sp)),
-                                  color: selectedTab == 0
-                                      ? Theme.of(context).primaryColorLight
-                                      : Colors.transparent),
-                              child: Center(
-                                child: Text(
-                                  ("general.login").tr(),
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              selectedTab = 1;
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 48.h,
-                              width: deviceType == "phone"
-                                  ? (ScreenUtil().screenWidth - 56.sp) / 2
-                                  : (ScreenUtil().screenWidth - 156.sp) / 2,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(14.sp, 14.sp)),
-                                  color: selectedTab == 1
-                                      ? Theme.of(context).primaryColorLight
-                                      : Colors.transparent),
-                              child: Center(
-                                child: Text(
-                                  ("general.register").tr(),
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              ),
-              selectedTab == 0
-                  ? Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: SizedBox(
-                        height: ScreenUtil().screenHeight / 1.5,
-                        child: Column(
+                          borderRadius: BorderRadius.circular(20.sp),
+                          color: Theme.of(context).dialogBackgroundColor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            IOSKeyboardAction(
-                                focusActionType: FocusActionType.done,
-                                label: ("general.close_keyboard").tr(),
-                                backgroundColor:
-                                    CupertinoColors.lightBackgroundGray,
-                                textColor: Theme.of(context).primaryColor,
-                                focusNode: phoneFocusNode,
+                            GestureDetector(
+                              onTap: () {
+                                selectedTab = 0;
+                                setState(() {});
+                              },
+                              child: Container(
+                                height: 48.h,
+                                width: deviceType == "phone"
+                                    ? (ScreenUtil().screenWidth - 56.sp) / 2
+                                    : (ScreenUtil().screenWidth - 156.sp) / 2,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.elliptical(14.sp, 14.sp)),
+                                    color: selectedTab == 0
+                                        ? Theme.of(context).primaryColorLight
+                                        : Colors.transparent),
+                                child: Center(
+                                  child: Text(
+                                    ("general.login").tr(),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                selectedTab = 1;
+                                setState(() {});
+                              },
+                              child: Container(
+                                height: 48.h,
+                                width: deviceType == "phone"
+                                    ? (ScreenUtil().screenWidth - 56.sp) / 2
+                                    : (ScreenUtil().screenWidth - 156.sp) / 2,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.elliptical(14.sp, 14.sp)),
+                                    color: selectedTab == 1
+                                        ? Theme.of(context).primaryColorLight
+                                        : Colors.transparent),
+                                child: Center(
+                                  child: Text(
+                                    ("general.register").tr(),
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+                selectedTab == 0
+                    ? Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: SizedBox(
+                          height: ScreenUtil().screenHeight / 1.5,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 60.h,
+                                width: ScreenUtil().screenWidth - 30,
                                 child: PhoneFormField(
                                   focusNode: phoneFocusNode,
                                   autofocus: true,
@@ -180,6 +184,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   cursorColor: Theme.of(context).primaryColor,
                                   decoration: InputDecoration(
                                     hintText: ("general.phone").tr(),
+                                    hintStyle: TextStyle(
+                                        color: Theme.of(context).hintColor),
                                   ),
                                   inputFormatters: [
                                     new LengthLimitingTextInputFormatter(13),
@@ -201,72 +207,75 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ("general.errors.required_phone_number")
                                                 .tr())
                                   ]),
-                                )),
-                            SizedBox(height: 15.h),
-                            Visibility(
-                              visible: pinCodevisible,
-                              child: Pinput(
-                                focusNode: pinputFocusNode,
-                                autofocus: true,
-                                closeKeyboardWhenCompleted: true,
-                                length: 6,
-                                pinAnimationType: PinAnimationType.slide,
-                                onCompleted: (value) async {
-                                  await login(
-                                      phoneNumber,
-                                      value,
-                                      OTPhash,
-                                      context,
-                                      fcmToken == null
-                                          ? "cantfetchfcm"
-                                          : fcmToken!);
-                                },
+                                ),
                               ),
-                            ),
-                            const Spacer(),
-                            MateButon(
-                                color: Theme.of(context).primaryColor,
-                                textcolor: Theme.of(context).primaryColorLight,
-                                title: ("general.login").tr(),
-                                minimumSize: const Size.fromHeight(50),
-                                onPressed: () async {
-                                  pinputFocusNode.requestFocus();
-                                  phoneNumber = phoneController.value!.nsn;
-                                  if (pinCodevisible == false) {
-                                    var response = await sendSms(phoneNumber,
-                                        phoneController.value!.countryCode);
-                                    if (response == "false") {
-                                      pinCodevisible = false;
-                                    } else {
-                                      pinCodevisible = true;
-                                      OTPhash = response;
+                              SizedBox(height: 15.h),
+                              Visibility(
+                                visible: pinCodevisible,
+                                child: Pinput(
+                                  focusNode: pinputFocusNode,
+                                  autofocus: true,
+                                  closeKeyboardWhenCompleted: true,
+                                  length: 6,
+                                  pinAnimationType: PinAnimationType.slide,
+                                  onCompleted: (value) async {
+                                    await login(
+                                        phoneNumber,
+                                        value,
+                                        OTPhash,
+                                        context,
+                                        fcmToken == null
+                                            ? "cantfetchfcm"
+                                            : fcmToken!);
+                                  },
+                                ),
+                              ),
+                              const Spacer(),
+                              MateButon(
+                                  color: Theme.of(context).primaryColor,
+                                  textcolor:
+                                      Theme.of(context).primaryColorLight,
+                                  title: ("general.login").tr(),
+                                  minimumSize: const Size.fromHeight(50),
+                                  onPressed: () async {
+                                    pinputFocusNode.requestFocus();
+                                    phoneNumber = phoneController.value!.nsn;
+                                    if (pinCodevisible == false) {
+                                      var response = await sendSms(phoneNumber,
+                                          phoneController.value!.countryCode);
+                                      if (response == "false") {
+                                        pinCodevisible = false;
+                                      } else {
+                                        pinCodevisible = true;
+                                        OTPhash = response;
+                                      }
                                     }
-                                  }
 
-                                  setState(() {});
-                                }),
-                            SizedBox(height: 18.h),
-                          ],
+                                    setState(() {});
+                                  }),
+                              SizedBox(height: 18.h),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  : registerPage == 0
-                      ? fcmToken != null
-                          ? Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: SizedBox(
-                                  height: ScreenUtil().screenHeight / 1.5,
-                                  child: SizedBox(
-                                      height: ScreenUtil().screenHeight / 1.5,
-                                      child: RegisterWidget(
-                                        fcmToken: fcmToken!,
-                                      ))),
-                            )
-                          : Center(
-                              child: Loader(),
-                            )
-                      : Container()
-            ],
+                      )
+                    : registerPage == 0
+                        ? fcmToken != null
+                            ? Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: SizedBox(
+                                    height: ScreenUtil().screenHeight / 1.5,
+                                    child: SizedBox(
+                                        height: ScreenUtil().screenHeight / 1.5,
+                                        child: RegisterWidget(
+                                          fcmToken: fcmToken!,
+                                        ))),
+                              )
+                            : Center(
+                                child: Loader(),
+                              )
+                        : Container()
+              ],
+            ),
           ),
         ),
       ),

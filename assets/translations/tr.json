@@ -23,12 +23,12 @@
         }
     },
     "SplashScreen": {
-        "splash_title_1": "En avantajlı koşullarda saç ürünleri satın alın.",
-        "splash_text_1": "Uygulamamızdan bir ürün satın aldığınızda, salonumuzdan ücretsiz bir hizmet kazanırsınız.",
-        "splash_title_2": "Ödüllü Dostluk",
-        "splash_text_2": "Uygulamamızı arkadaşlarınıza önerin. Hem arkadaşlarınız ilk hizmetlerini indirimli alır hem de siz puan kazanırsınız.",
-        "splash_title_3": "Salla ve Kazan",
-        "splash_text_3": "Telefonunuzu günde bir kez sallayın ve salonumuzda geçerli sürpriz hediyeler kazanın."
+        "splash_title_1": "Ürünlerimizi en avantajlı koşullarla satın alın.",
+        "splash_text_1": "Salonumuzun kampanyalarına bağlı olarak belirli tutarda ürün satın almanız karşılığında hediye hizmet kazanabilirsiniz.",
+        "splash_title_2": "Kazandıran Arkadaşlık",
+        "splash_text_2": "Uygulamamızı salonumuzu daha önce ziyaret etmemiş arkadaşlarınıza önerin. Arkadaşlarınız salonumuzdaki ilk ziyaretlerini indirimli yaparken siz de puan kazanın.",
+        "splash_title_3": "Salla Kazan",
+        "splash_text_3": "Telefonunuzu sallayın ve sürpriz hediyeler kazanma şansı yakalayın."
     },
     "RegisterWidget":{
         "agreement_confirm":"Kullanıcı Sözleşmesi ve Gizlilik Politikasını okudum ve kabul ediyorum.",

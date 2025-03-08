@@ -155,101 +155,112 @@ class _CuzdanimScreenState extends State<CuzdanimScreen> {
                     ],
                   ),
                   SizedBox(height: 10.h),
-                  Container(child: () {
-                    if (cuzdanim!.hizmetler!.length == 0) {
-                      return Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: EmptyState(
-                            image: "assets/images/icons/appointment.png",
-                            title: "Maalesef !",
-                            description: "Şuanda aktif hizmetiniz yok"),
-                      );
-                    }
-                    for (int i = 0; i < cuzdanim!.hizmetler!.length; i++)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 80.h,
-                          width: ScreenUtil().screenWidth - 20,
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              border: Border.all(
-                                  color: Theme.of(context).colorScheme.outline),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      cuzdanim!.hizmetler![i].name!,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17.sp,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary),
-                                    ),
+                  Expanded(
+                    child: cuzdanim!.hizmetler!.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: EmptyState(
+                                image: "assets/images/icons/appointment.png",
+                                title: "Maalesef !",
+                                description: "Şuanda aktif hizmetiniz yok"),
+                          )
+                        : ListView.builder(
+                            itemCount: cuzdanim!.hizmetler!.length,
+                            itemBuilder: (context, i) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w, vertical: 8.h),
+                                child: Container(
+                                  height: 120.h,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.circular(16.r),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.05),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Text(
-                                      cuzdanim!.hizmetler![i].ney!,
-                                      style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Row(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.r),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        SizedBox(
-                                          width: 40.w,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              cuzdanim!.hizmetler![i].name!,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4.h),
+                                            Text(
+                                              cuzdanim!.hizmetler![i].ney!,
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface
+                                                    .withOpacity(0.7),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        MateButon(
-                                            title: "Randevu Al",
-                                            minimumSize: Size(20.w, 30.h),
-                                            onPressed: () {
-                                              Navigator.push(
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            MateButon(
+                                              title: "Randevu Al",
+                                              minimumSize: Size(120.w, 36.h),
+                                              onPressed: () {
+                                                Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ScheduleScreen(
-                                                            selectedService:
-                                                                cuzdanim!
-                                                                    .hizmetler![i],
-                                                            hizmetler: cuzdanim!
-                                                                .hizmetler!,
-                                                            kategori: cuzdanim!
-                                                                .hizmetler![i]
-                                                                .name!,
-                                                            cuzdanrandevusu:
-                                                                true,
-                                                            cuzdanID: cuzdanim!
-                                                                .hizmetler![i]
-                                                                .cuzdanID,
-                                                          )));
-                                            },
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            textcolor: Theme.of(context)
-                                                .primaryColorLight),
+                                                    builder: (context) =>
+                                                        ScheduleScreen(
+                                                      selectedService: cuzdanim!
+                                                          .hizmetler![i],
+                                                      hizmetler:
+                                                          cuzdanim!.hizmetler!,
+                                                      kategori: cuzdanim!
+                                                          .hizmetler![i].name!,
+                                                      cuzdanrandevusu: true,
+                                                      cuzdanID: cuzdanim!
+                                                          .hizmetler![i]
+                                                          .cuzdanID,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              textcolor: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimary,
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
-                                ],
-                              )),
-                        ),
-                      );
-                  }())
+                                ),
+                              );
+                            },
+                          ),
+                  )
                 ],
               ),
             ),

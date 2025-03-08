@@ -1088,10 +1088,26 @@ class MateServices extends ChangeNotifier {
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(color: "#E0E0E4".toColor(), width: 0.5),
         ),
+        errorStyle:
+            TextStyle(color: "#FD3553".toColor(), fontWeight: FontWeight.bold),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(
-            color: "#E0E0E4".toColor(),
+            color: Colors.green,
+            width: 0.5,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(
+            color: "#FD3553".toColor(),
+            width: 0.5,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(
+            color: "#FD3553".toColor(),
             width: 0.5,
           ),
         ),
