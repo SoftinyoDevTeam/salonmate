@@ -152,13 +152,16 @@ class _SepetScreenState extends State<SepetScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  urun.title!,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
+                                Container(
+                                  width: ScreenUtil().screenWidth - 150.w,
+                                  child: Text(
+                                    urun.title!,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary),
+                                  ),
                                 ),
                                 Text(
                                   "${urun.price.toString()} TL",

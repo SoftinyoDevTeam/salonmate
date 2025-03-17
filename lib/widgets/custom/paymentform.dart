@@ -13,7 +13,14 @@ import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:web_socket_client/web_socket_client.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webviewx_plus/webviewx_plus.dart';
+
+// Define the Branch class
+class Branch {
+  final String name;
+  final String address;
+
+  Branch({required this.name, required this.address});
+}
 
 class PaymentForm extends StatefulWidget {
   const PaymentForm({super.key});
@@ -21,6 +28,9 @@ class PaymentForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => PaymentFormState();
 }
+
+// Add enum for delivery types
+enum DeliveryType { branch, shipping }
 
 class PaymentFormState extends State<PaymentForm> {
   bool isLightTheme = false;
@@ -45,6 +55,13 @@ class PaymentFormState extends State<PaymentForm> {
   );
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   void initstate() {}
+
+  // Add new properties for delivery option
+  DeliveryType _selectedDeliveryType = DeliveryType.branch;
+
+  // Add this property to PaymentFormState class
+  Branch? _selectedBranch;
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -60,6 +77,162 @@ class PaymentFormState extends State<PaymentForm> {
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 8.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(16.w),
+                              child: Text(
+                                ('PaymentScreen.delivery_method').tr(),
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                            Divider(height: 1),
+                            RadioListTile<DeliveryType>(
+                              title: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      ('PaymentScreen.branch_delivery').tr(),
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ),
+                                  if (_selectedDeliveryType ==
+                                      DeliveryType.branch)
+                                    TextButton.icon(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.store,
+                                        size: 18.sp,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                      label: Text(
+                                        _selectedBranch == null
+                                            ? ('PaymentScreen.select_branch')
+                                                .tr()
+                                            : ('PaymentScreen.change_branch')
+                                                .tr(),
+                                        style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ('PaymentScreen.branch_delivery_desc').tr(),
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  if (_selectedBranch != null)
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 8.h),
+                                      child: Container(
+                                        padding: EdgeInsets.all(8.w),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(8.r),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              size: 16.sp,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                            SizedBox(width: 8.w),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    _selectedBranch!.name,
+                                                    style: TextStyle(
+                                                      fontSize: 13.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.black87,
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 2.h),
+                                                  Text(
+                                                    _selectedBranch!.address,
+                                                    style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              value: DeliveryType.branch,
+                              groupValue: _selectedDeliveryType,
+                              onChanged: (DeliveryType? value) {
+                                setState(() {
+                                  _selectedDeliveryType = value!;
+                                });
+                              },
+                            ),
+                            RadioListTile<DeliveryType>(
+                              title: Text(
+                                ('PaymentScreen.shipping').tr(),
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              subtitle: Text(
+                                ('PaymentScreen.shipping_desc').tr(),
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              value: DeliveryType.shipping,
+                              groupValue: _selectedDeliveryType,
+                              onChanged: (DeliveryType? value) {
+                                setState(() {
+                                  _selectedDeliveryType = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                       CreditCardWidget(
                         labelValidThru: "",
                         enableFloatingCard: useFloatingAnimation,
@@ -106,6 +279,8 @@ class PaymentFormState extends State<PaymentForm> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: <Widget>[
+                              // Add delivery options before credit card form
+
                               CreditCardForm(
                                 formKey: formKey,
                                 obscureCvv: false,
@@ -143,7 +318,8 @@ class PaymentFormState extends State<PaymentForm> {
                               const SizedBox(height: 20),
                               MateButon(
                                   title: ("PaymentScreen.pay_now").tr(),
-                                  minimumSize: const Size(400, 50),
+                                  minimumSize:
+                                      Size(ScreenUtil().screenWidth - 30.w, 50),
                                   onPressed: _onValidate,
                                   color: Theme.of(context).primaryColor,
                                   textcolor:
@@ -160,7 +336,18 @@ class PaymentFormState extends State<PaymentForm> {
     );
   }
 
+  // Modify _onValidate to include delivery type
   void _onValidate() async {
+    if (_selectedDeliveryType == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(('PaymentScreen.select_delivery_method').tr()),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
     loading = true;
     setState(() {});
     if (formKey.currentState?.validate() == false) {
@@ -201,8 +388,17 @@ class PaymentFormState extends State<PaymentForm> {
       );
       log("Lütfen kart bilgilerinizi eksiksiz ve doğru şekilde girin.");
     } else {
-      String htmlsTR =
-          await completeCart(cardHolderName, cardNumber, expiryDate, cvvCode);
+      // Add delivery type to your payment processing
+      final deliveryMethod =
+          _selectedDeliveryType == DeliveryType.branch ? 'branch' : 'shipping';
+
+      // Include delivery method in your API call
+      String htmlsTR = await completeCart(
+        cardHolderName,
+        cardNumber,
+        expiryDate,
+        cvvCode,
+      );
 
       await wbController.loadHtmlString(htmlsTR);
 

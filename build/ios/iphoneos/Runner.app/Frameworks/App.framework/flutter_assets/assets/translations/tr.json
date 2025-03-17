@@ -1,0 +1,197 @@
+{
+    "general": {
+        "login": "Giriş Yap",
+        "register": "Kayıt Ol",
+        "phone": "Telefon Numarası",
+        "fname":"Ad",
+        "lname":"Soyad",
+        "birthday":"Doğum Tarihi",
+        "okey":"Tamam",
+        "done":"Bitti",
+        "cancel":"İptal",
+        "next":"Sonraki",
+        "prev":"Önceki",
+        "welcome":"Hoş Geldiniz",
+        "yes":"Evet",
+        "no":"Hayır",
+        "shakewin":"Salla Kazan",
+        "close_keyboard":"Klavyeyi Kapat",
+        "search_product":"Ürün Ara",
+        "errors":{
+            "required_phone_number":"Telefon numarası gereklidir",
+            "wrong_phone_number":"Geçersiz telefon numarası"
+        }
+    },
+    "SplashScreen": {
+        "splash_title_1": "Ürünlerimizi en avantajlı koşullarla satın alın.",
+        "splash_text_1": "Salonumuzun kampanyalarına bağlı olarak belirli tutarda ürün satın almanız karşılığında hediye hizmet kazanabilirsiniz.",
+        "splash_title_2": "Kazandıran Arkadaşlık",
+        "splash_text_2": "Uygulamamızı salonumuzu daha önce ziyaret etmemiş arkadaşlarınıza önerin. Arkadaşlarınız salonumuzdaki ilk ziyaretlerini indirimli yaparken siz de puan kazanın.",
+        "splash_title_3": "Salla Kazan",
+        "splash_text_3": "Telefonunuzu sallayın ve sürpriz hediyeler kazanma şansı yakalayın."
+    },
+    "RegisterWidget":{
+        "agreement_confirm":"Kullanıcı Sözleşmesi ve Gizlilik Politikasını okudum ve kabul ediyorum.",
+        "didyouservicefromus":"Daha önce bizden hizmet aldınız mı?",
+        "affiliate_code":"Davet Kodu",
+        "affiliate_code_enter":"Lütfen bağlı kuruluş kodunuzu girin",
+        "howlongcustomeryouare":"Müşterimiz olarak ne kadar süredir hizmet alıyorsunuz?",
+        "lessthan1year":"1 yıldan az",
+        "13year":"1-3 Yıl",
+        "morethan3year":"3 yıldan fazla"
+
+    },
+    "LoginScreen":{
+
+    },
+    "ScheduleScreen":{
+        "appointment_create": "Randevu Oluştur",
+        "select_branch": "Şube Seçiniz",
+        "select_personnel": "Hizmet almak istediğiniz personeli seçin",
+        "service_added_to_cart": "Hizmetiniz sepete eklenmiştir.",
+        "prepayment_required": "Randevunuzu oluşturmak için \nön ödeme yapmanız gerekmektedir.",
+        "prepayment_info": "Ön ödeme yaptıktan sonra almak istediğiniz hizmet için personel, gün ve saat seçebilirsiniz.",
+        "add_another_appointment": "Randevu ekle butonuna basarak başka bir hizmeti daha sepetenize ekleyebilirsiniz.",
+        "select_personnel_prompt": "Personel Seçin*",
+        "branch_selection": "Şube Seçiniz",
+        "select_time": "Saati Belirleyin",
+        "service": "Hizmet",
+        "personnel": "Personel",
+        "date": "Tarih",
+        "time": "Saat",
+        "back": "Geri",
+        "add_to_cart": "Sepete Ekle",
+        "next": "Sonraki",
+        "create_appointment": "Randevumu Oluştur",
+        "prepayment": "Ön Ödeme Yap",
+        "add_appointment": "Randevu Ekle"
+      },
+      "HomeScreen":{
+        "wallet": "Cüzdanım",
+        "campaigns": "Kampanyalar",
+        "see_all": "Tümünü Gör",
+        "featured_products": "Öne Çıkan Ürünler",
+        "no_featured_products": "Öne çıkarılan hiç ürün yok",
+        "unfortunately": "Maalesef"
+      },
+      "SallaKazan":{
+        "shake_to_win": "Ödülleri kazanmak için şimdi salla!",
+        "shaking": "Sallıyorsunuz...",
+        "congratulations": "Tebrikler!",
+        "you_won": "Kazandınız!",
+        "try_again": "Tekrar Deneyin"
+      },
+      "SallaKazanSonuc": {
+        "go_to_gift_services": "Hediye Hizmetlerime Git"
+      },
+      "ScreenBridge":{
+        "home": "Anasayfa",
+        "products": "Ürünler",
+        "appointment": "Randevu",
+        "cart": "Sepetim",
+        "support": "Canlı Destek"
+      },
+      "PaymentScreen":{
+        "payment_screen_title": "Ödeme Ekranı",
+        "total_amount": "Toplam Tutar",
+        "payment_method": "Ödeme Yöntemi",
+        "credit_card": "Kredi Kartı",
+        "cash": "Nakit",
+        "pay_now": "Şimdi Öde",
+        "enter_card_details": "Kart Bilgilerini Girin",
+        "card_number": "Kart Numarası",
+        "expiry_date": "Ay/Yıl",
+        "cvv": "CVV",
+        "card_holder_name": "Kart Sahibi Adı",
+        "payment_successful": "Ödeme Başarılı",
+        "payment_failed": "Ödeme Başarısız",
+        "try_again": "Tekrar Deneyin"
+      },
+      "ProfileScreen":{
+        "my_profile": "Profilim",
+        "share_invite_code": "Davet Kodunu Paylaş",
+        "personal_info": "Kişisel Bilgilerim",
+        "my_wallet": "Cüzdanım",
+        "my_orders": "Siparişlerim",
+        "my_appointments": "Randevularım",
+        "campaigns": "Kampanyalar",
+        "change_language": "Dil Değiştir",
+        "logout": "Çıkış Yap",
+        "delete_account": "Hesabımı Kalıcı Olarak Sil",
+        "invite_code_message": "Kodu istediğiniz kadar arkadaşınızla paylaşıp sunduğumuz avantajlardan faydalanabilirsiniz.",
+        "invite_code_subject": "Davet Kodumla Üye Ol %30 İndirim Kazan",
+        "invite_code_text": "davet kodumla uygulamayı indir ilk harcamanda %30 indirim kazan.",
+        "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+      },
+      "SalonSecScreen": {
+        "enter_code": "Lütfen salonunuzdan aldığınız kodu giriniz",
+        "wrong_salon_code":"Yanlış salon kodu girdiniz. Lütfen tekrar deneyin..."
+      },
+      "SozlesmeScreen": {
+        "accept_terms": "Okudum Anladım Kabul Ettim"
+      },
+      "CampaignDetail": {
+        "loading": "Yükleniyor",
+        "buy_product_get_service": "Ürün Satın Al & Hizmet Kazan",
+        "buy_discounted_service": "Kampanyalı Hizmeti Satın Al",
+        "congratulations": "Tebrikler !",
+        "service_added_to_cart": "Kampanyalı hizmet başarıyla sepetenize eklendi.",
+        "go_to_home": "Anasayfaya Git",
+        "go_to_cart": "Sepete Git",
+        "create_discounted_appointment": "İndirimli Randevu Oluştur"
+      },
+      "CampaignList": {
+        "campaigns": "Kampanyalar"
+      },
+      "NoInternetScreen": {
+        "check_connection": "Lütfen İnternet Bağlantınızı Kontrol Edin"
+      },
+      "OldVersionScreen": {
+        "old_version": "Uygulama Sürümünüz Eski",
+        "update_prompt": "Uygulamayı kullanmak için lütfen gerekli güncellemeleri yapınız. Güncelleme yapmak için butona tıklayabilirsiniz."
+      },
+      "ProductCategoryScreen": {
+        "product_list": "Ürün Listesi",
+        "unfortunately": "Maalesef",
+        "no_featured_products": "Öne çıkarılan hiç ürün yok"
+      },
+      "ProductDetailScreen": {
+        "total": "Toplam",
+        "add_to_cart": "Sepete Ekle",
+        "product_features": "Ürün Özellikleri",
+        "campaigns": "Kampanyalar"
+      },
+      "AdreslerimScreen":{
+        "my_addresses":"Adreslerim",
+        "add_new_address":"Yeni Adres Ekle",
+        "address":"Adres",
+        "edit":"Düzenle",
+        "delete":"Sil",
+        "add_address":"Adres Ekle",
+        "address_name":"Adres Adı",
+        "address_name_placeholder":"Ev, İş, Diğer",
+        "address_title":"Adres Başlığı",
+        "address_title_placeholder":"Ev, İş, Diğer",
+        "address_description":"Adres Açıklaması",
+        "address_description_placeholder":"Ev, İş, Diğer",
+        "address_type":"Adres Türü",
+        "address_type_home":"Ev",
+        "address_type_work":"İş",
+        "address_type_other":"Diğer"
+      },
+      "YeniAdresEkleScreen": {
+        "title": "Add New Address",
+        "address_title": "Address Title",
+        "country": "Ulke",
+        "city": "Il",
+        "town": "Ilce",
+        "address_detail": "Additional Address Details",
+        "phone": "Phone Number",
+        "save": "Save Address",
+        "required_field": "This field is required",
+        "select_country": "Please select a country",
+        "select_city": "Please select a city",
+        "select_district": "Please select a district"
+      }
+}

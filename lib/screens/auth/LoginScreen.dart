@@ -187,9 +187,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     hintStyle: TextStyle(
                                         color: Theme.of(context).hintColor),
                                   ),
-                                  inputFormatters: [
-                                    new LengthLimitingTextInputFormatter(13),
-                                  ],
                                   controller: phoneController,
                                   onChanged: (value) {
                                     if (value!.nsn.length == 10) {

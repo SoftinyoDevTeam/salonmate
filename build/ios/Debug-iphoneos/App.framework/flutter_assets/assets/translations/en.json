@@ -1,0 +1,123 @@
+{
+    "general": {
+        "login": "Login",
+        "register": "Register",
+        "phone": "Phone Number",
+        "fname": "First Name",
+        "lname": "Last Name",
+        "birthday": "Date of Birth",
+        "okey": "OK",
+        "done": "Done",
+        "cancel": "Cancel",
+        "next": "Next",
+        "prev": "Previous",
+        "welcome": "Welcome",
+        "yes": "Yes",
+        "no": "No",
+        "shakewin": "Shake and Win",
+        "close_keyboard": "Close Keyboard",
+        "search_product": "Search Product",
+        "errors": {
+            "required_phone_number": "Phone number is required",
+            "wrong_phone_number": "Invalid phone number"
+        }
+    },
+    "SplashScreen": {
+        "splash_title_1": "Buy hair products at the best conditions.",
+        "splash_text_1": "When you purchase a product through our app, you get a free service at our salon.",
+        "splash_title_2": "Friendship with Rewards",
+        "splash_text_2": "Recommend our app to your friends. Your friends will get a discount on their first service, and you will earn points.",
+        "splash_title_3": "Shake and Win",
+        "splash_text_3": "Shake your phone once a day and win surprises valid at our salon."
+    },
+    "RegisterWidget": {
+        "agreement_confirm": "I have read and accept the User Agreement and Privacy Policy.",
+        "didyouservicefromus": "Have you used our services before?",
+        "affiliate_code": "Affiliate Code",
+        "affiliate_code_enter": "Enter your affiliate code",
+        "howlongcustomeryouare": "How long have you been our customer?",
+        "lessthan1year": "Less than 1 year",
+        "13year": "1-3 years",
+        "morethan3year": "More than 3 years"
+    },
+    "LoginScreen": {
+
+    },
+    "ScheduleScreen": {
+        "appointment_create": "Create Appointment",
+        "select_branch": "Select Branch",
+        "select_personnel": "Select Personnel",
+        "service_added_to_cart": "Service added to cart.",
+        "prepayment_required": "Prepayment is required to create an appointment.",
+        "prepayment_info": "After prepayment, you can select personnel, date, and time for the service.",
+        "add_another_appointment": "Click 'Add Appointment' to add another service to your cart.",
+        "select_personnel_prompt": "Select Personnel*",
+        "branch_selection": "Select Branch",
+        "select_time": "Select Time",
+        "service": "Service",
+        "personnel": "Personnel",
+        "date": "Date",
+        "time": "Time",
+        "back": "Back",
+        "add_to_cart": "Add to Cart",
+        "next": "Next",
+        "create_appointment": "Create Appointment",
+        "prepayment": "Make Prepayment",
+        "add_appointment": "Add Appointment"
+    },
+    "HomeScreen": {
+        "wallet": "My Wallet",
+        "campaigns": "Campaigns",
+        "see_all": "See All",
+        "featured_products": "Featured Products",
+        "no_featured_products": "No featured products",
+        "unfortunately": "Unfortunately"
+    },
+    "SallaKazan": {
+        "shake_to_win": "Shake to win prizes!",
+        "shaking": "Shaking...",
+        "congratulations": "Congratulations!",
+        "you_won": "You won!",
+        "try_again": "Try Again"
+    },
+    "ScreenBridge": {
+        "home": "Home",
+        "products": "Products",
+        "appointment": "Appointment",
+        "cart": "Cart",
+        "support": "Support"
+    },
+    "PaymentScreen": {
+        "payment_screen_title": "Payment Screen",
+        "total_amount": "Total Amount",
+        "payment_method": "Payment Method",
+        "credit_card": "Credit Card",
+        "cash": "Cash",
+        "pay_now": "Pay Now",
+        "enter_card_details": "Enter Card Details",
+        "card_number": "Card Number",
+        "expiry_date": "Month/Year",
+        "cvv": "CVV",
+        "card_holder_name": "Card Holder Name",
+        "payment_successful": "Payment Successful",
+        "payment_failed": "Payment Failed",
+        "try_again": "Try Again"
+    },
+    "ProfileScreen": {
+        "my_profile": "My Profile",
+        "share_invite_code": "Share Invite Code",
+        "personal_info": "My Personal Information",
+        "my_wallet": "My Wallet",
+        "my_orders": "My Orders",
+        "my_appointments": "My Appointments",
+        "campaigns": "Campaigns",
+        "change_language": "Change Language",
+        "logout": "Logout",
+        "delete_account": "Delete Account Permanently",
+        "invite_code_message": "Share the code with your friends and enjoy our benefits.",
+        "invite_code_subject": "Register with my code and get a 30% discount",
+        "invite_code_text": "Download the app with my code and get a 30% discount on your first purchase.",
+        "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    }
+}

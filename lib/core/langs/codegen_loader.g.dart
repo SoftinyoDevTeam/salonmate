@@ -30,7 +30,7 @@ class CodegenLoader extends AssetLoader{
     "welcome": "Hoş Geldiniz",
     "yes": "Evet",
     "no": "Hayır",
-    "shakewin": "Salla ve Kazan",
+    "shakewin": "Salla Kazan",
     "close_keyboard": "Klavyeyi Kapat",
     "search_product": "Ürün Ara",
     "errors": {
@@ -49,7 +49,7 @@ class CodegenLoader extends AssetLoader{
   "RegisterWidget": {
     "agreement_confirm": "Kullanıcı Sözleşmesi ve Gizlilik Politikasını okudum ve kabul ediyorum.",
     "didyouservicefromus": "Daha önce bizden hizmet aldınız mı?",
-    "affiliate_code": "Bağlı Kuruluş Kodu",
+    "affiliate_code": "Davet Kodu",
     "affiliate_code_enter": "Lütfen bağlı kuruluş kodunuzu girin",
     "howlongcustomeryouare": "Müşterimiz olarak ne kadar süredir hizmet alıyorsunuz?",
     "lessthan1year": "1 yıldan az",
@@ -118,7 +118,16 @@ class CodegenLoader extends AssetLoader{
     "card_holder_name": "Kart Sahibi Adı",
     "payment_successful": "Ödeme Başarılı",
     "payment_failed": "Ödeme Başarısız",
-    "try_again": "Tekrar Deneyin"
+    "try_again": "Tekrar Deneyin",
+    "delivery_method": "Delivery Method",
+    "branch_delivery": "Branch Delivery",
+    "branch_delivery_desc": "Pick up your order from our branch",
+    "shipping": "Shipping",
+    "shipping_desc": "Deliver to your address",
+    "select_delivery_method": "Please select a delivery method",
+    "select_branch": "Select Branch",
+    "change_branch": "Change Branch",
+    "select_branch_error": "Please select a branch for delivery"
   },
   "ProfileScreen": {
     "my_profile": "Profilim",
@@ -174,6 +183,44 @@ class CodegenLoader extends AssetLoader{
     "add_to_cart": "Sepete Ekle",
     "product_features": "Ürün Özellikleri",
     "campaigns": "Kampanyalar"
+  },
+  "AdreslerimScreen": {
+    "my_addresses": "My Addresses",
+    "add_new_address": "Add New Address",
+    "no_addresses": "No Addresses Yet",
+    "add_address_description": "Add your first address to get started",
+    "address": "Adres",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add_address": "Adres Ekle",
+    "address_name": "Adres Adı",
+    "address_name_placeholder": "Ev, İş, Diğer",
+    "address_title": "Adres Başlığı",
+    "address_title_placeholder": "Ev, İş, Diğer",
+    "address_description": "Adres Açıklaması",
+    "address_description_placeholder": "Ev, İş, Diğer",
+    "address_type": "Adres Türü",
+    "address_type_home": "Ev",
+    "address_type_work": "İş",
+    "address_type_other": "Diğer",
+    "delete_confirmation_title": "Delete Address",
+    "delete_confirmation_message": "Are you sure you want to delete this address?",
+    "cancel": "Cancel",
+    "delete_success": "Address deleted successfully"
+  },
+  "YeniAdresEkleScreen": {
+    "title": "Add New Address",
+    "address_title": "Address Title",
+    "country": "Ulke",
+    "city": "Il",
+    "town": "Ilce",
+    "address_detail": "Additional Address Details",
+    "phone": "Phone Number",
+    "save": "Save Address",
+    "required_field": "This field is required",
+    "select_country": "Please select a country",
+    "select_city": "Please select a city",
+    "select_district": "Please select a district"
   }
 };
 static const Map<String,dynamic> ru = {

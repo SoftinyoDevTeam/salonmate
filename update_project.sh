@@ -2,13 +2,13 @@
 
 # Kullanım kılavuzu
 usage() {
-  echo "Kullanım: $0 --source-dir <source-dir> --output-dir <output-dir> --app-name <app-name> --package-name <package-name>"
+  echo "Kullanım: $0 ./update_project.sh --app-name "Sabit Akkaya" --package-name com.softinyo.sabitak"
   exit 1
 }
 
 # Varsayılan değerler
-source_dir=""
-output_dir=""
+source_dir="assets/translations"
+output_dir="lib/core/langs/"
 app_name=""
 package_name=""
 
@@ -26,7 +26,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Gerekli parametreleri kontrol et
-if [[ -z "$source_dir" || -z "$output_dir" || -z "$app_name" || -z "$package_name" ]]; then
+if [[ -z "$app_name" || -z "$package_name" ]]; then
   echo "HATA: --source-dir, --output-dir, --app-name ve --package-name parametreleri zorunludur."
   usage
 fi

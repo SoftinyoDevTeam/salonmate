@@ -1,5 +1,5 @@
 icons_launcher:
-  image_path: "assets/appicon/baharbabacan.png"
+  image_path: "assets/appicon/appicon.jpg"
   platforms:
     android:
       enable: true

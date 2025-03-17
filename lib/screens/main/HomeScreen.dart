@@ -145,155 +145,157 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        OverlayTooltipItem(
-                          displayIndex: 2,
-                          tooltip: (controller) => Container(
-                              width: 200.w,
-                              height: 150.h,
-                              child: Padding(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      OverlayTooltipItem(
+                        displayIndex: 2,
+                        tooltip: (controller) => Container(
+                            width: 200.w,
+                            height: 150.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MateCard(
+                                  widget: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: MateCard(
-                                    widget: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(children: [
-                                    Text(
-                                      ("HomeScreen.wallet").tr(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                child: Column(children: [
+                                  Text(
+                                    ("HomeScreen.wallet").tr(),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      style: TextStyle(fontSize: 11.sp),
+                                      maxLines: 4,
+                                      "Kampanyalarımızdan elde ettiğiniz kazanımları buradan takip edebilirsiniz.",
+                                      textAlign: TextAlign.center,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text(
-                                        style: TextStyle(fontSize: 11.sp),
-                                        maxLines: 4,
-                                        "Kampanyalarımızdan elde ettiğiniz kazanımları buradan takip edebilirsiniz.",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: MateButon(
-                                          title: "Devam",
-                                          minimumSize: Size(30, 30),
-                                          onPressed: () {},
-                                          color: Theme.of(context).primaryColor,
-                                          textcolor: Theme.of(context)
-                                              .primaryColorLight),
-                                    )
-                                  ]),
-                                )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: MateButon(
+                                        title: "Devam",
+                                        minimumSize: Size(30, 30),
+                                        onPressed: () {},
+                                        color: Theme.of(context).primaryColor,
+                                        textcolor: Theme.of(context)
+                                            .primaryColorLight),
+                                  )
+                                ]),
                               )),
-                          tooltipVerticalPosition:
-                              TooltipVerticalPosition.BOTTOM,
-                          tooltipHorizontalPosition:
-                              TooltipHorizontalPosition.CENTER,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.outline,
-                              surfaceTintColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                              ),
+                            )),
+                        tooltipVerticalPosition: TooltipVerticalPosition.BOTTOM,
+                        tooltipHorizontalPosition:
+                            TooltipHorizontalPosition.CENTER,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.outline,
+                            surfaceTintColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CuzdanimScreen()));
-                            },
-                            icon: Image.asset(
-                              "assets/images/icons/wallet.png",
-                              width: 24,
-                              height: 24,
-                            ),
-                            label: Text(("HomeScreen.wallet").tr(),
-                                style: TextStyle(
-                                    color: const Color(0xFF272E54),
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w600)),
+                            fixedSize:
+                                Size(160.w, 40.h), // Reduced from 48.h to 40.h
                           ),
-                        ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.05),
-                        OverlayTooltipItem(
-                          displayIndex: 1,
-                          tooltip: (controller) => Container(
-                              width: 200.w,
-                              height: 150.h,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: MateCard(
-                                    widget: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(children: [
-                                    Text(
-                                      ("general.shakewin").tr(),
-                                      style: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text(
-                                        style: TextStyle(fontSize: 11.sp),
-                                        maxLines: 4,
-                                        "Telefonunu salla ve süpriz hediyeler kazanma şansını yakala.",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: MateButon(
-                                          title: "Devam",
-                                          minimumSize: Size(30, 30),
-                                          onPressed: () {},
-                                          color: Theme.of(context).primaryColor,
-                                          textcolor: Theme.of(context)
-                                              .primaryColorLight),
-                                    )
-                                  ]),
-                                )),
-                              )),
-                          tooltipVerticalPosition:
-                              TooltipVerticalPosition.BOTTOM,
-                          tooltipHorizontalPosition:
-                              TooltipHorizontalPosition.CENTER,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              surfaceTintColor: Colors.transparent,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.outline,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12), // <-- Radius
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
+                          onPressed: () {
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const SallaKazanScreen()),
-                              );
-                            },
-                            icon: Image.asset(
-                              "assets/images/icons/shakewin.png",
-                              width: 24,
-                              height: 24,
-                            ),
-                            label: Text(("general.shakewin").tr(),
-                                style: TextStyle(
-                                    color: const Color(0xFF272E54),
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w600)),
+                                        const CuzdanimScreen()));
+                          },
+                          icon: Image.asset(
+                            "assets/images/icons/wallet.png",
+                            width: 24,
+                            height: 24,
                           ),
-                        )
-                      ]),
+                          label: Text(("HomeScreen.wallet").tr(),
+                              style: TextStyle(
+                                  color: const Color(0xFF272E54),
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      OverlayTooltipItem(
+                        displayIndex: 1,
+                        tooltip: (controller) => Container(
+                            width: 200.w,
+                            height: 150.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MateCard(
+                                  widget: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(children: [
+                                  Text(
+                                    ("general.shakewin").tr(),
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      style: TextStyle(fontSize: 11.sp),
+                                      maxLines: 4,
+                                      "Telefonunu salla ve süpriz hediyeler kazanma şansını yakala.",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: MateButon(
+                                        title: "Devam",
+                                        minimumSize: Size(30, 30),
+                                        onPressed: () {},
+                                        color: Theme.of(context).primaryColor,
+                                        textcolor: Theme.of(context)
+                                            .primaryColorLight),
+                                  )
+                                ]),
+                              )),
+                            )),
+                        tooltipVerticalPosition: TooltipVerticalPosition.BOTTOM,
+                        tooltipHorizontalPosition:
+                            TooltipHorizontalPosition.CENTER,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            surfaceTintColor: Colors.transparent,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.outline,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(12), // <-- Radius
+                            ),
+                            fixedSize:
+                                Size(160.w, 40.h), // Reduced from 48.h to 40.h
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SallaKazanScreen()),
+                            );
+                          },
+                          icon: Image.asset(
+                            "assets/images/icons/shakewin.png",
+                            width: 24,
+                            height: 24,
+                          ),
+                          label: Text(("general.shakewin").tr(),
+                              style: TextStyle(
+                                  color: const Color(0xFF272E54),
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),

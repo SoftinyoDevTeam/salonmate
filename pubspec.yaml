@@ -4,7 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 2.2.5+225
+version: 2.2.6+226
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -59,6 +59,8 @@ dependencies:
   phone_numbers_parser: ^9.0.3
   circle_flags: ^5.0.0
   flutter_country_selector: ^1.0.14
+  flutter_map: ^8.1.1
+  csc_picker_plus: ^0.0.3
 
 dev_dependencies:
   flutter_test:

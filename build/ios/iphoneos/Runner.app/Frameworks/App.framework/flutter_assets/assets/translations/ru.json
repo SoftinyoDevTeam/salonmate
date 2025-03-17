@@ -1,0 +1,123 @@
+{
+    "general": {
+        "login": "Войти",
+        "register": "Зарегистрироваться",
+        "phone": "Номер телефона",
+        "fname": "Имя",
+        "lname": "Фамилия",
+        "birthday": "Дата рождения",
+        "okey": "ОК",
+        "done": "Готово",
+        "cancel": "Отмена",
+        "next": "Далее",
+        "prev": "Назад",
+        "welcome": "Добро пожаловать",
+        "yes": "Да",
+        "no": "Нет",
+        "shakewin": "встряхнуть победу",
+        "close_keyboard": "Закрыть клавиатуру",
+        "search_product": "Поиск продукта",
+        "errors": {
+            "required_phone_number": "Требуется номер телефона",
+            "wrong_phone_number": "Неверный номер телефона"
+        }
+    },
+    "SplashScreen": {
+        "splash_title_1": "Покупайте средства для волос на самых выгодных условиях.",
+        "splash_text_1": "При покупке продукта через наше приложение вы получаете бесплатную услугу в нашем салоне.",
+        "splash_title_2": "Дружба с наградами",
+        "splash_text_2": "Рекомендуйте наше приложение своим друзьям. Ваши друзья получат скидку на первую услугу, а вы заработаете баллы.",
+        "splash_title_3": "Тряси и выигрывай",
+        "splash_text_3": "Трясите телефон раз в день и выигрывайте сюрпризы, действующие в нашем салоне."
+    },
+    "RegisterWidget": {
+        "agreement_confirm": "Я прочитал и принимаю Пользовательское соглашение и Политику конфиденциальности.",
+        "didyouservicefromus": "Вы уже пользовались нашими услугами?",
+        "affiliate_code": "Код партнера",
+        "affiliate_code_enter": "Введите ваш партнерский код",
+        "howlongcustomeryouare": "Как долго вы являетесь нашим клиентом?",
+        "lessthan1year": "Менее 1 года",
+        "13year": "1-3 года",
+        "morethan3year": "Более 3 лет"
+    },
+    "LoginScreen": {
+
+    },
+    "ScheduleScreen": {
+        "appointment_create": "Создать запись",
+        "select_branch": "Выберите филиал",
+        "select_personnel": "Выберите персонал",
+        "service_added_to_cart": "Услуга добавлена в корзину.",
+        "prepayment_required": "Для создания записи требуется предоплата.",
+        "prepayment_info": "После предоплаты вы сможете выбрать персонал, дату и время для услуги.",
+        "add_another_appointment": "Нажмите кнопку 'Добавить запись', чтобы добавить еще одну услугу в корзину.",
+        "select_personnel_prompt": "Выберите персонал*",
+        "branch_selection": "Выберите филиал",
+        "select_time": "Выберите время",
+        "service": "Услуга",
+        "personnel": "Персонал",
+        "date": "Дата",
+        "time": "Время",
+        "back": "Назад",
+        "add_to_cart": "Добавить в корзину",
+        "next": "Далее",
+        "create_appointment": "Создать запись",
+        "prepayment": "Сделать предоплату",
+        "add_appointment": "Добавить запись"
+    },
+    "HomeScreen": {
+        "wallet": "Мой кошелек",
+        "campaigns": "Кампании",
+        "see_all": "Смотреть все",
+        "featured_products": "Рекомендуемые продукты",
+        "no_featured_products": "Нет рекомендуемых продуктов",
+        "unfortunately": "К сожалению"
+    },
+    "SallaKazan": {
+        "shake_to_win": "Тряси, чтобы выиграть призы!",
+        "shaking": "Трясете...",
+        "congratulations": "Поздравляем!",
+        "you_won": "Вы выиграли!",
+        "try_again": "Попробуйте снова"
+    },
+    "ScreenBridge": {
+        "home": "Главная",
+        "products": "Продукты",
+        "appointment": "Запись",
+        "cart": "Корзина",
+        "support": "Поддержка"
+    },
+    "PaymentScreen": {
+        "payment_screen_title": "Экран оплаты",
+        "total_amount": "Общая сумма",
+        "payment_method": "Способ оплаты",
+        "credit_card": "Кредитная карта",
+        "cash": "Наличные",
+        "pay_now": "Оплатить сейчас",
+        "enter_card_details": "Введите данные карты",
+        "card_number": "Номер карты",
+        "expiry_date": "Месяц/Год",
+        "cvv": "CVV",
+        "card_holder_name": "Имя владельца карты",
+        "payment_successful": "Оплата успешна",
+        "payment_failed": "Оплата не удалась",
+        "try_again": "Попробуйте снова"
+    },
+    "ProfileScreen": {
+        "my_profile": "Мой профиль",
+        "share_invite_code": "Поделиться кодом приглашения",
+        "personal_info": "Моя личная информация",
+        "my_wallet": "Мой кошелек",
+        "my_orders": "Мои заказы",
+        "my_appointments": "Мои записи",
+        "campaigns": "Кампании",
+        "change_language": "Сменить язык",
+        "logout": "Выйти",
+        "delete_account": "Удалить аккаунт навсегда",
+        "invite_code_message": "Поделитесь кодом с друзьями и воспользуйтесь нашими преимуществами.",
+        "invite_code_subject": "Зарегистрируйтесь с моим кодом и получите скидку 30%",
+        "invite_code_text": "Скачайте приложение с моим кодом и получите скидку 30% на первую покупку.",
+        "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    }
+}
