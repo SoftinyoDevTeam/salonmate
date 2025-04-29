@@ -6,13 +6,13 @@ import 'package:salonmate/core/functions.dart';
 
 // General const
 
-const appname = "Bahar Babacan";
+const appname = "Sabit Akkaya";
 const affCodePrefix = 'MATE';
 const currency = "TL";
 String platform = Platform.isAndroid ? "android" : "ios";
 
 String mateKey =
-    "bahars-s0e6-44c5-ac17-a9bcd947ff0c"; // mate -- yadasalon token
+    "a690ecb2-e0c6-44c5-ac17-d8fcf947ff0c"; // mate -- yadasalon token
 
 // Localization const
 

@@ -4,7 +4,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadowapi/4.12.1/9adce46e653d0fb1276aea78bdcf0c4699e7d813/shadowapi-4.12.1.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadowapi/4.12.1/19895f9c8b58c19c95b5e68824116a7d54e28f0f/shadowapi-4.12.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadowapi/4.12.1/dc436d7b179c0729428a6569acbf4ba1b72d919f/shadowapi-4.12.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

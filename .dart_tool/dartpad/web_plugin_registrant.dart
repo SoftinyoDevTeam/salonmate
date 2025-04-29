@@ -8,6 +8,7 @@
 
 import 'package:audio_session/audio_session_web.dart';
 import 'package:device_info_plus/src/device_info_plus_web.dart';
+import 'package:firebase_analytics_web/firebase_analytics_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 import 'package:flutter_credit_card/src/plugin/flutter_credit_card_web.dart';
@@ -27,6 +28,7 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   AudioSessionWeb.registerWith(registrar);
   DeviceInfoPlusWebPlugin.registerWith(registrar);
+  FirebaseAnalyticsWeb.registerWith(registrar);
   FirebaseCoreWeb.registerWith(registrar);
   FirebaseMessagingWeb.registerWith(registrar);
   FlutterCreditCardWeb.registerWith(registrar);

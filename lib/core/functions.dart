@@ -4,11 +4,13 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:salonmate/core/const.dart';
 import 'package:salonmate/core/extensions.dart';
@@ -16,6 +18,7 @@ import 'package:salonmate/core/models/othermodels/RandevuModel.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/othermodels/sepetmodel.dart';
+import 'package:salonmate/core/models/salonmodels/businesshourstaffmodel.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
 import 'package:salonmate/core/models/salonmodels/siparisgecmisimodel.dart';
@@ -365,7 +368,7 @@ Future<String> register(FormData form, BuildContext context) async {
           (Route<dynamic> route) => false);
       return "true";
     } else {
-      //Fluttertoast.showToast(msg: "${response.data["message"]}");
+      Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('register: [ERROR] ${response.data}');
       return "false";
     }
@@ -604,8 +607,9 @@ Future<List<RandevuModel?>> fetchRandevu() async {
   }
 }
 
-Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
+Future<Map<String, dynamic>> checkStaffFilledSchedules(String staffID) async {
   List<DateTime> elements = [];
+  List<BusinessHourStaffModel> businessHours = [];
   FormData data = FormData.fromMap({"staffID": staffID});
   try {
     Response response = await Dio().post(
@@ -622,7 +626,17 @@ Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
 
     //log("checkStaffFilledSchedules : [ RESPONSE ]" + response.data.toString());
     if (response.data["status"] == "200") {
-      response.data["data"].forEach((element) {
+      response.data["data"]["staffbusinesshours"].forEach((element) {
+        businessHours.add(BusinessHourStaffModel(
+          id: element["ID"],
+          staffID: element["staffID"],
+          startTime: element["startTime"],
+          endTime: element["endTime"],
+          day: element["day"],
+        ));
+      });
+
+      response.data["data"]["filledSchedules"].forEach((element) {
         DateTime scheduleStart = DateTime.parse(element["scheduleStart"]);
         DateTime scheduleEnd = DateTime.parse(element["scheduleEnd"]);
         int serviceDuration = scheduleEnd.difference(scheduleStart).inMinutes;
@@ -635,17 +649,17 @@ Future<List<DateTime>> checkStaffFilledSchedules(String staffID) async {
         }
         elements.add(scheduleEnd);
       });
-      return elements;
     } else {
       // Fluttertoast.showToast(msg: "${response.data["message"]}");
       log('checkStaffFilledSchedules: [ERROR] ${response.data}');
-      return elements;
+      return {"elements": elements, "businessHours": businessHours};
     }
   } catch (e) {
     //  Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('checkStaffFilledSchedules: [ERROR] $e', error: e);
-    return elements;
+    return {"elements": elements, "businessHours": businessHours};
   }
+  return {"elements": elements, "businessHours": businessHours};
 }
 
 Future<bool> updateMyDataMobile(String column, String value) async {
@@ -673,6 +687,36 @@ Future<bool> updateMyDataMobile(String column, String value) async {
   } catch (e) {
     Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
     log('updateMyDataMobile: [ERROR] $e', error: e);
+    return false;
+  }
+}
+
+Future<bool> logMATEAI(String question, String answer, String gptmodel) async {
+  FormData form = FormData.fromMap(
+      {"question": question, "answer": answer, "model": gptmodel});
+  try {
+    Response response = await Dio().post(
+      apiUrl + "?module=logMATEAI",
+      data: form,
+      options: Options(
+        headers: {
+          "Access-Control-Allow-Origin":
+              "*", // Required for CORS support to work
+          "Matekey": await getPrefString("token"),
+        },
+      ),
+    );
+    log(response.data.toString());
+    if (response.data["status"] == "200") {
+      return true;
+    } else {
+      //Fluttertoast.showToast(msg: "${response.data["message"]}");
+      log('logMATEAI: [ERROR] ${response.data}');
+      return false;
+    }
+  } catch (e) {
+    //Fluttertoast.showToast(msg: "Uzak sunucuya erişim reddedildi. $e");
+    log('logMATEAI: [ERROR] $e', error: e);
     return false;
   }
 }
@@ -735,6 +779,11 @@ Future<bool> checkAff() async {
     log('shakeWin: [ERROR] $e', error: e);
     return false;
   }
+}
+
+TimeOfDay stringToTimeOfDay(String tod) {
+  final format = DateFormat.Hm(); // "18:00" format for 24-hour time
+  return TimeOfDay.fromDateTime(format.parse(tod));
 }
 
 List<DateTimeRange> getEmptySchedule(
@@ -946,7 +995,13 @@ Future<List<CampaignModel?>> getCampaigns() async {
 }
 
 Future<String> completeCart(
-    String ccOwner, String card_number, String expirydate, String cvv) async {
+    String ccOwner,
+    String card_number,
+    String expirydate,
+    String cvv,
+    int shipment,
+    int selectedAdres,
+    int selectedbranch) async {
   String expiry_month = expirydate[0] + expirydate[1];
   String expiry_year = expirydate[3] + expirydate[4];
   FormData form = FormData.fromMap({
@@ -954,8 +1009,12 @@ Future<String> completeCart(
     "card_number": card_number.replaceAll(" ", ""),
     "expiry_month": expiry_month,
     "expiry_year": expiry_year,
-    "cvv": cvv
+    "cvv": cvv,
+    "shipment": shipment,
+    "selectedAdres": selectedAdres,
+    "selectedbranch": selectedbranch
   });
+  log(form.toString());
   try {
     Response response = await Dio().post(
       apiUrl + "?module=completeCart",
@@ -1050,6 +1109,53 @@ Future<bool> deleteCart(int ID) async {
 class MateServices extends ChangeNotifier {
   ThemeData themeData = ThemeData().copyWith();
   SalonConfigModel? salonConfig;
+  RewardedAd? _rewardedAd;
+  bool _isRewardedAdReady = false;
+  // TODO: replace this test ad unit with your own ad unit.
+  final adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-3940256099942544/5224354917'
+      : 'ca-app-pub-3940256099942544/1712485313';
+
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: 'ca-app-pub-3940256099942544/5224354917', // TEST ID
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (RewardedAd ad) {
+          _rewardedAd = ad;
+          _isRewardedAdReady = true;
+
+          _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              ad.dispose();
+              _loadRewardedAd(); // tekrar yükle
+            },
+            onAdFailedToShowFullScreenContent: (ad, error) {
+              ad.dispose();
+              _loadRewardedAd();
+            },
+          );
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          print('Rewarded ad failed to load: $error');
+          _isRewardedAdReady = false;
+        },
+      ),
+    );
+  }
+
+  void _showRewardedAd() {
+    if (_isRewardedAdReady && _rewardedAd != null) {
+      _rewardedAd!.show(
+        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+          print('Kullanıcı ödül kazandı: ${reward.amount} ${reward.type}');
+          // Burada kullanıcıya ödül ver
+        },
+      );
+    } else {
+      print('Rewarded ad hazır değil.');
+    }
+  }
 
   changeThemeData() async {
     salonConfig = await getSalonConfig(buildNumber);

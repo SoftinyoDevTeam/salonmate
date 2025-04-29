@@ -104,6 +104,7 @@
         "try_again": "Proovi uuesti"
     },
     "ProfileScreen": {
+        "puzzle": "Pusle",
         "my_profile": "Minu profiil",
         "share_invite_code": "Jaga kutsekoodi",
         "personal_info": "Minu isiklik teave",
@@ -118,6 +119,48 @@
         "invite_code_subject": "Registreeru minu koodiga ja saa 30% allahindlust",
         "invite_code_text": "Laadige rakendus alla minu koodiga ja saate oma esimese ostu puhul 30% allahindlust.",
         "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+        "leaderboard": "Edetabel",
+        "top_scorers": "Parimad skoorijad",
+        "new_members": "Uued liikmed"
+    },
+    "AdreslerimScreen": {
+        "my_addresses": "Minu aadressid",
+        "add_new_address": "Lisa uus aadress",
+        "no_addresses": "Aadressid puuduvad",
+        "add_address_description": "Lisage aadress, klõpsates nupul 'Lisa uus aadress'.",
+        "address": "Aadress",
+        "edit": "Muuda",
+        "delete": "Kustuta",
+        "add_address": "Lisa aadress",
+        "address_name": "Aadressi nimi",
+        "address_name_placeholder": "Kodu, Töö, Muu",
+        "address_title": "Aadressi pealkiri",
+        "address_title_placeholder": "Kodu, Töö, Muu",
+        "address_description": "Aadressi kirjeldus",
+        "address_description_placeholder": "Kodu, Töö, Muu",
+        "address_type": "Aadressi tüüp",
+        "address_type_home": "Kodu",
+        "address_type_work": "Töö",
+        "address_type_other": "Muu",
+        "delete_confirmation_title": "Kustuta aadress",
+        "delete_confirmation_message": "Kas olete kindel, et soovite selle aadressi kustutada?",
+        "cancel": "Tühista",
+        "delete_success": "Aadress edukalt kustutatud"
+    },
+    "YeniAdresEkleScreen": {
+        "title": "Lisa uus aadress",
+        "edit_title": "Muuda aadressi",
+        "address_title": "Aadressi pealkiri",
+        "country": "Riik",
+        "city": "Linn",
+        "town": "Linnaosa",
+        "address_detail": "Täiendavad aadressi üksikasjad",
+        "phone": "Telefoninumber",
+        "save": "Salvesta aadress",
+        "required_field": "Kohustuslik väli",
+        "select_country": "Palun valige riik",
+        "select_city": "Palun valige linn",
+        "select_district": "Palun valige linnaosa"
     }
 }

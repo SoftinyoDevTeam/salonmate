@@ -1,0 +1,1 @@
+ /Users/mateuser/Desktop/salonmate/.dart_tool/flutter_build/ffef7346ef246f3ae5b41445c2dd074e/dart_build_result.json: 

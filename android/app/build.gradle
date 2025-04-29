@@ -24,14 +24,14 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.softinyo.sabitak"
-    compileSdkVersion 34
-    buildToolsVersion "23.0.1"
-    ndkVersion '25.2.9519653'
+    namespace "com.sacinlainatlasma"
+    compileSdkVersion 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8 // or a higher Java version
+        targetCompatibility JavaVersion.VERSION_1_8 // or a higher Java version
     }
 
     kotlinOptions {
@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.softinyo.sabitak"
+        applicationId "com.sacinlainatlasma"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
@@ -60,7 +60,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    buildToolsVersion '34.0.0'
 }
 
 flutter {
@@ -70,7 +69,7 @@ flutter {
 dependencies {
   // Import the Firebase BoM
   implementation platform('com.google.firebase:firebase-bom:30.2.0')
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4' // Use the latest version
   // Add the dependency for the Firebase SDK for Google Analytics
   // When using the BoM, don't specify versions in Firebase dependencies
   implementation 'com.google.firebase:firebase-analytics'

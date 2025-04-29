@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.build:gradle-settings-api:8.8.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.build" artifactId="gradle-settings-api" version="8.8.0" baseVersion="8.8.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-settings-api/8.8.0/faf79ddec9f1f02693cce151aa1636b27ec41d3b/gradle-settings-api-8.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle-settings-api/8.8.0/9cd16b9fe5de670678a03b54729a03d5981b504a/gradle-settings-api-8.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -60,7 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ScreenBridge(
-                            selectedScreen: 3,
+                            selectedScreen: 4,
                           ),
                         ),
                         (route) => false);

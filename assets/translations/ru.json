@@ -104,6 +104,7 @@
         "try_again": "Попробуйте снова"
     },
     "ProfileScreen": {
+         "puzzle": "Пазл",
         "my_profile": "Мой профиль",
         "share_invite_code": "Поделиться кодом приглашения",
         "personal_info": "Моя личная информация",
@@ -118,6 +119,48 @@
         "invite_code_subject": "Зарегистрируйтесь с моим кодом и получите скидку 30%",
         "invite_code_text": "Скачайте приложение с моим кодом и получите скидку 30% на первую покупку.",
         "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+        "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+        "leaderboard": "Таблица лидеров",
+        "top_scorers": "Лучшие игроки",
+        "new_members": "Новые участники"
+    },
+    "AdreslerimScreen": {
+        "my_addresses": "Мои адреса",
+        "add_new_address": "Добавить новый адрес",
+        "no_addresses": "Адреса отсутствуют",
+        "add_address_description": "Добавьте адрес, нажав кнопку 'Добавить новый адрес'.",
+        "address": "Адрес",
+        "edit": "Редактировать",
+        "delete": "Удалить",
+        "add_address": "Добавить адрес",
+        "address_name": "Название адреса",
+        "address_name_placeholder": "Дом, Работа, Другое",
+        "address_title": "Заголовок адреса",
+        "address_title_placeholder": "Дом, Работа, Другое",
+        "address_description": "Описание адреса",
+        "address_description_placeholder": "Дом, Работа, Другое",
+        "address_type": "Тип адреса",
+        "address_type_home": "Дом",
+        "address_type_work": "Работа",
+        "address_type_other": "Другое",
+        "delete_confirmation_title": "Удалить адрес",
+        "delete_confirmation_message": "Вы уверены, что хотите удалить этот адрес?",
+        "cancel": "Отмена",
+        "delete_success": "Адрес успешно удален"
+    },
+    "YeniAdresEkleScreen": {
+        "title": "Добавить новый адрес",
+        "edit_title": "Редактировать адрес",
+        "address_title": "Заголовок адреса",
+        "country": "Страна",
+        "city": "Город",
+        "town": "Район",
+        "address_detail": "Дополнительные детали адреса",
+        "phone": "Номер телефона",
+        "save": "Сохранить адрес",
+        "required_field": "Обязательное поле",
+        "select_country": "Пожалуйста, выберите страну",
+        "select_city": "Пожалуйста, выберите город",
+        "select_district": "Пожалуйста, выберите район"
     }
 }

@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     List<SplashModel> list = [];
 
     list.add(SplashModel(
-        image: 'assets/images/splash/baharsplash.jpeg',
+        image: 'assets/images/splash/model_one.png',
         title: ('SplashScreen.splash_title_1').tr(),
         subTitle: ('SplashScreen.splash_text_1').tr()));
     list.add(SplashModel(

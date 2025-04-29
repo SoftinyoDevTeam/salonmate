@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
 
 import 'dart:ui';
 
@@ -14,7 +14,7 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> tr = {
+  static const Map<String,dynamic> _tr = {
   "general": {
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
@@ -102,7 +102,7 @@ class CodegenLoader extends AssetLoader{
     "products": "Ürünler",
     "appointment": "Randevu",
     "cart": "Sepetim",
-    "support": "Canlı Destek"
+    "support": "MATE AI"
   },
   "PaymentScreen": {
     "payment_screen_title": "Ödeme Ekranı",
@@ -119,17 +119,26 @@ class CodegenLoader extends AssetLoader{
     "payment_successful": "Ödeme Başarılı",
     "payment_failed": "Ödeme Başarısız",
     "try_again": "Tekrar Deneyin",
-    "delivery_method": "Delivery Method",
-    "branch_delivery": "Branch Delivery",
-    "branch_delivery_desc": "Pick up your order from our branch",
-    "shipping": "Shipping",
-    "shipping_desc": "Deliver to your address",
-    "select_delivery_method": "Please select a delivery method",
-    "select_branch": "Select Branch",
-    "change_branch": "Change Branch",
-    "select_branch_error": "Please select a branch for delivery"
+    "delivery_method": "Teslimat Yöntemi",
+    "branch_delivery": "Gel Al",
+    "branch_delivery_desc": "Siparişinizi şubemizden teslim alın",
+    "shipping": "Kargo",
+    "shipping_desc": "Adresinize teslim",
+    "select_delivery_method": "Lütfen bir teslimat yöntemi seçin",
+    "select_branch": "Şube Seç",
+    "change_branch": "Şube Değiştir",
+    "select_adress": "Adres Seç",
+    "change_adress": "Adres Değiştir",
+    "select_branch_error": "Teslimat için lütfen bir şube seçin",
+    "order_summary": "Sipariş Özeti",
+    "subtotal": "Ara Toplam",
+    "shipping_fee": "Kargo Ücreti",
+    "service_fee": "Hizmet Bedeli",
+    "tax": "KDV",
+    "total": "Toplam"
   },
   "ProfileScreen": {
+    "puzzle": "Puzzle",
     "my_profile": "Profilim",
     "share_invite_code": "Davet Kodunu Paylaş",
     "personal_info": "Kişisel Bilgilerim",
@@ -144,7 +153,10 @@ class CodegenLoader extends AssetLoader{
     "invite_code_subject": "Davet Kodumla Üye Ol %30 İndirim Kazan",
     "invite_code_text": "davet kodumla uygulamayı indir ilk harcamanda %30 indirim kazan.",
     "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+    "leaderboard": "Liderlik Tablosu",
+    "top_scorers": "Liderler",
+    "new_members": "Yeni Üyeler"
   },
   "SalonSecScreen": {
     "enter_code": "Lütfen salonunuzdan aldığınız kodu giriniz",
@@ -185,13 +197,13 @@ class CodegenLoader extends AssetLoader{
     "campaigns": "Kampanyalar"
   },
   "AdreslerimScreen": {
-    "my_addresses": "My Addresses",
-    "add_new_address": "Add New Address",
-    "no_addresses": "No Addresses Yet",
-    "add_address_description": "Add your first address to get started",
+    "my_addresses": "Adreslerim",
+    "add_new_address": "Yeni Adres Ekle",
+    "no_addresses": "Adresiniz bulunmamaktadır",
+    "add_address_description": "Adres eklemek için 'Yeni Adres Ekle' butonuna tıklayınız.",
     "address": "Adres",
-    "edit": "Edit",
-    "delete": "Delete",
+    "edit": "Düzenle",
+    "delete": "Sil",
     "add_address": "Adres Ekle",
     "address_name": "Adres Adı",
     "address_name_placeholder": "Ev, İş, Diğer",
@@ -203,27 +215,28 @@ class CodegenLoader extends AssetLoader{
     "address_type_home": "Ev",
     "address_type_work": "İş",
     "address_type_other": "Diğer",
-    "delete_confirmation_title": "Delete Address",
-    "delete_confirmation_message": "Are you sure you want to delete this address?",
-    "cancel": "Cancel",
-    "delete_success": "Address deleted successfully"
+    "delete_confirmation_title": "Adres Sil",
+    "delete_confirmation_message": "Adresi silmek istediğinize emin misiniz?",
+    "cancel": "İptal",
+    "delete_success": "Adres başarıyla silindi"
   },
   "YeniAdresEkleScreen": {
-    "title": "Add New Address",
+    "title": "Yeni Adres Ekle",
+    "edit_title": "Adres Düzenle",
     "address_title": "Address Title",
     "country": "Ulke",
     "city": "Il",
     "town": "Ilce",
-    "address_detail": "Additional Address Details",
-    "phone": "Phone Number",
-    "save": "Save Address",
-    "required_field": "This field is required",
-    "select_country": "Please select a country",
-    "select_city": "Please select a city",
-    "select_district": "Please select a district"
+    "address_detail": "Ek Adres Detayı",
+    "phone": "Telefon Numarası",
+    "save": "Adresi Kaydet",
+    "required_field": "ZORUNLU ALAN",
+    "select_country": "Lutfen ulkenizi seciniz",
+    "select_city": "Lutfen ilinizi seciniz",
+    "select_district": "Lutfen ilcenizi seciniz"
   }
 };
-static const Map<String,dynamic> ru = {
+static const Map<String,dynamic> _ru = {
   "general": {
     "login": "Войти",
     "register": "Зарегистрироваться",
@@ -327,6 +340,7 @@ static const Map<String,dynamic> ru = {
     "try_again": "Попробуйте снова"
   },
   "ProfileScreen": {
+    "puzzle": "Пазл",
     "my_profile": "Мой профиль",
     "share_invite_code": "Поделиться кодом приглашения",
     "personal_info": "Моя личная информация",
@@ -341,10 +355,52 @@ static const Map<String,dynamic> ru = {
     "invite_code_subject": "Зарегистрируйтесь с моим кодом и получите скидку 30%",
     "invite_code_text": "Скачайте приложение с моим кодом и получите скидку 30% на первую покупку.",
     "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+    "leaderboard": "Таблица лидеров",
+    "top_scorers": "Лучшие игроки",
+    "new_members": "Новые участники"
+  },
+  "AdreslerimScreen": {
+    "my_addresses": "Мои адреса",
+    "add_new_address": "Добавить новый адрес",
+    "no_addresses": "Адреса отсутствуют",
+    "add_address_description": "Добавьте адрес, нажав кнопку 'Добавить новый адрес'.",
+    "address": "Адрес",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "add_address": "Добавить адрес",
+    "address_name": "Название адреса",
+    "address_name_placeholder": "Дом, Работа, Другое",
+    "address_title": "Заголовок адреса",
+    "address_title_placeholder": "Дом, Работа, Другое",
+    "address_description": "Описание адреса",
+    "address_description_placeholder": "Дом, Работа, Другое",
+    "address_type": "Тип адреса",
+    "address_type_home": "Дом",
+    "address_type_work": "Работа",
+    "address_type_other": "Другое",
+    "delete_confirmation_title": "Удалить адрес",
+    "delete_confirmation_message": "Вы уверены, что хотите удалить этот адрес?",
+    "cancel": "Отмена",
+    "delete_success": "Адрес успешно удален"
+  },
+  "YeniAdresEkleScreen": {
+    "title": "Добавить новый адрес",
+    "edit_title": "Редактировать адрес",
+    "address_title": "Заголовок адреса",
+    "country": "Страна",
+    "city": "Город",
+    "town": "Район",
+    "address_detail": "Дополнительные детали адреса",
+    "phone": "Номер телефона",
+    "save": "Сохранить адрес",
+    "required_field": "Обязательное поле",
+    "select_country": "Пожалуйста, выберите страну",
+    "select_city": "Пожалуйста, выберите город",
+    "select_district": "Пожалуйста, выберите район"
   }
 };
-static const Map<String,dynamic> en = {
+static const Map<String,dynamic> _en = {
   "general": {
     "login": "Login",
     "register": "Register",
@@ -448,6 +504,7 @@ static const Map<String,dynamic> en = {
     "try_again": "Try Again"
   },
   "ProfileScreen": {
+    "puzzle": "Puzzle",
     "my_profile": "My Profile",
     "share_invite_code": "Share Invite Code",
     "personal_info": "My Personal Information",
@@ -462,10 +519,52 @@ static const Map<String,dynamic> en = {
     "invite_code_subject": "Register with my code and get a 30% discount",
     "invite_code_text": "Download the app with my code and get a 30% discount on your first purchase.",
     "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+    "leaderboard": "Leaderboard",
+    "top_scorers": "Top Scorers",
+    "new_members": "New Members"
+  },
+  "AdreslerimScreen": {
+    "my_addresses": "My Addresses",
+    "add_new_address": "Add New Address",
+    "no_addresses": "No addresses found",
+    "add_address_description": "Click 'Add New Address' to add an address.",
+    "address": "Address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add_address": "Add Address",
+    "address_name": "Address Name",
+    "address_name_placeholder": "Home, Work, Other",
+    "address_title": "Address Title",
+    "address_title_placeholder": "Home, Work, Other",
+    "address_description": "Address Description",
+    "address_description_placeholder": "Home, Work, Other",
+    "address_type": "Address Type",
+    "address_type_home": "Home",
+    "address_type_work": "Work",
+    "address_type_other": "Other",
+    "delete_confirmation_title": "Delete Address",
+    "delete_confirmation_message": "Are you sure you want to delete this address?",
+    "cancel": "Cancel",
+    "delete_success": "Address deleted successfully"
+  },
+  "YeniAdresEkleScreen": {
+    "title": "Add New Address",
+    "edit_title": "Edit Address",
+    "address_title": "Address Title",
+    "country": "Country",
+    "city": "City",
+    "town": "District",
+    "address_detail": "Additional Address Details",
+    "phone": "Phone Number",
+    "save": "Save Address",
+    "required_field": "Required Field",
+    "select_country": "Please select a country",
+    "select_city": "Please select a city",
+    "select_district": "Please select a district"
   }
 };
-static const Map<String,dynamic> et = {
+static const Map<String,dynamic> _et = {
   "general": {
     "login": "Logi sisse",
     "register": "Registreeru",
@@ -569,6 +668,7 @@ static const Map<String,dynamic> et = {
     "try_again": "Proovi uuesti"
   },
   "ProfileScreen": {
+    "puzzle": "Pusle",
     "my_profile": "Minu profiil",
     "share_invite_code": "Jaga kutsekoodi",
     "personal_info": "Minu isiklik teave",
@@ -583,8 +683,50 @@ static const Map<String,dynamic> et = {
     "invite_code_subject": "Registreeru minu koodiga ja saa 30% allahindlust",
     "invite_code_text": "Laadige rakendus alla minu koodiga ja saate oma esimese ostu puhul 30% allahindlust.",
     "ios_link": "iOS: https://apps.apple.com/tr/app/sabit-akkaya/id6451428307?l=tr",
-    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate"
+    "android_link": "Android: https://play.google.com/store/apps/details?id=com.sabitakkaya.salonmate",
+    "leaderboard": "Edetabel",
+    "top_scorers": "Parimad skoorijad",
+    "new_members": "Uued liikmed"
+  },
+  "AdreslerimScreen": {
+    "my_addresses": "Minu aadressid",
+    "add_new_address": "Lisa uus aadress",
+    "no_addresses": "Aadressid puuduvad",
+    "add_address_description": "Lisage aadress, klõpsates nupul 'Lisa uus aadress'.",
+    "address": "Aadress",
+    "edit": "Muuda",
+    "delete": "Kustuta",
+    "add_address": "Lisa aadress",
+    "address_name": "Aadressi nimi",
+    "address_name_placeholder": "Kodu, Töö, Muu",
+    "address_title": "Aadressi pealkiri",
+    "address_title_placeholder": "Kodu, Töö, Muu",
+    "address_description": "Aadressi kirjeldus",
+    "address_description_placeholder": "Kodu, Töö, Muu",
+    "address_type": "Aadressi tüüp",
+    "address_type_home": "Kodu",
+    "address_type_work": "Töö",
+    "address_type_other": "Muu",
+    "delete_confirmation_title": "Kustuta aadress",
+    "delete_confirmation_message": "Kas olete kindel, et soovite selle aadressi kustutada?",
+    "cancel": "Tühista",
+    "delete_success": "Aadress edukalt kustutatud"
+  },
+  "YeniAdresEkleScreen": {
+    "title": "Lisa uus aadress",
+    "edit_title": "Muuda aadressi",
+    "address_title": "Aadressi pealkiri",
+    "country": "Riik",
+    "city": "Linn",
+    "town": "Linnaosa",
+    "address_detail": "Täiendavad aadressi üksikasjad",
+    "phone": "Telefoninumber",
+    "save": "Salvesta aadress",
+    "required_field": "Kohustuslik väli",
+    "select_country": "Palun valige riik",
+    "select_city": "Palun valige linn",
+    "select_district": "Palun valige linnaosa"
   }
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "ru": ru, "en": en, "et": et};
+static const Map<String, Map<String,dynamic>> mapLocales = {"tr": _tr, "ru": _ru, "en": _en, "et": _et};
 }

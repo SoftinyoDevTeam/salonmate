@@ -1,1 +1,0 @@
- /Users/mateuser/Desktop/salonmate/.dart_tool/flutter_build/afc6f45fe224e52829d488d906c32820/native_assets.json: 

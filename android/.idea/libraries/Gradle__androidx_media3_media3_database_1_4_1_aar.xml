@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.media3:media3-database:1.4.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/55881e6bdd174b57a4d5c66e4589a97d/transformed/jetified-media3-database-1.4.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.10.2/transforms/a674aedd7789a582dc1dffc8a8f7723c/transformed/jetified-media3-database-1.4.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/55881e6bdd174b57a4d5c66e4589a97d/transformed/jetified-media3-database-1.4.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-4/55881e6bdd174b57a4d5c66e4589a97d/transformed/jetified-media3-database-1.4.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.10.2/transforms/a674aedd7789a582dc1dffc8a8f7723c/transformed/jetified-media3-database-1.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.10.2/transforms/a674aedd7789a582dc1dffc8a8f7723c/transformed/jetified-media3-database-1.4.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

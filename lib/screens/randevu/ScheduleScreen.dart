@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:salonmate/core/extensions.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/radioselectmodels.dart';
 import 'package:salonmate/core/models/othermodels/stafffilledschedules.dart';
+import 'package:salonmate/core/models/salonmodels/businesshourstaffmodel.dart';
 import 'package:salonmate/core/models/salonmodels/checkHizmetmodel.dart';
 import 'package:salonmate/screens/main/ScreenBridge.dart';
 import 'package:salonmate/screens/profile/RandevularimScreen.dart';
@@ -49,8 +52,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   int cuzdanID = 0;
   late List<StaffFilledSchedules?> filledSchedules;
   List<DateTime> staffFilledScheduleList = [];
-
-  late List<DateTime> selectedDate = [DateTime.now()];
+  List<BusinessHourStaffModel> staffbusinesshours = [];
+  late List<DateTime> selectedDate = [];
 
   List<DateTimeRange> emptyScheduleList = [];
   RadioSelectModels? selectedItems;
@@ -385,9 +388,28 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           selectedStaff = value;
                           staffFilledScheduleList =
                               await checkStaffFilledSchedules(
+                                      selectedStaff!.ID.toString())
+                                  .then((response) => response['elements']
+                                      .map<DateTime>(
+                                          (e) => DateTime.parse(e.toString()))
+                                      .toList());
+
+                          // Fix the way we retrieve business hours to avoid type error
+                          var scheduleResponse =
+                              await checkStaffFilledSchedules(
                                   selectedStaff!.ID.toString());
+                          staffbusinesshours =
+                              scheduleResponse['businessHours'];
+
                           emptyScheduleList = getEmptySchedule(
-                              DateTime.now(), startTime, departureTime);
+                            DateTime.now(),
+                            stringToTimeOfDay(
+                                staffbusinesshours[DateTime.now().weekday - 1]
+                                    .startTime),
+                            stringToTimeOfDay(
+                                staffbusinesshours[DateTime.now().weekday - 1]
+                                    .endTime),
+                          );
                           setState(() {});
                         });
                       },
@@ -445,7 +467,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     minDate: DateTime.now(),
                     maxDate: DateTime(DateTime.now().year,
                         DateTime.now().month + 1, DateTime.now().day),
-                    initialSelectedDate: DateTime.now(),
                     selectionShape: DateRangePickerSelectionShape.rectangle,
                     selectionColor: Theme.of(context).colorScheme.secondary,
                     showTodayButton: false,
@@ -455,8 +476,27 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     selectionTextStyle:
                         TextStyle(color: Theme.of(context).primaryColorLight),
                     onSelectionChanged: (args) {
+                      TimeOfDay startTimeOfDay;
+                      TimeOfDay endTimeOfDay;
+
+                      if (staffbusinesshours.isEmpty ||
+                          args.value.weekday - 1 >= staffbusinesshours.length) {
+                        // Default values when business hours are not available
+                        startTimeOfDay = TimeOfDay(hour: 9, minute: 0);
+                        endTimeOfDay = TimeOfDay(hour: 9, minute: 0);
+                      } else {
+                        startTimeOfDay = stringToTimeOfDay(
+                            staffbusinesshours[args.value.weekday - 1]
+                                .startTime);
+                        endTimeOfDay = stringToTimeOfDay(
+                            staffbusinesshours[args.value.weekday - 1].endTime);
+                      }
+
                       emptyScheduleList = getEmptySchedule(
-                          args.value, startTime, departureTime);
+                        args.value,
+                        startTimeOfDay,
+                        endTimeOfDay,
+                      );
                       setState(() {});
                     },
                     monthViewSettings: DateRangePickerMonthViewSettings(
@@ -487,7 +527,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ],
                 ),
                 Container(
-                  height: 299.h,
+                  height: ScreenUtil().screenHeight * 0.50,
                   child: GridView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -833,16 +873,51 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               color: Theme.of(context).colorScheme.secondary,
                               textcolor: Theme.of(context).primaryColorLight,
                             )
-                          : MateButon(
-                              title: "Sonraki",
-                              minimumSize: Size(100.w, 120.h),
-                              onPressed: () {
-                                selectedTab = selectedTab + 1;
-                                setState(() {});
-                              },
-                              color: Theme.of(context).colorScheme.secondary,
-                              textcolor: Theme.of(context).primaryColorLight,
-                            )
+                          : selectedTab == 2
+                              ? selectedStaff != null
+                                  ? MateButon(
+                                      title: "Sonraki",
+                                      minimumSize: Size(100.w, 120.h),
+                                      onPressed: () {
+                                        selectedTab = selectedTab + 1;
+                                        setState(() {});
+                                      },
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      textcolor:
+                                          Theme.of(context).primaryColorLight,
+                                    )
+                                  : Container()
+                              : selectedTab == 3
+                                  ? selectedDate.isNotEmpty
+                                      ? MateButon(
+                                          title: "Sonraki",
+                                          minimumSize: Size(100.w, 120.h),
+                                          onPressed: () {
+                                            selectedTab = selectedTab + 1;
+                                            setState(() {});
+                                          },
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          textcolor: Theme.of(context)
+                                              .primaryColorLight,
+                                        )
+                                      : Container()
+                                  : MateButon(
+                                      title: "Sonraki",
+                                      minimumSize: Size(100.w, 120.h),
+                                      onPressed: () {
+                                        selectedTab = selectedTab + 1;
+                                        setState(() {});
+                                      },
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      textcolor:
+                                          Theme.of(context).primaryColorLight,
+                                    )
                       : MateButon(
                           title: "Sonraki",
                           minimumSize: Size(100.w, 120.h),

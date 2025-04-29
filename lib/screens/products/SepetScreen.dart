@@ -228,7 +228,9 @@ class _SepetScreenState extends State<SepetScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PaymentScreen()));
+                              builder: (context) => PaymentScreen(
+                                    subtotal: sepetTotal.toInt(),
+                                  )));
                     } else {
                       Fluttertoast.showToast(
                           msg: "Önce sepete bişeyler ekleyin.");

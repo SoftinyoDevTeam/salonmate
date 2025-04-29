@@ -34,6 +34,7 @@ class _ScreenBridgeState extends State<ScreenBridge> {
     FontAwesomeIcons.tag,
     FontAwesomeIcons.calendar,
     FontAwesomeIcons.basketShopping,
+    FontAwesomeIcons.robot,
   ];
   @override
   void initState() {
@@ -75,14 +76,14 @@ class _ScreenBridgeState extends State<ScreenBridge> {
         child = ProductsMainScreen();
         break;
       case 2:
-        child = RandevuMainScreen();
+        child = CanliDestekScreen();
         break;
       case 3:
-        child = SepetScreen();
+        child = RandevuMainScreen();
         setState(() {});
         break;
       case 4:
-        child = CanliDestekScreen();
+        child = SepetScreen();
         setState(() {});
         break;
     }
@@ -132,6 +133,9 @@ class _ScreenBridgeState extends State<ScreenBridge> {
                   BottomNavigationBarItem(
                       icon: Icon(iconList[1]),
                       label: ("ScreenBridge.products").tr()),
+                  BottomNavigationBarItem(
+                      icon: Icon(iconList[4]),
+                      label: ("ScreenBridge.support").tr()),
                   BottomNavigationBarItem(
                       icon: Icon(iconList[2]),
                       label: ("ScreenBridge.appointment").tr()),

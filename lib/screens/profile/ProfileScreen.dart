@@ -8,7 +8,9 @@ import 'package:salonmate/screens/auth/SplashScreen.dart';
 import 'package:salonmate/screens/campaigns/CampaingLists.dart';
 import 'package:salonmate/screens/profile/AdreslerimScreen.dart';
 import 'package:salonmate/screens/profile/CuzdanimScreen.dart';
+import 'package:salonmate/screens/profile/LeaderBoard.dart';
 import 'package:salonmate/screens/profile/PersonalDataScreen.dart';
+import 'package:salonmate/screens/profile/PuzzleGame.dart';
 import 'package:salonmate/screens/profile/RandevularimScreen.dart';
 import 'package:salonmate/screens/profile/SiparislerimScreen.dart';
 import 'package:salonmate/widgets/appbar/appbar.dart';
@@ -167,7 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.person_2,
+                                        Icons.person_2_outlined,
                                         color: Theme.of(context).hintColor,
                                       ),
                                       Padding(
@@ -197,13 +199,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) =>
+                            //                 const CuzdanimScreen()));
+                            //   },
+                            //   child: Container(
+                            //     height: 60.h,
+                            //     width: ScreenUtil().screenWidth,
+                            //     child: Padding(
+                            //       padding: const EdgeInsets.all(18.0),
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.start,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.wallet_outlined,
+                            //             color: Theme.of(context).hintColor,
+                            //           ),
+                            //           Padding(
+                            //             padding:
+                            //                 const EdgeInsets.only(left: 8.0),
+                            //             child: Text(
+                            //               ("ProfileScreen.my_wallet").tr(),
+                            //               style: TextStyle(
+                            //                   color: Theme.of(context)
+                            //                       .primaryColorDark),
+                            //             ),
+                            //           ),
+                            //           const Spacer(),
+                            //           Icon(
+                            //             Icons.chevron_right_outlined,
+                            //             color: Theme.of(context).hintColor,
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 18.0),
+                            //   child: Divider(
+                            //     height: 1,
+                            //     color: Theme.of(context).colorScheme.outline,
+                            //   ),
+                            // ),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const CuzdanimScreen()));
+                                            const SiparislerimScreen()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -214,14 +263,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.wallet,
+                                        Icons.shopping_bag_outlined,
                                         color: Theme.of(context).hintColor,
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          ("ProfileScreen.my_wallet").tr(),
+                                          ("ProfileScreen.my_orders").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -249,8 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SiparislerimScreen()));
+                                        builder: (context) => PuzzlePage()));
                               },
                               child: Container(
                                 height: 60.h,
@@ -261,14 +309,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.shopping_bag,
+                                        Icons.extension_outlined,
                                         color: Theme.of(context).hintColor,
                                       ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
                                         child: Text(
-                                          ("ProfileScreen.my_orders").tr(),
+                                          ("ProfileScreen.puzzle").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),
@@ -308,7 +356,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.calendar_month,
+                                        Icons.calendar_month_outlined,
                                         color: Theme.of(context).hintColor,
                                       ),
                                       Padding(
@@ -339,53 +387,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: Theme.of(context).colorScheme.outline,
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CampaignLists()));
-                              },
-                              child: Container(
-                                height: 60.h,
-                                width: ScreenUtil().screenWidth,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(18.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.campaign,
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: Text(
-                                          ("ProfileScreen.campaigns").tr(),
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColorDark),
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Icon(
-                                        Icons.chevron_right_outlined,
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Divider(
-                                height: 1,
-                                color: Theme.of(context).colorScheme.outline,
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) =>
+                            //                 const CampaignLists()));
+                            //   },
+                            //   child: Container(
+                            //     height: 60.h,
+                            //     width: ScreenUtil().screenWidth,
+                            //     child: Padding(
+                            //       padding: const EdgeInsets.all(18.0),
+                            //       child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.start,
+                            //         children: [
+                            //           Icon(
+                            //             Icons.campaign_outlined,
+                            //             color: Theme.of(context).hintColor,
+                            //           ),
+                            //           Padding(
+                            //             padding:
+                            //                 const EdgeInsets.only(left: 8.0),
+                            //             child: Text(
+                            //               ("ProfileScreen.campaigns").tr(),
+                            //               style: TextStyle(
+                            //                   color: Theme.of(context)
+                            //                       .primaryColorDark),
+                            //             ),
+                            //           ),
+                            //           const Spacer(),
+                            //           Icon(
+                            //             Icons.chevron_right_outlined,
+                            //             color: Theme.of(context).hintColor,
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 18.0),
+                            //   child: Divider(
+                            //     height: 1,
+                            //     color: Theme.of(context).colorScheme.outline,
+                            //   ),
+                            // ),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -413,6 +461,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         child: Text(
                                           ("AdreslerimScreen.my_addresses")
                                               .tr(),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Icon(
+                                        Icons.chevron_right_outlined,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 18.0),
+                              child: Divider(
+                                height: 1,
+                                color: Theme.of(context).colorScheme.outline,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LeaderBoard()),
+                                );
+                              },
+                              child: Container(
+                                height: 60.h,
+                                width: ScreenUtil().screenWidth,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.leaderboard_outlined,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          ("ProfileScreen.leaderboard").tr(),
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColorDark),

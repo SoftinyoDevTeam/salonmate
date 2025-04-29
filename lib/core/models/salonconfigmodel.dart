@@ -10,13 +10,13 @@ class SalonConfigModel {
   SalonConfigModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -28,51 +28,72 @@ class Data {
   int? iD;
   String? salonName;
   String? salonAppName;
-  SalonConfig? salonConfig;
-  String? createdDate;
-  String? lastActivityTime;
-  String? matetoken;
+  String? salonCreatedDate;
+  int? salonType;
+  int? salonLocation;
+  String? salonToken;
+  String? salonSubdomain;
   String? appStoreLink;
   String? playStoreLink;
+  int? debugMode;
+  SalonConfig? salonConfig;
+  PluginsConfig? pluginsConfig;
 
-  Data(
-      {this.iD,
-      this.salonName,
-      this.salonAppName,
-      this.salonConfig,
-      this.createdDate,
-      this.lastActivityTime,
-      this.matetoken,
-      this.appStoreLink,
-      this.playStoreLink});
+  Data({
+    this.iD,
+    this.salonName,
+    this.salonAppName,
+    this.salonCreatedDate,
+    this.salonType,
+    this.salonLocation,
+    this.salonToken,
+    this.salonSubdomain,
+    this.appStoreLink,
+    this.playStoreLink,
+    this.debugMode,
+    this.salonConfig,
+    this.pluginsConfig,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     iD = json['ID'];
     salonName = json['salon_name'];
     salonAppName = json['salon_app_name'];
-    salonConfig = json['salon_mobile_config'] != null
-        ? new SalonConfig.fromJson(jsonDecode(json["salon_mobile_config"]))
-        : null;
-    createdDate = json['createdDate'];
-    lastActivityTime = json['lastActivityTime'];
-    matetoken = json['matetoken'];
+    salonCreatedDate = json['salon_createdDate'];
+    salonType = json['salon_type'];
+    salonLocation = json['salon_location'];
+    salonToken = json['salonToken'];
+    salonSubdomain = json['salonsubdomain'];
     appStoreLink = json['appStoreLink'];
     playStoreLink = json['playStoreLink'];
+    debugMode = json['debugMode'];
+    salonConfig = json['salon_mobile_config'] != null
+        ? SalonConfig.fromJson(jsonDecode(json['salon_mobile_config']))
+        : null;
+    pluginsConfig = json['pluginsConfig'] != null
+        ? PluginsConfig.fromJson(jsonDecode(json['pluginsConfig']))
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ID'] = this.iD;
-    data['salon_name'] = this.salonName;
-    data['salon_app_name'] = this.salonAppName;
-    if (this.salonConfig != null) {
-      data['salon_mobile_config'] = this.salonConfig!.toJson();
+    data['ID'] = iD;
+    data['salon_name'] = salonName;
+    data['salon_app_name'] = salonAppName;
+    data['salon_createdDate'] = salonCreatedDate;
+    data['salon_type'] = salonType;
+    data['salon_location'] = salonLocation;
+    data['salonToken'] = salonToken;
+    data['salonsubdomain'] = salonSubdomain;
+    data['appStoreLink'] = appStoreLink;
+    data['playStoreLink'] = playStoreLink;
+    data['debugMode'] = debugMode;
+    if (salonConfig != null) {
+      data['salon_mobile_config'] = jsonEncode(salonConfig!.toJson());
     }
-    data['createdDate'] = this.createdDate;
-    data['lastActivityTime'] = this.lastActivityTime;
-    data['matetoken'] = this.matetoken;
-    data['appStoreLink'] = this.appStoreLink;
-    data['playStoreLink'] = this.playStoreLink;
+    if (pluginsConfig != null) {
+      data['pluginsConfig'] = jsonEncode(pluginsConfig!.toJson());
+    }
     return data;
   }
 }
@@ -83,20 +104,40 @@ class SalonConfig {
   String? primaryColorDark;
   String? primaryColorLight;
   String? backgroundColor;
-  String? livechat;
   String? textColor;
   String? buttonColor;
+  String? livechat;
   String? urunkampanyatext;
-  SalonConfig(
-      {this.fontFamily,
-      this.primaryColor,
-      this.primaryColorDark,
-      this.primaryColorLight,
-      this.backgroundColor,
-      this.livechat,
-      this.textColor,
-      this.buttonColor,
-      this.urunkampanyatext});
+  String? affOran;
+  String? bizimhesapefaturafirmaID;
+  String? minimumsepet;
+  double? kargoucreti;
+  String? welcomeBonus;
+  String? sallakazanbgurl;
+  String? popupurl; // New field for popup image
+  String? popup_title; // New field for popup title
+  String? popup_description; // New field for popup description
+
+  SalonConfig({
+    this.fontFamily,
+    this.primaryColor,
+    this.primaryColorDark,
+    this.primaryColorLight,
+    this.backgroundColor,
+    this.textColor,
+    this.buttonColor,
+    this.livechat,
+    this.urunkampanyatext,
+    this.affOran,
+    this.bizimhesapefaturafirmaID,
+    this.minimumsepet,
+    this.kargoucreti,
+    this.welcomeBonus,
+    this.sallakazanbgurl,
+    this.popupurl,
+    this.popup_title,
+    this.popup_description,
+  });
 
   SalonConfig.fromJson(Map<String, dynamic> json) {
     fontFamily = json['fontFamily'];
@@ -104,23 +145,65 @@ class SalonConfig {
     primaryColorDark = json['primaryColorDark'];
     primaryColorLight = json['primaryColorLight'];
     backgroundColor = json['backgroundColor'];
-    livechat = json['livechat'];
     textColor = json['textColor'];
     buttonColor = json['buttonColor'];
+    livechat = json['livechat'];
     urunkampanyatext = json['urunkampanyatext'];
+    affOran = json['affOran'];
+    bizimhesapefaturafirmaID = json['bizimhesapefaturafirmaID'];
+    minimumsepet = json['minimumsepet'];
+    kargoucreti = json['kargoucreti'] != null
+        ? double.parse(json['kargoucreti'].toString())
+        : null;
+    welcomeBonus = json['welcomeBonus'];
+    sallakazanbgurl = json['sallakazanbgurl'];
+    popupurl = json['popupurl'];
+    popup_title = json['popup_title'];
+    popup_description = json['popup_description'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fontFamily'] = this.fontFamily;
-    data['primaryColor'] = this.primaryColor;
-    data['primaryColorDark'] = this.primaryColorDark;
-    data['primaryColorLight'] = this.primaryColorLight;
-    data['backgroundColor'] = this.backgroundColor;
-    data['livechat'] = this.livechat;
-    data['textColor'] = this.textColor;
-    data['buttonColor'] = this.buttonColor;
-    data['urunkampanyatext'] = this.urunkampanyatext;
+    data['fontFamily'] = fontFamily;
+    data['primaryColor'] = primaryColor;
+    data['primaryColorDark'] = primaryColorDark;
+    data['primaryColorLight'] = primaryColorLight;
+    data['backgroundColor'] = backgroundColor;
+    data['textColor'] = textColor;
+    data['buttonColor'] = buttonColor;
+    data['livechat'] = livechat;
+    data['urunkampanyatext'] = urunkampanyatext;
+    data['affOran'] = affOran;
+    data['bizimhesapefaturafirmaID'] = bizimhesapefaturafirmaID;
+    data['minimumsepet'] = minimumsepet;
+    data['kargoucreti'] = kargoucreti;
+    data['welcomeBonus'] = welcomeBonus;
+    data['sallakazanbgurl'] = sallakazanbgurl;
+    data['popupurl'] = popupurl;
+    data['popup_title'] = popup_title;
+    data['popup_description'] = popup_description;
+    return data;
+  }
+}
+
+class PluginsConfig {
+  String? asdas;
+  String? bizimhesapefaturafirmaID;
+
+  PluginsConfig({
+    this.asdas,
+    this.bizimhesapefaturafirmaID,
+  });
+
+  PluginsConfig.fromJson(Map<String, dynamic> json) {
+    asdas = json['asdas'];
+    bizimhesapefaturafirmaID = json['bizimhesapefaturafirmaID'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['asdas'] = asdas;
+    data['bizimhesapefaturafirmaID'] = bizimhesapefaturafirmaID;
     return data;
   }
 }

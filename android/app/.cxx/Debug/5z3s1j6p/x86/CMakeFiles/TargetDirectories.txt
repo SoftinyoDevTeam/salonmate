@@ -1,0 +1,2 @@
+/Users/mateuser/Desktop/salonmate/android/app/.cxx/Debug/5z3s1j6p/x86/CMakeFiles/rebuild_cache.dir
+/Users/mateuser/Desktop/salonmate/android/app/.cxx/Debug/5z3s1j6p/x86/CMakeFiles/edit_cache.dir

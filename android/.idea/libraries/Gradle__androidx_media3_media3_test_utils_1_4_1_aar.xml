@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.media3:media3-test-utils:1.4.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/d02ef21682167fab8b90847787caf9b3/transformed/jetified-media3-test-utils-1.4.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.10.2/transforms/a3c1f7a30f524e6b582ba95646b58242/transformed/jetified-media3-test-utils-1.4.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-4/d02ef21682167fab8b90847787caf9b3/transformed/jetified-media3-test-utils-1.4.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-4/d02ef21682167fab8b90847787caf9b3/transformed/jetified-media3-test-utils-1.4.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-4/d02ef21682167fab8b90847787caf9b3/transformed/jetified-media3-test-utils-1.4.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/8.10.2/transforms/a3c1f7a30f524e6b582ba95646b58242/transformed/jetified-media3-test-utils-1.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.10.2/transforms/a3c1f7a30f524e6b582ba95646b58242/transformed/jetified-media3-test-utils-1.4.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/8.10.2/transforms/a3c1f7a30f524e6b582ba95646b58242/transformed/jetified-media3-test-utils-1.4.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

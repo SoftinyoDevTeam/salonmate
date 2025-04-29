@@ -93,7 +93,7 @@ class _YeniAdresEkleScreenState extends State<YeniAdresEkleScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.address == null
-            ? ('YeniAdresEkleScreen.add_title').tr()
+            ? ('YeniAdresEkleScreen.title').tr()
             : ('YeniAdresEkleScreen.edit_title').tr()),
       ),
       body: Form(
@@ -117,7 +117,7 @@ class _YeniAdresEkleScreenState extends State<YeniAdresEkleScreen> {
             TextFormField(
               controller: _stateController,
               decoration: InputDecoration(
-                labelText: ('YeniAdresEkleScreen.state').tr(),
+                labelText: ('YeniAdresEkleScreen.city').tr(),
               ),
               validator: (value) {
                 if (value?.isEmpty ?? true) {
@@ -130,7 +130,7 @@ class _YeniAdresEkleScreenState extends State<YeniAdresEkleScreen> {
             TextFormField(
               controller: _cityController,
               decoration: InputDecoration(
-                labelText: ('YeniAdresEkleScreen.city').tr(),
+                labelText: ('YeniAdresEkleScreen.town').tr(),
               ),
               validator: (value) {
                 if (value?.isEmpty ?? true) {
@@ -143,7 +143,7 @@ class _YeniAdresEkleScreenState extends State<YeniAdresEkleScreen> {
             TextFormField(
               controller: _zipCodeController,
               decoration: InputDecoration(
-                labelText: ('YeniAdresEkleScreen.zip_code').tr(),
+                labelText: ('YeniAdresEkleScreen.phone').tr(),
               ),
               validator: (value) {
                 if (value?.isEmpty ?? true) {
@@ -157,7 +157,7 @@ class _YeniAdresEkleScreenState extends State<YeniAdresEkleScreen> {
               controller: _addressController,
               maxLines: 3,
               decoration: InputDecoration(
-                labelText: ('YeniAdresEkleScreen.address').tr(),
+                labelText: ('YeniAdresEkleScreen.address_detail').tr(),
               ),
               validator: (value) {
                 if (value?.isEmpty ?? true) {

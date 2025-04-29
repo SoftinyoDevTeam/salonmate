@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ios_keyboard_action/ios_keyboard_action.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
+import 'package:provider/provider.dart';
 import 'package:salonmate/core/functions.dart';
 import 'package:salonmate/core/models/othermodels/campaignmodels.dart';
 import 'package:salonmate/core/models/salonmodels/salonproductsmodel.dart';
@@ -18,10 +19,12 @@ import 'package:salonmate/screens/profile/ProfileScreen.dart';
 import 'package:salonmate/widgets/buttons.dart';
 import 'package:salonmate/widgets/cards/matecard.dart';
 import 'package:salonmate/widgets/cards/productlistcard.dart';
+import 'package:salonmate/widgets/custom/adsbanner.dart';
 import 'package:salonmate/widgets/custom/mateslider.dart';
 import 'package:salonmate/widgets/empty.dart';
 import 'package:salonmate/widgets/loader.dart';
 import 'package:search_field_autocomplete/search_field_autocomplete.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SalonmateHomeScreen extends StatefulWidget {
   const SalonmateHomeScreen({super.key});
@@ -35,6 +38,109 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
   List<SalonProductsModel?> products = [];
   List<CampaignModel?> kampanyalar = [];
   List<SearchFieldAutoCompleteItem<String>> urunlerforarama = [];
+  // Check if we should show the ad popup today
+  Future<bool> _shouldShowAdPopup() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? lastShownDate = prefs.getString('last_ad_popup_date');
+
+    if (lastShownDate == null) {
+      return true; // Show if never shown before
+    }
+
+    final DateTime lastShown = DateTime.parse(lastShownDate);
+    final DateTime now = DateTime.now(); //DateTime(DateTime.april); //
+
+    // Check if it's the same day
+    return !(lastShown.year == now.year &&
+        lastShown.month == now.month &&
+        lastShown.day == now.day);
+  }
+
+  // Save the date when ad was shown
+  Future<void> _updateLastShownDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'last_ad_popup_date', DateTime.now().toIso8601String());
+  }
+
+  // Show the advertisement popup
+  void _showAdPopup() async {
+    Future.delayed(Duration(milliseconds: 1500), () async {
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Container(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          _updateLastShownDate();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 150.h,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            Provider.of<MateServices>(context, listen: false)
+                                .salonConfig!
+                                .data!
+                                .salonConfig!
+                                .popupurl!,
+                          ),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center),
+                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    Provider.of<MateServices>(context, listen: false)
+                        .salonConfig!
+                        .data!
+                        .salonConfig!
+                        .popup_title!,
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    Provider.of<MateServices>(context, listen: false)
+                        .salonConfig!
+                        .data!
+                        .salonConfig!
+                        .popup_description!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  SizedBox(height: 8),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    });
+  }
 
   void awaitgetProducts() async {
     products = await getProducts();
@@ -62,6 +168,13 @@ class _SalonmateHomeScreenState extends State<SalonmateHomeScreen> {
     // TODO: implement initState
     super.initState();
     awaitgetProducts();
+
+    // Check and show ad popup after a small delay to allow screen to build
+    Future.delayed(Duration(milliseconds: 500), () async {
+      if (await _shouldShowAdPopup()) {
+        _showAdPopup();
+      }
+    });
   }
 
   @override

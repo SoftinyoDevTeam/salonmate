@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:salonmate/widgets/custom/paymentform.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
-
+  const PaymentScreen({super.key, required this.subtotal});
+  final int subtotal;
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
@@ -50,6 +50,6 @@ class _PaymentScreenState extends State<PaymentScreen>
               ),
               preferredSize: Size.fromHeight(4.0)),
         ),
-        body: PaymentForm());
+        body: PaymentForm(subTotal: widget.subtotal));
   }
 }

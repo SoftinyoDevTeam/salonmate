@@ -1,0 +1,11 @@
+framework module store_checker {
+  umbrella header "store_checker-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module store_checker.Swift {
+  header "store_checker-Swift.h"
+  requires objc
+}
